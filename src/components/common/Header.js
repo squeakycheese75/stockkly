@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./Header.css";
-// import { Link } from "react-router-dom";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //import styles from "./Header.css";
