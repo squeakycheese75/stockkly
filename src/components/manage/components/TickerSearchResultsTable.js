@@ -51,15 +51,6 @@ class TickerSearchResultsTable extends Component {
           >
             Symbol
           </TableHeaderColumn>
-          {/* <TableHeaderColumn
-            dataField="ticker"
-            isKey={true}
-            dataSort={true}
-            hidden={true}
-            columnClassName="bstable"
-          >
-            Ticker
-          </TableHeaderColumn> */}
           <TableHeaderColumn
             width="60%"
             dataField="name"

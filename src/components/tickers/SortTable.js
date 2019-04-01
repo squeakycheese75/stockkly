@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-// import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table-next";
 import "./SortTable.css";
-//import styles from "./sortTable-styles.js";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
   return fieldValue < 0
@@ -11,10 +9,6 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
 }
 
 function openFormatter(cell, row) {
-  // if( !cell ) {
-  //   return `+${row.symbol}` + (parseFloat(row.last) + parseFloat(row.change)).toFixed(2);
-  // }
-  // return `+${row.symbol}` + cell;
   if (!cell) {
     return (
       `${row.symbol}` +
@@ -27,18 +21,34 @@ function openFormatter(cell, row) {
 }
 
 function priceChangeFormatter(cell, row) {
-  var movement = (
-    (parseFloat(row.change) / (parseFloat(row.last) + parseFloat(row.change))) *
-    100
-  ).toFixed(2);
+  var movement = null;
+  if (row.change == null || row.last == null) {
+    return (
+      <div>
+        <ul>
+          <li className="name">na</li>
+        </ul>
+      </div>
+    );
+  } else {
+    movement = (
+      (parseFloat(row.change) /
+        (parseFloat(row.last) + parseFloat(row.change))) *
+      100
+    ).toFixed(2);
+  }
 
-  // return cell > 0
-  //   ? `+${cell}<i class="material-icons vertical-align-middle">arrow_drop_up</i> (${movement}%)`
-  //   : `${cell}<i class="material-icons vertical-align-middle">arrow_drop_down</i> (${movement}%)`;
   return (
     <div>
       <ul>
-        <li className="name">{cell}</li>
+        <li className="name">
+          {cell}
+          {cell > 0 ? (
+            <i class="material-icons vertical-align-middle">arrow_drop_up</i>
+          ) : (
+            <i class="material-icons vertical-align-middle">arrow_drop_down</i>
+          )}
+        </li>
         <li className="details">({movement}%)</li>
       </ul>
     </div>
@@ -46,7 +56,6 @@ function priceChangeFormatter(cell, row) {
 }
 
 function nameFormatter(cell, row) {
-  console.log("In nameFormatter with :", row);
   return (
     <div>
       <ul>
@@ -133,7 +142,7 @@ class SortTable extends Component {
           >
             PRICE
           </TableHeaderColumn>
-          <TableHeaderColumn
+          {/* <TableHeaderColumn
             width="17%"
             dataField="open"
             dataFormat={openFormatter}
@@ -141,7 +150,7 @@ class SortTable extends Component {
             columnClassName="bstable"
           >
             OPEN
-          </TableHeaderColumn>
+          </TableHeaderColumn> */}
           <TableHeaderColumn
             width="17%"
             dataField="change"
