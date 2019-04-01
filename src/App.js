@@ -5,6 +5,7 @@ import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
 import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
+import Loading from "./components/common/Loading";
 //import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
 import ProfilePage from "./components/profile/ProfilePage";
@@ -20,6 +21,7 @@ class App extends Component {
     this.auth = new Auth(this.props.history);
   }
   state = {
+    isLoaded: false,
     hasError: false,
     subscribedTickers: defaultTickersList,
     data: [],
@@ -85,6 +87,7 @@ class App extends Component {
       //console.log("componentDidMount User not authenticated");
       this.loadData();
     }
+    // this.setState({ loading: false });
     var refreshRate = this.state.user.settings.refresh * 1000;
     setInterval(() => this.loadData(), refreshRate);
     //this.loadData(); // also load one immediately
@@ -93,10 +96,8 @@ class App extends Component {
   authenticatedLoad() {
     var url = process.env["REACT_APP_PRICES_API"] + "/api/private/profile";
     fetch(url, {
-      // fetch(proxy + url, {
       headers: {
         Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        // mode: "no-cors"
         "Content-Type": "application/json"
       }
     })
@@ -234,7 +235,9 @@ class App extends Component {
       return <h1>Oops, there is an error!</h1>;
     }
 
-    return (
+    let content = !this.state.isLoaded ? (
+      <Loading />
+    ) : (
       <>
         <div>
           <Nav auth={this.auth} />
@@ -288,6 +291,8 @@ class App extends Component {
         </div>
       </>
     );
+
+    return content;
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+// import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table-next";
 import "./SortTable.css";
 //import styles from "./sortTable-styles.js";
 
@@ -17,10 +18,12 @@ function openFormatter(cell, row) {
   if (!cell) {
     return (
       `${row.symbol}` +
-      (parseFloat(row.last) + parseFloat(row.change)).toFixed(2)
+      (parseFloat(row.last) + parseFloat(row.change))
+        .toFixed(2)
+        .toLocaleString()
     );
   }
-  return `${row.symbol}` + cell;
+  return `${row.symbol}` + cell.toLocaleString();
 }
 
 function priceChangeFormatter(cell, row) {
@@ -78,6 +81,7 @@ class SortTable extends Component {
 
   render() {
     const { data } = this.props;
+
     const options = {
       onRowClick: function(row) {
         // alert(`You click row id: ${row._id}`);
@@ -85,6 +89,12 @@ class SortTable extends Component {
       },
       noDataText: "Loading..."
     };
+    // const selectRowProp = {
+    //   mode: "checkbox",
+    //   bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
+    //   hideSelectColumn: true, // enable hide selection column.
+    //   clickToSelect: false // you should enable clickToSelect, otherwise, you can't select column.
+    // };
 
     return (
       <div>
@@ -94,9 +104,10 @@ class SortTable extends Component {
           striped
           hover
           condensed
+          bordered
           size="sm"
           version="4"
-          //selectRow={selectRowProp}
+          // selectRow={selectRowProp}
           options={options}
         >
           <TableHeaderColumn
@@ -108,26 +119,27 @@ class SortTable extends Component {
             columnClassName="bstable"
             dataFormat={nameFormatter}
           >
-            Name
+            NAME
           </TableHeaderColumn>
           {/* <TableHeaderColumn width='10%' dataField='sector'  dataSort={ true }  columnClassName= 'bstable'>Sector</TableHeaderColumn> */}
           <TableHeaderColumn
-            width="16%"
+            width="17%"
             dataField="last"
             dataFormat={openFormatter}
             dataSort={true}
-            columnClassName="bstable bstable-header-bold"
+            columnClassName="bstable"
+            // columnClassName="bstable bstable-header-bold"
           >
-            Price
+            PRICE
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="16%"
+            width="17%"
             dataField="open"
             dataFormat={openFormatter}
             dataSort={true}
-            columnClassName="bstable bstable-header-bold"
+            columnClassName="bstable"
           >
-            Open
+            OPEN
           </TableHeaderColumn>
           <TableHeaderColumn
             width="17%"
@@ -136,10 +148,10 @@ class SortTable extends Component {
             dataSort={true}
             dataFormat={priceChangeFormatter}
           >
-            Change
+            CHANGE
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="7%"
+            width="5%"
             dataField="_id"
             columnClassName="bstable bstable-icon"
             dataAlign="center"
