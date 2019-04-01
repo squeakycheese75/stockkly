@@ -44,9 +44,13 @@ function priceChangeFormatter(cell, row) {
         <li className="name">
           {cell}
           {cell > 0 ? (
-            <i class="material-icons vertical-align-middle">arrow_drop_up</i>
+            <i className="material-icons vertical-align-middle">
+              arrow_drop_up
+            </i>
           ) : (
-            <i class="material-icons vertical-align-middle">arrow_drop_down</i>
+            <i className="material-icons vertical-align-middle">
+              arrow_drop_down
+            </i>
           )}
         </li>
         <li className="details">({movement}%)</li>
@@ -74,6 +78,7 @@ function nameFormatter(cell, row) {
 
 class SortTable extends Component {
   removeItem = index => {
+    // console.log("Hit! with ", index);
     this.props.onSubmit(index);
   };
 
@@ -121,7 +126,7 @@ class SortTable extends Component {
           options={options}
         >
           <TableHeaderColumn
-            width="30%"
+            width="45%"
             dataField="id"
             isKey={true}
             dataSort={true}
@@ -133,7 +138,7 @@ class SortTable extends Component {
           </TableHeaderColumn>
           {/* <TableHeaderColumn width='10%' dataField='sector'  dataSort={ true }  columnClassName= 'bstable'>Sector</TableHeaderColumn> */}
           <TableHeaderColumn
-            width="17%"
+            width="25%"
             dataField="last"
             dataFormat={openFormatter}
             dataSort={true}
@@ -152,7 +157,7 @@ class SortTable extends Component {
             OPEN
           </TableHeaderColumn> */}
           <TableHeaderColumn
-            width="17%"
+            width="25%"
             dataField="change"
             columnClassName={columnClassNameFormat}
             dataSort={true}
@@ -162,7 +167,7 @@ class SortTable extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn
             width="5%"
-            dataField="_id"
+            dataField="ticker"
             columnClassName="bstable bstable-icon"
             dataAlign="center"
             dataFormat={this.removeButton.bind(this)}
