@@ -3,7 +3,7 @@ import styles from "./Header.css";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //import styles from "./Header.css";
-import logo from "./icon2.png";
+import logo from "./icon_256.png";
 
 class Header extends Component {
   render() {
