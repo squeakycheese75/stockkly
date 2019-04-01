@@ -46,10 +46,11 @@ function priceChangeFormatter(cell, row) {
 }
 
 function nameFormatter(cell, row) {
+  console.log("In nameFormatter with :", row);
   return (
     <div>
       <ul>
-        <li className="name">{cell}</li>
+        <li className="name">{row.id}</li>
         <li className="details">{row.name}</li>
       </ul>
     </div>
@@ -85,7 +86,7 @@ class SortTable extends Component {
     const options = {
       onRowClick: function(row) {
         // alert(`You click row id: ${row._id}`);
-        console.log(`You click row id: ${row._id}`);
+        console.log(`You click row id: ${row.id}`);
       },
       noDataText: "Loading..."
     };
@@ -112,7 +113,7 @@ class SortTable extends Component {
         >
           <TableHeaderColumn
             width="30%"
-            dataField="_id"
+            dataField="id"
             isKey={true}
             dataSort={true}
             //bordered={true}

@@ -21,7 +21,7 @@ class TickerSearchResultsTable extends Component {
     const options = {
       onRowClick: function(row) {
         // alert(`You click row id: ${row._id}`);
-        console.log(`You click row id: ${row._id}`);
+        console.log(`You click row id: ${row.ticker}`);
       },
       noDataText: "Loading..."
     };
@@ -44,13 +44,22 @@ class TickerSearchResultsTable extends Component {
         >
           <TableHeaderColumn
             width="30%"
-            dataField="ticker"
+            dataField="id"
             isKey={true}
             dataSort={true}
             columnClassName="bstable"
           >
             Symbol
           </TableHeaderColumn>
+          {/* <TableHeaderColumn
+            dataField="ticker"
+            isKey={true}
+            dataSort={true}
+            hidden={true}
+            columnClassName="bstable"
+          >
+            Ticker
+          </TableHeaderColumn> */}
           <TableHeaderColumn
             width="60%"
             dataField="name"
