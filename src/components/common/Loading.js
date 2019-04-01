@@ -35,8 +35,8 @@ class Loading extends React.Component {
         <ScaleLoader
           css={override}
           sizeUnit={"px"}
-          size={150}
-          color={"#123abc"}
+          size={300}
+          color={"#428BCA"}
           loading={this.state.loading}
         />
       </div>

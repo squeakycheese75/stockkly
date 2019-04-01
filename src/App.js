@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
@@ -8,7 +8,7 @@ import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 //import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
-import ProfilePage from "./components/profile/ProfilePage";
+// import ProfilePage from "./components/profile/ProfilePage";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -270,7 +270,7 @@ class App extends Component {
               path="/callback"
               render={props => <Callback auth={this.auth} {...props} />}
             />
-            <Route
+            {/* <Route
               path="/profile"
               render={props =>
                 this.auth.isAuthenticated() ? (
@@ -279,7 +279,7 @@ class App extends Component {
                   <Redirect to="/" />
                 )
               }
-            />
+            /> */}
             {/* <Route path="/public" component={Public} />
             <Route
               path="/private"

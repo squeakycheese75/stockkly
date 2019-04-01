@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-// import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table-next";
 import "./SortTable.css";
-//import styles from "./sortTable-styles.js";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
   return fieldValue < 0
@@ -11,10 +9,6 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
 }
 
 function openFormatter(cell, row) {
-  // if( !cell ) {
-  //   return `+${row.symbol}` + (parseFloat(row.last) + parseFloat(row.change)).toFixed(2);
-  // }
-  // return `+${row.symbol}` + cell;
   if (!cell) {
     return (
       `${row.symbol}` +
@@ -27,18 +21,38 @@ function openFormatter(cell, row) {
 }
 
 function priceChangeFormatter(cell, row) {
-  var movement = (
-    (parseFloat(row.change) / (parseFloat(row.last) + parseFloat(row.change))) *
-    100
-  ).toFixed(2);
+  var movement = null;
+  if (row.change == null || row.last == null) {
+    return (
+      <div>
+        <ul>
+          <li className="name">na</li>
+        </ul>
+      </div>
+    );
+  } else {
+    movement = (
+      (parseFloat(row.change) /
+        (parseFloat(row.last) + parseFloat(row.change))) *
+      100
+    ).toFixed(2);
+  }
 
-  // return cell > 0
-  //   ? `+${cell}<i class="material-icons vertical-align-middle">arrow_drop_up</i> (${movement}%)`
-  //   : `${cell}<i class="material-icons vertical-align-middle">arrow_drop_down</i> (${movement}%)`;
   return (
     <div>
       <ul>
-        <li className="name">{cell}</li>
+        <li className="name">
+          {cell}
+          {cell > 0 ? (
+            <i className="material-icons vertical-align-middle">
+              arrow_drop_up
+            </i>
+          ) : (
+            <i className="material-icons vertical-align-middle">
+              arrow_drop_down
+            </i>
+          )}
+        </li>
         <li className="details">({movement}%)</li>
       </ul>
     </div>
@@ -49,7 +63,7 @@ function nameFormatter(cell, row) {
   return (
     <div>
       <ul>
-        <li className="name">{cell}</li>
+        <li className="name">{row.id}</li>
         <li className="details">{row.name}</li>
       </ul>
     </div>
@@ -64,6 +78,7 @@ function nameFormatter(cell, row) {
 
 class SortTable extends Component {
   removeItem = index => {
+    // console.log("Hit! with ", index);
     this.props.onSubmit(index);
   };
 
@@ -85,7 +100,7 @@ class SortTable extends Component {
     const options = {
       onRowClick: function(row) {
         // alert(`You click row id: ${row._id}`);
-        console.log(`You click row id: ${row._id}`);
+        console.log(`You click row id: ${row.id}`);
       },
       noDataText: "Loading..."
     };
@@ -111,8 +126,8 @@ class SortTable extends Component {
           options={options}
         >
           <TableHeaderColumn
-            width="30%"
-            dataField="_id"
+            width="45%"
+            dataField="id"
             isKey={true}
             dataSort={true}
             //bordered={true}
@@ -123,7 +138,7 @@ class SortTable extends Component {
           </TableHeaderColumn>
           {/* <TableHeaderColumn width='10%' dataField='sector'  dataSort={ true }  columnClassName= 'bstable'>Sector</TableHeaderColumn> */}
           <TableHeaderColumn
-            width="17%"
+            width="25%"
             dataField="last"
             dataFormat={openFormatter}
             dataSort={true}
@@ -132,7 +147,7 @@ class SortTable extends Component {
           >
             PRICE
           </TableHeaderColumn>
-          <TableHeaderColumn
+          {/* <TableHeaderColumn
             width="17%"
             dataField="open"
             dataFormat={openFormatter}
@@ -140,9 +155,9 @@ class SortTable extends Component {
             columnClassName="bstable"
           >
             OPEN
-          </TableHeaderColumn>
+          </TableHeaderColumn> */}
           <TableHeaderColumn
-            width="17%"
+            width="25%"
             dataField="change"
             columnClassName={columnClassNameFormat}
             dataSort={true}
@@ -152,7 +167,7 @@ class SortTable extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn
             width="5%"
-            dataField="_id"
+            dataField="ticker"
             columnClassName="bstable bstable-icon"
             dataAlign="center"
             dataFormat={this.removeButton.bind(this)}
