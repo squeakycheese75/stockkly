@@ -10,8 +10,11 @@ const HomePage = props => {
         <p>A mobile-first app for keeping track of your favourite prices.</p>
         <p>
           Simply locate the prices you want to watch, add them to your tracker
-          and sit back. Oh, it's worth remembering that if you want to have you
-          favourite prices saved for next time you'll need to be logged in.
+          and sit back.{" "}
+          <i>
+            Oh and it's worth remembering that if you want to have you favourite
+            prices saved for next time you'll need to be logged in.{" "}
+          </i>
         </p>
         <p>
           {" "}
