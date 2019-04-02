@@ -2,30 +2,37 @@ import React from "react";
 import { Jumbotron, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-const HomePage = props => {
+const HomePage = () => {
   return (
     <div>
       <Jumbotron>
-        <h1>Welcome to Stockkly</h1>
-        <p>A mobile-first app for keeping track of your favourite prices.</p>
+        <h4>Welcome to Stockkly</h4>
         <p>
-          Simply locate the prices you want to watch, add them to your tracker
-          and sit back.{" "}
-          <i>
-            Oh and it's worth remembering that if you want to have you favourite
-            prices saved for next time you'll need to be logged in.{" "}
-          </i>
+          The simple mobile-first app for keeping track of your favourite
+          prices.
+        </p>
+        <p>
+          Simply locate prices you want to watch, add them to your tracker and
+          sit back. *<p />
         </p>
         <p>
           {" "}
-          Enough talking, take me to the prices.
+          Enough talking and take me to the prices.{" "}
           <LinkContainer to="pricing">
             <Button>Click!</Button>
           </LinkContainer>
         </p>
+
+        <p>Stockkly Team</p>
         <p>
-          Coming soon.....FX, crypto, funds, derived data, historical charting
+          <i>Coming soon.....</i> FX, more crypto, funds, derived data,
+          historical charting
         </p>
+        <b>
+          {" "}
+          * Oh and it's worth remembering that if you want to have your
+          favourite prices saved for next time, you'll need to be logged in.{" "}
+        </b>
       </Jumbotron>
     </div>
   );
