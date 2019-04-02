@@ -1,11 +1,11 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 // import LinkedInBadge from "./LinkedInBadge";
-// import styles from "./AboutPage.css";
+import styles from "./AboutPage.css";
 
 const AboutPage = () => {
   return (
-    <div>
+    <div className={styles}>
       <Card border="dark">
         <Card.Header as="h5">About Me</Card.Header>
         {/* <Card.Img variant="left" src="./holder.js/100px180" /> */}
