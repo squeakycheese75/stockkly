@@ -1,4 +1,4 @@
-/* p {
+p {
   font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman",
     Times, serif;
   letter-spacing: 0.01rem;
@@ -9,8 +9,8 @@
   letter-spacing: -0.003em;
 }
 
-h1 {
+h5 {
   font-family: medium-content-sans-serif-font, "Lucida Grande",
     "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif;
   font-size: 16px;
-} */
+}

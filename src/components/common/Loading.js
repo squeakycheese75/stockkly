@@ -39,6 +39,7 @@ class Loading extends React.Component {
           color={"#428BCA"}
           loading={this.state.loading}
         />
+        {/* <Spinner animation="border" variant="primary" /> */}
       </div>
     );
   }
