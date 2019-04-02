@@ -1,19 +1,68 @@
 import React, { Component } from "react";
+import { Alert } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { withToastManager } from "react-toast-notifications";
+// import { ToastButtonWrapper } from "./ToastButtonWrapper";
+import ToastButton from "./ToastButton";
+
+// const FormWithToasts = withToastManager(ToastButtonWrapper);
+
+var FormWithToasts = withToastManager(ToastButton);
+
+function msg() {
+  return (
+    <Alert size="sm">
+      Woah, no results! Maybe a typo? Are you already watching that price? Or I
+      might not have that price yet. Feel free to drop me an email to request a
+      price you'd like!
+    </Alert>
+  );
+}
+// consts = ToastDemo;
 
 class TickerSearchResultsTable extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false
+    };
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
   addItem(index) {
     console.log(index);
     this.props.onSubmit(index);
   }
+
   addButton(cell) {
     return (
-      <i
-        className="mdc-icon-button material-icons md-12 orange600"
-        onClick={() => this.addItem(cell)}
-      >
-        add_circle
-      </i>
+      // <i
+      //   className="mdc-icon-button material-icons md-12 orange600"
+      //   onClick={() => this.addItem(cell)}
+      // >
+      //   add_circle
+      // </i>
+      <>
+        <FormWithToasts content={cell} onClick={() => this.addItem(cell)} />
+        {/* </ToastProvider> */}
+        {/* <i
+          className="mdc-icon-button material-icons md-12 orange600"
+          onClick={() => {
+            this.addItem(cell);
+            alert(`You added: ${cell}`);
+          }}
+        >add_circle</i> */}
+      </>
     );
   }
   render() {
@@ -21,9 +70,9 @@ class TickerSearchResultsTable extends Component {
     const options = {
       onRowClick: function(row) {
         // alert(`You click row id: ${row._id}`);
-        console.log(`You click row id: ${row.ticker}`);
+        // console.log(`You clicked row id: ${row.ticker}`);
       },
-      noDataText: "Loading..."
+      noDataText: msg()
     };
 
     return (

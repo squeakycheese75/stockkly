@@ -8,7 +8,9 @@ import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 //import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
+import HomePage from "./components/home/HomePage";
 // import ProfilePage from "./components/profile/ProfilePage";
+import { ToastProvider } from "react-toast-notifications";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -242,13 +244,15 @@ class App extends Component {
         <div>
           <Nav auth={this.auth} />
 
+          <Route exact path="/" component={HomePage} />
           <Route
-            exact
-            path={["/", "/pricing"]}
-            render={() => (
+            path={["/pricing"]}
+            render={props => (
               <PricingPage
                 data={this.state.data}
                 removeTicker={this.removeTicker}
+                auth={this.auth}
+                {...props}
               />
             )}
           />
@@ -257,13 +261,15 @@ class App extends Component {
             <Route
               path="/manage"
               render={() => (
-                <ManagePage
-                  data={this.state.subscribedTickers}
-                  addNewTicker={this.addNewTicker}
-                  sectors={this.state.sectors}
-                  filteredTickers={this.filteredTickers}
-                  filteredTickersData={this.state.filteredTickers}
-                />
+                <ToastProvider>
+                  <ManagePage
+                    data={this.state.subscribedTickers}
+                    addNewTicker={this.addNewTicker}
+                    sectors={this.state.sectors}
+                    filteredTickers={this.filteredTickers}
+                    filteredTickersData={this.state.filteredTickers}
+                  />
+                </ToastProvider>
               )}
             />
             <Route

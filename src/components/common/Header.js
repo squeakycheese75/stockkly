@@ -42,7 +42,7 @@ class Header extends Component {
               </LinkContainer>
               <LinkContainer to="about">
                 <Nav.Link>
-                  <Button>About</Button>
+                  <Button>Contact</Button>
                 </Nav.Link>
               </LinkContainer>
             </Nav>

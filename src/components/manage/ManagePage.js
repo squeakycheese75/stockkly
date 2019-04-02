@@ -32,16 +32,11 @@ class ManagePage extends React.Component {
 
     return (
       <div>
-        <br />
-        <p>Find new tickers:</p>
         <TickerSearch
           sectors={sectors}
           filterExchanges={this.filteredTickers}
         />
         {activeComponent}
-        <br />
-        {/* <h4>Preferences:</h4>
-                <PreferencesForm /> */}
       </div>
     );
   }
