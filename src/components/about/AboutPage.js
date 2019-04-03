@@ -18,10 +18,10 @@ const AboutPage = () => {
               <s>Barcelona</s>, Chamonix.
             </p>
             <p>
-              I built Stockkly as I wanted a one-stop, convenient, light-weight,
-              mobile-first source for watching prices that I'm interested in.
-              That and I fancied building a progresssive web app in React, using
-              only cloud services.
+              I built Stockkly as I wanted a one-stop, mobile-first source for
+              watching prices that I'm interested in. That and I fancied
+              building a progresssive web app in React, using only cloud
+              services.
             </p>
             <p>
               Feel free to{" "}
