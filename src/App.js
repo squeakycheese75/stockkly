@@ -280,7 +280,7 @@ class App extends Component {
             />
 
             <Route
-              path="/product"
+              path="/product/:pid"
               render={props => <ProductForm {...props} />}
             />
 

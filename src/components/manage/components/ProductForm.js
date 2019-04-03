@@ -1,10 +1,12 @@
 import React from "react";
 
 const ProductForm = props => {
-  // const id = props.location.customKey;
+  const {
+    match: { params }
+  } = props;
   return (
     <div className="container-fluid">
-      <p>Product Info under constructiom!</p>
+      <h1>Product Info: {params["pid"]}</h1>
     </div>
   );
 };

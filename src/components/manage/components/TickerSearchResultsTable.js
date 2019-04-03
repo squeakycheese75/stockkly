@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert } from "react-bootstrap";
+import { Alert, ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { withToastManager } from "react-toast-notifications";
 import ToastButton from "./ToastButton";
@@ -17,7 +17,12 @@ function msg() {
     </Alert>
   );
 }
-// consts = ToastDemo;
+
+function onSelectRow(row, isSelected, e) {
+  if (isSelected) {
+    // alert(`You just selected '${row["name"]}'`);
+  }
+}
 
 class TickerSearchResultsTable extends Component {
   constructor(props, context) {
@@ -51,25 +56,40 @@ class TickerSearchResultsTable extends Component {
     );
   }
 
-  viewProduct(cell, row) {
-    // let data = { pathname: "/product", customKey: { cell } };
+  viewProductHelp(cell, row) {
     return (
-      // <Link to={"product/" + cell} customKey={cell}>
-      <Link to="product">
-        <i className="mdc-icon-button material-icons md-12 orange600">
-          view_headline
-        </i>
-      </Link>
+      <ButtonToolbar>
+        <OverlayTrigger
+          key="top"
+          placement="top"
+          overlay={<Tooltip id={`tooltip-top`}>Details</Tooltip>}
+        >
+          <Link to={`/product/${cell}`}>
+            <i className="mdc-icon-button material-icons md-12 orange600">
+              view_headline
+            </i>
+          </Link>
+        </OverlayTrigger>
+      </ButtonToolbar>
     );
   }
+
   render() {
     const { data } = this.props;
     const options = {
-      onRowClick: function(row) {
-        // alert(`You click row id: ${row._id}`);
-        console.log(`You clicked row id: ${row.ticker}`);
-      },
       noDataText: msg()
+      // onRowClick: function(row) {
+      //   // alert(`You click row id: ${row._id}`);
+      //   // console.log(`You clicked row id: ${row.ticker}`);
+      //   // <Link to={`/product/${row}`} />;
+      //   this.router.transitionTo(`/product/${row.id}`);
+      // },
+    };
+    const selectRowProps = {
+      mode: "radio",
+      clickToSelect: true,
+      onSelect: onSelectRow,
+      hideSelectColumn: true
     };
 
     return (
@@ -87,11 +107,12 @@ class TickerSearchResultsTable extends Component {
           size="sm"
           version="4"
           options={options}
+          selectRow={selectRowProps}
         >
           <TableHeaderColumn
             width="30%"
             dataField="id"
-            isKey={true}
+            isKey
             dataSort={true}
             columnClassName="bstable"
           >
@@ -111,7 +132,7 @@ class TickerSearchResultsTable extends Component {
             dataField="ticker"
             columnClassName="bstable bstable-icon"
             dataAlign="center"
-            dataFormat={this.viewProduct.bind(this)}
+            dataFormat={this.viewProductHelp.bind(this)}
           />
           <TableHeaderColumn
             width="5%"
