@@ -5,12 +5,13 @@ import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
 import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
-import Loading from "./components/common/Loading";
+// import Loading from "./components/common/Loading";
 //import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 // import ProfilePage from "./components/profile/ProfilePage";
 import { ToastProvider } from "react-toast-notifications";
+import ProductForm from "./components/manage/components/ProductForm";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -237,9 +238,10 @@ class App extends Component {
       return <h1>Oops, there is an error!</h1>;
     }
 
-    let content = !this.state.isLoaded ? (
-      <Loading />
-    ) : (
+    // let content = !this.state.isLoaded ? (
+    //   <Loading />
+    // ) : ()
+    let content = (
       <>
         <div>
           <Nav auth={this.auth} />
@@ -276,6 +278,12 @@ class App extends Component {
               path="/callback"
               render={props => <Callback auth={this.auth} {...props} />}
             />
+
+            <Route
+              path="/product"
+              render={props => <ProductForm {...props} />}
+            />
+
             {/* <Route
               path="/profile"
               render={props =>

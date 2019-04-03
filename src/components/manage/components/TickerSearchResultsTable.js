@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Alert } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { withToastManager } from "react-toast-notifications";
-// import { ToastButtonWrapper } from "./ToastButtonWrapper";
 import ToastButton from "./ToastButton";
-
-// const FormWithToasts = withToastManager(ToastButtonWrapper);
+import { Link } from "react-router-dom";
+// import ProductForm from "./ProductForm";
 
 var FormWithToasts = withToastManager(ToastButton);
 
@@ -46,23 +45,21 @@ class TickerSearchResultsTable extends Component {
 
   addButton(cell) {
     return (
-      // <i
-      //   className="mdc-icon-button material-icons md-12 orange600"
-      //   onClick={() => this.addItem(cell)}
-      // >
-      //   add_circle
-      // </i>
       <>
         <FormWithToasts content={cell} onClick={() => this.addItem(cell)} />
-        {/* </ToastProvider> */}
-        {/* <i
-          className="mdc-icon-button material-icons md-12 orange600"
-          onClick={() => {
-            this.addItem(cell);
-            alert(`You added: ${cell}`);
-          }}
-        >add_circle</i> */}
       </>
+    );
+  }
+
+  viewProduct(cell, row) {
+    // let data = { pathname: "/product", customKey: { cell } };
+    return (
+      // <Link to={"product/" + cell} customKey={cell}>
+      <Link to="product">
+        <i className="mdc-icon-button material-icons md-12 orange600">
+          view_headline
+        </i>
+      </Link>
     );
   }
   render() {
@@ -70,7 +67,7 @@ class TickerSearchResultsTable extends Component {
     const options = {
       onRowClick: function(row) {
         // alert(`You click row id: ${row._id}`);
-        // console.log(`You clicked row id: ${row.ticker}`);
+        console.log(`You clicked row id: ${row.ticker}`);
       },
       noDataText: msg()
     };
@@ -110,7 +107,14 @@ class TickerSearchResultsTable extends Component {
           </TableHeaderColumn>
           {/* <TableHeaderColumn width='20%' dataField='ticker' dataFormat={this.cellButton.bind(this)}>Add</TableHeaderColumn>                            */}
           <TableHeaderColumn
-            width="10%"
+            width="5%"
+            dataField="ticker"
+            columnClassName="bstable bstable-icon"
+            dataAlign="center"
+            dataFormat={this.viewProduct.bind(this)}
+          />
+          <TableHeaderColumn
+            width="5%"
             dataField="ticker"
             columnClassName="bstable bstable-icon"
             dataAlign="center"
