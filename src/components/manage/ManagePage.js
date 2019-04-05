@@ -1,6 +1,6 @@
 import React from "react";
 import TickerSearch from "./components/TickerSearch";
-// import PreferencesForm from "./components/PreferencesForm";
+import { Card } from "react-bootstrap";
 import TickerSearchResultsTable from "./components/TickerSearchResultsTable";
 
 class ManagePage extends React.Component {
@@ -32,11 +32,15 @@ class ManagePage extends React.Component {
 
     return (
       <div>
-        <TickerSearch
-          sectors={sectors}
-          filterExchanges={this.filteredTickers}
-        />
-        {activeComponent}
+        <Card border="dark">
+          <Card.Text>
+            <TickerSearch
+              sectors={sectors}
+              filterExchanges={this.filteredTickers}
+            />
+            {activeComponent}
+          </Card.Text>
+        </Card>
       </div>
     );
   }

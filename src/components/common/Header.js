@@ -11,16 +11,18 @@ class Header extends Component {
     return (
       <div className={styles}>
         <Navbar collapseOnSelect={true} expand="sm" bg="primary" variant="dark">
-          <Navbar.Brand to="/">
-            <img
-              alt=""
-              src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />
-            {" T O C K K L Y"}
-          </Navbar.Brand>
+          <LinkContainer to="pricing">
+            <Navbar.Brand>
+              <img
+                alt=""
+                src={logo}
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />
+              {" T O C K K L Y"}
+            </Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="navbar-nav mr-auto">

@@ -12,15 +12,17 @@ const HomePage = () => {
           A simple, mobile-first app for keeping track of your favourite prices.
         </p>
         <p>
-          Track down prices you want to watch on the{" "}
+          Find prices to watch on the{" "}
           <LinkContainer to="manage">
             <Button>Manage</Button>
           </LinkContainer>{" "}
-          page, add them to your{" "}
-          <LinkContainer to="manage">
+          page.
+        </p>
+        <p>
+          Get live updates on the{" "}
+          <LinkContainer to="prices">
             <Button>Prices</Button>
           </LinkContainer>{" "}
-          tracker and sit back.*
         </p>
         <p>Stockkly Team</p>
         <p>
@@ -28,9 +30,8 @@ const HomePage = () => {
           historical charting
         </p>
         <b>
-          {" "}
-          *It's worth remembering that if you want to have your favourite prices
-          saved for next time you'll need to be logged in.{" "}
+          * If you want to have your favourite prices saved for next time you'll
+          need to be logged in.{" "}
         </b>
       </Jumbotron>
     </div>
