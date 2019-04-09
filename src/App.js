@@ -12,6 +12,7 @@ import HomePage from "./components/home/HomePage";
 // import ProfilePage from "./components/profile/ProfilePage";
 import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/manage/components/ProductForm";
+import AddTransaction from "./components/manage/components/AddTransaction";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -282,6 +283,11 @@ class App extends Component {
             <Route
               path="/product/:pid"
               render={props => <ProductForm {...props} />}
+            />
+
+            <Route
+              path="addTransaction"
+              render={props => <AddTransaction {...props} />}
             />
 
             {/* <Route

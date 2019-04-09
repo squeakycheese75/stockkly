@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, FormGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import { Form, DropdownButton, Dropdown } from "react-bootstrap";
 // import signUpForm from "./style.js";
 
 class TickerSearch extends Component {
@@ -18,22 +18,21 @@ class TickerSearch extends Component {
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <Form.Label />
-            <DropdownButton
-              value={this.state.selectedValue}
-              title={this.state.selectedValue}
-              onSelect={event => this.onTargetSelect(event)}
-              id={this.state.selectedValue}
-              size="sm"
-            >
-              {sectors.map(sector => (
-                <Dropdown.Item eventKey={sector} key={sector}>
-                  {sector}
-                </Dropdown.Item>
-              ))}
-            </DropdownButton>
-          </FormGroup>
+          {/* <FormGroup> */}
+          <DropdownButton
+            value={this.state.selectedValue}
+            title={this.state.selectedValue}
+            onSelect={event => this.onTargetSelect(event)}
+            id={this.state.selectedValue}
+            size="sm"
+          >
+            {sectors.map(sector => (
+              <Dropdown.Item eventKey={sector} key={sector}>
+                {sector}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+          {/* </FormGroup> */}
         </Form>
         {/* <Card border="primary">
           <Card.Header as="h5">Find new prices to watch:</Card.Header>

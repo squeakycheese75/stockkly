@@ -32,17 +32,17 @@ class Header extends Component {
               <Link to="manage">
                 <Button>Manage</Button>
               </Link> */}
-              <LinkContainer to="pricing">
+              <LinkContainer to="/pricing">
                 <Nav.Link>
                   <Button>Prices</Button>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="manage">
+              <LinkContainer to="/manage">
                 <Nav.Link>
                   <Button>Manage</Button>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="about">
+              <LinkContainer to="/about">
                 <Nav.Link>
                   <Button>Contact</Button>
                 </Nav.Link>

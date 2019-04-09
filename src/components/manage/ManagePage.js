@@ -33,13 +33,11 @@ class ManagePage extends React.Component {
     return (
       <div>
         <Card border="dark">
-          <Card.Text>
-            <TickerSearch
-              sectors={sectors}
-              filterExchanges={this.filteredTickers}
-            />
-            {activeComponent}
-          </Card.Text>
+          <TickerSearch
+            sectors={sectors}
+            filterExchanges={this.filteredTickers}
+          />
+          {activeComponent}
         </Card>
       </div>
     );
