@@ -11,7 +11,7 @@ import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/manage/components/ProductForm";
-// import AddTransaction from "./components/manage/components/AddTransaction";
+import AddTransaction from "./components/manage/components/AddTransaction";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -285,10 +285,10 @@ class App extends Component {
               render={props => <ProductForm {...props} />}
             />
 
-            {/* <Route
+            <Route
               path="addTransaction"
               render={props => <AddTransaction {...props} />}
-            /> */}
+            />
           </Switch>
         </div>
       </>
