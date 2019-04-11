@@ -6,13 +6,12 @@ import ManagePage from "./components/manage/ManagePage";
 import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
 // import Loading from "./components/common/Loading";
-//import NotFound from "./components/common/NotFound";
+// import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
-// import ProfilePage from "./components/profile/ProfilePage";
 import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/manage/components/ProductForm";
-import AddTransaction from "./components/manage/components/AddTransaction";
+// import AddTransaction from "./components/manage/components/AddTransaction";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -43,7 +42,7 @@ class App extends Component {
   //Load component data
   fetchTickers = () => {
     var url = process.env["REACT_APP_PRICES_API"] + "/tickers/";
-    console.log("fetchTickers fetching: ", url);
+    // console.log("fetchTickers fetching: ", url);
     fetch(url)
       .then(res => res.json())
       .then(allTickers => {
@@ -247,19 +246,21 @@ class App extends Component {
         <div>
           <Nav auth={this.auth} />
 
-          <Route exact path="/" component={HomePage} />
-          <Route
-            path={["/pricing"]}
-            render={props => (
-              <PricingPage
-                data={this.state.data}
-                removeTicker={this.removeTicker}
-                auth={this.auth}
-                {...props}
-              />
-            )}
-          />
           <Switch>
+            <Route exact path="/" component={HomePage} />
+
+            <Route
+              path={["/pricing"]}
+              render={props => (
+                <PricingPage
+                  data={this.state.data}
+                  removeTicker={this.removeTicker}
+                  auth={this.auth}
+                  {...props}
+                />
+              )}
+            />
+
             <Route path="/about" component={AboutPage} />
             <Route
               path="/manage"
@@ -279,34 +280,15 @@ class App extends Component {
               path="/callback"
               render={props => <Callback auth={this.auth} {...props} />}
             />
-
             <Route
               path="/product/:pid"
               render={props => <ProductForm {...props} />}
             />
 
-            <Route
+            {/* <Route
               path="addTransaction"
               render={props => <AddTransaction {...props} />}
-            />
-
-            {/* <Route
-              path="/profile"
-              render={props =>
-                this.auth.isAuthenticated() ? (
-                  <ProfilePage auth={this.auth} {...props} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
             /> */}
-            {/* <Route path="/public" component={Public} />
-            <Route
-              path="/private"
-              render={props => <Private auth={this.auth} {...props} />}
-            /> */}
-            {/* Finally, catch all unmatched routes */}
-            {/* <Route component={NotFound} /> */}
           </Switch>
         </div>
       </>
