@@ -281,7 +281,7 @@ class App extends Component {
             />
             <Route
               path="/product/:pid"
-              render={props => <ProductForm {...props} />}
+              render={props => <ProductForm auth={this.auth} {...props} />}
             />
 
             {/* <Route

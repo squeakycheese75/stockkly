@@ -1,34 +1,20 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
-const data = [
-  {
-    id: 1,
-    transtype: "Buy",
-    quantity: 100,
-    transdate: "01/01/2018",
-    price: 1.15
-  },
-  {
-    id: 2,
-    transtype: "Sell",
-    quantity: -50,
-    transdate: "01/02/2018",
-    price: 1.31
-  }
-];
-
-function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
+function columnClassNameFormat(fieldValue) {
   return fieldValue < 0
     ? "td-column-price-down td-column-size bstable"
     : "td-column-price-up td-column-size bstable";
 }
 
 const TransactionHistory = props => {
+  const options = {
+    noDataText: "Loading..."
+  };
   return (
     <div>
       <BootstrapTable
-        data={data}
+        data={props.data}
         // responsive
         striped
         bordered
@@ -36,6 +22,7 @@ const TransactionHistory = props => {
         headerContainerClass="bstable bstable-header-bold"
         size="sm"
         version="4"
+        options={options}
       >
         <TableHeaderColumn
           dataField="id"
@@ -43,7 +30,7 @@ const TransactionHistory = props => {
           columnClassName="bstable"
           width="20%"
         >
-          Id
+          ID
         </TableHeaderColumn>
         <TableHeaderColumn
           dataField="transdate"
@@ -51,7 +38,7 @@ const TransactionHistory = props => {
           dataSort={true}
           width="20%"
         >
-          Date
+          DATE
         </TableHeaderColumn>
         <TableHeaderColumn
           dataField="quantity"
@@ -59,7 +46,7 @@ const TransactionHistory = props => {
           dataSort={true}
           width="20%"
         >
-          Qty
+          QTY
         </TableHeaderColumn>
         <TableHeaderColumn
           dataField="price"
@@ -67,7 +54,7 @@ const TransactionHistory = props => {
           columnClassName="bstable"
           width="20%"
         >
-          Price
+          PRICE
         </TableHeaderColumn>
         <TableHeaderColumn
           dataField="transtype"
@@ -75,7 +62,7 @@ const TransactionHistory = props => {
           columnClassName="bstable"
           width="20%"
         >
-          Type
+          TYPE
         </TableHeaderColumn>
       </BootstrapTable>
     </div>
