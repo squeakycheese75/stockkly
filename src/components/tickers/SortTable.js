@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { withRouter } from "react-router-dom";
 import "./SortTable.css";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
@@ -70,15 +71,16 @@ function nameFormatter(cell, row) {
   );
 }
 
-// function onSelectRow(row, isSelected, e) {
-//   if (isSelected) {
-//     alert(`You just selected '${row["name"]}'`);
-//   }
+// function handleOnSelect(row, isSelected, e) {
+//   const {
+//     history: { push }
+//   } = this.props;
+//   // this.props.history.push("/about");
+//   push("/about");
 // }
 
 class SortTable extends Component {
   removeItem = index => {
-    // console.log("Hit! with ", index);
     this.props.onSubmit(index);
   };
 
@@ -94,17 +96,12 @@ class SortTable extends Component {
     );
   }
 
-  handleOnSelect(row, isSelected) {
-    console.log("handleOnSelect  pressed");
-  }
-
   render() {
-    const { data } = this.props;
+    const { data, history } = this.props;
 
     const options = {
       onRowClick: function(row) {
-        // alert(`You click row id: ${row._id}`);
-        console.log(`You click row id: ${row.id}`);
+        history.push(`/product/${row.id}`);
       },
       noDataText: "Loading..."
     };
@@ -112,8 +109,8 @@ class SortTable extends Component {
       hideSelectColumn: true,
       mode: "checkbox",
       clickToSelect: true,
-      bgColor: "rgb(178,214,225)",
-      onSelect: this.handleOnSelect
+      bgColor: "rgb(178,214,225)"
+      // onSelect: handleOnSelect
     };
 
     return (
@@ -186,4 +183,4 @@ class SortTable extends Component {
     );
   }
 }
-export default SortTable;
+export default withRouter(SortTable);

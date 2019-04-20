@@ -11,6 +11,7 @@ class PricingPage extends React.Component {
   render() {
     const { data } = this.props;
     const { isAuthenticated } = this.props.auth;
+    // const { history } = this.history;
 
     return (
       <div>
