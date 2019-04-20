@@ -51,7 +51,6 @@ class ProductForm extends React.Component {
     if (this.auth.isAuthenticated()) {
       this.loadTransactionHistory();
     }
-    // this.loadProductChartData();
   }
 
   render() {
@@ -92,37 +91,5 @@ class ProductForm extends React.Component {
     );
   }
 }
-
-// const ProductForm = props => {
-//   const {
-//     match: { params }
-//   } = props;
-//   // this.state = {
-//   //   open: false,
-//   // };
-//   return (
-//     <div>
-//       <Card>
-//         <Card.Header>
-//           <h5>Product Info: {params["pid"]}</h5>
-//         </Card.Header>
-//         <ProductChart productId={params["pid"]} />
-//       </Card>
-//       <br />
-//       <Card>
-//         <Card.Header>
-//           <h3>Transaction History:</h3>
-//         </Card.Header>
-//         <TransactionHistory />
-//       </Card>
-//       <Card>
-//         <Card.Header>
-//           <h3>Add Transaction:</h3>
-//         </Card.Header>
-//         <AddTransaction />
-//       </Card>
-//     </div>
-//   );
-// };
 
 export default ProductForm;

@@ -66,18 +66,21 @@ class ProductChart extends React.Component {
     var trace1 = {
       type: "scatter",
       mode: "lines",
+      name: this.state.pid + " Open",
       x: this.state.x,
       y: this.state.y,
       line: { color: "#17BECF" }
     };
+
     return (
-      <Plot
-        data={[trace1]}
-        layout={{ width: 320, height: 240, title: "A Fancy Plot" }}
-      />
-      // <div className="container-fluid">
-      //   <p>Chart coming soon!</p>
-      // </div>
+      <div className="container-fluid">
+        <Plot
+          data={[trace1]}
+          layout={{ title: this.state.pid + " Chart", height: 480 }}
+          useResizeHandler={true}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </div>
     );
   }
 }

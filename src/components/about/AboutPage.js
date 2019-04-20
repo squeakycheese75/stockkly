@@ -15,12 +15,12 @@ const AboutPage = () => {
           <p>
             I'm a freelance software engineer and digital nomad. Currently
             living and working from...<s>London</s>, <s>Berlin</s>,{" "}
-            <s>Barcelona</s>, <s>Chamonix</s>, <s>Devon</s>, Madrid.
+            <s>Barcelona</s>, <s>Chamonix</s>, <s>Devon</s>, <s>Madrid</s>,
+            Santiago.
           </p>
           <p>
-            I built Stockkly as I wanted a one-stop, mobile-first source for
-            watching prices that I'm interested in. That and I fancied building
-            a progresssive web app in React, using only cloud services.
+            I built Stockkly as I wanted a mobile friendly, one-stop source for
+            watching prices that I'm interested in.
           </p>
           <p>
             Feel free to <a href="mailto:james_wooltorton@hotmail.com">email</a>{" "}
