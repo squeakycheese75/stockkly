@@ -9,7 +9,7 @@ function columnClassNameFormat(fieldValue) {
 
 const TransactionHistory = props => {
   const options = {
-    noDataText: "Loading..."
+    noDataText: "No data.."
   };
   return (
     <div>
@@ -29,6 +29,7 @@ const TransactionHistory = props => {
           isKey
           columnClassName="bstable"
           width="20%"
+          hidden={true}
         >
           ID
         </TableHeaderColumn>

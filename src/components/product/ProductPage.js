@@ -9,46 +9,55 @@ class ProductForm extends React.Component {
     super(props);
     this.state = {
       pid: props.match.params.pid,
-      transactionHistoryData: []
+      transactionHistoryData: [],
+      productData: [],
+      message: "",
+      x: [],
+      y: []
     };
     this.auth = this.props.auth;
   }
 
+  loadTransactionHistory() {
+    var url =
+      process.env["REACT_APP_PRICES_API"] +
+      "/api/private/transactions/" +
+      this.state.pid;
+    console.log("ProductForm.componentDidMount called" + this.state.pid);
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          transactionHistoryData: response.message
+        });
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
   componentDidMount() {
     if (this.auth.isAuthenticated()) {
-      var url =
-        process.env["REACT_APP_PRICES_API"] +
-        "/api/private/transactions/" +
-        this.state.pid;
-      console.log("ProductForm.componentDidMount called" + this.state.pid);
-      fetch(url, {
-        headers: {
-          Authorization: `Bearer ${this.auth.getAccessToken()}`,
-          "Content-Type": "application/json"
-        }
-      })
-        .then(response => {
-          if (response.ok) return response;
-          throw new Error("Network response was not ok.");
-        })
-        .then(response => response.json())
-        .then(response => {
-          this.setState({
-            transactionHistoryData: response.message
-          });
-        })
-        .catch(error => {
-          this.setState({
-            message: error.message
-          });
-        });
+      this.loadTransactionHistory();
     }
+    // this.loadProductChartData();
   }
 
   render() {
     return (
       <div>
-        <Card key="1">
+        <Card key="productInfo">
           <Card.Header>
             <h5>Product Info: {this.state.pid}</h5>
           </Card.Header>
@@ -58,14 +67,14 @@ class ProductForm extends React.Component {
         {this.auth.isAuthenticated() ? (
           <>
             <br />
-            <Card key="2">
+            <Card key="transactionHistory">
               <Card.Header>
                 <h3>Transaction History:</h3>
               </Card.Header>
               <TransactionHistory data={this.state.transactionHistoryData} />
             </Card>
             <br />
-            <Card key="3">
+            <Card key="addTransaction">
               <Card.Header>
                 <h3>Add Transaction:</h3>
               </Card.Header>
