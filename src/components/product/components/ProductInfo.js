@@ -5,49 +5,41 @@ class ProductInfo extends React.Component {
     super(props);
     this.state = {
       pid: this.props.productId,
-      message: ""
+      productData: "",
+      message: "",
+      isLoaded: false
     };
   }
 
   loadProductInfo() {
     console.log("Loading product info data from api");
-    // var uri =
-    //   process.env["REACT_APP_PRICES_API"] +
-    //   "/api/historical/data/" +
-    //   this.state.pid;
+    var url =
+      process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
 
-    // // console.log(uri);
-    // var url = new URL(uri),
-    //   params = {
-    //     start_date: this.state.start_date,
-    //     end_date: this.state.end_date
-    //   };
-    // Object.keys(params).forEach(key =>
-    //   url.searchParams.append(key, params[key])
-    // );
+    console.log(url);
 
-    // fetch(url, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // })
-    //   .then(response => {
-    //     if (response.ok) return response;
-    //     throw new Error("Network response was not ok.");
-    //   })
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     this.setState({
-    //       y: Object.values(JSON.parse(response.message)),
-    //       x: Object.keys(JSON.parse(response.message))
-    //     });
-    //   })
-    //   .catch(error => {
-    //     this.setState({
-    //       message: error.message
-    //     });
-    //   });
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          productData: response.message,
+          isLoaded: true
+        });
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
   }
 
   componentDidMount() {
@@ -55,7 +47,41 @@ class ProductInfo extends React.Component {
   }
 
   render() {
-    return <h5>Product Info: {this.state.pid}</h5>;
+    return (
+      <>
+        {this.state.isLoaded ? (
+          <>
+            <h5>Product Info: {this.state.pid}</h5>
+            <h5>Name: {this.state.productData.name}</h5>
+            <h6>Company: {this.state.productData.company.name}</h6>
+
+            <p>
+              Market Data:
+              <h6>MarketCap: {this.state.productData.marketData.marketCap}</h6>
+            </p>
+
+            {/* "ticker": "BTC-USD",
+            "displayTicker": "BTC:USD",
+            "name": "Bitcoin (USD)",
+            "description": "Bitcoin is an experimental digital currency that enables instant payments to anyone, anywhere in the world.",
+            "company": {
+                "name": "Bitcoin",
+                "url": "https://bitcoin.org/"
+            },
+            "sector": "Crypto",
+            "exchanges": ["CPRO"],
+            "quote": {
+                "symbol": "$",
+                "currency": "USD"
+            } */}
+          </>
+        ) : (
+          <>
+            <h5>Loading..</h5>
+          </>
+        )}
+      </>
+    );
   }
 }
 
