@@ -16,15 +16,15 @@ class ProductChart extends React.Component {
       end_date: "2001-02-01",
       message: ""
     };
-    // this.auth = this.props.auth;
   }
 
   loadProductChartData() {
+    console.log("Loading data form chart from api");
     var uri =
       process.env["REACT_APP_PRICES_API"] +
       "/api/historical/data/" +
       this.state.pid;
-    console.log(uri);
+    // console.log(uri);
     var url = new URL(uri),
       params = {
         start_date: this.state.start_date,
@@ -69,17 +69,22 @@ class ProductChart extends React.Component {
       name: this.state.pid + " Open",
       x: this.state.x,
       y: this.state.y,
-      line: { color: "#17BECF" }
+      line: { color: "#428bca" }
     };
 
     return (
       <div className="container-fluid">
-        <Plot
-          data={[trace1]}
-          layout={{ title: this.state.pid + " Chart", height: 480 }}
-          useResizeHandler={true}
-          style={{ width: "100%", height: "100%" }}
-        />
+        {!Array.isArray(this.state.x) || !this.state.x.length ? (
+          "No Data"
+        ) : (
+          <Plot
+            data={[trace1]}
+            layout={{ title: this.state.pid + " Chart", height: 480 }}
+            useResizeHandler={true}
+            style={{ width: "100%", height: "100%" }}
+            config={{ displaylogo: false }}
+          />
+        )}
       </div>
     );
   }

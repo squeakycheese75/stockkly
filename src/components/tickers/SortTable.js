@@ -94,6 +94,10 @@ class SortTable extends Component {
     );
   }
 
+  handleOnSelect(row, isSelected) {
+    console.log("handleOnSelect  pressed");
+  }
+
   render() {
     const { data } = this.props;
 
@@ -104,12 +108,13 @@ class SortTable extends Component {
       },
       noDataText: "Loading..."
     };
-    // const selectRowProp = {
-    //   mode: "checkbox",
-    //   bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-    //   hideSelectColumn: true, // enable hide selection column.
-    //   clickToSelect: false // you should enable clickToSelect, otherwise, you can't select column.
-    // };
+    const selectRowProp = {
+      hideSelectColumn: true,
+      mode: "checkbox",
+      clickToSelect: true,
+      bgColor: "rgb(178,214,225)",
+      onSelect: this.handleOnSelect
+    };
 
     return (
       <div>
@@ -122,7 +127,7 @@ class SortTable extends Component {
           bordered
           size="sm"
           version="4"
-          // selectRow={selectRowProp}
+          selectRow={selectRowProp}
           options={options}
         >
           <TableHeaderColumn
@@ -133,6 +138,7 @@ class SortTable extends Component {
             //bordered={true}
             columnClassName="bstable"
             dataFormat={nameFormatter}
+            editable={false}
           >
             NAME
           </TableHeaderColumn>
@@ -143,6 +149,7 @@ class SortTable extends Component {
             dataFormat={openFormatter}
             dataSort={true}
             columnClassName="bstable"
+            editable={false}
             // columnClassName="bstable bstable-header-bold"
           >
             PRICE
@@ -162,6 +169,7 @@ class SortTable extends Component {
             columnClassName={columnClassNameFormat}
             dataSort={true}
             dataFormat={priceChangeFormatter}
+            editable={false}
           >
             CHANGE
           </TableHeaderColumn>
@@ -171,6 +179,7 @@ class SortTable extends Component {
             columnClassName="bstable bstable-icon"
             dataAlign="center"
             dataFormat={this.removeButton.bind(this)}
+            editable={false}
           />
         </BootstrapTable>
       </div>
