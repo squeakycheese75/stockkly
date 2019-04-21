@@ -26,12 +26,6 @@ class Header extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="navbar-nav mr-auto">
-              {/* <Link to="pricing">
-                <Button className="btn outline">Prices</Button>
-              </Link>
-              <Link to="manage">
-                <Button>Manage</Button>
-              </Link> */}
               <LinkContainer to="/pricing">
                 <Nav.Link>
                   <Button>Prices</Button>
@@ -42,6 +36,13 @@ class Header extends Component {
                   <Button>Manage</Button>
                 </Nav.Link>
               </LinkContainer>
+              {isAuthenticated() && (
+                <LinkContainer to="/wallet">
+                  <Nav.Link>
+                    <Button>Wallet</Button>
+                  </Nav.Link>
+                </LinkContainer>
+              )}
               <LinkContainer to="/about">
                 <Nav.Link>
                   <Button>Contact</Button>

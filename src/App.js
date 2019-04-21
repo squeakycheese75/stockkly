@@ -11,8 +11,8 @@ import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/product/ProductPage";
-//import AddTransaction from "./components/product/components/AddTransactionForm";
 import TransactionsPage from "./components/product/TransactionsPage";
+import WalletPage from "./components/wallet/WalletPage";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -289,6 +289,11 @@ class App extends Component {
             <Route
               path="/transactions/:pid"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
+            />
+
+            <Route
+              path="/wallet"
+              render={props => <WalletPage auth={this.auth} {...props} />}
             />
           </Switch>
         </div>

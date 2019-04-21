@@ -42,11 +42,6 @@ class TransactionHistory extends React.Component {
           });
         }
       })
-      // .then(response => {
-      //   this.setState({
-      //     transactionHistoryData: response.message
-      //   });
-      // })
       .catch(error => {
         this.setState({
           message: error.message

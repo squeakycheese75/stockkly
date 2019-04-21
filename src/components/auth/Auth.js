@@ -6,9 +6,9 @@ const REDIRECT_ON_LOGIN = "redirect_on_login";
 // var idToken = null;
 // let _accessToken = null;
 // var expiresAt = null;
+// let _accessToken = null;
 
 export default class Auth {
-  _accessToken = null;
   constructor(history) {
     this.history = history;
     this.userProfile = null;
@@ -74,8 +74,8 @@ export default class Auth {
     //   expiresAt: authResult.expiresIn * 1000 + new Date().getTime()
     // };
     // debugger;
-    this._accessToken = authResult.accessToken;
-    console.log("Setting access token: " + this._accessToken);
+    // _accessToken = authResult.accessToken;
+    // console.log("Setting access token: " + _accessToken);
     // this._idToken = authResult.idToken;
     // _idToken = authResult.idToken;
     // this._idToken = authResult.idToken;
@@ -105,9 +105,6 @@ export default class Auth {
   };
 
   getAccessToken = () => {
-    // debugger;
-    // console.log(this._accessToken);
-    console.log("Retrieving access token: " + this._accessToken);
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
       throw new Error("No access token found.");
