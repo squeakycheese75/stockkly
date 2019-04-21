@@ -1,91 +1,57 @@
 import React from "react";
 import ProductChart from "./components/ProductChart";
-import AddTransaction from "./components/AddTransactionForm";
 import TransactionHistory from "./components/TransactionHistory";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
 
 class ProductForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pid: props.match.params.pid,
-      transactionHistoryData: [],
-      productData: [],
-      message: "",
-      x: [],
-      y: []
+      pid: props.match.params.pid
+      // transactionHistoryData: [],
+      // productData: [],
+      // message: ""
+      // x: [],
+      // y: []
     };
     this.auth = this.props.auth;
   }
 
-  // loadTransactionHistory() {
-  //   var url =
-  //     process.env["REACT_APP_PRICES_API"] +
-  //     "/api/private/transactions/" +
-  //     this.state.pid;
-  //   console.log("ProductForm.componentDidMount called" + this.state.pid);
-  //   fetch(url, {
-  //     headers: {
-  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(response => {
-  //       if (response.ok) return response;
-  //       throw new Error("Network response was not ok.");
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({
-  //         transactionHistoryData: response.message
-  //       });
-  //     })
-  //     .catch(error => {
-  //       this.setState({
-  //         message: error.message
-  //       });
-  //     });
-  // }
-
-  // componentDidMount() {
-  //   if (this.auth.isAuthenticated()) {
-  //     this.loadTransactionHistory();
-  //   }
-  // }
-
   render() {
     return (
       <div>
-        <Card key="productInfo">
-          <Card.Header>
-            <ProductInfo productId={this.state.pid} />
-          </Card.Header>
-          <ProductChart productId={this.state.pid} />
+        <ProductInfo productId={this.state.pid} />
+        <Card border="info" key="productChart">
+          <Card.Header as="h5">Chart</Card.Header>
+          <Card.Body>
+            <ProductChart productId={this.state.pid} />
+          </Card.Body>
         </Card>
-
         {this.auth.isAuthenticated() ? (
           <>
-            <br />
-            <Card key="transactionHistory">
-              <Card.Header>
-                <h3>Transaction History:</h3>
-              </Card.Header>
-              <TransactionHistory auth={this.auth} productId={this.state.pid} />
-            </Card>
-            <br />
-            <Card key="addTransaction">
-              <Card.Header>
-                <h3>Add Transaction:</h3>
-              </Card.Header>
-              <AddTransaction auth={this.auth} product={this.state.pid} />
+            <Card border="info" key="transactionHistory">
+              <Card.Header as="h5">Transaction History:</Card.Header>
+              <Card.Body>
+                <TransactionHistory
+                  auth={this.auth}
+                  productId={this.state.pid}
+                />
+                <Link to={`/transactions/${this.state.pid}`}>
+                  <Button className="btn outline">Add Transaction</Button>
+                </Link>
+              </Card.Body>
             </Card>
           </>
         ) : (
           <Card>
-            <Card.Header>
-              <p>Need to be logged in to manage transactions.</p>
-            </Card.Header>
+            <Card.Header as="h5">**Note**</Card.Header>
+            <Card.Body>
+              <Card.Text>
+                Need to be logged in to manage transactions.
+              </Card.Text>
+            </Card.Body>
           </Card>
         )}
       </div>

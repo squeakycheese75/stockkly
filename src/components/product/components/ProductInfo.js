@@ -1,4 +1,5 @@
 import React from "react";
+import { Jumbotron } from "react-bootstrap";
 
 class ProductInfo extends React.Component {
   constructor(props) {
@@ -6,8 +7,7 @@ class ProductInfo extends React.Component {
     this.state = {
       pid: this.props.productId,
       productData: "",
-      message: "",
-      isLoaded: false
+      message: ""
     };
   }
 
@@ -31,8 +31,7 @@ class ProductInfo extends React.Component {
       .then(response => response.json())
       .then(response => {
         this.setState({
-          productData: response.message,
-          isLoaded: true
+          productData: response.message
         });
       })
       .catch(error => {
@@ -48,39 +47,13 @@ class ProductInfo extends React.Component {
 
   render() {
     return (
-      <>
-        {this.state.isLoaded ? (
-          <>
-            <h5>Product Info: {this.state.pid}</h5>
-            <h5>Name: {this.state.productData.name}</h5>
-            <h6>Company: {this.state.productData.company.name}</h6>
-
-            <p>
-              Market Data:
-              <h6>MarketCap: {this.state.productData.marketData.marketCap}</h6>
-            </p>
-
-            {/* "ticker": "BTC-USD",
-            "displayTicker": "BTC:USD",
-            "name": "Bitcoin (USD)",
-            "description": "Bitcoin is an experimental digital currency that enables instant payments to anyone, anywhere in the world.",
-            "company": {
-                "name": "Bitcoin",
-                "url": "https://bitcoin.org/"
-            },
-            "sector": "Crypto",
-            "exchanges": ["CPRO"],
-            "quote": {
-                "symbol": "$",
-                "currency": "USD"
-            } */}
-          </>
-        ) : (
-          <>
-            <h5>Loading..</h5>
-          </>
-        )}
-      </>
+      <Jumbotron>
+        <h5 className="text-center">
+          <b>{this.state.productData.displayTicker}</b> -{" "}
+          {this.state.productData.name}
+        </h5>
+        <p>{this.state.productData.desc}</p>
+      </Jumbotron>
     );
   }
 }

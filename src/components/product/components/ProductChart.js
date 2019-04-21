@@ -79,7 +79,7 @@ class ProductChart extends React.Component {
         ) : (
           <Plot
             data={[trace1]}
-            layout={{ title: this.state.pid + " Chart", height: 480 }}
+            layout={{ title: this.state.pid + " Chart", height: 320 }}
             useResizeHandler={true}
             style={{ width: "100%", height: "100%" }}
             config={{ displaylogo: false }}

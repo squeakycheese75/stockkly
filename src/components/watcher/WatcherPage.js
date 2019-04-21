@@ -2,7 +2,7 @@ import React from "react";
 import SortTable from "./SortTable";
 import LoginReminder from "./LoginReminder";
 
-class PricingPage extends React.Component {
+class WatcherPage extends React.Component {
   removeTicker = event => {
     console.log("In TickerPage.removeTicker with ", event);
     this.props.removeTicker(event);
@@ -11,6 +11,7 @@ class PricingPage extends React.Component {
   render() {
     const { data } = this.props;
     const { isAuthenticated } = this.props.auth;
+    // const { history } = this.history;
 
     return (
       <div>
@@ -21,4 +22,4 @@ class PricingPage extends React.Component {
   }
 }
 
-export default PricingPage;
+export default WatcherPage;

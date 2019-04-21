@@ -1,9 +1,24 @@
 import auth0 from "auth0-js";
 
+const REDIRECT_ON_LOGIN = "redirect_on_login";
+
+// eslint-disable-next-line
+// var idToken = null;
+// let _accessToken = null;
+// var expiresAt = null;
+
 export default class Auth {
+  _accessToken = null;
   constructor(history) {
     this.history = history;
     this.userProfile = null;
+    // this.idToken = null;
+    // this.accessToken = null;
+    // this.token = {
+    //   idToken: null,
+    //   expiresAt: null,
+    //   accessToken: null
+    // };
     this.auth0 = new auth0.WebAuth({
       domain: process.env.REACT_APP_AUTH0_DOMAIN,
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
@@ -15,20 +30,33 @@ export default class Auth {
   }
 
   login = () => {
+    localStorage.setItem(
+      REDIRECT_ON_LOGIN,
+      JSON.stringify(this.history.location)
+    );
     this.auth0.authorize();
   };
 
   handleAuthentication = () => {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        // debugger;
         this.setSession(authResult);
+        // const redirectLocation =
+        //   localStorage.getItem(REDIRECT_ON_LOGIN) === "undefined"
+        //     ? "/"
+        //     : JSON.parse(localStorage.getItem(REDIRECT_ON_LOGIN));
         window.location = "/";
-        //this.history.push("/");
+        // var r = JSON.parse(redirectLocation);
+        // debugger;
+        // window.location = redirectLocation.pathname;
+        // this.history.push(redirectLocation);
       } else if (err) {
         this.history.push("/");
         alert(`Error: ${err.error}. Check the console for further details.`);
         console.log(err);
       }
+      localStorage.removeItem(REDIRECT_ON_LOGIN);
     });
   };
 
@@ -37,10 +65,25 @@ export default class Auth {
     const expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     );
+    console.log("Token expires at" + expiresAt);
 
+    // debugger;
+    // this.token = {
+    //   accessToken: authResult.accessToken,
+    //   idToken: authResult.idToken,
+    //   expiresAt: authResult.expiresIn * 1000 + new Date().getTime()
+    // };
+    // debugger;
+    this._accessToken = authResult.accessToken;
+    console.log("Setting access token: " + this._accessToken);
+    // this._idToken = authResult.idToken;
+    // _idToken = authResult.idToken;
+    // this._idToken = authResult.idToken;
+    // expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
     localStorage.setItem("access_token", authResult.accessToken);
     localStorage.setItem("id_token", authResult.idToken);
     localStorage.setItem("expires_at", expiresAt);
+    this.scheduleTokenRenewal();
   };
 
   isAuthenticated() {
@@ -49,7 +92,7 @@ export default class Auth {
   }
 
   logout = () => {
-    localStorage.removeItem("access_token");
+    // localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
     this.userProfile = null;
@@ -62,6 +105,9 @@ export default class Auth {
   };
 
   getAccessToken = () => {
+    // debugger;
+    // console.log(this._accessToken);
+    console.log("Retrieving access token: " + this._accessToken);
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
       throw new Error("No access token found.");
@@ -88,8 +134,9 @@ export default class Auth {
   //   });
   // }
 
-  // scheduleTokenRenewal() {
-  //   const delay = _expiresAt - Date.now();
-  //   if (delay > 0) setTimeout(() => this.renewToken(), delay);
-  // }
+  scheduleTokenRenewal() {
+    const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+    const delay = expiresAt - Date.now();
+    if (delay > 0) setTimeout(() => this.renewToken(), delay);
+  }
 }

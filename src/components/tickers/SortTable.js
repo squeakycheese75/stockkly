@@ -71,14 +71,6 @@ function nameFormatter(cell, row) {
   );
 }
 
-// function handleOnSelect(row, isSelected, e) {
-//   const {
-//     history: { push }
-//   } = this.props;
-//   // this.props.history.push("/about");
-//   push("/about");
-// }
-
 class SortTable extends Component {
   removeItem = index => {
     this.props.onSubmit(index);
@@ -110,7 +102,6 @@ class SortTable extends Component {
       mode: "checkbox",
       clickToSelect: true,
       bgColor: "rgb(178,214,225)"
-      // onSelect: handleOnSelect
     };
 
     return (
