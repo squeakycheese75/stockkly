@@ -137,6 +137,7 @@ class SortTable extends Component {
             dataFormat={openFormatter}
             dataSort={true}
             columnClassName="bstable"
+            dataAlign="right"
             editable={false}
             // columnClassName="bstable bstable-header-bold"
           >

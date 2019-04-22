@@ -87,6 +87,7 @@ li {
 
 .table td {
   padding: 0.2em;
+  /* font-size: 12px; */
   margin-left: 10px;
   vertical-align: middle;
   border: 0px;

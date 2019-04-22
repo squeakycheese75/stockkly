@@ -81,8 +81,9 @@ class WalletTable extends React.Component {
           <TableHeaderColumn
             width="10%"
             dataField="total"
-            dataAlign="center"
-            columnClassName="bstable  bstable-header-bold"
+            dataAlign="right"
+            columnClassName="bstable bstable-header-bold"
+            headerAlign="right"
             dataSort={true}
             dataFormat={openFormatterTotal}
           >
@@ -91,8 +92,9 @@ class WalletTable extends React.Component {
           <TableHeaderColumn
             width="10%"
             dataField="qty"
-            dataAlign="center"
+            dataAlign="right"
             columnClassName="bstable"
+            headerAlign="right"
             dataSort={true}
           >
             QUANTITY
@@ -100,26 +102,19 @@ class WalletTable extends React.Component {
           <TableHeaderColumn
             width="10%"
             dataField="price"
-            dataAlign="center"
+            dataAlign="right"
             columnClassName="bstable"
+            headerAlign="right"
             dataSort={true}
             dataFormat={openFormatter}
           >
             PRICE
           </TableHeaderColumn>
-          {/* <TableHeaderColumn
-            width="10%"
-            dataField="spot"
-            dataAlign="center"
-            columnClassName="bstable"
-            dataSort={true}
-          >
-            SPOT
-          </TableHeaderColumn> */}
           <TableHeaderColumn
             width="10%"
             dataField="change"
             dataAlign="center"
+            headerAlign="center"
             columnClassName={columnClassNameFormat}
             dataFormat={priceChangeFormatter}
             dataSort={true}

@@ -5,7 +5,7 @@ import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
 import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
-// import Loading from "./components/common/Loading";
+import Loading from "./components/common/Loading";
 // import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
@@ -37,7 +37,8 @@ class App extends Component {
     tickers: [],
     exchanges: [],
     sectors: [],
-    filteredTickers: []
+    filteredTickers: [],
+    tokenRenewalComplete: false
   };
 
   //Load component data
@@ -83,8 +84,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //console.log("Called componentDidMount");
-    // bug here!
+    this.auth.renewToken(() => this.setState({ tokenRenewalComplete: true }));
+
     if (this.auth.isAuthenticated()) {
       this.authenticatedLoad();
     } else {
@@ -238,6 +239,7 @@ class App extends Component {
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
     }
+    if (!this.state.tokenRenewalComplete) return <Loading />;
 
     // let content = !this.state.isLoaded ? (
     //   <Loading />

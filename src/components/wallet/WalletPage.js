@@ -15,11 +15,13 @@ class WalletPage extends React.Component {
           change: 0.19,
           price: 123.37,
           movement: 2.1,
+          total_change: 300.66,
           qty: 150,
           total: 18505.0,
           spot: 1.2922,
           ccy: "USD",
-          symbol: "$"
+          symbol: "$",
+          direction: "up"
         },
         {
           ticker: "BTC-USD",
@@ -27,11 +29,13 @@ class WalletPage extends React.Component {
           change: 0.19,
           price: 5272.76,
           movement: 0.76,
+          total_change: 300.66,
           qty: 8.99,
           total: 47434.02,
           spot: 1.2922,
           ccy: "USD",
-          symbol: "$"
+          symbol: "$",
+          direction: "up"
         },
         {
           ticker: "GOLD-OZ",
@@ -41,9 +45,11 @@ class WalletPage extends React.Component {
           movement: -1.1,
           qty: 6,
           total: 5893.02,
+          total_change: -30.66,
           spot: 1,
           ccy: "GBP",
-          symbol: "£"
+          symbol: "£",
+          direction: "down"
         }
       ]
     };
