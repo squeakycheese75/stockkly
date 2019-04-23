@@ -8,6 +8,11 @@ class WalletPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      appSettings: {
+        currency: "GBP",
+        symbol: "£",
+        refreshRate: 30
+      },
       holdingsData: [
         {
           ticker: "MSFT",
@@ -20,8 +25,7 @@ class WalletPage extends React.Component {
           total: 18505.0,
           spot: 1.2922,
           ccy: "USD",
-          symbol: "$",
-          direction: "up"
+          symbol: "$"
         },
         {
           ticker: "BTC-USD",
@@ -34,8 +38,7 @@ class WalletPage extends React.Component {
           total: 47434.02,
           spot: 1.2922,
           ccy: "USD",
-          symbol: "$",
-          direction: "up"
+          symbol: "$"
         },
         {
           ticker: "GOLD-OZ",
@@ -48,8 +51,7 @@ class WalletPage extends React.Component {
           total_change: -30.66,
           spot: 1,
           ccy: "GBP",
-          symbol: "£",
-          direction: "down"
+          symbol: "£"
         }
       ]
     };
@@ -97,11 +99,16 @@ class WalletPage extends React.Component {
   }
 
   render() {
-    // const { history } = this.props;
     return (
       <div>
-        <WalletSummary data={this.state.holdingsData} />
-        <WalletTable data={this.state.holdingsData} />
+        <WalletSummary
+          data={this.state.holdingsData}
+          settings={this.state.appSettings}
+        />
+        <WalletTable
+          data={this.state.holdingsData}
+          settings={this.state.appSettings}
+        />
       </div>
     );
   }

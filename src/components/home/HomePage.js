@@ -9,19 +9,20 @@ const HomePage = () => {
       <Jumbotron>
         <h4>Welcome to Stockkly</h4>
         <p>
-          A simple, mobile-first app for keeping track of your favourite prices.
+          A simple, mobile friendly app for keeping track of all your favourite
+          prices.
         </p>
         <p>
           Find prices to watch on the{" "}
           <LinkContainer to="manage">
-            <Button>Manage</Button>
+            <Button size="sm">Manage</Button>
           </LinkContainer>{" "}
           page.
         </p>
         <p>
           Get live updates on the{" "}
           <LinkContainer to="prices">
-            <Button>Prices</Button>
+            <Button size="sm">Prices</Button>
           </LinkContainer>{" "}
         </p>
         <p>Stockkly Team</p>

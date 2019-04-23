@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, DropdownButton, Dropdown } from "react-bootstrap";
-// import signUpForm from "./style.js";
+// import DropdownList from "react-widgets/lib/DropdownList";
 
 class TickerSearch extends Component {
   state = {
@@ -14,11 +14,12 @@ class TickerSearch extends Component {
   };
 
   render() {
+    // eslint-disable-next-line
     const sectors = this.props.sectors || [];
+    // let colors = ["orange", "red", "blue", "purple"];
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
-          {/* <FormGroup> */}
           <DropdownButton
             value={this.state.selectedValue}
             title={this.state.selectedValue}
@@ -32,17 +33,8 @@ class TickerSearch extends Component {
               </Dropdown.Item>
             ))}
           </DropdownButton>
-          {/* </FormGroup> */}
+          {/* <DropdownList data={colors} size="sm" /> */}
         </Form>
-        {/* <Card border="primary">
-          <Card.Header as="h5">Find new prices to watch:</Card.Header>
-          <Card.Body>
-            <Card.Title>Find new prices</Card.Title>
-            <Card.Text>
-
-            </Card.Text>
-          </Card.Body>
-        </Card> */}
       </div>
     );
   }

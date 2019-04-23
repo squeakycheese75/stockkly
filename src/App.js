@@ -57,7 +57,6 @@ class App extends Component {
   };
 
   determineUniqueSectors = () => {
-    //console.log(this.state.tickers);
     const sectors = this.state.tickers
       ? Array.from(new Set(this.state.tickers.map(t => t.sector)))
       : [];
@@ -76,11 +75,6 @@ class App extends Component {
 
   componentWillMount() {
     this.fetchTickers();
-    // if (this.auth.isAuthenticated()) {
-    //   this.authenticatedLoad();
-    // } else {
-    //   this.loadData();
-    // }
   }
 
   componentDidMount() {

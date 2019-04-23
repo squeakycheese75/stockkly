@@ -8,12 +8,24 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
     : "td-column-price-up td-column-size";
 }
 
-function openFormatter(cell, row) {
-  return `${row.symbol}` + cell.toLocaleString();
+function priceFormatter(cell, row) {
+  return row.spot === 1 ? (
+    `${row.symbol}` + cell.toLocaleString()
+  ) : (
+    <div>
+      <ul>
+        <li className="name">
+          {row.symbol}
+          {cell.toLocaleString()}
+        </li>
+        <li className="details">({row.spot})</li>
+      </ul>
+    </div>
+  );
 }
 
-function openFormatterTotal(cell, row) {
-  return `${portfolioCcySymbol}` + cell.toLocaleString();
+function qtyFormatter(cell, row) {
+  return cell.toFixed(2).toLocaleString();
 }
 
 function priceChangeFormatter(cell, row) {
@@ -49,12 +61,13 @@ function nameFormatter(cell, row) {
   );
 }
 
-const portfolioCcySymbol = "£";
-
 class WalletTable extends React.Component {
   render() {
-    const { data } = this.props;
-    // const { portfolioCcySymbol} = "£";
+    const { data, settings } = this.props;
+
+    const openFormatterTotal = (cell, row) => {
+      return `${settings.symbol}` + cell.toLocaleString();
+    };
 
     return (
       <div>
@@ -70,7 +83,7 @@ class WalletTable extends React.Component {
         >
           <TableHeaderColumn
             isKey={true}
-            width="10%"
+            width="25%"
             dataField="ticker"
             columnClassName="bstable"
             dataFormat={nameFormatter}
@@ -80,6 +93,28 @@ class WalletTable extends React.Component {
           </TableHeaderColumn>
           <TableHeaderColumn
             width="10%"
+            dataField="qty"
+            dataAlign="right"
+            columnClassName="bstable"
+            headerAlign="right"
+            dataSort={true}
+            dataFormat={qtyFormatter}
+          >
+            QTY
+          </TableHeaderColumn>
+          <TableHeaderColumn
+            width="25%"
+            dataField="price"
+            dataAlign="right"
+            columnClassName="bstable"
+            headerAlign="right"
+            dataSort={true}
+            dataFormat={priceFormatter}
+          >
+            PRICE
+          </TableHeaderColumn>
+          <TableHeaderColumn
+            width="25%"
             dataField="total"
             dataAlign="right"
             columnClassName="bstable bstable-header-bold"
@@ -90,37 +125,14 @@ class WalletTable extends React.Component {
             TOTAL
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="10%"
-            dataField="qty"
-            dataAlign="right"
-            columnClassName="bstable"
-            headerAlign="right"
-            dataSort={true}
-          >
-            QUANTITY
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            width="10%"
-            dataField="price"
-            dataAlign="right"
-            columnClassName="bstable"
-            headerAlign="right"
-            dataSort={true}
-            dataFormat={openFormatter}
-          >
-            PRICE
-          </TableHeaderColumn>
-          <TableHeaderColumn
-            width="10%"
+            width="15%"
             dataField="change"
             dataAlign="center"
             headerAlign="center"
             columnClassName={columnClassNameFormat}
             dataFormat={priceChangeFormatter}
             dataSort={true}
-          >
-            CHANGE
-          </TableHeaderColumn>
+          />
         </BootstrapTable>
       </div>
     );
