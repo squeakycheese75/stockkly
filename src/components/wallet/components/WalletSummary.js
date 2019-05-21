@@ -4,9 +4,34 @@ import "./WalletSummary.css";
 
 const portfolioCcySymbol = "£";
 
-// function avg(data, key) {
-//   return data.reduce((a, b) => a + (b[key] || 0), 0);
-// }
+function priceChangeFormatter(change, movement) {
+  return (
+    <div>
+      <ul>
+        {change > 0 ? (
+          <>
+            <li className="name up">
+              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              <i className="material-icons vertical-align-middle up">
+                arrow_drop_up
+              </i>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="name down">
+              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              <i className="material-icons vertical-align-middle down">
+                arrow_drop_down
+              </i>
+            </li>
+          </>
+        )}
+        <li className="details">({movement}%)</li>
+      </ul>
+    </div>
+  );
+}
 
 function sum(data, key) {
   return data.reduce((a, b) => a + (b[key] || 0), 0);
@@ -16,35 +41,21 @@ function totalFormatter(cell) {
   return `${portfolioCcySymbol}` + cell.toLocaleString();
 }
 
-// function priceChangeFormatter(cell, row) {
-//   return (
-//     <div>
-//       <ul>
-//         <li className="name">
-//           {cell}
-//           {cell > 0 ? (
-//             <i className="material-icons vertical-align-middle">
-//               arrow_drop_up
-//             </i>
-//           ) : (
-//             <i className="material-icons vertical-align-middle">
-//               arrow_drop_down
-//             </i>
-//           )}
-//         </li>
-//         <li className="details">({row.movement}%)</li>
-//       </ul>
-//     </div>
-//   );
-// }
-
 class WalletSummary extends React.Component {
   render() {
     const { data } = this.props;
 
     return (
       <Jumbotron>
-        <h1 className="text-center"> {totalFormatter(sum(data, "total"))}</h1>
+        <h1 className="text-center">
+          <table align="center">
+            <tr>
+              <td>{totalFormatter(sum(data, "total"))}</td>
+              <td>{priceChangeFormatter(1001.88, 0.19)}</td>
+            </tr>
+          </table>
+        </h1>
+        <div />
       </Jumbotron>
     );
   }

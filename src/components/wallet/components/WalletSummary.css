@@ -1,3 +1,51 @@
-.jumbotron h1 {
-  font-weight: 800;
+.name {
+  /* height: 20px; */
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 0px;
+  margin-top: 5px;
+}
+
+.details {
+  /* height: 15px; */
+  font-size: 15px;
+  margin-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.material-icons {
+  margin-left: -5px;
+}
+
+.material-icons.orange600 {
+  color: #fb8c00;
+  text-align: center;
+}
+
+.up {
+  color: #4c9900;
+}
+
+.down {
+  /* animation: blinker 1s linear infinite; */
+  color: #ff2e00;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.jumbotron {
+  border-style: solid;
+  /* margin-bottom: 0px;
+  background-position: 0% 25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow: black 0.3em 0.3em 0.3em; */
+  /* background: black; */
+  border: 5px;
+  border-color: black;
 }

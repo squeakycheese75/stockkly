@@ -66,7 +66,10 @@ class WalletTable extends React.Component {
     const { data, settings } = this.props;
 
     const openFormatterTotal = (cell, row) => {
-      return `${settings.symbol}` + cell.toLocaleString();
+      return (
+        `${settings.symbol}` +
+        cell.toLocaleString(undefined, { minimumFractionDigits: 2 })
+      );
     };
 
     return (
