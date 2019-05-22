@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { withRouter } from "react-router-dom";
-import "./SortTable.css";
+import "./WatchListTable.css";
 // import WatchListPage from "../WatchListPage";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
