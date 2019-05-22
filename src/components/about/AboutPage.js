@@ -14,9 +14,9 @@ const AboutPage = () => {
           {/* <Card.Text> */}
           <p>
             I'm a freelance software engineer and digital nomad. Currently
-            living and working from...<s>London</s>, <s>Berlin</s>,{" "}
+            living and working from...<s>London</s>, <s>Berlin</s>,
             <s>Barcelona</s>, <s>Chamonix</s>, <s>Devon</s>, <s>Madrid</s>,
-            Santiago.
+            <s>Santiago</s>, Lima.
           </p>
           <p>
             I built Stockkly as I wanted a mobile friendly, one-stop source for
@@ -28,7 +28,8 @@ const AboutPage = () => {
           </p>
           <p>
             Or, for anyone wanting to get into building progressive web apps
-            with React, checkout an early open source version of the app.
+            with React, checkout an early open source version of the app on
+            GitHub.
           </p>
           <p>
             {" "}

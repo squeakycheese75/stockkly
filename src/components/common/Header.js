@@ -11,7 +11,7 @@ class Header extends Component {
     return (
       <div className={styles}>
         <Navbar collapseOnSelect={true} expand="sm" bg="primary" variant="dark">
-          <LinkContainer to="/pricing">
+          <LinkContainer to="/wallet">
             <Navbar.Brand>
               <img
                 alt=""
@@ -26,16 +26,6 @@ class Header extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="navbar-nav mr-auto">
-              <LinkContainer to="/pricing">
-                <Nav.Link>
-                  <Button>Prices</Button>
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/manage">
-                <Nav.Link>
-                  <Button>Manage</Button>
-                </Nav.Link>
-              </LinkContainer>
               {isAuthenticated() && (
                 <LinkContainer to="/wallet">
                   <Nav.Link>
@@ -43,6 +33,22 @@ class Header extends Component {
                   </Nav.Link>
                 </LinkContainer>
               )}
+              <LinkContainer to="/pricing">
+                <Nav.Link>
+                  <Button>Pricing</Button>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/watching">
+                <Nav.Link>
+                  <Button>WatchList</Button>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/manage">
+                <Nav.Link>
+                  <Button>Manage</Button>
+                </Nav.Link>
+              </LinkContainer>
+
               <LinkContainer to="/about">
                 <Nav.Link>
                   <Button>About</Button>

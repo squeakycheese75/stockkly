@@ -1,26 +1,25 @@
 import React from "react";
-import WalletSummary from "./components/WalletSummary";
-import WalletTable from "./components/WalletTable";
-// import WatchingPage from "../watcher/WatchingPage";
+import WatchListTable from "./components/WatchListTable";
+// import LoginReminder from "./LoginReminder";
 
-class WalletPage extends React.Component {
+class WatchListPage extends React.Component {
   _isMounted = false;
 
   constructor(props) {
     super(props);
     this.state = {
       appSettings: this.props.appSettings,
-      holdingsData: localStorage.getItem("holdingsData")
-        ? JSON.parse(localStorage.getItem("holdingsData"))
+      watchData: localStorage.getItem("watchData")
+        ? JSON.parse(localStorage.getItem("watchData"))
         : []
     };
     this.auth = this.props.auth;
   }
 
-  async loadWalletData() {
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
+  async loadWatchData() {
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/watching";
 
-    console.log("Calling ... " + url);
+    console.log(url);
 
     fetch(url, {
       method: "GET",
@@ -52,45 +51,38 @@ class WalletPage extends React.Component {
     this._isMounted = true;
 
     if (this.auth.isAuthenticated()) {
-      this.loadWalletData();
+      this.loadWatchData();
     }
     // Sets the data refresh rate
     var refreshRate = this.state.appSettings.refreshRate * 1000;
     setInterval(() => {
       if (this._isMounted) {
-        this.loadWalletData();
+        this.loadWatchData();
       }
-      // else {
-      //   console.log("Not mounted, so not loading");
-      // }
     }, refreshRate);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     //Cache data back to localStorage if unmounted
-    localStorage.setItem(
-      "holdingsData",
-      JSON.stringify(this.state.holdingsData)
-    );
+    localStorage.setItem("watchData", JSON.stringify(this.state.watchData));
   }
 
   render() {
+    // const { data } = this.props;
+    // const { isAuthenticated } = this.props.auth;
+    // const { history } = this.history;
+
     return (
       <div>
-        <WalletSummary
+        <h5>.....Watchlist.....</h5>
+        <WatchListTable
           data={this.state.holdingsData}
           settings={this.state.appSettings}
         />
-        {/* <h5>Portfolio</h5> */}
-        <WalletTable
-          data={this.state.holdingsData}
-          settings={this.state.appSettings}
-        />
-        {/* <WatchingPage auth={this.auth} appSettings={this.state.appSettings} /> */}
       </div>
     );
   }
 }
 
-export default WalletPage;
+export default WatchListPage;

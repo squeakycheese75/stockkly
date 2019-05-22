@@ -13,6 +13,7 @@ import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/product/ProductPage";
 import TransactionsPage from "./components/product/TransactionsPage";
 import WalletPage from "./components/wallet/WalletPage";
+import WatchListPage from "./components/watcher/WatchListPage";
 
 //should all be done by service discovery - consul
 const defaultTickersList = ["MSFT"];
@@ -29,16 +30,21 @@ class App extends Component {
     hasError: false,
     subscribedTickers: defaultTickersList,
     data: [],
-    user: {
-      settings: {
-        refresh: "30"
-      }
-    },
+    // user: {
+    //   settings: {
+    //     refresh: "30"
+    //   }
+    // },
     tickers: [],
     exchanges: [],
     sectors: [],
     filteredTickers: [],
-    tokenRenewalComplete: false
+    tokenRenewalComplete: false,
+    appSettings: {
+      currency: "GBP",
+      symbol: "£",
+      refreshRate: 30
+    }
   };
 
   //Load component data
@@ -83,11 +89,10 @@ class App extends Component {
     if (this.auth.isAuthenticated()) {
       this.authenticatedLoad();
     } else {
-      //console.log("componentDidMount User not authenticated");
       this.loadData();
     }
     // this.setState({ loading: false });
-    var refreshRate = this.state.user.settings.refresh * 1000;
+    var refreshRate = this.state.appSettings.refreshRate * 1000;
     setInterval(() => this.loadData(), refreshRate);
     //this.loadData(); // also load one immediately
   }
@@ -289,7 +294,24 @@ class App extends Component {
 
             <Route
               path="/wallet"
-              render={props => <WalletPage auth={this.auth} {...props} />}
+              render={props => (
+                <WalletPage
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  {...props}
+                />
+              )}
+            />
+
+            <Route
+              path="/watching"
+              render={props => (
+                <WatchListPage
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  {...props}
+                />
+              )}
             />
           </Switch>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { withRouter } from "react-router-dom";
 import "./WalletTable.css";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
@@ -63,7 +64,8 @@ function nameFormatter(cell, row) {
 
 class WalletTable extends React.Component {
   render() {
-    const { data, settings } = this.props;
+    const { data, settings, history } = this.props;
+    // const { data, history } = this.props;
 
     const openFormatterTotal = (cell, row) => {
       return (
@@ -72,8 +74,24 @@ class WalletTable extends React.Component {
       );
     };
 
+    const options = {
+      onRowClick: function(row) {
+        // console.log(row.ticke);
+        history.push(`/product/${row.ticker}`);
+        // history.push(`/product/AAPL`);
+      },
+      noDataText: "Loading..."
+    };
+    const selectRowProp = {
+      hideSelectColumn: true,
+      mode: "checkbox",
+      clickToSelect: true,
+      bgColor: "rgb(178,214,225)"
+    };
+
     return (
       <div>
+        {/* Portfolio */}
         <BootstrapTable
           data={data}
           striped
@@ -83,6 +101,8 @@ class WalletTable extends React.Component {
           size="sm"
           version="4"
           headerContainerClass="bstable"
+          selectRow={selectRowProp}
+          options={options}
         >
           <TableHeaderColumn
             isKey={true}
@@ -142,4 +162,4 @@ class WalletTable extends React.Component {
   }
 }
 
-export default WalletTable;
+export default withRouter(WalletTable);

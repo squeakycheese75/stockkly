@@ -49,13 +49,14 @@ class WalletSummary extends React.Component {
       <Jumbotron>
         <h1 className="text-center">
           <table align="center">
-            <tr>
-              <td>{totalFormatter(sum(data, "total"))}</td>
-              <td>{priceChangeFormatter(1001.88, 0.19)}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>{totalFormatter(sum(data, "total"))}</td>
+                <td>{priceChangeFormatter(1001.88, 0.19)}</td>
+              </tr>
+            </tbody>
           </table>
         </h1>
-        <div />
       </Jumbotron>
     );
   }
