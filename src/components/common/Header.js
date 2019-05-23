@@ -33,11 +33,11 @@ class Header extends Component {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              <LinkContainer to="/pricing">
+              {/* <LinkContainer to="/pricing">
                 <Nav.Link>
                   <Button>Pricing</Button>
                 </Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
               <LinkContainer to="/watching">
                 <Nav.Link>
                   <Button>WatchList</Button>

@@ -6,23 +6,65 @@ import { Link } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
 
 class ProductForm extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
-      pid: props.match.params.pid
-      // transactionHistoryData: [],
-      // productData: [],
-      // message: ""
-      // x: [],
-      // y: []
+      pid: props.match.params.pid,
+      transactionHistoryData: []
     };
     this.auth = this.props.auth;
+  }
+
+  async loadTransactionHistory() {
+    console.log("calling loadTransactionHistory with " + this.state.pid);
+    var url =
+      process.env["REACT_APP_PRICES_API"] +
+      "/api/private/transactions/" +
+      this.state.pid;
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        if (this._isMounted) {
+          this.setState({
+            transactionHistoryData: response.message
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+
+    this.loadTransactionHistory();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
     return (
       <div>
-        <ProductInfo productId={this.state.pid} />
+        <ProductInfo
+          productId={this.state.pid}
+          data={this.state.transactionHistoryData}
+        />
         <Card border="info" key="productChart">
           <Card.Header as="h5">Chart</Card.Header>
           <Card.Body>
@@ -37,6 +79,7 @@ class ProductForm extends React.Component {
                 <TransactionHistory
                   auth={this.auth}
                   productId={this.state.pid}
+                  data={this.state.transactionHistoryData}
                 />
                 <Link to={`/transactions/${this.state.pid}`}>
                   <Button className="btn outline">Add Transaction</Button>

@@ -1,5 +1,5 @@
 import React from "react";
-import WalletSummary from "./components/WalletSummary";
+import Summary from "./components/Summary";
 import WalletTable from "./components/WalletTable";
 // import WatchingPage from "../watcher/WatchingPage";
 
@@ -78,9 +78,11 @@ class WalletPage extends React.Component {
   render() {
     return (
       <div>
-        <WalletSummary
+        <Summary
           data={this.state.holdingsData}
           settings={this.state.appSettings}
+          price={1003.44}
+          change={0.5}
         />
         {/* <h5>Portfolio</h5> */}
         <WalletTable

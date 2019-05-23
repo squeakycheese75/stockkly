@@ -10,11 +10,11 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
     : "td-column-price-up td-column-size";
 }
 
-function openFormatter(cell, row) {
+function priceFormatter(cell, row) {
   if (!cell) {
     return (
       `${row.symbol}` +
-      (parseFloat(row.last) + parseFloat(row.change))
+      parseFloat(row.price)
         .toFixed(2)
         .toLocaleString()
     );
@@ -24,7 +24,7 @@ function openFormatter(cell, row) {
 
 function priceChangeFormatter(cell, row) {
   var movement = null;
-  if (row.change == null || row.last == null) {
+  if (row.change == null) {
     return (
       <div>
         <ul>
@@ -33,11 +33,7 @@ function priceChangeFormatter(cell, row) {
       </div>
     );
   } else {
-    movement = (
-      (parseFloat(row.change) /
-        (parseFloat(row.last) + parseFloat(row.change))) *
-      100
-    ).toFixed(2);
+    movement = parseFloat(row.movement).toFixed(2);
   }
 
   return (
@@ -65,7 +61,7 @@ function nameFormatter(cell, row) {
   return (
     <div>
       <ul>
-        <li className="name">{row.id}</li>
+        <li className="name">{row.ticker}</li>
         <li className="details">{row.name}</li>
       </ul>
     </div>
@@ -121,38 +117,25 @@ class WatchListTable extends Component {
         >
           <TableHeaderColumn
             width="45%"
-            dataField="id"
+            dataField="ticker"
             isKey={true}
             dataSort={true}
-            //bordered={true}
             columnClassName="bstable"
             dataFormat={nameFormatter}
             editable={false}
           >
             NAME
           </TableHeaderColumn>
-          {/* <TableHeaderColumn width='10%' dataField='sector'  dataSort={ true }  columnClassName= 'bstable'>Sector</TableHeaderColumn> */}
           <TableHeaderColumn
             width="25%"
-            dataField="last"
-            dataFormat={openFormatter}
+            dataField="price"
+            dataFormat={priceFormatter}
             dataSort={true}
-            columnClassName="bstable"
-            // dataAlign="right"
+            columnClassName="bstable bstable-header-bold"
             editable={false}
-            // columnClassName="bstable bstable-header-bold"
           >
             PRICE
           </TableHeaderColumn>
-          {/* <TableHeaderColumn
-            width="17%"
-            dataField="open"
-            dataFormat={openFormatter}
-            dataSort={true}
-            columnClassName="bstable"
-          >
-            OPEN
-          </TableHeaderColumn> */}
           <TableHeaderColumn
             width="25%"
             dataField="change"

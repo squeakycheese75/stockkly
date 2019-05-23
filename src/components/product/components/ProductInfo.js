@@ -2,6 +2,10 @@ import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import "./ProductInfo.css";
 
+function sum(data, key) {
+  return data.reduce((a, b) => a + (b[key] || 0), 0);
+}
+
 class ProductInfo extends React.Component {
   _isMounted = false;
 
@@ -58,6 +62,7 @@ class ProductInfo extends React.Component {
   }
 
   render() {
+    const { data } = this.props;
     return (
       <Jumbotron>
         <h5 className="text-center">
@@ -79,39 +84,12 @@ class ProductInfo extends React.Component {
                   )}
                 </li>
                 <li className="details">({this.state.movement}%)</li>
+                <li>Qty Held: {sum(data, "quantity")}</li>
               </ul>
             </div>
           </span>
         </h5>
         <p>{this.state.productData.desc}</p>
-        {/* <Table size="sm">
-          <tbody>
-            <tr>
-              <td>
-                <b>{this.state.productData.displayTicker}</b> -{" "}
-                {this.state.productData.name}
-              </td>
-              <td>
-                {" "}
-                <ul>
-                  <li className="name">
-                    {this.state.price}
-                    {this.state.price > 0 ? (
-                      <i className="material-icons vertical-align-middle">
-                        arrow_drop_up
-                      </i>
-                    ) : (
-                      <i className="material-icons vertical-align-middle">
-                        arrow_drop_down
-                      </i>
-                    )}
-                  </li>
-                  <li className="details">({this.state.movement}%)</li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </Table> */}
       </Jumbotron>
     );
   }

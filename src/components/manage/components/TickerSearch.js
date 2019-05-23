@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, DropdownButton, Dropdown } from "react-bootstrap";
 // import DropdownList from "react-widgets/lib/DropdownList";
+// import { DropdownList } from "react-widgets";
 
 class TickerSearch extends Component {
   state = {
@@ -20,6 +21,11 @@ class TickerSearch extends Component {
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
+          {/* <DropdownList
+            data={colors}
+            value={this.state.value}
+            onChange={value => this.setState({ value })}
+          /> */}
           <DropdownButton
             value={this.state.selectedValue}
             title={this.state.selectedValue}

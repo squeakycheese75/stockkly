@@ -7,60 +7,16 @@ function columnClassNameFormat(fieldValue) {
     : "td-column-price-up td-column-size bstable";
 }
 
+function isoDateFormatter(cell, row) {
+  // var d = new Date(cell);
+  // return d.toLocaleString();
+  return cell.split("T")[0];
+}
+
 class TransactionHistory extends React.Component {
-  _isMounted = false;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      pid: this.props.productId,
-      message: ""
-    };
-    this.auth = this.props.auth;
-  }
-
-  loadTransactionHistory() {
-    var url =
-      process.env["REACT_APP_PRICES_API"] +
-      "/api/private/transactions/" +
-      this.state.pid;
-    fetch(url, {
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) return response;
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (this._isMounted) {
-          this.setState({
-            transactionHistoryData: response.message
-          });
-        }
-      })
-      .catch(error => {
-        this.setState({
-          message: error.message
-        });
-      });
-  }
-
-  componentDidMount() {
-    this._isMounted = true;
-    if (this.auth.isAuthenticated()) {
-      this.loadTransactionHistory();
-    }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   render() {
+    const { data } = this.props;
+
     const options = {
       noDataText: "No data.."
     };
@@ -68,8 +24,8 @@ class TransactionHistory extends React.Component {
     return (
       <div>
         <BootstrapTable
-          data={this.state.data}
-          // responsive
+          data={data}
+          responsive
           striped
           bordered
           hover
@@ -91,15 +47,25 @@ class TransactionHistory extends React.Component {
             dataField="transdate"
             columnClassName="bstable"
             dataSort={true}
+            dataFormat={isoDateFormatter}
             width="20%"
           >
             DATE
+          </TableHeaderColumn>
+          <TableHeaderColumn
+            dataField="ticker"
+            dataSort={true}
+            columnClassName="bstable"
+            width="20%"
+          >
+            PRODUCT
           </TableHeaderColumn>
           <TableHeaderColumn
             dataField="quantity"
             columnClassName={columnClassNameFormat}
             dataSort={true}
             width="20%"
+            dataAlign="right"
           >
             QTY
           </TableHeaderColumn>
@@ -108,6 +74,7 @@ class TransactionHistory extends React.Component {
             dataSort={true}
             columnClassName="bstable"
             width="20%"
+            dataAlign="right"
           >
             PRICE
           </TableHeaderColumn>
@@ -116,6 +83,7 @@ class TransactionHistory extends React.Component {
             dataSort={true}
             columnClassName="bstable"
             width="20%"
+            dataAlign="center"
           >
             TYPE
           </TableHeaderColumn>

@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
-import PricingPage from "./components/tickers/PricingPage";
+// import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 // import NotFound from "./components/common/NotFound";
@@ -251,7 +251,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
 
-            <Route
+            {/* <Route
               path={["/pricing"]}
               render={props => (
                 <PricingPage
@@ -261,7 +261,7 @@ class App extends Component {
                   {...props}
                 />
               )}
-            />
+            /> */}
 
             <Route path="/about" component={AboutPage} />
             <Route

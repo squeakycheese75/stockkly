@@ -1,6 +1,6 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
-import "./WalletSummary.css";
+import "./Summary.css";
 
 const portfolioCcySymbol = "£";
 
@@ -43,7 +43,7 @@ function totalFormatter(cell) {
 
 class WalletSummary extends React.Component {
   render() {
-    const { data } = this.props;
+    const { data, price, change } = this.props;
 
     return (
       <Jumbotron>
@@ -52,7 +52,7 @@ class WalletSummary extends React.Component {
             <tbody>
               <tr>
                 <td>{totalFormatter(sum(data, "total"))}</td>
-                <td>{priceChangeFormatter(1001.88, 0.19)}</td>
+                <td>{priceChangeFormatter(price, change)}</td>
               </tr>
             </tbody>
           </table>

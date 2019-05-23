@@ -17,10 +17,10 @@ class AddTransaction extends React.Component {
       t_type: "BUY",
       t_qty: 1,
       t_price: 1,
-      t_pid: this.props.product
+      t_pid: this.props.product,
+      t_details: "Trade info"
     };
     this.auth = this.props.auth;
-    // this.pid = this.props.product;
   }
 
   handleDateTimeChange = event => {
@@ -40,8 +40,8 @@ class AddTransaction extends React.Component {
   };
 
   handleSubmit = event => {
-    console.log("in handleSubmit");
-    console.log("pid is " + this.state.t_pid);
+    // console.log("in handleSubmit");
+    // console.log("pid is " + this.state.t_pid);
 
     var data = {
       ticker: this.state.t_pid,
@@ -49,9 +49,10 @@ class AddTransaction extends React.Component {
       transtype: this.state.t_type,
       quantity:
         this.state.t_type === "SELL" ? this.state.t_qty * -1 : this.state.t_qty,
-      price: this.state.t_price
+      price: this.state.t_price,
+      details: this.state.t_details
     };
-    console.log("constructed data");
+    // console.log("constructed data");
 
     var url = process.env["REACT_APP_PRICES_API"] + "/api/private/transactions";
     fetch(url, {

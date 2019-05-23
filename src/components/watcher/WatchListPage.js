@@ -17,14 +17,14 @@ class WatchListPage extends React.Component {
   }
 
   async loadWatchData() {
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/watching";
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/public/watching/";
 
     console.log(url);
 
     fetch(url, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        // Authorization: `Bearer ${this.auth.getAccessToken()}`,
         "Content-Type": "application/json"
       }
     })
@@ -36,7 +36,7 @@ class WatchListPage extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            holdingsData: response.message
+            watchData: response.message
           });
         }
       })
@@ -52,6 +52,7 @@ class WatchListPage extends React.Component {
 
     if (this.auth.isAuthenticated()) {
       this.loadWatchData();
+    } else {
     }
     // Sets the data refresh rate
     var refreshRate = this.state.appSettings.refreshRate * 1000;
@@ -75,9 +76,9 @@ class WatchListPage extends React.Component {
 
     return (
       <div>
-        <h5>.....Watchlist.....</h5>
+        {/* <h5>.....Watchlist.....</h5> */}
         <WatchListTable
-          data={this.state.holdingsData}
+          data={this.state.watchData}
           settings={this.state.appSettings}
         />
       </div>

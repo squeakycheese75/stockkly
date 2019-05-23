@@ -76,9 +76,7 @@ class WalletTable extends React.Component {
 
     const options = {
       onRowClick: function(row) {
-        // console.log(row.ticke);
         history.push(`/product/${row.ticker}`);
-        // history.push(`/product/AAPL`);
       },
       noDataText: "Loading..."
     };
