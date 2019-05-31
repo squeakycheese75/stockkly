@@ -1,5 +1,5 @@
 import React from "react";
-import Summary from "./components/Summary";
+import WalletSummary from "./components/WalletSummary";
 import WalletTable from "./components/WalletTable";
 // import WatchingPage from "../watcher/WatchingPage";
 
@@ -18,7 +18,8 @@ class WalletPage extends React.Component {
   }
 
   async loadWalletData() {
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
+    // var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/holdings/";
 
     console.log("Calling ... " + url);
 
@@ -37,7 +38,7 @@ class WalletPage extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            holdingsData: response.message
+            holdingsData: response
           });
         }
       })
@@ -78,7 +79,7 @@ class WalletPage extends React.Component {
   render() {
     return (
       <div>
-        <Summary
+        <WalletSummary
           data={this.state.holdingsData}
           settings={this.state.appSettings}
           price={1003.44}

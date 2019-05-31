@@ -107,3 +107,12 @@ li {
 td.bstable-icon {
   text-align: right;
 }
+
+.up {
+  color: #4c9900;
+}
+
+.down {
+  /* animation: blinker 1s linear infinite; */
+  color: #ff2e00;
+}

@@ -34,7 +34,7 @@ function priceChangeFormatter(cell, row) {
     <div>
       <ul>
         <li className="name">
-          {cell}
+          {cell.toFixed(2).toLocaleString()}
           {cell > 0 ? (
             <i className="material-icons vertical-align-middle">
               arrow_drop_up
@@ -45,7 +45,9 @@ function priceChangeFormatter(cell, row) {
             </i>
           )}
         </li>
-        <li className="details">({row.movement}%)</li>
+        <li className="details">
+          ({row.movement.toFixed(2).toLocaleString()}%)
+        </li>
       </ul>
     </div>
   );
@@ -69,11 +71,28 @@ class WalletTable extends React.Component {
 
     const openFormatterTotal = (cell, row) => {
       return (
-        `${settings.symbol}` +
-        cell.toLocaleString(undefined, { minimumFractionDigits: 2 })
+        <div>
+          <ul>
+            <li className="name">
+              {`${settings.symbol}` +
+                cell.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </li>
+            {row.total_change > 0 ? (
+              <li className="details up">
+                {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+              </li>
+            ) : (
+              <li className="details down">
+                {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+              </li>
+            )}
+          </ul>
+        </div>
       );
+      // openFormatterTotal
     };
 
+    // row.total_change
     const options = {
       onRowClick: function(row) {
         history.push(`/product/${row.ticker}`);
