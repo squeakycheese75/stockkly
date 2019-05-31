@@ -43,7 +43,7 @@ function totalFormatter(cell) {
 
 class WalletSummary extends React.Component {
   render() {
-    const { data, price, change } = this.props;
+    const { data } = this.props;
 
     return (
       <div>
@@ -53,7 +53,9 @@ class WalletSummary extends React.Component {
               <tbody>
                 <tr>
                   <td>{totalFormatter(sum(data, "total"))}</td>
-                  <td>{priceChangeFormatter(price, change)}</td>
+                  <td>
+                    {priceChangeFormatter(sum(data, "total_change"), 1.15)}
+                  </td>
                 </tr>
               </tbody>
             </table>

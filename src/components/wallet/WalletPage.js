@@ -82,8 +82,8 @@ class WalletPage extends React.Component {
         <WalletSummary
           data={this.state.holdingsData}
           settings={this.state.appSettings}
-          price={1003.44}
-          change={0.5}
+          // price={1003.44}
+          // change={0.5}
         />
         {/* <h5>Portfolio</h5> */}
         <WalletTable
