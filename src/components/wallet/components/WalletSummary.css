@@ -49,3 +49,14 @@ h1 {
   border: 5px;
   border-color: black;
 }
+
+table.summary td {
+  /* background-color: lime; */
+  /* margin: 12px 12px 12px 12px;
+  padding: 12px 12px 12px 12px; */
+}
+table.summary {
+  border-collapse: separate;
+  border-spacing: 12px;
+  *border-collapse: expression("separate", cellSpacing = "10px");
+}

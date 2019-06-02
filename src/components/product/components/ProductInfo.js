@@ -22,10 +22,14 @@ class ProductInfo extends React.Component {
 
   loadProductInfo() {
     // console.log("Loading product info data from api");
+    // var url =
+    //   process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     var url =
-      process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
+      process.env["REACT_APP_PRICES_API"] +
+      "/api/products/info/" +
+      this.state.pid;
 
-    console.log(url);
+    // console.log(url);
 
     fetch(url, {
       method: "GET",
@@ -41,7 +45,7 @@ class ProductInfo extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            productData: response.message
+            productData: response
           });
         }
       })

@@ -38,7 +38,7 @@ function sum(data, key) {
 }
 
 function totalFormatter(cell) {
-  return `${portfolioCcySymbol}` + cell.toLocaleString();
+  return `${portfolioCcySymbol}` + cell.toFixed(2).toLocaleString();
 }
 
 class WalletSummary extends React.Component {
@@ -49,7 +49,7 @@ class WalletSummary extends React.Component {
       <div>
         <Jumbotron>
           <h1 className="text-center">
-            <table align="center">
+            <table align="center" className="summary">
               <tbody>
                 <tr>
                   <td>{totalFormatter(sum(data, "total"))}</td>

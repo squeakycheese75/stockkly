@@ -38,7 +38,7 @@ function sum(data, key) {
 }
 
 function totalFormatter(cell) {
-  return `${portfolioCcySymbol}` + cell.toLocaleString();
+  return `${portfolioCcySymbol}` + cell;
 }
 
 class WalletSummary extends React.Component {

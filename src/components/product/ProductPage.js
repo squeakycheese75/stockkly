@@ -19,9 +19,13 @@ class ProductForm extends React.Component {
 
   async loadTransactionHistory() {
     console.log("calling loadTransactionHistory with " + this.state.pid);
+    // var url =
+    //   process.env["REACT_APP_PRICES_API"] +
+    //   "/api/private/transactions/" +
+    //   this.state.pid;
     var url =
       process.env["REACT_APP_PRICES_API"] +
-      "/api/private/transactions/" +
+      "/api/wallet/transactions/" +
       this.state.pid;
     fetch(url, {
       headers: {
@@ -37,7 +41,7 @@ class ProductForm extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            transactionHistoryData: response.message
+            transactionHistoryData: response
           });
         }
       })
