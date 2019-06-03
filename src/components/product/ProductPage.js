@@ -18,14 +18,41 @@ class ProductForm extends React.Component {
   }
 
   async loadTransactionHistory() {
-    console.log("calling loadTransactionHistory with " + this.state.pid);
-    // var url =
-    //   process.env["REACT_APP_PRICES_API"] +
-    //   "/api/private/transactions/" +
-    //   this.state.pid;
+    // console.log("calling loadTransactionHistory with " + this.state.pid);
     var url =
       process.env["REACT_APP_PRICES_API"] +
       "/api/wallet/transactions/" +
+      this.state.pid;
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        if (this._isMounted) {
+          this.setState({
+            transactionHistoryData: response
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
+  async loadProductSummary() {
+    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    var url =
+      process.env["REACT_APP_PRICES_API"] +
+      "/api/wallet/holdings/" +
       this.state.pid;
     fetch(url, {
       headers: {
@@ -65,6 +92,10 @@ class ProductForm extends React.Component {
   render() {
     return (
       <div>
+        {/* <ProductSummary
+          data={this.state.holdingsData}
+          settings={this.state.appSettings}
+        /> */}
         <ProductInfo
           productId={this.state.pid}
           data={this.state.transactionHistoryData}
