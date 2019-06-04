@@ -11,7 +11,7 @@ function priceChangeFormatter(change, movement) {
         {change > 0 ? (
           <>
             <li className="name up">
-              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              {parseFloat(change).toFixed(2)}
               <i className="material-icons vertical-align-middle up">
                 arrow_drop_up
               </i>
@@ -20,22 +20,22 @@ function priceChangeFormatter(change, movement) {
         ) : (
           <>
             <li className="name down">
-              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              {parseFloat(change).toFixed(2)}
               <i className="material-icons vertical-align-middle down">
                 arrow_drop_down
               </i>
             </li>
           </>
         )}
-        <li className="details">({movement}%)</li>
+        <li className="details">({parseFloat(movement).toFixed(2)}%)</li>
       </ul>
     </div>
   );
 }
 
-function sum(data, key) {
-  return data.reduce((a, b) => a + (b[key] || 0), 0);
-}
+// function sum(data, key) {
+//   return data.reduce((a, b) => a + (b[key] || 0), 0);
+// }
 
 function totalFormatter(cell) {
   return `${portfolioCcySymbol}` + cell;
@@ -43,7 +43,7 @@ function totalFormatter(cell) {
 
 class WalletSummary extends React.Component {
   render() {
-    const { data, price, change } = this.props;
+    const { data } = this.props;
 
     return (
       <div>
@@ -52,8 +52,9 @@ class WalletSummary extends React.Component {
             <table align="center">
               <tbody>
                 <tr>
-                  <td>{totalFormatter(sum(data, "total"))}</td>
-                  <td>{priceChangeFormatter(price, change)}</td>
+                  <td>{totalFormatter(data["total"])}</td>
+
+                  <td>{priceChangeFormatter(data.price, data.change)}</td>
                 </tr>
               </tbody>
             </table>

@@ -12,8 +12,14 @@ class ManagePage extends React.Component {
       appSettings: this.props.appSettings,
       sectors: localStorage.getItem("sectors")
         ? JSON.parse(localStorage.getItem("sectors"))
-        : []
+        : [],
+      products: localStorage.getItem("products")
+        ? JSON.parse(localStorage.getItem("products"))
+        : [],
+      filteredProducts: [],
+      selectedSector: null
     };
+
     this.auth = this.props.auth;
   }
 
@@ -47,15 +53,57 @@ class ManagePage extends React.Component {
       });
   }
 
+  async loadProducts() {
+    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/products/";
+    fetch(url, {
+      headers: {
+        // Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        if (this._isMounted) {
+          this.setState({
+            products: response
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
+  filteredTickers = input => {
+    // console.log("In ManagePage.removeTicker with ", event);
+    // const fProducts = this.state.products.filter(h => h.sector === input);
+    // const filterSUbscribedTickers = filteredTickers.filter(
+    //   id => !this.state.subscribedTickers.includes(id.ticker)
+    // );
+    this.setState({
+      filteredProducts: this.state.products.filter(h => h.sector === input)
+    });
+    this.setState({ selectedSector: input });
+  };
+
   componentDidMount() {
     this._isMounted = true;
     this.loadSectors();
+    this.loadProducts();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     //Cache data back to localStorage if unmounted
     localStorage.setItem("sectors", JSON.stringify(this.state.sectors));
+    localStorage.setItem("products", JSON.stringify(this.state.products));
   }
 
   addTicker = event => {
@@ -63,23 +111,14 @@ class ManagePage extends React.Component {
     this.props.addNewTicker(event);
   };
 
-  filteredTickers = event => {
-    //console.log("In ManagePage.removeTicker with ", event);
-    this.props.filteredTickers(event);
-  };
-
   render() {
-    // const sectors = this.props.sectors;
     let activeComponent = null;
 
-    if (
-      this.props.filteredTickersData &&
-      this.props.filteredTickersData.length
-    ) {
+    if (this.state.filteredProducts && this.state.filteredProducts.length) {
       activeComponent = (
         <TickerSearchResultsTable
           onSubmit={this.addTicker}
-          data={this.props.filteredTickersData}
+          data={this.state.filteredProducts}
         />
       );
     }

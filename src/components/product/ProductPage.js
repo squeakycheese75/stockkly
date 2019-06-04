@@ -1,9 +1,10 @@
 import React from "react";
-import ProductChart from "./components/ProductChart";
-import TransactionHistory from "./components/TransactionHistory";
-import { Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import ProductInfo from "./components/ProductInfo";
+// import ProductChart from "./components/ProductChart";
+// import TransactionHistory from "./components/TransactionHistory";
+// import { Card, Button } from "react-bootstrap";
+// import { Link } from "react-router-dom";
+// import ProductInfo from "./components/ProductInfo";
+import ProductSummary from "./components/ProductSummary";
 
 class ProductForm extends React.Component {
   _isMounted = false;
@@ -12,7 +13,12 @@ class ProductForm extends React.Component {
     super(props);
     this.state = {
       pid: props.match.params.pid,
-      transactionHistoryData: []
+      // transactionHistoryData: [],
+      // product: [],
+      // productHoldings: localStorage.getItem("productHoldings")
+      //   ? JSON.parse(localStorage.getItem("productHoldings"))
+      //   : []
+      productHoldings: { ticker: "MSFT", total: 1234.45 }
     };
     this.auth = this.props.auth;
   }
@@ -51,6 +57,35 @@ class ProductForm extends React.Component {
   async loadProductSummary() {
     // console.log("calling loadTransactionHistory with " + this.state.pid);
     var url =
+      process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
+    fetch(url, {
+      headers: {
+        // Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        if (this._isMounted) {
+          this.setState({
+            productSummary: response
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
+  async loadProductHoldings() {
+    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    var url =
       process.env["REACT_APP_PRICES_API"] +
       "/api/wallet/holdings/" +
       this.state.pid;
@@ -68,7 +103,7 @@ class ProductForm extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            transactionHistoryData: response
+            productHoldings: response
           });
         }
       })
@@ -81,8 +116,9 @@ class ProductForm extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-
-    this.loadTransactionHistory();
+    // this.loadTransactionHistory();
+    this.loadProductHoldings();
+    // if ((this.state.product = [])) this.loadProductSummary();
   }
 
   componentWillUnmount() {
@@ -92,15 +128,15 @@ class ProductForm extends React.Component {
   render() {
     return (
       <div>
-        {/* <ProductSummary
-          data={this.state.holdingsData}
-          settings={this.state.appSettings}
-        /> */}
-        <ProductInfo
+        <ProductSummary
+          data={this.state.productHoldings}
+          // settings={this.state.appSettings}
+        />
+        {/* <ProductInfo
           productId={this.state.pid}
           data={this.state.transactionHistoryData}
-        />
-        <Card border="info" key="productChart">
+        /> */}
+        {/* <Card border="info" key="productChart">
           <Card.Header as="h5">Chart</Card.Header>
           <Card.Body>
             <ProductChart productId={this.state.pid} />
@@ -131,7 +167,7 @@ class ProductForm extends React.Component {
               </Card.Text>
             </Card.Body>
           </Card>
-        )}
+        )} */}
       </div>
     );
   }
