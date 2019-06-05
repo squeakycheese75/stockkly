@@ -77,11 +77,40 @@ class WalletSummary extends React.Component {
       });
   }
 
+  async loadProductHoldings() {
+    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    var url = process.env["REACT_APP_PRICES_API"] + "/api//" + this.state.pid;
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        if (this._isMounted) {
+          this.setState({
+            productHoldings: response
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
   componentDidMount() {
     this._isMounted = true;
     if (this.auth.isAuthenticated()) {
       this.loadProductHoldings();
     }
+    this.loadProductPrice();
   }
 
   componentWillUnmount() {
