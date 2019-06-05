@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Form, DropdownButton, Dropdown } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 // import DropdownList from "react-widgets/lib/DropdownList";
 // import { DropdownList } from "react-widgets";
+// import SearchNew from "./SearchNew";
+import { DropdownList } from "react-widgets";
+import "./SearchNew.css";
 
 class TickerSearch extends Component {
   state = {
@@ -26,7 +29,18 @@ class TickerSearch extends Component {
             value={this.state.value}
             onChange={value => this.setState({ value })}
           /> */}
-          <DropdownButton
+          {/* <SearchNew
+            sectors={sectors}
+            // onSelect={event => this.onTargetSelect(event)}
+          /> */}
+          <DropdownList
+            className="dropdown_customized"
+            data={sectors}
+            value={this.state.selectedValue}
+            // onChange={selectedValue => this.setState({ selectedValue })}
+            onSelect={event => this.onTargetSelect(event)}
+          />
+          {/* <DropdownButton
             value={this.state.selectedValue}
             title={this.state.selectedValue}
             onSelect={event => this.onTargetSelect(event)}
@@ -38,7 +52,7 @@ class TickerSearch extends Component {
                 {sector}
               </Dropdown.Item>
             ))}
-          </DropdownButton>
+          </DropdownButton> */}
           {/* <DropdownList data={colors} size="sm" /> */}
         </Form>
       </div>

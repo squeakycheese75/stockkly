@@ -38,14 +38,14 @@ class Header extends Component {
                   <Button>Pricing</Button>
                 </Nav.Link>
               </LinkContainer> */}
-              {/* <LinkContainer to="/watching">
+              <LinkContainer to="/watching">
                 <Nav.Link>
                   <Button>WatchList</Button>
                 </Nav.Link>
-              </LinkContainer> */}
+              </LinkContainer>
               <LinkContainer to="/manage">
                 <Nav.Link>
-                  <Button>Manage</Button>
+                  <Button>Find</Button>
                 </Nav.Link>
               </LinkContainer>
 

@@ -29,22 +29,27 @@ class App extends Component {
     isLoaded: false,
     hasError: false,
     // subscribedTickers: defaultTickersList,
-    data: [],
+    // data: [],
     // user: {
     //   settings: {
     //     refresh: "30"
     //   }
     // },
-    tickers: [],
-    exchanges: [],
-    sectors: [],
-    filteredTickers: [],
+    // tickers: [],
+    // exchanges: [],
+    // sectors: [],
+    // filteredTickers: [],
     tokenRenewalComplete: false,
     appSettings: {
-      currency: "GBP",
-      symbol: "£",
-      refreshRate: 30,
-      watching: ["MSFT", "AAPL"]
+      watching: ["MSFT", "AAPL"],
+      settings: [
+        {
+          profile: "main",
+          currency: "GBP",
+          symbol: "£",
+          refreshRate: 30
+        }
+      ]
     }
   };
 
@@ -87,9 +92,10 @@ class App extends Component {
   componentDidMount() {
     this.auth.renewToken(() => this.setState({ tokenRenewalComplete: true }));
 
-    // if (this.auth.isAuthenticated()) {
-    //   this.authenticatedLoad();
-    // } else {
+    if (this.auth.isAuthenticated()) {
+      // this.loadProfile();
+    }
+    // else {
     //   this.loadData();
     // }
     // // this.setState({ loading: false });
@@ -131,16 +137,16 @@ class App extends Component {
     // console.log(error, info);
   }
 
-  loadData() {
-    //console.log("In loading data!");
-    // if (
-    //   Array.isArray(this.state.subscribedTickers) ||
-    //   this.state.subscribedTickers.length
-    // ) {
-    //   // array does not exist, is not an array, or is empty
-    //   this.fetchDataWithTicker();
-    // }
-  }
+  // loadData() {
+  //console.log("In loading data!");
+  // if (
+  //   Array.isArray(this.state.subscribedTickers) ||
+  //   this.state.subscribedTickers.length
+  // ) {
+  //   // array does not exist, is not an array, or is empty
+  //   this.fetchDataWithTicker();
+  // }
+  // }
 
   // async fetchDataWithTicker() {
   //   var url =
