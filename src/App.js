@@ -16,7 +16,7 @@ import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
 
 //should all be done by service discovery - consul
-const defaultTickersList = ["MSFT"];
+// const defaultTickersList = ["MSFT"];
 
 //require("dotenv").config();
 
@@ -28,7 +28,7 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    subscribedTickers: defaultTickersList,
+    // subscribedTickers: defaultTickersList,
     data: [],
     // user: {
     //   settings: {
@@ -284,7 +284,13 @@ class App extends Component {
             />
             <Route
               path="/product/:pid"
-              render={props => <ProductForm auth={this.auth} {...props} />}
+              render={props => (
+                <ProductForm
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  {...props}
+                />
+              )}
             />
 
             <Route
