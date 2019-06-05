@@ -43,7 +43,8 @@ class App extends Component {
     appSettings: {
       currency: "GBP",
       symbol: "£",
-      refreshRate: 30
+      refreshRate: 30,
+      watching: ["MSFT", "AAPL"]
     }
   };
 

@@ -104,6 +104,10 @@ class ProductForm extends React.Component {
     this._isLoaded = false;
   }
 
+  handleSubmit = event => {
+    console.log("in handleSubmit from add to watch list.");
+  };
+
   render() {
     // if (!this._isLoaded) return <Loading />;
 
@@ -138,6 +142,9 @@ class ProductForm extends React.Component {
                 <Link to={`/transactions/${this.state.pid}`}>
                   <Button className="btn outline">Add Transaction</Button>
                 </Link>
+                <Link to={`/watcher/${this.state.pid}`}>
+                  <Button className="btn outline">Watch</Button>
+                </Link>
               </Card.Body>
             </Card>
           </>
@@ -146,8 +153,16 @@ class ProductForm extends React.Component {
             <Card.Header as="h5">**Note**</Card.Header>
             <Card.Body>
               <Card.Text>
-                Need to be logged in to manage transactions.
+                You need to be logged in to manage transactions but you can add
+                to you watch list!
               </Card.Text>
+              <Button
+                className="btn btn-default"
+                size="sm"
+                onClick={event => this.handleSubmit(event)}
+              >
+                Add to Watchlist
+              </Button>
             </Card.Body>
           </Card>
         )}
