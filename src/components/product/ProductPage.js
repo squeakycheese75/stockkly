@@ -27,36 +27,36 @@ class ProductForm extends React.Component {
     this.auth = this.props.auth;
   }
 
-  async loadTransactionHistory() {
-    // console.log("calling loadTransactionHistory with " + this.state.pid);
-    var url =
-      process.env["REACT_APP_PRICES_API"] +
-      "/api/wallet/transactions/" +
-      this.state.pid;
-    fetch(url, {
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) return response;
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (this._isMounted) {
-          this.setState({
-            transactionHistoryData: response
-          });
-        }
-      })
-      .catch(error => {
-        this.setState({
-          message: error.message
-        });
-      });
-  }
+  // async loadTransactionHistory() {
+  //   // console.log("calling loadTransactionHistory with " + this.state.pid);
+  //   var url =
+  //     process.env["REACT_APP_PRICES_API"] +
+  //     "/api/wallet/transactions/" +
+  //     this.state.pid;
+  //   fetch(url, {
+  //     headers: {
+  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //     .then(response => {
+  //       if (response.ok) return response;
+  //       throw new Error("Network response was not ok.");
+  //     })
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       if (this._isMounted) {
+  //         this.setState({
+  //           transactionHistoryData: response
+  //         });
+  //       }
+  //     })
+  //     .catch(error => {
+  //       this.setState({
+  //         message: error.message
+  //       });
+  //     });
+  // }
 
   async loadProductSummary() {
     // console.log("calling loadTransactionHistory with " + this.state.pid);
@@ -89,7 +89,10 @@ class ProductForm extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.loadTransactionHistory();
+    // if (this.auth.isAuthenticated) {
+    //   this.loadTransactionHistory();
+    // }
+
     // this.loadProductHoldings();
     this.loadProductSummary();
     this._isLoaded = true;
@@ -110,6 +113,7 @@ class ProductForm extends React.Component {
           // data={this.state.productHoldings}
           appSettings={this.state.appSettings}
           auth={this.auth}
+          productId={this.state.pid}
         />
 
         <ProductInfo productId={this.state.pid} />
@@ -127,9 +131,9 @@ class ProductForm extends React.Component {
               <Card.Header as="h5">Transaction History:</Card.Header>
               <Card.Body>
                 <TransactionHistory
-                  auth={this.auth}
+                  // auth={this.auth}
                   productId={this.state.pid}
-                  data={this.state.transactionHistoryData}
+                  // data={this.state.transactionHistoryData}
                 />
                 <Link to={`/transactions/${this.state.pid}`}>
                   <Button className="btn outline">Add Transaction</Button>

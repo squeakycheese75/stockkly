@@ -14,8 +14,58 @@ function isoDateFormatter(cell, row) {
 }
 
 class TransactionHistory extends React.Component {
+  _isMounted = false;
+  constructor(props) {
+    super(props);
+    this.state = {
+      pid: props.match.params.pid,
+      // appSettings: this.props.appSettings,
+      transactionHistoryData: []
+    };
+    // this.auth = this.props.auth;
+  }
+  async loadTransactionHistory() {
+    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    var url =
+      process.env["REACT_APP_PRICES_API"] +
+      "/api/wallet/transactions/" +
+      this.state.pid;
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        if (this._isMounted) {
+          this.setState({
+            transactionHistoryData: response
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    this.loadTransactionHistory();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
-    const { data } = this.props;
+    // const { data } = this.props;
 
     const options = {
       noDataText: "No data.."
@@ -24,7 +74,7 @@ class TransactionHistory extends React.Component {
     return (
       <div>
         <BootstrapTable
-          data={data}
+          data={this.state.transactionHistoryData}
           responsive
           striped
           bordered

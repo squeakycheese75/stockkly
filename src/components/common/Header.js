@@ -11,7 +11,7 @@ class Header extends Component {
     return (
       <div className={styles}>
         <Navbar collapseOnSelect={true} expand="sm" bg="primary" variant="dark">
-          <LinkContainer to="/wallet">
+          <LinkContainer to="/">
             <Navbar.Brand>
               <img
                 alt=""
