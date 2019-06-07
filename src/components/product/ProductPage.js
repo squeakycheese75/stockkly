@@ -5,7 +5,7 @@ import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
 import ProductSummary from "./components/ProductSummary";
-// import Loading from "../common/Loading";
+import Loading from "../common/Loading";
 
 class ProductForm extends React.Component {
   _isMounted = false;
@@ -78,6 +78,7 @@ class ProductForm extends React.Component {
           this.setState({
             productSummary: response
           });
+          this._isLoaded = false;
         }
       })
       .catch(error => {
@@ -101,7 +102,7 @@ class ProductForm extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    this._isLoaded = false;
+    // this._isLoaded = false;
   }
 
   handleSubmit = event => {
@@ -109,7 +110,7 @@ class ProductForm extends React.Component {
   };
 
   render() {
-    // if (!this._isLoaded) return <Loading />;
+    if (!this._isLoaded) return <Loading />;
 
     return (
       <div>

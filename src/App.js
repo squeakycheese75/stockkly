@@ -42,14 +42,17 @@ class App extends Component {
     tokenRenewalComplete: false,
     appSettings: {
       watching: ["MSFT", "AAPL"],
-      settings: [
-        {
-          profile: "main",
-          currency: "GBP",
-          symbol: "£",
-          refreshRate: 30
-        }
-      ]
+      // settings: [
+      //   {
+      //     profile: "main",
+      //     currency: "GBP",
+      //     symbol: "£",
+      //     refreshRate: 30
+      //   }
+
+      currency: "GBP",
+      symbol: "£",
+      refreshRate: 30
     }
   };
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import { withRouter } from "react-router-dom";
+import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { withRouter, Link } from "react-router-dom";
 import "./WatchListTable.css";
 // import WatchListPage from "../WatchListPage";
 
@@ -73,17 +74,57 @@ class WatchListTable extends Component {
     this.props.onSubmit(index);
   };
 
+  // removeButton(cell) {
+  //   return (
+  //     <i
+  //       className="mdc-icon-button material-icons md-12 orange600"
+  //       onClick={() => this.removeItem(cell)}
+  //     >
+  //       {/* highlight_off */}
+  //       delete
+  //     </i>
+  //   );
+  // }
+
   removeButton(cell) {
     return (
-      <i
-        className="mdc-icon-button material-icons md-12 orange600"
-        onClick={() => this.removeItem(cell)}
-      >
-        {/* highlight_off */}
-        delete
-      </i>
+      <ButtonToolbar>
+        <OverlayTrigger
+          key="top"
+          placement="top"
+          overlay={<Tooltip id={`tooltip-top`}>Remove from watchlist.</Tooltip>}
+        >
+          <Link to={`/product/${cell}`}>
+            <i
+              className="mdc-icon-button material-icons md-12 orange600"
+              onClick={() => this.removeItem(cell)}
+            >
+              {/* highlight_off */}
+              delete
+            </i>
+          </Link>
+        </OverlayTrigger>
+      </ButtonToolbar>
     );
   }
+
+  // viewProductHelp(cell, row) {
+  //   return (
+  //     <ButtonToolbar>
+  //       <OverlayTrigger
+  //         key="top"
+  //         placement="top"
+  //         overlay={<Tooltip id={`tooltip-top`}>Details</Tooltip>}
+  //       >
+  //         <Link to={`/product/${cell}`}>
+  //           <i className="mdc-icon-button material-icons md-12 orange600">
+  //             view_headline
+  //           </i>
+  //         </Link>
+  //       </OverlayTrigger>
+  //     </ButtonToolbar>
+  //   );
+  // }
 
   render() {
     const { data, history } = this.props;

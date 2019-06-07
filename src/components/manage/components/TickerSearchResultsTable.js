@@ -4,6 +4,7 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { withToastManager } from "react-toast-notifications";
 import ToastButton from "./ToastButton";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // import ProductForm from "./ProductForm";
 
 var FormWithToasts = withToastManager(ToastButton);
@@ -18,11 +19,11 @@ function msg() {
   );
 }
 
-function onSelectRow(row, isSelected, e) {
-  if (isSelected) {
-    // alert(`You just selected '${row["name"]}'`);
-  }
-}
+// function onSelectRow(row, isSelected, e) {
+//   if (isSelected) {
+//     // alert(`You just selected '${row["name"]}'`);
+//   }
+// }
 
 class TickerSearchResultsTable extends Component {
   constructor(props, context) {
@@ -75,21 +76,36 @@ class TickerSearchResultsTable extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, history } = this.props;
+
+    // const options = {
+    //   noDataText: msg()
+    //   // onRowClick: function(row) {
+    //   //   // alert(`You click row id: ${row._id}`);
+    //   //   // console.log(`You clicked row id: ${row.ticker}`);
+    //   //   // <Link to={`/product/${row}`} />;
+    //   //   this.router.transitionTo(`/product/${row.id}`);
+    //   // },
+    // };
+    // const selectRowProps = {
+    //   mode: "radio",
+    //   clickToSelect: true,
+    //   onSelect: onSelectRow,
+    //   hideSelectColumn: true
+    // };
+
+    // row.total_change
     const options = {
+      onRowClick: function(row) {
+        history.push(`/product/${row.ticker}`);
+      },
       noDataText: msg()
-      // onRowClick: function(row) {
-      //   // alert(`You click row id: ${row._id}`);
-      //   // console.log(`You clicked row id: ${row.ticker}`);
-      //   // <Link to={`/product/${row}`} />;
-      //   this.router.transitionTo(`/product/${row.id}`);
-      // },
     };
     const selectRowProps = {
-      mode: "radio",
+      hideSelectColumn: true,
+      mode: "checkbox",
       clickToSelect: true,
-      onSelect: onSelectRow,
-      hideSelectColumn: true
+      bgColor: "rgb(178,214,225)"
     };
 
     return (
@@ -107,6 +123,7 @@ class TickerSearchResultsTable extends Component {
           size="sm"
           version="4"
           options={options}
+          // selectRow={selectRowProps}
           selectRow={selectRowProps}
         >
           <TableHeaderColumn
@@ -127,7 +144,7 @@ class TickerSearchResultsTable extends Component {
             Name
           </TableHeaderColumn>
           {/* <TableHeaderColumn width='20%' dataField='ticker' dataFormat={this.cellButton.bind(this)}>Add</TableHeaderColumn>                            */}
-          <TableHeaderColumn
+          {/* <TableHeaderColumn
             width="5%"
             dataField="ticker"
             columnClassName="bstable bstable-icon"
@@ -140,11 +157,11 @@ class TickerSearchResultsTable extends Component {
             columnClassName="bstable bstable-icon"
             dataAlign="center"
             dataFormat={this.addButton.bind(this)}
-          />
+          /> */}
         </BootstrapTable>
       </div>
     );
   }
 }
 
-export default TickerSearchResultsTable;
+export default withRouter(TickerSearchResultsTable);
