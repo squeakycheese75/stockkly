@@ -1,44 +1,16 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import "./ProductSummary.css";
-// import t from "typy";
+import t from "typy";
 
-function priceChangeFormatter(change, movement) {
-  return (
-    <div>
-      <ul>
-        {change > 0 ? (
-          <>
-            <li className="name up">
-              {parseFloat(change).toFixed(2)}
-              <i className="material-icons vertical-align-middle up">
-                arrow_drop_up
-              </i>
-            </li>
-          </>
-        ) : (
-          <>
-            <li className="name down">
-              {parseFloat(change).toFixed(2)}
-              <i className="material-icons vertical-align-middle down">
-                arrow_drop_down
-              </i>
-            </li>
-          </>
-        )}
-        <li className="details">({parseFloat(movement).toFixed(2)}%)</li>
-      </ul>
-    </div>
-  );
-}
-
-function priceFormatter(price) {
+function priceFormatter(symbol, price) {
   return (
     <div>
       <ul>
         {price > 0 ? (
           <>
             <li className="price-large up">
+              {symbol}
               {parseFloat(price).toFixed(2)}
               <i className="material-icons vertical-align-middle up">
                 arrow_drop_up
@@ -48,6 +20,7 @@ function priceFormatter(price) {
         ) : (
           <>
             <li className="price-large down">
+              {symbol}
               {parseFloat(price).toFixed(2)}
               <i className="material-icons vertical-align-middle down">
                 arrow_drop_down
@@ -68,13 +41,6 @@ function changeFormatter(change) {
       </ul>
     </div>
   );
-}
-
-function isEmpty(obj) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
 }
 
 class ProductSummary extends React.Component {
@@ -199,12 +165,20 @@ class ProductSummary extends React.Component {
   }
 
   render() {
-    const { appSettings } = this.props;
-    // const total =t(this.state.productData, "total").safeObject;
+    // const { appSettings } = this.props;
+    // const total = t(this.state.productHoldings, "total").safeObject;
+    const symbol = t(this.state.productSummary, "quote.symbol").safeObject;
 
-    function totalFormatter(cell) {
-      return `${appSettings.symbol}` + cell;
-    }
+    // function totalFormatter(cell) {
+    //   return `${appSettings.symbol}` + cell;
+    // }
+
+    // function isEmpty(obj) {
+    //   for (var key in obj) {
+    //     if (obj.hasOwnProperty(key)) return false;
+    //   }
+    //   return true;
+    // }
 
     return (
       <div>
@@ -212,44 +186,25 @@ class ProductSummary extends React.Component {
           <h1 className="text-center">
             <table align="center">
               <tbody>
+                {/* {!isEmpty(this.state.productHoldings) ? (
+                     <></>
+                ) : (
+                  <></>
+                )} */}
                 <tr>
-                  <td>{this.state.pid}</td>
+                  <td>{this.state.pid}:</td>
                   <td>{this.state.productSummary.name}</td>
                 </tr>
+                <tr />
                 <tr>
-                  {isEmpty(this.state.productHoldings) ? (
-                    <>
-                      <td>{priceFormatter(this.state.productPrice.price)}</td>
-                      <td>{changeFormatter(this.state.productPrice.change)}</td>
-                    </>
-                  ) : (
-                    <>
-                      <td>{totalFormatter(this.state.productSummary.price)}</td>
-                      <td>
-                        {priceChangeFormatter(
-                          this.state.productSummary.price,
-                          this.state.productSummary.change
-                        )}
-                      </td>
-                    </>
-                  )}
+                  <td>
+                    {priceFormatter(symbol, this.state.productPrice.price)}
+                  </td>
+                  <td>{changeFormatter(this.state.productPrice.change)}</td>
                 </tr>
               </tbody>
             </table>
           </h1>
-          {/* <h3>
-            <ul align="center">
-              {data["spot"] > 0 ? (
-                <li className="name">
-                  {data["qty"]} @ {data["price"]} ({data["spot"]})
-                </li>
-              ) : (
-                <li className="name">
-                  {data["qty"]} @ {data["price"]}
-                </li>
-              )}
-            </ul>
-          </h3> */}
         </Jumbotron>
       </div>
     );

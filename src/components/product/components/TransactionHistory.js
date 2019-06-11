@@ -18,11 +18,11 @@ class TransactionHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pid: props.match.params.pid,
+      pid: this.props.pid,
       // appSettings: this.props.appSettings,
       transactionHistoryData: []
     };
-    // this.auth = this.props.auth;
+    this.auth = this.props.auth;
   }
   async loadTransactionHistory() {
     // console.log("calling loadTransactionHistory with " + this.state.pid);

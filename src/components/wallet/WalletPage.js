@@ -2,9 +2,11 @@ import React from "react";
 import WalletSummary from "./components/WalletSummary";
 import WalletTable from "./components/WalletTable";
 // import WatchingPage from "../watcher/WatchingPage";
+import Loading from "../common/Loading";
 
 class WalletPage extends React.Component {
   _isMounted = false;
+  _isLoaded = false;
 
   constructor(props) {
     super(props);
@@ -40,6 +42,7 @@ class WalletPage extends React.Component {
           this.setState({
             holdingsData: response
           });
+          // this._isLoaded = true;
         }
       })
       .catch(error => {
@@ -54,6 +57,7 @@ class WalletPage extends React.Component {
 
     if (this.auth.isAuthenticated()) {
       this.loadWalletData();
+      this._isLoaded = true;
     }
     // Sets the data refresh rate
     var refreshRate = this.state.appSettings.refreshRate * 1000;
@@ -65,6 +69,7 @@ class WalletPage extends React.Component {
       //   console.log("Not mounted, so not loading");
       // }
     }, refreshRate);
+    this._isLoaded = true;
   }
 
   componentWillUnmount() {
@@ -77,6 +82,8 @@ class WalletPage extends React.Component {
   }
 
   render() {
+    if (!this._isLoaded) return <Loading />;
+
     return (
       <div>
         <WalletSummary

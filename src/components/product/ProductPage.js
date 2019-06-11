@@ -1,5 +1,5 @@
 import React from "react";
-// import ProductChart from "./components/ProductChart";
+import ProductChart from "./components/ProductChart";
 import TransactionHistory from "./components/TransactionHistory";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -21,7 +21,7 @@ class ProductForm extends React.Component {
       // productHoldings: localStorage.getItem("productHoldings")
       //   ? JSON.parse(localStorage.getItem("productHoldings"))
       //   : []
-      productHoldings: { ticker: "MSFT", total: 1234.45 },
+      productHoldings: {},
       productSummary: {}
     };
     this.auth = this.props.auth;
@@ -123,23 +123,19 @@ class ProductForm extends React.Component {
 
         <ProductInfo productId={this.state.pid} />
 
-        {/* <Card border="info" key="productChart">
+        <Card border="info" key="productChart">
           <Card.Header as="h5">Chart</Card.Header>
           <Card.Body>
             <ProductChart productId={this.state.pid} />
           </Card.Body>
-        </Card> */}
+        </Card>
 
         {this.auth.isAuthenticated() ? (
           <>
             <Card key="transactionHistory">
               <Card.Header as="h5">Transaction History:</Card.Header>
               <Card.Body>
-                <TransactionHistory
-                  // auth={this.auth}
-                  productId={this.state.pid}
-                  // data={this.state.transactionHistoryData}
-                />
+                <TransactionHistory auth={this.auth} pid={this.state.pid} />
                 <Link to={`/transactions/${this.state.pid}`}>
                   <Button className="btn outline">Add Transaction</Button>
                 </Link>
