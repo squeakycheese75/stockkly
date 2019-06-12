@@ -11,8 +11,8 @@ class WatchListPage extends React.Component {
       appSettings: this.props.appSettings,
       watchData: localStorage.getItem("watchData")
         ? JSON.parse(localStorage.getItem("watchData"))
-        : [],
-      watchList: "DIS"
+        : []
+      // watchList: this.props.watchList
     };
     this.auth = this.props.auth;
   }
@@ -21,7 +21,7 @@ class WatchListPage extends React.Component {
     var url =
       process.env["REACT_APP_PRICES_API"] +
       "/api/watchlist/" +
-      this.state.watchList;
+      this.state.appSettings.watchList;
 
     fetch(url, {
       method: "GET",
@@ -69,6 +69,11 @@ class WatchListPage extends React.Component {
     localStorage.setItem("watchData", JSON.stringify(this.state.watchData));
   }
 
+  removeTicker = event => {
+    console.log("In TickerPage.removeTicker with ", event);
+    this.props.removeTicker(event);
+  };
+
   render() {
     // const { data } = this.props;
     // const { isAuthenticated } = this.props.auth;
@@ -78,6 +83,7 @@ class WatchListPage extends React.Component {
       <div>
         <WatchListTable
           data={this.state.watchData}
+          onSubmit={this.removeTicker}
           settings={this.state.appSettings}
         />
       </div>

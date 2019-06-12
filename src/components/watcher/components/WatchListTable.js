@@ -69,9 +69,33 @@ function nameFormatter(cell, row) {
   );
 }
 
+// function iconFormatter() {
+//   function handleClick(e) {
+//     e.preventDefault();
+//     console.log("The link was clicked.");
+//   }
+
+//   return (
+//     <i
+//       className="mdc-icon-button material-icons md-12 orange600"
+//       // onClick={() => this.removeItem(cell)}
+//       onClick={handleClick}
+//     >
+//       {/* highlight_off */}
+//       delete
+//     </i>
+//   );
+// }
+
+// function handleClick(e) {
+//   e.preventDefault();
+//   console.log("The link was clicked.");
+// }
+
 class WatchListTable extends Component {
-  removeItem = index => {
-    this.props.onSubmit(index);
+  removeItem = event => {
+    // event.preventDefault();
+    this.props.onSubmit(event);
   };
 
   // removeButton(cell) {
@@ -79,6 +103,7 @@ class WatchListTable extends Component {
   //     <i
   //       className="mdc-icon-button material-icons md-12 orange600"
   //       onClick={() => this.removeItem(cell)}
+  //       // onClick={handleClick}
   //     >
   //       {/* highlight_off */}
   //       delete
@@ -94,13 +119,31 @@ class WatchListTable extends Component {
           placement="top"
           overlay={<Tooltip id={`tooltip-top`}>Remove from watchlist.</Tooltip>}
         >
+          {/* <Link to={`/product/${cell}`}> */}
+          <i
+            className="mdc-icon-button material-icons md-12 orange600"
+            onClick={() => this.removeItem(cell)}
+          >
+            {/* highlight_off */}
+            delete
+          </i>
+          {/* </Link> */}
+        </OverlayTrigger>
+      </ButtonToolbar>
+    );
+  }
+
+  viewProductHelp(cell, row) {
+    return (
+      <ButtonToolbar>
+        <OverlayTrigger
+          key="top"
+          placement="top"
+          overlay={<Tooltip id={`tooltip-top`}>Details</Tooltip>}
+        >
           <Link to={`/product/${cell}`}>
-            <i
-              className="mdc-icon-button material-icons md-12 orange600"
-              onClick={() => this.removeItem(cell)}
-            >
-              {/* highlight_off */}
-              delete
+            <i className="mdc-icon-button material-icons md-12 orange600">
+              view_headline
             </i>
           </Link>
         </OverlayTrigger>
@@ -108,39 +151,24 @@ class WatchListTable extends Component {
     );
   }
 
-  // viewProductHelp(cell, row) {
-  //   return (
-  //     <ButtonToolbar>
-  //       <OverlayTrigger
-  //         key="top"
-  //         placement="top"
-  //         overlay={<Tooltip id={`tooltip-top`}>Details</Tooltip>}
-  //       >
-  //         <Link to={`/product/${cell}`}>
-  //           <i className="mdc-icon-button material-icons md-12 orange600">
-  //             view_headline
-  //           </i>
-  //         </Link>
-  //       </OverlayTrigger>
-  //     </ButtonToolbar>
-  //   );
-  // }
-
   render() {
-    const { data, history } = this.props;
+    // const { data, history } = this.props;
+    const { data } = this.props;
 
     const options = {
-      onRowClick: function(row) {
-        history.push(`/product/${row.id}`);
-      },
+      // onRowClick: function(row) {
+      //   history.push(`/product/${row.id}`);
+      // },
+      // onRowClick: this.removeButton.bind(this),
+      // onRowClick: this.onSelectedRow.bind(this),
       noDataText: "Loading..."
     };
-    const selectRowProp = {
-      hideSelectColumn: true,
-      mode: "checkbox",
-      clickToSelect: true,
-      bgColor: "rgb(178,214,225)"
-    };
+    // const selectRowProp = {
+    //   hideSelectColumn: true,
+    //   mode: "checkbox",
+    //   clickToSelect: true,
+    //   bgColor: "rgb(178,214,225)"
+    // };
 
     return (
       <div>
@@ -153,7 +181,7 @@ class WatchListTable extends Component {
           bordered
           size="sm"
           version="4"
-          selectRow={selectRowProp}
+          // selectRow={selectRowProp}
           options={options}
         >
           <TableHeaderColumn
@@ -187,6 +215,13 @@ class WatchListTable extends Component {
           >
             CHANGE
           </TableHeaderColumn>
+          <TableHeaderColumn
+            width="5%"
+            dataField="ticker"
+            columnClassName="bstable bstable-icon"
+            dataAlign="center"
+            dataFormat={this.viewProductHelp.bind(this)}
+          />
           <TableHeaderColumn
             width="5%"
             dataField="ticker"

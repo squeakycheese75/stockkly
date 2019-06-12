@@ -1,5 +1,5 @@
 import React from "react";
-import ProductChart from "./components/ProductChart";
+// import ProductChart from "./components/ProductChart";
 import TransactionHistory from "./components/TransactionHistory";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ class ProductForm extends React.Component {
     this.state = {
       pid: props.match.params.pid,
       appSettings: this.props.appSettings,
+      open: false,
       // transactionHistoryData: [],
       // product: [],
       // productHoldings: localStorage.getItem("productHoldings")
@@ -26,37 +27,6 @@ class ProductForm extends React.Component {
     };
     this.auth = this.props.auth;
   }
-
-  // async loadTransactionHistory() {
-  //   // console.log("calling loadTransactionHistory with " + this.state.pid);
-  //   var url =
-  //     process.env["REACT_APP_PRICES_API"] +
-  //     "/api/wallet/transactions/" +
-  //     this.state.pid;
-  //   fetch(url, {
-  //     headers: {
-  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(response => {
-  //       if (response.ok) return response;
-  //       throw new Error("Network response was not ok.");
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       if (this._isMounted) {
-  //         this.setState({
-  //           transactionHistoryData: response
-  //         });
-  //       }
-  //     })
-  //     .catch(error => {
-  //       this.setState({
-  //         message: error.message
-  //       });
-  //     });
-  // }
 
   async loadProductSummary() {
     // console.log("calling loadTransactionHistory with " + this.state.pid);
@@ -102,7 +72,7 @@ class ProductForm extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    // this._isLoaded = false;
+    this._isLoaded = false;
   }
 
   handleSubmit = event => {
@@ -115,7 +85,6 @@ class ProductForm extends React.Component {
     return (
       <div>
         <ProductSummary
-          // data={this.state.productHoldings}
           appSettings={this.state.appSettings}
           auth={this.auth}
           productId={this.state.pid}
@@ -123,12 +92,20 @@ class ProductForm extends React.Component {
 
         <ProductInfo productId={this.state.pid} />
 
-        <Card border="info" key="productChart">
-          <Card.Header as="h5">Chart</Card.Header>
-          <Card.Body>
-            <ProductChart productId={this.state.pid} />
+        {/* <Card border="info" key="productChart">
+          <Card.Header as="h5" className="text-dark">
+            Chart
+          </Card.Header>
+          <Card.Title>Chart</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            {this.state.pid} Open 6m
+          </Card.Subtitle>
+          <Card.Body className="text-secondary">
+            <Collapse in={this.state.open}>
+              <ProductChart productId={this.state.pid} />
+            </Collapse>
           </Card.Body>
-        </Card>
+        </Card> */}
 
         {this.auth.isAuthenticated() ? (
           <>
@@ -137,11 +114,21 @@ class ProductForm extends React.Component {
               <Card.Body>
                 <TransactionHistory auth={this.auth} pid={this.state.pid} />
                 <Link to={`/transactions/${this.state.pid}`}>
-                  <Button className="btn outline">Add Transaction</Button>
-                </Link>
-                <Link to={`/watcher/${this.state.pid}`}>
-                  <Button className="btn outline">Watch</Button>
-                </Link>
+                  <Button className="btn" variant="outline-info">
+                    Add Transaction
+                  </Button>
+                </Link>{" "}
+                {/* <Link to={`/watcher/${this.state.pid}`}>
+                  <Button className="btn outline">Add to Watchlist</Button>
+                </Link> */}
+                <Button
+                  className="btn"
+                  variant="outline-dark"
+                  size="sm"
+                  onClick={event => this.handleSubmit(event)}
+                >
+                  Add to Watchlist
+                </Button>
               </Card.Body>
             </Card>
           </>
@@ -155,6 +142,7 @@ class ProductForm extends React.Component {
               </Card.Text>
               <Button
                 className="btn btn-default"
+                variant="outline-dark"
                 size="sm"
                 onClick={event => this.handleSubmit(event)}
               >

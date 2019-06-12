@@ -28,32 +28,23 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    // subscribedTickers: defaultTickersList,
+    subscribedTickers: [],
     // data: [],
-    // user: {
-    //   settings: {
-    //     refresh: "30"
-    //   }
-    // },
     // tickers: [],
     // exchanges: [],
     // sectors: [],
     // filteredTickers: [],
     tokenRenewalComplete: false,
-    appSettings: {
-      watching: ["MSFT", "AAPL"],
-      // settings: [
-      //   {
-      //     profile: "main",
-      //     currency: "GBP",
-      //     symbol: "£",
-      //     refreshRate: 30
-      //   }
-
-      currency: "GBP",
-      symbol: "£",
-      refreshRate: 30
-    }
+    appSettings: localStorage.getItem("userProfile")
+      ? JSON.parse(localStorage.getItem("userProfile"))
+      : {
+          // Default
+          watchList: ["MSFT", "AAPL"],
+          currency: "GBP",
+          symbol: "£",
+          refreshRate: 30
+        },
+    watchList: ["MSFT", "AAPL"]
   };
 
   //Load component data
@@ -89,22 +80,59 @@ class App extends Component {
   // };
 
   componentWillMount() {
-    // this.fetchTickers();
+    // Check we've refreshed token
+    this.auth.renewToken(() => {
+      // update state
+      this.setState({ tokenRenewalComplete: true });
+      // load profile
+      if (this.auth.isAuthenticated()) {
+        this.loadProfile();
+        console.log("Authenticated profile load");
+      }
+    });
   }
 
   componentDidMount() {
     this.auth.renewToken(() => this.setState({ tokenRenewalComplete: true }));
+  }
 
-    if (this.auth.isAuthenticated()) {
-      // this.loadProfile();
-    }
-    // else {
-    //   this.loadData();
-    // }
-    // // this.setState({ loading: false });
-    // var refreshRate = this.state.appSettings.refreshRate * 1000;
-    // setInterval(() => this.loadData(), refreshRate);
-    //this.loadData(); // also load one immediately
+  componentWillUnmount() {
+    //Cache data back to localStorage if unmounted
+    localStorage.setItem("userProfile", JSON.stringify(this.state.appSettings));
+  }
+
+  async loadProfile() {
+    console.log("Loading user profile data from and authenticated user.");
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
+
+    fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        // if (this._isMounted) {
+        this.setState(
+          {
+            appSettings: response
+          },
+          () => {
+            console.log("Back from api and state has been set!");
+          }
+        );
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
   }
 
   // authenticatedLoad() {
@@ -244,6 +272,24 @@ class App extends Component {
   //   }
   // };
 
+  removeTicker = index => {
+    this.setState(
+      prevState => ({
+        watchList: prevState.watchList.filter(ticker => ticker !== index)
+      }),
+      () => {
+        // this.loadData();
+        console.log("Removed ticker from watchlist");
+      }
+    );
+
+    if (this.auth.isAuthenticated()) {
+      // this.authorisedTickerCall("DELETE", index);
+      //Update profile.
+      console.log("Need to update the user profile");
+    }
+  };
+
   render() {
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
@@ -325,6 +371,7 @@ class App extends Component {
                 <WatchListPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
+                  removeTicker={this.removeTicker}
                   {...props}
                 />
               )}
