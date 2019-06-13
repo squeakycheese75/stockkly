@@ -33,13 +33,13 @@ class App extends Component {
     appSettings: localStorage.getItem("userProfile")
       ? JSON.parse(localStorage.getItem("userProfile"))
       : {
-          // Default
-          // watchList: ["MSFT", "AAPL"],
           currency: "GBP",
           symbol: "£",
           refreshRate: 30
         },
-    watchList: ["MSFT", "AAPL"]
+    watchList: localStorage.getItem("watchList")
+      ? JSON.parse(localStorage.getItem("watchList"))
+      : ["MSFT", "AAPL", "DIS"]
   };
 
   //Load component data
@@ -131,32 +131,54 @@ class App extends Component {
       });
   }
 
-  // authenticatedLoad() {
-  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/private/profile";
+  async updateProfile() {
+    var data = {
+      // appSettings: this.state.appSettings.
+      currency: this.state.appSettings.currency,
+      symbol: this.state.appSettings.symbol,
+      refreshRate: this.state.appSettings.refreshRate,
+      watchList: this.state.watchList
+    };
+
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
+    fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: {
+        Authorization: `Bearer ${this.auth.getAccessToken()}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.status) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => console.log("Success:", JSON.stringify(response)))
+      .catch(error => console.error("Error:", error));
+  }
+
+  // authorisedTickerCall(method, ticker) {
+  //   var data = { ticker: ticker };
+  //   //fetch("http://localhost:5000/api/private/tickers", {
+  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/private/tickers";
   //   fetch(url, {
+  //     method: method,
+  //     body: JSON.stringify(data), // data can be `string` or {object}!
   //     headers: {
   //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
   //       "Content-Type": "application/json"
+
+  //       // mode: "no-cors"
   //     }
   //   })
   //     .then(response => {
-  //       if (response.ok) return response;
+  //       if (response.status) return response;
   //       throw new Error("Network response was not ok.");
   //     })
   //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({
-  //         subscribedTickers: !response.message
-  //           ? [defaultTickersList]
-  //           : response.message
-  //       });
-  //     })
-  //     .then(response => this.loadData())
-  //     .catch(error => {
-  //       this.setState({
-  //         message: error.message
-  //       });
-  //     });
+  //     .then(response => console.log("Success:", JSON.stringify(response)))
+  //     .catch(error => console.error("Error:", error));
   // }
 
   componentDidCatch(error, info) {
@@ -164,69 +186,28 @@ class App extends Component {
     // console.log(error, info);
   }
 
-  // loadData() {
-  //console.log("In loading data!");
-  // if (
-  //   Array.isArray(this.state.subscribedTickers) ||
-  //   this.state.subscribedTickers.length
-  // ) {
-  //   // array does not exist, is not an array, or is empty
-  //   this.fetchDataWithTicker();
-  // }
-  // }
-
-  // async fetchDataWithTicker() {
-  //   var url =
-  //     process.env["REACT_APP_PRICES_API"] +
-  //     "/pricing/" +
-  //     this.state.subscribedTickers.join(",");
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(
-  //       result => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           data: result
-  //         });
-  //       },
-  //       // Note: it's important to handle errors here
-  //       // instead of a catch() block so that we don't swallow
-  //       // exceptions from actual bugs in components.
-  //       error => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           error
-  //         });
-  //       }
-  //     );
-  // }
-
-  // addNewTicker = input => {
-  //   if (input) {
-  //     //Check it's not already in the list
-  //     var resval = this.state.subscribedTickers.some(item => input === item);
-  //     if (!resval) {
-  //       this.setState(
-  //         prevState => ({
-  //           subscribedTickers: prevState.subscribedTickers.concat(input)
-  //         }),
-  //         () => {
-  //           //Reload data in callback.
-  //           this.loadData();
-  //           console.log(
-  //             "calling this.filteredTickers with ",
-  //             this.state.selectedSector
-  //           );
-  //           this.filteredTickers(this.state.selectedSector);
-  //         }
-  //       );
-  //     }
-  //   }
-
-  //   if (this.auth.isAuthenticated()) {
-  //     this.authorisedTickerCall("POST", input);
-  //   }
-  // };
+  addNewTicker = input => {
+    if (input) {
+      //Check it's not already in the list
+      var resval = this.state.watchList.some(item => input === item);
+      if (!resval) {
+        this.setState(
+          prevState => ({
+            watchList: prevState.watchList.concat(input)
+          }),
+          () => {
+            //Reload data in callback.
+            this.loadData();
+            console.log(
+              "calling this.filteredTickers with ",
+              this.state.selectedSector
+            );
+            this.filteredTickers(this.state.selectedSector);
+          }
+        );
+      }
+    }
+  };
 
   // authorisedTickerCall(method, ticker) {
   //   var data = { ticker: ticker };
@@ -276,12 +257,11 @@ class App extends Component {
         )
       }),
       () => {
-        // this.loadData();
         //Need to remove from the backend
         console.log("Removed ticker from watchlist" + index);
         if (this.auth.isAuthenticated()) {
           // this.authorisedTickerCall("DELETE", index);
-          //Update profile.
+          this.updateProfile();
           console.log("Need to update the user profile");
         }
       }

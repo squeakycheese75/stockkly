@@ -12,9 +12,7 @@ class WatchListPage extends React.Component {
       watchData: localStorage.getItem("watchData")
         ? JSON.parse(localStorage.getItem("watchData"))
         : [],
-      watchList: localStorage.getItem("watchList")
-        ? JSON.parse(localStorage.getItem("watchList"))
-        : ["MSFT", "AAPL"]
+      watchList: this.props.watchList
     };
     this.auth = this.props.auth;
   }
