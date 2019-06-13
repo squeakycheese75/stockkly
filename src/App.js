@@ -28,18 +28,13 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    subscribedTickers: [],
-    // data: [],
-    // tickers: [],
-    // exchanges: [],
-    // sectors: [],
-    // filteredTickers: [],
+    // subscribedTickers: [],
     tokenRenewalComplete: false,
     appSettings: localStorage.getItem("userProfile")
       ? JSON.parse(localStorage.getItem("userProfile"))
       : {
           // Default
-          watchList: ["MSFT", "AAPL"],
+          // watchList: ["MSFT", "AAPL"],
           currency: "GBP",
           symbol: "£",
           refreshRate: 30
@@ -121,7 +116,8 @@ class App extends Component {
         // if (this._isMounted) {
         this.setState(
           {
-            appSettings: response
+            appSettings: response,
+            watchList: response.watchList
           },
           () => {
             console.log("Back from api and state has been set!");
@@ -275,19 +271,21 @@ class App extends Component {
   removeTicker = index => {
     this.setState(
       prevState => ({
-        watchList: prevState.watchList.filter(ticker => ticker !== index)
+        watchList: prevState.watchList.filter(
+          ticker => ticker.toLowerCase() !== index.toLowerCase()
+        )
       }),
       () => {
         // this.loadData();
-        console.log("Removed ticker from watchlist");
+        //Need to remove from the backend
+        console.log("Removed ticker from watchlist" + index);
+        if (this.auth.isAuthenticated()) {
+          // this.authorisedTickerCall("DELETE", index);
+          //Update profile.
+          console.log("Need to update the user profile");
+        }
       }
     );
-
-    if (this.auth.isAuthenticated()) {
-      // this.authorisedTickerCall("DELETE", index);
-      //Update profile.
-      console.log("Need to update the user profile");
-    }
   };
 
   render() {
@@ -371,7 +369,9 @@ class App extends Component {
                 <WatchListPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
+                  watchList={this.state.watchList}
                   removeTicker={this.removeTicker}
+                  onReload={this.reload}
                   {...props}
                 />
               )}
