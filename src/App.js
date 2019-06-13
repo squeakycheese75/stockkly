@@ -133,7 +133,6 @@ class App extends Component {
 
   async updateProfile() {
     var data = {
-      // appSettings: this.state.appSettings.
       currency: this.state.appSettings.currency,
       symbol: this.state.appSettings.symbol,
       refreshRate: this.state.appSettings.refreshRate,
@@ -153,7 +152,7 @@ class App extends Component {
         if (response.status) return response;
         throw new Error("Network response was not ok.");
       })
-      .then(response => response.json())
+      // .then(response => response.json())
       .then(response => console.log("Success:", JSON.stringify(response)))
       .catch(error => console.error("Error:", error));
   }
@@ -186,10 +185,11 @@ class App extends Component {
     // console.log(error, info);
   }
 
-  addNewTicker = input => {
+  addTickerToWatchList = input => {
     if (input) {
       //Check it's not already in the list
       var resval = this.state.watchList.some(item => input === item);
+      console.log("compare is ", resval);
       if (!resval) {
         this.setState(
           prevState => ({
@@ -197,12 +197,10 @@ class App extends Component {
           }),
           () => {
             //Reload data in callback.
-            this.loadData();
-            console.log(
-              "calling this.filteredTickers with ",
-              this.state.selectedSector
-            );
-            this.filteredTickers(this.state.selectedSector);
+            console.log("Added ticker from watchlist", input);
+            if (this.auth.isAuthenticated()) {
+              this.updateProfile();
+            }
           }
         );
       }
@@ -260,9 +258,7 @@ class App extends Component {
         //Need to remove from the backend
         console.log("Removed ticker from watchlist" + index);
         if (this.auth.isAuthenticated()) {
-          // this.authorisedTickerCall("DELETE", index);
           this.updateProfile();
-          console.log("Need to update the user profile");
         }
       }
     );
@@ -303,11 +299,11 @@ class App extends Component {
               render={() => (
                 <ToastProvider>
                   <ManagePage
-                    data={this.state.subscribedTickers}
-                    addNewTicker={this.addNewTicker}
-                    sectors={this.state.sectors}
-                    filteredTickers={this.filteredTickers}
-                    filteredTickersData={this.state.filteredTickers}
+                  // data={this.state.subscribedTickers}
+                  // addNewTicker={this.addNewTicker}
+                  // sectors={this.state.sectors}
+                  // filteredTickers={this.filteredTickers}
+                  // filteredTickersData={this.state.filteredTickers}
                   />
                 </ToastProvider>
               )}
@@ -322,6 +318,8 @@ class App extends Component {
                 <ProductForm
                   auth={this.auth}
                   appSettings={this.state.appSettings}
+                  addTickerToWatchList={this.addTickerToWatchList}
+                  watchList={this.state.watchList}
                   {...props}
                 />
               )}

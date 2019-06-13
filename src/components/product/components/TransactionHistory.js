@@ -85,7 +85,7 @@ class TransactionHistory extends React.Component {
           options={options}
         >
           <TableHeaderColumn
-            dataField="id"
+            dataField="_id"
             isKey={true}
             columnClassName="bstable"
             width="20%"

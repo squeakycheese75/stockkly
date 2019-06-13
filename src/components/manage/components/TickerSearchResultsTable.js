@@ -65,7 +65,7 @@ class TickerSearchResultsTable extends Component {
           placement="top"
           overlay={<Tooltip id={`tooltip-top`}>Details</Tooltip>}
         >
-          <Link to={`/product/${cell}`}>
+          <Link to={`/product/${cell.toString().toUpperCase()}`}>
             <i className="mdc-icon-button material-icons md-12 orange600">
               view_headline
             </i>
@@ -97,7 +97,7 @@ class TickerSearchResultsTable extends Component {
     // row.total_change
     const options = {
       onRowClick: function(row) {
-        history.push(`/product/${row.ticker}`);
+        history.push(`/product/${row.ticker.toString().toUpperCase()}`);
       },
       noDataText: msg()
     };
@@ -136,12 +136,20 @@ class TickerSearchResultsTable extends Component {
             Ticker
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="60%"
+            width="20%"
             dataField="name"
             dataSort={true}
             columnClassName="bstable"
           >
             Name
+          </TableHeaderColumn>
+          <TableHeaderColumn
+            width="20%"
+            dataField="exchange"
+            dataSort={true}
+            columnClassName="bstable"
+          >
+            Exchange
           </TableHeaderColumn>
           {/* <TableHeaderColumn width='20%' dataField='ticker' dataFormat={this.cellButton.bind(this)}>Add</TableHeaderColumn>                            */}
           {/* <TableHeaderColumn

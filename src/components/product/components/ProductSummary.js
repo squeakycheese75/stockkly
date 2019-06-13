@@ -173,13 +173,6 @@ class ProductSummary extends React.Component {
     //   return `${appSettings.symbol}` + cell;
     // }
 
-    // function isEmpty(obj) {
-    //   for (var key in obj) {
-    //     if (obj.hasOwnProperty(key)) return false;
-    //   }
-    //   return true;
-    // }
-
     return (
       <div>
         <Jumbotron>

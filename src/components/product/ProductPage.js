@@ -5,31 +5,33 @@ import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
 import ProductSummary from "./components/ProductSummary";
-import Loading from "../common/Loading";
+// import Loading from "../common/Loading";
 
 class ProductForm extends React.Component {
   _isMounted = false;
-  _isLoaded = false;
+  // _isLoaded = false;
 
   constructor(props) {
     super(props);
     this.state = {
       pid: props.match.params.pid,
       appSettings: this.props.appSettings,
-      open: false,
+      // open: false,
       // transactionHistoryData: [],
       // product: [],
       // productHoldings: localStorage.getItem("productHoldings")
       //   ? JSON.parse(localStorage.getItem("productHoldings"))
       //   : []
       productHoldings: {},
-      productSummary: {}
+      productSummary: {},
+      watchList: this.props.watchList
     };
     this.auth = this.props.auth;
+    this.history = this.props.history;
   }
 
   async loadProductSummary() {
-    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    console.log("calling loadTransactionHistory with " + this.state.pid);
     var url =
       process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     fetch(url, {
@@ -66,21 +68,30 @@ class ProductForm extends React.Component {
 
     // this.loadProductHoldings();
     this.loadProductSummary();
-    this._isLoaded = true;
+    // this._isLoaded = true;
     // if ((this.state.product = [])) this.loadProductSummary();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
-    this._isLoaded = false;
+    // this._isLoaded = false;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.watchList !== this.props.watchList) {
+      console.log("Watchlist needs updating");
+      this.setState({
+        watchList: nextProps.watchList
+      });
+    }
   }
 
   handleSubmit = event => {
-    console.log("in handleSubmit from add to watch list.");
+    this.props.addTickerToWatchList(event);
   };
 
   render() {
-    if (!this._isLoaded) return <Loading />;
+    // if (!this._isLoaded) return <Loading />;
 
     return (
       <div>
@@ -118,17 +129,18 @@ class ProductForm extends React.Component {
                     Add Transaction
                   </Button>
                 </Link>{" "}
-                {/* <Link to={`/watcher/${this.state.pid}`}>
-                  <Button className="btn outline">Add to Watchlist</Button>
-                </Link> */}
-                <Button
-                  className="btn"
-                  variant="outline-dark"
-                  size="sm"
-                  onClick={event => this.handleSubmit(event)}
-                >
-                  Add to Watchlist
-                </Button>
+                {this.state.watchList.includes(this.state.pid) ? (
+                  <></>
+                ) : (
+                  <Button
+                    className="btn"
+                    variant="outline-dark"
+                    size="sm"
+                    onClick={event => this.handleSubmit(this.state.pid)}
+                  >
+                    Add to Watchlist
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           </>
@@ -140,14 +152,18 @@ class ProductForm extends React.Component {
                 You need to be logged in to manage transactions but you can add
                 to you watch list!
               </Card.Text>
-              <Button
-                className="btn btn-default"
-                variant="outline-dark"
-                size="sm"
-                onClick={event => this.handleSubmit(event)}
-              >
-                Add to Watchlist
-              </Button>
+              {this.state.watchList.includes(this.state.pid) ? (
+                <></>
+              ) : (
+                <Button
+                  className="btn"
+                  variant="outline-dark"
+                  size="sm"
+                  onClick={event => this.handleSubmit(this.state.pid)}
+                >
+                  Add to Watchlist
+                </Button>
+              )}
             </Card.Body>
           </Card>
         )}

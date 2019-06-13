@@ -11,7 +11,7 @@ function priceChangeFormatter(change, movement) {
         {change > 0 ? (
           <>
             <li className="name up">
-              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              +{change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
               <i className="material-icons vertical-align-middle up">
                 arrow_drop_up
               </i>
@@ -20,7 +20,7 @@ function priceChangeFormatter(change, movement) {
         ) : (
           <>
             <li className="name down">
-              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}_
               <i className="material-icons vertical-align-middle down">
                 arrow_drop_down
               </i>

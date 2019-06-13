@@ -62,7 +62,7 @@ function nameFormatter(cell, row) {
   return (
     <div>
       <ul>
-        <li className="name">{row.ticker}</li>
+        <li className="name">{row.ticker.toString().toUpperCase()}</li>
         <li className="details">{row.name}</li>
       </ul>
     </div>
@@ -141,7 +141,7 @@ class WatchListTable extends Component {
           placement="top"
           overlay={<Tooltip id={`tooltip-top`}>Details</Tooltip>}
         >
-          <Link to={`/product/${cell}`}>
+          <Link to={`/product/${cell.toString().toUpperCase()}`}>
             <i className="mdc-icon-button material-icons md-12 orange600">
               view_headline
             </i>

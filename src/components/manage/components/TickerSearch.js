@@ -36,7 +36,8 @@ class TickerSearch extends Component {
           <DropdownList
             className="dropdown_customized"
             data={sectors}
-            value={this.state.selectedValue}
+            // value=
+            defaultValue={this.state.selectedValue}
             // onChange={selectedValue => this.setState({ selectedValue })}
             onSelect={event => this.onTargetSelect(event)}
           />

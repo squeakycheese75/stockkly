@@ -18,36 +18,42 @@ class WatchListPage extends React.Component {
   }
 
   async loadWatchData() {
-    var url =
-      process.env["REACT_APP_PRICES_API"] +
-      "/api/watchlist/" +
-      this.state.watchList;
+    if (this.state.watchList && this.state.watchList.length) {
+      var url =
+        process.env["REACT_APP_PRICES_API"] +
+        "/api/watchlist/" +
+        this.state.watchList;
 
-    fetch(url, {
-      method: "GET",
-      headers: {
-        // Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) return response;
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (this._isMounted) {
-          this.setState({
-            watchData: response
-          });
-          console.log("Loaded data");
+      fetch(url, {
+        method: "GET",
+        headers: {
+          // Authorization: `Bearer ${this.auth.getAccessToken()}`,
+          "Content-Type": "application/json"
         }
       })
-      .catch(error => {
-        this.setState({
-          message: error.message
+        .then(response => {
+          if (response.ok) return response;
+          throw new Error("Network response was not ok.");
+        })
+        .then(response => response.json())
+        .then(response => {
+          if (this._isMounted) {
+            this.setState({
+              watchData: response
+            });
+            console.log("Loaded data");
+          }
+        })
+        .catch(error => {
+          this.setState({
+            message: error.message
+          });
         });
+    } else {
+      this.setState({
+        watchData: {}
       });
+    }
   }
 
   componentDidMount() {
@@ -73,6 +79,7 @@ class WatchListPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     // console.log("componentWillReceiveProps");
     // console.log(nextProps);
+    // if ((nextProps.watchList = [])) return;
     if (nextProps.watchList !== this.props.watchList) {
       console.log("Watchlist needs updating");
       this.setState(
@@ -80,8 +87,6 @@ class WatchListPage extends React.Component {
           watchList: nextProps.watchList
         },
         () => {
-          // this.loadData();
-          // console.log("Updated watchlist");
           this.loadWatchData();
         }
       );
@@ -89,23 +94,30 @@ class WatchListPage extends React.Component {
   }
 
   removeTicker = event => {
-    // console.log("In TickerPage.removeTicker with ", event);
     this.props.removeTicker(event);
   };
 
   render() {
-    // this.setState({ watchList: this.props.watchList });
-    // const { isAuthenticated } = this.props.auth;
-    // const { history } = this.history;
+    function isEmpty(obj) {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
+      }
+      return true;
+    }
 
     return (
       <div>
-        <WatchListTable
-          data={this.state.watchData}
-          onSubmit={this.removeTicker}
-          // watchList={this.props.watchList}
-          settings={this.state.appSettings}
-        />
+        {isEmpty(this.state.watchData) ? (
+          <>
+            <h1>Empty</h1>
+          </>
+        ) : (
+          <WatchListTable
+            data={this.state.watchData}
+            onSubmit={this.removeTicker}
+            settings={this.state.appSettings}
+          />
+        )}
       </div>
     );
   }
