@@ -94,6 +94,7 @@ class WalletPage extends React.Component {
         />
         {/* <h5>Portfolio</h5> */}
         <WalletTable
+          // data={this.state.holdingsData.filter(h => h.quantity > 1)}
           data={this.state.holdingsData}
           settings={this.state.appSettings}
         />

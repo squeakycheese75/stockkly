@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import TransactionHistory from "./components/TransactionHistory";
 
 class TransactionPage extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,14 @@ class TransactionPage extends React.Component {
       message: ""
     };
     this.auth = this.props.auth;
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -29,7 +38,7 @@ class TransactionPage extends React.Component {
             Transaction History {this.state.pid}
           </Card.Header>
           <Card.Body>
-            <TransactionHistory auth={this.auth} productId={this.state.pid} />
+            <TransactionHistory auth={this.auth} pid={this.state.pid} />
           </Card.Body>
         </Card>
       </div>

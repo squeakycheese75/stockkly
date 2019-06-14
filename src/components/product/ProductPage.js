@@ -31,7 +31,7 @@ class ProductForm extends React.Component {
   }
 
   async loadProductSummary() {
-    console.log("calling loadTransactionHistory with " + this.state.pid);
+    console.log("calling loadProductSummary with " + this.state.pid);
     var url =
       process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     fetch(url, {

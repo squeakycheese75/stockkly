@@ -12,6 +12,7 @@ momentLocalizer();
 class AddTransaction extends React.Component {
   constructor(props) {
     super(props);
+    // Default
     this.state = {
       t_date: new Date(),
       t_type: "BUY",
@@ -39,10 +40,8 @@ class AddTransaction extends React.Component {
     this.setState({ t_price: event });
   };
 
-  handleSubmit = event => {
-    // console.log("in handleSubmit");
-    // console.log("pid is " + this.state.t_pid);
-
+  async insertTransaction() {
+    console.log("In InsertTransaction");
     var data = {
       ticker: this.state.t_pid,
       transdate: this.state.t_date,
@@ -52,9 +51,8 @@ class AddTransaction extends React.Component {
       price: this.state.t_price,
       details: this.state.t_details
     };
-    // console.log("constructed data");
 
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/transactions";
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/transactions/";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data), // data can be `string` or {object}!
@@ -71,6 +69,12 @@ class AddTransaction extends React.Component {
       .then(response => console.log("Success:", JSON.stringify(response)))
       .catch(error => console.error("Error:", error));
     console.log("Done!");
+  }
+
+  handleSubmit = event => {
+    console.log("in handleSubmit this.state.t_pid");
+    // console.log("pid is " + this.state.t_pid);
+    this.insertTransaction();
   };
 
   render() {

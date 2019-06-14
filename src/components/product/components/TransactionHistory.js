@@ -12,6 +12,16 @@ function isoDateFormatter(cell, row) {
   // return d.toLocaleString();
   return cell.split("T")[0];
 }
+// .toFixed(2).toLocaleString()
+
+function qtyFormatter(cell, row) {
+  return cell.toFixed(2).toLocaleString();
+}
+
+function priceFormatter(cell, row) {
+  // return `${row.symbol}` + cell.toFixed(2).toLocaleString();
+  return cell.toFixed(2).toLocaleString();
+}
 
 class TransactionHistory extends React.Component {
   _isMounted = false;
@@ -25,7 +35,7 @@ class TransactionHistory extends React.Component {
     this.auth = this.props.auth;
   }
   async loadTransactionHistory() {
-    // console.log("calling loadTransactionHistory with " + this.state.pid);
+    console.log("calling loadTransactionHistory with " + this.state.pid);
     var url =
       process.env["REACT_APP_PRICES_API"] +
       "/api/wallet/transactions/" +
@@ -116,6 +126,7 @@ class TransactionHistory extends React.Component {
             dataSort={true}
             width="20%"
             dataAlign="right"
+            dataFormat={qtyFormatter}
           >
             QTY
           </TableHeaderColumn>
@@ -125,6 +136,7 @@ class TransactionHistory extends React.Component {
             columnClassName="bstable"
             width="20%"
             dataAlign="right"
+            dataFormat={priceFormatter}
           >
             PRICE
           </TableHeaderColumn>
