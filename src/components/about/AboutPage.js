@@ -7,6 +7,31 @@ const AboutPage = () => {
   return (
     <div className={styles}>
       <Card border="dark">
+        <Card.Header as="h5">What's new in version 0.2</Card.Header>
+        <Card.Body>
+          <Card.Text>
+            <ul>
+              <li>
+                Added new Wallet function - including support for transactions
+                and tracking.
+              </li>
+              <li>
+                Streamlined refreshing issues. Now remembers logged in users for
+                7 days!
+              </li>
+            </ul>
+          </Card.Text>
+          {/* <ul>
+            <li>Added new Wallet function.</li>
+            <li>Added support for transactions and tracking.</li>
+            <li>
+              Streamlined refreshing issues. Now remember logged in users for 7
+              days!
+            </li>
+          </ul> */}
+        </Card.Body>
+      </Card>
+      <Card border="dark">
         <Card.Header as="h5">About Me</Card.Header>
         {/* <Card.Img variant="left" src="./holder.js/100px180" /> */}
         <Card.Body>
