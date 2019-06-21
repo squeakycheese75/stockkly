@@ -13,12 +13,14 @@ const AboutPage = () => {
             <ul>
               <li>
                 Added new Wallet function - including support for transactions
-                and tracking.
+                and wealth tracking.
               </li>
               <li>
                 Streamlined refreshing issues. Now remembers logged in users for
                 7 days!
               </li>
+              <li>Lots of backend squirelling to make things go smoother.</li>
+              <li>Privacy improvements</li>
             </ul>
           </Card.Text>
           {/* <ul>

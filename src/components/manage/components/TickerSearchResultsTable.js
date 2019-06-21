@@ -12,8 +12,7 @@ var FormWithToasts = withToastManager(ToastButton);
 function msg() {
   return (
     <Alert size="sm">
-      Woah, no results! Maybe a typo? Are you already watching that price? Or I
-      might not have that price yet. Feel free to drop me an email to request a
+      Woah, no results! Maybe a typo? Feel free to drop me an email to request a
       price you'd like!
     </Alert>
   );
