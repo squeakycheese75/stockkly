@@ -54,7 +54,8 @@ class WatchListPage extends React.Component {
         });
     } else {
       this.setState({
-        watchData: {}
+        watchData: {},
+        loading: false
       });
     }
   }
@@ -63,8 +64,8 @@ class WatchListPage extends React.Component {
     this._isMounted = true;
     this.loadWatchData();
 
-    // var refreshRate = this.state.appSettings.refreshRate * 1000;
-    var refreshRate = 30000;
+    var refreshRate = this.state.appSettings.refreshRate * 1000;
+    // var refreshRate = 30000;
     setInterval(() => {
       if (this._isMounted) {
         this.loadWatchData();
@@ -82,7 +83,6 @@ class WatchListPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.watchList !== this.props.watchList) {
-      // console.log("Watchlist needs updating");
       this.setState(
         {
           watchList: nextProps.watchList
