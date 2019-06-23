@@ -1,6 +1,6 @@
 import React from "react";
 import SortTable from "./SortTable";
-// import LoginReminder from "./LoginReminder";
+import LoginReminder from "./LoginReminder";
 
 class PricingPage extends React.Component {
   removeTicker = event => {
@@ -10,12 +10,12 @@ class PricingPage extends React.Component {
 
   render() {
     const { data } = this.props;
-    // const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     return (
       <div>
         <SortTable data={data} onSubmit={this.removeTicker} />
-        {/* {!isAuthenticated() && <LoginReminder />} */}
+        {!isAuthenticated() && <LoginReminder />}
       </div>
     );
   }

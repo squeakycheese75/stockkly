@@ -3,18 +3,20 @@ import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
-import PricingPage from "./components/tickers/PricingPage";
+// import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
-// import Loading from "./components/common/Loading";
-//import NotFound from "./components/common/NotFound";
+import Loading from "./components/common/Loading";
+// import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
-// import ProfilePage from "./components/profile/ProfilePage";
 import { ToastProvider } from "react-toast-notifications";
-import ProductForm from "./components/manage/components/ProductForm";
+import ProductForm from "./components/product/ProductPage";
+import TransactionsPage from "./components/product/TransactionsPage";
+import WalletPage from "./components/wallet/WalletPage";
+import WatchListPage from "./components/watcher/WatchListPage";
 
 //should all be done by service discovery - consul
-const defaultTickersList = ["MSFT"];
+// const defaultTickersList = ["MSFT"];
 
 //require("dotenv").config();
 
@@ -26,79 +28,80 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    subscribedTickers: defaultTickersList,
-    data: [],
-    user: {
-      settings: {
-        refresh: "30"
-      }
-    },
-    tickers: [],
-    exchanges: [],
-    sectors: [],
-    filteredTickers: []
+    // subscribedTickers: [],
+    tokenRenewalComplete: false,
+    appSettings: localStorage.getItem("userProfile")
+      ? JSON.parse(localStorage.getItem("userProfile"))
+      : {
+          currency: "GBP",
+          symbol: "£",
+          refreshRate: 30
+        },
+    watchList: localStorage.getItem("watchList")
+      ? JSON.parse(localStorage.getItem("watchList"))
+      : []
   };
 
   //Load component data
-  fetchTickers = () => {
-    var url = process.env["REACT_APP_PRICES_API"] + "/tickers/";
-    console.log("fetchTickers fetching: ", url);
-    fetch(url)
-      .then(res => res.json())
-      .then(allTickers => {
-        this.setState({
-          tickers: allTickers
-        });
-        //Might not setstate here
-      }) //.then(console.log('done'))
-      .then(res => this.determineUniqueSectors());
-  };
+  // fetchTickers = () => {
+  //   var url = process.env["REACT_APP_PRICES_API"] + "/tickers/";
+  //   // console.log("fetchTickers fetching: ", url);
+  //   fetch(url)
+  //     .then(res => res.json())
+  //     .then(allTickers => {
+  //       this.setState({
+  //         tickers: allTickers
+  //       });
+  //       //Might not setstate here
+  //     }) //.then(console.log('done'))
+  //     .then(res => this.determineUniqueSectors());
+  // };
 
-  determineUniqueSectors = () => {
-    //console.log(this.state.tickers);
-    const sectors = this.state.tickers
-      ? Array.from(new Set(this.state.tickers.map(t => t.sector)))
-      : [];
-    sectors.unshift(null);
-    this.setState({ sectors: sectors });
-  };
+  // determineUniqueSectors = () => {
+  //   const sectors = this.state.tickers
+  //     ? Array.from(new Set(this.state.tickers.map(t => t.sector)))
+  //     : [];
+  //   sectors.unshift(null);
+  //   this.setState({ sectors: sectors });
+  // };
 
-  filteredTickers = input => {
-    const filteredTickers = this.state.tickers.filter(h => h.sector === input);
-    const filterSUbscribedTickers = filteredTickers.filter(
-      id => !this.state.subscribedTickers.includes(id.ticker)
-    );
-    this.setState({ filteredTickers: filterSUbscribedTickers });
-    this.setState({ selectedSector: input });
-  };
+  // filteredTickers = input => {
+  //   const filteredTickers = this.state.tickers.filter(h => h.sector === input);
+  //   const filterSUbscribedTickers = filteredTickers.filter(
+  //     id => !this.state.subscribedTickers.includes(id.ticker)
+  //   );
+  //   this.setState({ filteredTickers: filterSUbscribedTickers });
+  //   this.setState({ selectedSector: input });
+  // };
 
   componentWillMount() {
-    this.fetchTickers();
-    // if (this.auth.isAuthenticated()) {
-    //   this.authenticatedLoad();
-    // } else {
-    //   this.loadData();
-    // }
+    // Check we've refreshed token
+    this.auth.renewToken(() => {
+      // update state
+      this.setState({ tokenRenewalComplete: true });
+      // load profile
+      if (this.auth.isAuthenticated()) {
+        this.loadProfile();
+        // console.log("Authenticated profile load");
+      }
+    });
   }
 
   componentDidMount() {
-    //console.log("Called componentDidMount");
-    // bug here!
-    if (this.auth.isAuthenticated()) {
-      this.authenticatedLoad();
-    } else {
-      //console.log("componentDidMount User not authenticated");
-      this.loadData();
-    }
-    // this.setState({ loading: false });
-    var refreshRate = this.state.user.settings.refresh * 1000;
-    setInterval(() => this.loadData(), refreshRate);
-    //this.loadData(); // also load one immediately
+    this.auth.renewToken(() => this.setState({ tokenRenewalComplete: true }));
   }
 
-  authenticatedLoad() {
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/profile";
+  componentWillUnmount() {
+    //Cache data back to localStorage if unmounted
+    localStorage.setItem("userProfile", JSON.stringify(this.state.appSettings));
+  }
+
+  async loadProfile() {
+    console.log("Loading user profile data from and authenticated user.");
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
+
     fetch(url, {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${this.auth.getAccessToken()}`,
         "Content-Type": "application/json"
@@ -110,13 +113,17 @@ class App extends Component {
       })
       .then(response => response.json())
       .then(response => {
-        this.setState({
-          subscribedTickers: !response.message
-            ? [defaultTickersList]
-            : response.message
-        });
+        // if (this._isMounted) {
+        this.setState(
+          {
+            appSettings: response,
+            watchList: response.watchList
+          },
+          () => {
+            console.log("Back from api and state has been set!");
+          }
+        );
       })
-      .then(response => this.loadData())
       .catch(error => {
         this.setState({
           message: error.message
@@ -124,152 +131,168 @@ class App extends Component {
       });
   }
 
-  componentDidCatch(error, info) {
-    this.setState({ hasError: true });
-    console.log(error, info);
-  }
+  async updateProfile() {
+    var data = {
+      currency: this.state.appSettings.currency,
+      symbol: this.state.appSettings.symbol,
+      refreshRate: this.state.appSettings.refreshRate,
+      watchList: this.state.watchList
+    };
 
-  loadData() {
-    //console.log("In loading data!");
-    if (
-      Array.isArray(this.state.subscribedTickers) ||
-      this.state.subscribedTickers.length
-    ) {
-      // array does not exist, is not an array, or is empty
-      this.fetchDataWithTicker();
-    }
-  }
-
-  async fetchDataWithTicker() {
-    var url =
-      process.env["REACT_APP_PRICES_API"] +
-      "/pricing/" +
-      this.state.subscribedTickers.join(",");
-    fetch(url)
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            data: result
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
-  }
-
-  addNewTicker = input => {
-    if (input) {
-      //Check it's not already in the list
-      var resval = this.state.subscribedTickers.some(item => input === item);
-      if (!resval) {
-        this.setState(
-          prevState => ({
-            subscribedTickers: prevState.subscribedTickers.concat(input)
-          }),
-          () => {
-            //Reload data in callback.
-            this.loadData();
-            console.log(
-              "calling this.filteredTickers with ",
-              this.state.selectedSector
-            );
-            this.filteredTickers(this.state.selectedSector);
-          }
-        );
-      }
-    }
-
-    if (this.auth.isAuthenticated()) {
-      this.authorisedTickerCall("POST", input);
-    }
-  };
-
-  authorisedTickerCall(method, ticker) {
-    var data = { ticker: ticker };
-    //fetch("http://localhost:5000/api/private/tickers", {
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/private/tickers";
+    var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
     fetch(url, {
-      method: method,
+      method: "PUT",
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
         Authorization: `Bearer ${this.auth.getAccessToken()}`,
         "Content-Type": "application/json"
-
-        // mode: "no-cors"
       }
     })
       .then(response => {
         if (response.status) return response;
         throw new Error("Network response was not ok.");
       })
-      .then(response => response.json())
+      // .then(response => response.json())
       .then(response => console.log("Success:", JSON.stringify(response)))
       .catch(error => console.error("Error:", error));
   }
 
+  // authorisedTickerCall(method, ticker) {
+  //   var data = { ticker: ticker };
+  //   //fetch("http://localhost:5000/api/private/tickers", {
+  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/private/tickers";
+  //   fetch(url, {
+  //     method: method,
+  //     body: JSON.stringify(data), // data can be `string` or {object}!
+  //     headers: {
+  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
+  //       "Content-Type": "application/json"
+
+  //       // mode: "no-cors"
+  //     }
+  //   })
+  //     .then(response => {
+  //       if (response.status) return response;
+  //       throw new Error("Network response was not ok.");
+  //     })
+  //     .then(response => response.json())
+  //     .then(response => console.log("Success:", JSON.stringify(response)))
+  //     .catch(error => console.error("Error:", error));
+  // }
+
+  componentDidCatch(error, info) {
+    // this.setState({ hasError: true });
+    // console.log(error, info);
+  }
+
+  addTickerToWatchList = input => {
+    if (input) {
+      //Check it's not already in the list
+      var resval = this.state.watchList.some(item => input === item);
+      console.log("compare is ", resval);
+      if (!resval) {
+        this.setState(
+          prevState => ({
+            watchList: prevState.watchList.concat(input)
+          }),
+          () => {
+            //Reload data in callback.
+            console.log("Added ticker from watchlist", input);
+            if (this.auth.isAuthenticated()) {
+              this.updateProfile();
+            }
+          }
+        );
+      }
+    }
+  };
+
+  // authorisedTickerCall(method, ticker) {
+  //   var data = { ticker: ticker };
+  //   //fetch("http://localhost:5000/api/private/tickers", {
+  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/private/tickers";
+  //   fetch(url, {
+  //     method: method,
+  //     body: JSON.stringify(data), // data can be `string` or {object}!
+  //     headers: {
+  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
+  //       "Content-Type": "application/json"
+
+  //       // mode: "no-cors"
+  //     }
+  //   })
+  //     .then(response => {
+  //       if (response.status) return response;
+  //       throw new Error("Network response was not ok.");
+  //     })
+  //     .then(response => response.json())
+  //     .then(response => console.log("Success:", JSON.stringify(response)))
+  //     .catch(error => console.error("Error:", error));
+  // }
+
+  // removeTicker = index => {
+  //   this.setState(
+  //     prevState => ({
+  //       subscribedTickers: prevState.subscribedTickers.filter(
+  //         ticker => ticker !== index
+  //       )
+  //     }),
+  //     () => {
+  //       this.loadData();
+  //     }
+  //   );
+
+  //   if (this.auth.isAuthenticated()) {
+  //     this.authorisedTickerCall("DELETE", index);
+  //   }
+  // };
+
   removeTicker = index => {
     this.setState(
       prevState => ({
-        subscribedTickers: prevState.subscribedTickers.filter(
-          ticker => ticker !== index
+        watchList: prevState.watchList.filter(
+          ticker => ticker.toLowerCase() !== index.toLowerCase()
         )
       }),
       () => {
-        this.loadData();
+        //Need to remove from the backend
+        console.log("Removed ticker from watchlist" + index);
+        if (this.auth.isAuthenticated()) {
+          this.updateProfile();
+        }
       }
     );
-
-    if (this.auth.isAuthenticated()) {
-      this.authorisedTickerCall("DELETE", index);
-    }
   };
 
   render() {
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
     }
+    if (!this.state.tokenRenewalComplete) return <Loading />;
 
-    // let content = !this.state.isLoaded ? (
-    //   <Loading />
-    // ) : ()
     let content = (
       <>
         <div>
           <Nav auth={this.auth} />
 
-          <Route exact path="/" component={HomePage} />
-          <Route
-            path={["/pricing"]}
-            render={props => (
-              <PricingPage
-                data={this.state.data}
-                removeTicker={this.removeTicker}
-                auth={this.auth}
-                {...props}
-              />
-            )}
-          />
           <Switch>
+            <Route
+              exact
+              path="/"
+              render={props => <HomePage auth={this.auth} {...props} />}
+            />
+
             <Route path="/about" component={AboutPage} />
             <Route
               path="/manage"
               render={() => (
                 <ToastProvider>
                   <ManagePage
-                    data={this.state.subscribedTickers}
-                    addNewTicker={this.addNewTicker}
-                    sectors={this.state.sectors}
-                    filteredTickers={this.filteredTickers}
-                    filteredTickersData={this.state.filteredTickers}
+                  // data={this.state.subscribedTickers}
+                  // addNewTicker={this.addNewTicker}
+                  // sectors={this.state.sectors}
+                  // filteredTickers={this.filteredTickers}
+                  // filteredTickersData={this.state.filteredTickers}
                   />
                 </ToastProvider>
               )}
@@ -278,29 +301,48 @@ class App extends Component {
               path="/callback"
               render={props => <Callback auth={this.auth} {...props} />}
             />
-
             <Route
-              path="/product"
-              render={props => <ProductForm {...props} />}
+              path="/product/:pid"
+              render={props => (
+                <ProductForm
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  addTickerToWatchList={this.addTickerToWatchList}
+                  watchList={this.state.watchList}
+                  {...props}
+                />
+              )}
             />
 
-            {/* <Route
-              path="/profile"
-              render={props =>
-                this.auth.isAuthenticated() ? (
-                  <ProfilePage auth={this.auth} {...props} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            /> */}
-            {/* <Route path="/public" component={Public} />
             <Route
-              path="/private"
-              render={props => <Private auth={this.auth} {...props} />}
-            /> */}
-            {/* Finally, catch all unmatched routes */}
-            {/* <Route component={NotFound} /> */}
+              path="/transactions/:pid"
+              render={props => <TransactionsPage auth={this.auth} {...props} />}
+            />
+
+            <Route
+              path="/wallet"
+              render={props => (
+                <WalletPage
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  {...props}
+                />
+              )}
+            />
+
+            <Route
+              path="/watching"
+              render={props => (
+                <WatchListPage
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  watchList={this.state.watchList}
+                  removeTicker={this.removeTicker}
+                  onReload={this.reload}
+                  {...props}
+                />
+              )}
+            />
           </Switch>
         </div>
       </>

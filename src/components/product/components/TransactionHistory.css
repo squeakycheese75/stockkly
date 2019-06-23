@@ -1,0 +1,19 @@
+.bstable-header-bold {
+  font-weight: bold;
+}
+
+.bstable {
+  font-size: small;
+  width: 100%;
+  max-width: 600px;
+  display: block;
+}
+
+.td-column-price-up {
+  color: #4c9900;
+}
+
+.td-column-price-down {
+  /* animation: blinker 1s linear infinite; */
+  color: #ff2e00;
+}

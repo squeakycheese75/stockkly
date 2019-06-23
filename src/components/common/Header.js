@@ -11,38 +11,47 @@ class Header extends Component {
     return (
       <div className={styles}>
         <Navbar collapseOnSelect={true} expand="sm" bg="primary" variant="dark">
-          <Navbar.Brand to="/">
-            <img
-              alt=""
-              src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />
-            {" T O C K K L Y"}
-          </Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand>
+              <img
+                alt=""
+                src={logo}
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />
+              {" T O C K K L Y"}
+            </Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="navbar-nav mr-auto">
-              {/* <Link to="pricing">
-                <Button className="btn outline">Prices</Button>
-              </Link>
-              <Link to="manage">
-                <Button>Manage</Button>
-              </Link> */}
-              <LinkContainer to="pricing">
+              {isAuthenticated() && (
+                <LinkContainer to="/wallet">
+                  <Nav.Link>
+                    <Button>Portfolio</Button>
+                  </Nav.Link>
+                </LinkContainer>
+              )}
+              {/* <LinkContainer to="/pricing">
                 <Nav.Link>
-                  <Button>Prices</Button>
+                  <Button>Pricing</Button>
+                </Nav.Link>
+              </LinkContainer> */}
+              <LinkContainer to="/watching">
+                <Nav.Link>
+                  <Button>WatchList</Button>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="manage">
+              <LinkContainer to="/manage">
                 <Nav.Link>
-                  <Button>Manage</Button>
+                  <Button>Find</Button>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="about">
+
+              <LinkContainer to="/about">
                 <Nav.Link>
-                  <Button>Contact</Button>
+                  <Button>About</Button>
                 </Nav.Link>
               </LinkContainer>
             </Nav>

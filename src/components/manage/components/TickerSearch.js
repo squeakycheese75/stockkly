@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import { Form, FormGroup, DropdownButton, Dropdown } from "react-bootstrap";
-// import signUpForm from "./style.js";
+import { Form } from "react-bootstrap";
+// import DropdownList from "react-widgets/lib/DropdownList";
+// import { DropdownList } from "react-widgets";
+// import SearchNew from "./SearchNew";
+import { DropdownList } from "react-widgets";
+import "./SearchNew.css";
 
 class TickerSearch extends Component {
   state = {
@@ -14,36 +18,44 @@ class TickerSearch extends Component {
   };
 
   render() {
+    // eslint-disable-next-line
     const sectors = this.props.sectors || [];
+    // let colors = ["orange", "red", "blue", "purple"];
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <Form.Label />
-            <DropdownButton
-              value={this.state.selectedValue}
-              title={this.state.selectedValue}
-              onSelect={event => this.onTargetSelect(event)}
-              id={this.state.selectedValue}
-              size="sm"
-            >
-              {sectors.map(sector => (
-                <Dropdown.Item eventKey={sector} key={sector}>
-                  {sector}
-                </Dropdown.Item>
-              ))}
-            </DropdownButton>
-          </FormGroup>
+          {/* <DropdownList
+            data={colors}
+            value={this.state.value}
+            onChange={value => this.setState({ value })}
+          /> */}
+          {/* <SearchNew
+            sectors={sectors}
+            // onSelect={event => this.onTargetSelect(event)}
+          /> */}
+          <DropdownList
+            className="dropdown_customized"
+            data={sectors}
+            // value=
+            defaultValue={this.state.selectedValue}
+            // onChange={selectedValue => this.setState({ selectedValue })}
+            onSelect={event => this.onTargetSelect(event)}
+          />
+          {/* <DropdownButton
+            value={this.state.selectedValue}
+            title={this.state.selectedValue}
+            onSelect={event => this.onTargetSelect(event)}
+            id={this.state.selectedValue}
+            size="sm"
+          >
+            {sectors.map(sector => (
+              <Dropdown.Item eventKey={sector} key={sector}>
+                {sector}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton> */}
+          {/* <DropdownList data={colors} size="sm" /> */}
         </Form>
-        {/* <Card border="primary">
-          <Card.Header as="h5">Find new prices to watch:</Card.Header>
-          <Card.Body>
-            <Card.Title>Find new prices</Card.Title>
-            <Card.Text>
-
-            </Card.Text>
-          </Card.Body>
-        </Card> */}
       </div>
     );
   }

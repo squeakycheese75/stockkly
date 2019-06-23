@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { withRouter } from "react-router-dom";
 import "./SortTable.css";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
@@ -70,15 +71,8 @@ function nameFormatter(cell, row) {
   );
 }
 
-// function onSelectRow(row, isSelected, e) {
-//   if (isSelected) {
-//     alert(`You just selected '${row["name"]}'`);
-//   }
-// }
-
 class SortTable extends Component {
   removeItem = index => {
-    // console.log("Hit! with ", index);
     this.props.onSubmit(index);
   };
 
@@ -95,21 +89,20 @@ class SortTable extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, history } = this.props;
 
     const options = {
       onRowClick: function(row) {
-        // alert(`You click row id: ${row._id}`);
-        console.log(`You click row id: ${row.id}`);
+        history.push(`/product/${row.id}`);
       },
       noDataText: "Loading..."
     };
-    // const selectRowProp = {
-    //   mode: "checkbox",
-    //   bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-    //   hideSelectColumn: true, // enable hide selection column.
-    //   clickToSelect: false // you should enable clickToSelect, otherwise, you can't select column.
-    // };
+    const selectRowProp = {
+      hideSelectColumn: true,
+      mode: "checkbox",
+      clickToSelect: true,
+      bgColor: "rgb(178,214,225)"
+    };
 
     return (
       <div>
@@ -122,7 +115,7 @@ class SortTable extends Component {
           bordered
           size="sm"
           version="4"
-          // selectRow={selectRowProp}
+          selectRow={selectRowProp}
           options={options}
         >
           <TableHeaderColumn
@@ -133,6 +126,7 @@ class SortTable extends Component {
             //bordered={true}
             columnClassName="bstable"
             dataFormat={nameFormatter}
+            editable={false}
           >
             NAME
           </TableHeaderColumn>
@@ -143,6 +137,8 @@ class SortTable extends Component {
             dataFormat={openFormatter}
             dataSort={true}
             columnClassName="bstable"
+            // dataAlign="right"
+            editable={false}
             // columnClassName="bstable bstable-header-bold"
           >
             PRICE
@@ -162,6 +158,7 @@ class SortTable extends Component {
             columnClassName={columnClassNameFormat}
             dataSort={true}
             dataFormat={priceChangeFormatter}
+            editable={false}
           >
             CHANGE
           </TableHeaderColumn>
@@ -171,10 +168,11 @@ class SortTable extends Component {
             columnClassName="bstable bstable-icon"
             dataAlign="center"
             dataFormat={this.removeButton.bind(this)}
+            editable={false}
           />
         </BootstrapTable>
       </div>
     );
   }
 }
-export default SortTable;
+export default withRouter(SortTable);
