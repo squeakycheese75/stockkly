@@ -95,7 +95,7 @@ class WalletPage extends React.Component {
 
     return (
       <div>
-        {isEmpty(this.state.watchData) ? (
+        {isEmpty(this.state.holdingsData) ? (
           <>
             <Alert key="empty" variant="secondary" as="h5">
               <Alert.Heading>Portfolio is empty!</Alert.Heading>
