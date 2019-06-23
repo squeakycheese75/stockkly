@@ -35,12 +35,11 @@ class HomePage extends Component {
                 <LinkContainer to="/wallet">
                   <Button size="sm">Wallet</Button>
                 </LinkContainer>
-                )}
               </>
             ) : (
               <>
                 Or,{" "}
-                <LinkContainer to="/login">
+                <LinkContainer to="login">
                   <Button size="sm">Login</Button>
                 </LinkContainer>{" "}
                 build a wallet
