@@ -47,8 +47,8 @@ class TransactionPage extends React.Component {
           onClose={true}
           style={{
             position: "absolute",
-            top: 50,
-            right: 50
+            bottom: 20,
+            right: 20
           }}
         >
           <Toast.Header className="info">

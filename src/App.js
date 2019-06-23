@@ -82,7 +82,7 @@ class App extends Component {
       // load profile
       if (this.auth.isAuthenticated()) {
         this.loadProfile();
-        console.log("Authenticated profile load");
+        // console.log("Authenticated profile load");
       }
     });
   }
@@ -279,7 +279,11 @@ class App extends Component {
           <Nav auth={this.auth} />
 
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route
+              exact
+              path="/"
+              render={props => <HomePage auth={this.auth} {...props} />}
+            />
 
             {/* <Route
               path={["/pricing"]}

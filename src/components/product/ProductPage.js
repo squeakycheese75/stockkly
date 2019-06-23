@@ -52,7 +52,6 @@ class ProductForm extends React.Component {
           this.setState({
             productSummary: response
           });
-          this._isLoaded = false;
         }
       })
       .catch(error => {
@@ -134,8 +133,8 @@ class ProductForm extends React.Component {
           autohide
           style={{
             position: "absolute",
-            top: 100,
-            right: 25
+            bottom: 20,
+            right: 20
           }}
         >
           <Toast.Header>

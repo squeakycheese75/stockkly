@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import { ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { ButtonToolbar, OverlayTrigger, Tooltip, Toast } from "react-bootstrap";
 import { withRouter, Link } from "react-router-dom";
 import "./WatchListTable.css";
 // import WatchListPage from "../WatchListPage";
@@ -93,23 +93,19 @@ function nameFormatter(cell, row) {
 // }
 
 class WatchListTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pid: "dummy",
+      showToast: false
+    };
+  }
+
   removeItem = event => {
     // event.preventDefault();
     this.props.onSubmit(event);
+    this.setState({ pid: event, showToast: true });
   };
-
-  // removeButton(cell) {
-  //   return (
-  //     <i
-  //       className="mdc-icon-button material-icons md-12 orange600"
-  //       onClick={() => this.removeItem(cell)}
-  //       // onClick={handleClick}
-  //     >
-  //       {/* highlight_off */}
-  //       delete
-  //     </i>
-  //   );
-  // }
 
   removeButton(cell) {
     return (
@@ -154,6 +150,10 @@ class WatchListTable extends Component {
   render() {
     // const { data, history } = this.props;
     const { data } = this.props;
+    const { showToast } = this.state;
+    // const { pid } = this.state;
+
+    const handleClose = () => this.setState({ showToast: false });
 
     const options = {
       // onRowClick: function(row) {
@@ -231,6 +231,28 @@ class WatchListTable extends Component {
             editable={false}
           />
         </BootstrapTable>
+        <Toast
+          onClose={handleClose}
+          show={showToast}
+          delay={3000}
+          autohide
+          style={{
+            position: "absolute",
+            bottom: 100,
+            right: 25
+          }}
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded mr-2"
+              alt=""
+            />
+            <strong className="mr-auto">Stockkly</strong>
+            {/* <small>11 mins ago</small> */}
+          </Toast.Header>
+          <Toast.Body>Removed {this.state.pid} from watchList!</Toast.Body>
+        </Toast>
       </div>
     );
   }
