@@ -185,8 +185,7 @@ class ProductForm extends React.Component {
               ) : (
                 <Button
                   className="btn"
-                  variant="outline-dark"
-                  size="sm"
+                  variant="outline-info"
                   onClick={event => this.handleSubmit(this.state.pid)}
                 >
                   Add to Watchlist
