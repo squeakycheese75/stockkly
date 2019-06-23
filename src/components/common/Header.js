@@ -29,7 +29,7 @@ class Header extends Component {
               {isAuthenticated() && (
                 <LinkContainer to="/wallet">
                   <Nav.Link>
-                    <Button>Wallet</Button>
+                    <Button>Portfolio</Button>
                   </Nav.Link>
                 </LinkContainer>
               )}

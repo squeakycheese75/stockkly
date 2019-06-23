@@ -1,0 +1,11 @@
+.toast-header {
+  /* display: flex;
+    align-items: center;
+    padding: $toast-padding-y $toast-padding-x; */
+  color: white;
+  background-color: #007bff;
+  border-bottom: #007bff;
+  /* background-color: $toast-header-background-color;
+    background-clip: padding-box;
+    border-bottom: $toast-border-width solid $toast-header-border-color; */
+}

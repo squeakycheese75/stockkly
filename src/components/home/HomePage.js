@@ -3,13 +3,6 @@ import { Jumbotron, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import styles from "../common/Header.css";
 
-// class HomePage extends Component {
-//   render() {
-//     return()
-//   }
-// }
-// export default HomePage;
-
 const HomePage = () => {
   return (
     <div style={styles}>
@@ -20,38 +13,21 @@ const HomePage = () => {
           prices.
         </p>
         <p>
-          <LinkContainer to="manage">
+          <LinkContainer to="/manage">
             <Button size="sm">Find</Button>
           </LinkContainer>{" "}
           prices and add them to your{" "}
-          <LinkContainer to="manage">
+          <LinkContainer to="watching">
             <Button size="sm">WatchList</Button>
           </LinkContainer>{" "}
         </p>
         <p>
-          Or,{" "}
-          {/* <LinkContainer to="login">
-            <Nav.Link>
-              <Button
-                className={styles}
-                variant="outline-light"
-                onClick={isAuthenticated() ? logout : login}
-              >
-                {isAuthenticated() ? "Log Out" : "Log In"}
-              </Button>
-            </Nav.Link>
-          </LinkContainer>{" "} */}
-          and build a{" "}
-          <LinkContainer to="prices">
+          Or, login, build a{" "}
+          <LinkContainer to="/wallet">
             <Button size="sm">Wallet</Button>
           </LinkContainer>{" "}
+          and track your wealth live!
         </p>
-        {/* <p>
-          Get live updates on the{" "}
-          <LinkContainer to="prices">
-            <Button size="sm">Prices</Button>
-          </LinkContainer>{" "}
-        </p> */}
         <p>Stockkly Team</p>
         <p>
           <i>Coming soon.....</i> FX, more crypto, funds, derived data,

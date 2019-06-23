@@ -1,11 +1,12 @@
 import React from "react";
 // import ProductChart from "./components/ProductChart";
 import TransactionHistory from "./components/TransactionHistory";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
 import ProductSummary from "./components/ProductSummary";
 // import Loading from "../common/Loading";
+import "./ProductPage.css";
 
 class ProductForm extends React.Component {
   _isMounted = false;
@@ -24,14 +25,15 @@ class ProductForm extends React.Component {
       //   : []
       productHoldings: {},
       productSummary: {},
-      watchList: this.props.watchList
+      watchList: this.props.watchList,
+      showToast: false
     };
     this.auth = this.props.auth;
     this.history = this.props.history;
   }
 
   async loadProductSummary() {
-    console.log("calling loadProductSummary with " + this.state.pid);
+    // console.log("calling loadProductSummary with " + this.state.pid);
     var url =
       process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     fetch(url, {
@@ -88,10 +90,18 @@ class ProductForm extends React.Component {
 
   handleSubmit = event => {
     this.props.addTickerToWatchList(event);
+    this.setState({ showToast: true });
+    // () => {
+    //   this.setState({ showToast: true })
+    // );
+    //show toast
   };
 
   render() {
+    const { showToast } = this.state;
     // if (!this._isLoaded) return <Loading />;
+    const handleClose = () => this.setState({ showToast: false });
+    // const handleShow = () => this.setState({ show: true });
 
     return (
       <div>
@@ -117,6 +127,28 @@ class ProductForm extends React.Component {
             </Collapse>
           </Card.Body>
         </Card> */}
+        <Toast
+          onClose={handleClose}
+          show={showToast}
+          delay={3000}
+          autohide
+          style={{
+            position: "absolute",
+            top: 100,
+            right: 25
+          }}
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded mr-2"
+              alt=""
+            />
+            <strong className="mr-auto">Stockkly</strong>
+            {/* <small>11 mins ago</small> */}
+          </Toast.Header>
+          <Toast.Body>Added {this.state.pid} to watchList!</Toast.Body>
+        </Toast>
 
         {this.auth.isAuthenticated() ? (
           <>

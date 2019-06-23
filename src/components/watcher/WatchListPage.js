@@ -1,6 +1,7 @@
 import React from "react";
+import { Alert } from "react-bootstrap";
 import WatchListTable from "./components/WatchListTable";
-// import LoginReminder from "./LoginReminder";
+import Loading from "../common/Loading";
 
 class WatchListPage extends React.Component {
   _isMounted = false;
@@ -12,7 +13,8 @@ class WatchListPage extends React.Component {
       watchData: localStorage.getItem("watchData")
         ? JSON.parse(localStorage.getItem("watchData"))
         : [],
-      watchList: this.props.watchList
+      watchList: this.props.watchList,
+      loading: true
     };
     this.auth = this.props.auth;
   }
@@ -39,9 +41,10 @@ class WatchListPage extends React.Component {
         .then(response => {
           if (this._isMounted) {
             this.setState({
-              watchData: response
+              watchData: response,
+              loading: false
             });
-            console.log("Loaded data");
+            // console.log("Loaded data");
           }
         })
         .catch(error => {
@@ -71,17 +74,15 @@ class WatchListPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+    this.setState({ loading: false });
     //Cache data back to localStorage if unmounted
     localStorage.setItem("watchData", JSON.stringify(this.state.watchData));
     localStorage.setItem("watchList", JSON.stringify(this.state.watchList));
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log("componentWillReceiveProps");
-    // console.log(nextProps);
-    // if ((nextProps.watchList = [])) return;
     if (nextProps.watchList !== this.props.watchList) {
-      console.log("Watchlist needs updating");
+      // console.log("Watchlist needs updating");
       this.setState(
         {
           watchList: nextProps.watchList
@@ -105,11 +106,16 @@ class WatchListPage extends React.Component {
       return true;
     }
 
+    if (this.state.loading) return <Loading />;
+
     return (
       <div>
         {isEmpty(this.state.watchData) ? (
           <>
-            <h1>Empty</h1>
+            <Alert key="empty" variant="secondary" as="h5">
+              <Alert.Heading>Watchlist is empty!</Alert.Heading>
+              <p>Go and find stuff to watch</p>
+            </Alert>
           </>
         ) : (
           <WatchListTable

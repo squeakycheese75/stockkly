@@ -39,7 +39,7 @@ class App extends Component {
         },
     watchList: localStorage.getItem("watchList")
       ? JSON.parse(localStorage.getItem("watchList"))
-      : ["MSFT", "AAPL", "DIS"]
+      : []
   };
 
   //Load component data
