@@ -10,7 +10,8 @@ class TransactionPage extends React.Component {
     super(props);
     this.state = {
       pid: props.match.params.pid,
-      message: ""
+      message: "",
+      showToast: false
     };
     this.auth = this.props.auth;
   }
@@ -24,6 +25,11 @@ class TransactionPage extends React.Component {
   }
 
   render() {
+    const { showToast } = this.state;
+
+    const handleClose = () => this.setState({ showToast: false });
+    const handleOpen = () => this.setState({ showToast: true });
+
     return (
       <div>
         <Card key="addTransaction">
@@ -31,7 +37,11 @@ class TransactionPage extends React.Component {
             Add Transaction for {this.state.pid}
           </Card.Header>
           <Card.Body>
-            <AddTransaction auth={this.auth} product={this.state.pid} />
+            <AddTransaction
+              auth={this.auth}
+              product={this.state.pid}
+              onSubmit={handleOpen}
+            />
           </Card.Body>
         </Card>
         <Card key="transactionHostory">
@@ -43,24 +53,26 @@ class TransactionPage extends React.Component {
           </Card.Body>
         </Card>
         <Toast
-          show={true}
-          onClose={true}
+          onClose={handleClose}
+          show={showToast}
+          delay={3000}
+          autohide
           style={{
             position: "absolute",
             bottom: 20,
             right: 20
           }}
         >
-          <Toast.Header className="info">
+          <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
               className="rounded mr-2"
               alt=""
             />
-            <strong className="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
+            <strong className="mr-auto">Stockkly</strong>
+            {/* <small>11 mins ago</small> */}
           </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+          <Toast.Body>Added {this.state.pid} to watchList!</Toast.Body>
         </Toast>
       </div>
     );

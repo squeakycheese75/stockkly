@@ -270,9 +270,6 @@ class App extends Component {
     }
     if (!this.state.tokenRenewalComplete) return <Loading />;
 
-    // let content = !this.state.isLoaded ? (
-    //   <Loading />
-    // ) : ()
     let content = (
       <>
         <div>
@@ -284,18 +281,6 @@ class App extends Component {
               path="/"
               render={props => <HomePage auth={this.auth} {...props} />}
             />
-
-            {/* <Route
-              path={["/pricing"]}
-              render={props => (
-                <PricingPage
-                  data={this.state.data}
-                  removeTicker={this.removeTicker}
-                  auth={this.auth}
-                  {...props}
-                />
-              )}
-            /> */}
 
             <Route path="/about" component={AboutPage} />
             <Route

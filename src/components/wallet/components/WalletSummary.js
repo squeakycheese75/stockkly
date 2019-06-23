@@ -38,7 +38,10 @@ function sum(data, key) {
 }
 
 function totalFormatter(cell) {
-  return `${portfolioCcySymbol}` + cell.toFixed(2).toLocaleString();
+  return (
+    `${portfolioCcySymbol}` +
+    cell.toLocaleString(undefined, { minimumFractionDigits: 2 })
+  );
 }
 
 class WalletSummary extends React.Component {

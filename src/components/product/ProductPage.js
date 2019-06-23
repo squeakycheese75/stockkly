@@ -156,18 +156,15 @@ class ProductForm extends React.Component {
               <Card.Body>
                 <TransactionHistory auth={this.auth} pid={this.state.pid} />
                 <Link to={`/transactions/${this.state.pid}`}>
-                  <Button className="btn" variant="outline-info">
-                    Add Transaction
-                  </Button>
+                  <Button className="btn">Add Transaction</Button>
                 </Link>{" "}
                 {this.state.watchList.includes(this.state.pid) ? (
                   <></>
                 ) : (
                   <Button
                     className="btn"
-                    variant="outline-dark"
-                    size="sm"
-                    onClick={event => this.handleSubmit(this.state.pid)}
+                    variant="outline-info"
+                    onClick={this.handleSubmit(this.state.pid)}
                   >
                     Add to Watchlist
                   </Button>

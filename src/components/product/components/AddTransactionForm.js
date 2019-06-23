@@ -1,10 +1,13 @@
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import React from "react";
 import NumericInput from "react-numeric-input";
 import Moment from "moment";
 import momentLocalizer from "react-widgets-moment";
 import { DateTimePicker } from "react-widgets";
 import "react-widgets/dist/css/react-widgets.css";
+// import NumberField from "./NumberField";
+// import { throwStatement } from "@babel/types";
+// import { t } from "typy";
 
 Moment.locale("en");
 momentLocalizer();
@@ -18,6 +21,7 @@ class AddTransaction extends React.Component {
       t_type: "BUY",
       t_qty: 1,
       t_price: 1,
+      t_total: 1,
       t_pid: this.props.product,
       t_details: "Trade info"
     };
@@ -33,12 +37,16 @@ class AddTransaction extends React.Component {
   };
 
   handleQuantityChange = event => {
-    this.setState({ t_qty: event });
+    this.setState({ t_qty: event, t_total: this.state.t_price * event });
   };
 
   handlePriceChange = event => {
-    this.setState({ t_price: event });
+    this.setState({ t_price: event, t_total: this.state.t_qty * event });
   };
+
+  // calcTotal () => {
+  //   t.p
+  // }
 
   async insertTransaction() {
     console.log("In InsertTransaction");
@@ -72,16 +80,24 @@ class AddTransaction extends React.Component {
   }
 
   handleSubmit = event => {
-    console.log("in handleSubmit this.state.t_pid");
+    // console.log("in handleSubmit this.state.t_pid");
     // console.log("pid is " + this.state.t_pid);
     this.insertTransaction();
+    this.props.onSubmit(event);
+  };
+
+  handleChange = event => {
+    console.log("in handleChange with", event);
+    // console.log("pid is " + this.state.t_pid);
+    // this.insertTransaction();
+    // this.props.onSubmit(event);
   };
 
   render() {
     return (
       <div>
-        <Form className="form-horizontal">
-          <Form.Group controlId="addTransaction">
+        {/* <Form className="form-horizontal"> */}
+        {/* <Form.Group controlId="addTransaction">
             <Form.Label>Transaction date:</Form.Label>
             <Form.Text>
               <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
@@ -93,8 +109,8 @@ class AddTransaction extends React.Component {
                 />
               </div>
             </Form.Text>
-          </Form.Group>
-          <Form.Group>
+          </Form.Group> */}
+        {/* <Form.Group>
             <Form.Label>Type:</Form.Label>
             <Form.Text>
               <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
@@ -119,10 +135,10 @@ class AddTransaction extends React.Component {
                 />
               </div>
             </Form.Text>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Quantity:</Form.Label>
-            <Form.Text>
+          </Form.Group> */}
+        {/* <Form.Group>
+            <Form.Label xs="4">Quantity:</Form.Label>
+            <Form.Text xs="8">
               <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
                 <NumericInput
                   className="form-control-qty"
@@ -134,8 +150,8 @@ class AddTransaction extends React.Component {
                 />
               </div>
             </Form.Text>
-          </Form.Group>
-          <Form.Group>
+          </Form.Group> */}
+        {/* <Form.Group>
             <Form.Label>Price:</Form.Label>
             <Form.Text>
               <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
@@ -149,7 +165,134 @@ class AddTransaction extends React.Component {
                 />
               </div>
             </Form.Text>
+          </Form.Group> */}
+        {/* <Form.Group>
+            <Form.Label>Bookcost:</Form.Label>
+            <Form.Text>
+              <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+                <NumericInput
+                  className="form-control-price"
+                  value={this.state.t_total}
+                  min={1}
+                  precision={2}
+                  size={5}
+                  contentEditable={false}
+                  // onChange={event => this.handlePriceChange(event)}
+                />
+              </div>
+            </Form.Text>
+          </Form.Group> */}
+        {/* <Form.Group>
+            <Form.Label> </Form.Label>
+            <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+              <Button
+                className="btn btn-default"
+                size="sm"
+                onClick={event => this.handleSubmit(event)}
+              >
+                Submit
+              </Button>
+            </div>
+          </Form.Group> */}
+        {/* </Form> */}
+
+        <Form className="form-horizontal">
+          <Form.Group as={Row} controlId="formPlaintextEmail">
+            <Form.Label column sm="4" xs="4" md="2">
+              Transaction date:
+            </Form.Label>
+            <Col sm="8" xs="8">
+              <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+                <DateTimePicker
+                  defaultValue={this.state.t_date}
+                  time={false}
+                  format="DD MMM YYYY"
+                  onChange={event => this.handleDateTimeChange(event)}
+                />
+              </div>
+            </Col>
           </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextEmail">
+            <Form.Label column sm="4" xs="4" md="2">
+              Type:
+            </Form.Label>
+            <Col sm="8" xs="8">
+              <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+                <Form.Check
+                  inline
+                  label="Buy"
+                  type="radio"
+                  id="inline-radio-buy"
+                  name="groupOptions"
+                  value="BUY"
+                  defaultChecked
+                  onChange={event => this.handleTransactionTypeChange(event)}
+                />
+                <Form.Check
+                  inline
+                  label="Sell"
+                  type="radio"
+                  id="inline-radio-sell"
+                  name="groupOptions"
+                  value="SELL"
+                  onChange={event => this.handleTransactionTypeChange(event)}
+                />
+              </div>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextEmail">
+            <Form.Label column sm="4" xs="4" md="2">
+              Quantity:
+            </Form.Label>
+            <Col sm="8" xs="8">
+              <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+                <NumericInput
+                  className="form-control-qty"
+                  value={this.state.t_qty}
+                  min={1}
+                  precision={2}
+                  size={5}
+                  onChange={event => this.handleQuantityChange(event)}
+                />
+              </div>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextEmail">
+            <Form.Label column sm="4" xs="4" md="2">
+              Price:
+            </Form.Label>
+            <Col sm="8" xs="8">
+              <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+                <NumericInput
+                  className="form-control-price"
+                  value={this.state.t_price}
+                  min={1}
+                  precision={2}
+                  size={5}
+                  onChange={event => this.handlePriceChange(event)}
+                />
+              </div>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formPlaintextEmail">
+            <Form.Label column sm="4" xs="4" md="2">
+              Bookcost:
+            </Form.Label>
+            <Col sm="8" xs="8">
+              <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
+                <NumericInput
+                  className="form-control-price"
+                  value={this.state.t_total}
+                  min={1}
+                  precision={2}
+                  size={5}
+                  contentEditable={false}
+                  readOnly={true}
+                />
+              </div>
+            </Col>
+          </Form.Group>
+          <br />
           <Form.Group>
             <Form.Label> </Form.Label>
             <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">

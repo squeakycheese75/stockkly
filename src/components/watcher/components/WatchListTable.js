@@ -3,7 +3,6 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { ButtonToolbar, OverlayTrigger, Tooltip, Toast } from "react-bootstrap";
 import { withRouter, Link } from "react-router-dom";
 import "./WatchListTable.css";
-// import WatchListPage from "../WatchListPage";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
   return fieldValue < 0
