@@ -17,28 +17,20 @@ class ProductForm extends React.Component {
     this.state = {
       pid: props.match.params.pid,
       appSettings: this.props.appSettings,
-      // open: false,
-      // transactionHistoryData: [],
-      // product: [],
-      // productHoldings: localStorage.getItem("productHoldings")
-      //   ? JSON.parse(localStorage.getItem("productHoldings"))
-      //   : []
       productHoldings: {},
       productSummary: {},
       watchList: this.props.watchList,
       showToast: false
     };
     this.auth = this.props.auth;
-    this.history = this.props.history;
+    this.handleClick = this.handleClick.bind(this);
   }
 
   async loadProductSummary() {
-    // console.log("calling loadProductSummary with " + this.state.pid);
     var url =
       process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     fetch(url, {
       headers: {
-        // Authorization: `Bearer ${this.auth.getAccessToken()}`,
         "Content-Type": "application/json"
       }
     })
@@ -63,14 +55,8 @@ class ProductForm extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    // if (this.auth.isAuthenticated) {
-    //   this.loadTransactionHistory();
-    // }
-
-    // this.loadProductHoldings();
     this.loadProductSummary();
     // this._isLoaded = true;
-    // if ((this.state.product = [])) this.loadProductSummary();
   }
 
   componentWillUnmount() {
@@ -87,20 +73,15 @@ class ProductForm extends React.Component {
     }
   }
 
-  handleSubmit = event => {
-    this.props.addTickerToWatchList(event);
+  handleClick() {
+    this.props.addTickerToWatchList(this.state.pid);
     this.setState({ showToast: true });
-    // () => {
-    //   this.setState({ showToast: true })
-    // );
-    //show toast
-  };
+  }
 
   render() {
     const { showToast } = this.state;
     // if (!this._isLoaded) return <Loading />;
     const handleClose = () => this.setState({ showToast: false });
-    // const handleShow = () => this.setState({ show: true });
 
     return (
       <div>
@@ -144,7 +125,6 @@ class ProductForm extends React.Component {
               alt=""
             />
             <strong className="mr-auto">Stockkly</strong>
-            {/* <small>11 mins ago</small> */}
           </Toast.Header>
           <Toast.Body>Added {this.state.pid} to watchList!</Toast.Body>
         </Toast>
@@ -164,7 +144,7 @@ class ProductForm extends React.Component {
                   <Button
                     className="btn"
                     variant="outline-info"
-                    onClick={this.handleSubmit(this.state.pid)}
+                    onClick={this.handleClick}
                   >
                     Add to Watchlist
                   </Button>
