@@ -3,12 +3,13 @@ import React from "react";
 import NumericInput from "react-numeric-input";
 import Moment from "moment";
 import momentLocalizer from "react-widgets-moment";
-import { DateTimePicker } from "react-widgets";
+import { DateTimePicker, NumberPicker } from "react-widgets";
 import "react-widgets/dist/css/react-widgets.css";
 import { withRouter } from "react-router-dom";
 // import NumberField from "./NumberField";
 // import { throwStatement } from "@babel/types";
 // import { t } from "typy";
+// import {  } from "react-widgets";
 
 Moment.locale("en");
 momentLocalizer();
@@ -278,7 +279,7 @@ class AddTransaction extends React.Component {
             </Form.Label>
             <Col sm="8" xs="8">
               <div className="col-sm-offset-2 col-xs-8 col-sm-6 col-md-4 col-lg-2">
-                <NumericInput
+                {/* <NumericInput
                   className="form-control-price"
                   value={this.state.t_total}
                   min={1}
@@ -286,7 +287,8 @@ class AddTransaction extends React.Component {
                   size={5}
                   contentEditable={false}
                   readOnly={true}
-                />
+                /> */}
+                <NumberPicker readOnly defaultValue={1.5} />
               </div>
             </Col>
           </Form.Group>

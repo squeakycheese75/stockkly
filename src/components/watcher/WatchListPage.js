@@ -20,6 +20,7 @@ class WatchListPage extends React.Component {
   }
 
   async loadWatchData() {
+    // console.log("loading watchlist data with ", this.state.watchList);
     if (this.state.watchList && this.state.watchList.length) {
       var url =
         process.env["REACT_APP_PRICES_API"] +
@@ -82,7 +83,9 @@ class WatchListPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // console.log("Received componentWillReceiveProps for in watchlist");
     if (nextProps.watchList !== this.props.watchList) {
+      // console.log("watchList was updated");
       this.setState(
         {
           watchList: nextProps.watchList
