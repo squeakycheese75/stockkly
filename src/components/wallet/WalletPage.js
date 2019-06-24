@@ -83,29 +83,42 @@ class WalletPage extends React.Component {
   }
 
   render() {
-    const data = this.state.holdingsData;
-    function isEmpty(obj) {
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) return false;
-      }
-      return true;
-    }
+    // const data = this.state.holdingsData;
+    // function isEmpty(obj) {
+    //   for (var key in obj) {
+    //     if (obj.hasOwnProperty(key)) return false;
+    //   }
+    //   return true;
+    // }
 
     if (!this._isLoaded) return <Loading />;
 
     return (
       <div>
-        {isEmpty(this.state.holdingsData) ? (
+        {this.state.holdingsData === undefined ? (
           <>
             <Alert key="empty" variant="secondary" as="h5">
               <Alert.Heading>Portfolio is empty!</Alert.Heading>
               <p>Go and find stuff to add</p>
             </Alert>
           </>
+        ) : this.state.holdingsData.length > 0 ? (
+          <>
+            <WalletSummary
+              data={this.state.holdingsData}
+              settings={this.state.appSettings}
+            />
+            <WalletTable
+              data={this.state.holdingsData}
+              settings={this.state.appSettings}
+            />
+          </>
         ) : (
           <>
-            <WalletSummary data={data} settings={this.state.appSettings} />
-            <WalletTable data={data} settings={this.state.appSettings} />
+            <Alert key="empty" variant="secondary" as="h5">
+              <Alert.Heading>Portfolio is empty!</Alert.Heading>
+              <p>Go and find stuff to add</p>
+            </Alert>
           </>
         )}
       </div>
