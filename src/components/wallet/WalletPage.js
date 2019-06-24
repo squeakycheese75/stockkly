@@ -7,7 +7,7 @@ import Loading from "../common/Loading";
 
 class WalletPage extends React.Component {
   _isMounted = false;
-  _isLoaded = false;
+  // _isLoaded = false;
 
   constructor(props) {
     super(props);
@@ -15,7 +15,8 @@ class WalletPage extends React.Component {
       appSettings: this.props.appSettings,
       holdingsData: localStorage.getItem("holdingsData")
         ? JSON.parse(localStorage.getItem("holdingsData"))
-        : []
+        : [],
+      loading: true
     };
     this.auth = this.props.auth;
   }
@@ -24,7 +25,7 @@ class WalletPage extends React.Component {
     // var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
     var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/holdings/";
 
-    console.log("Calling ... " + url);
+    // console.log("Calling ... " + url);
 
     fetch(url, {
       method: "GET",
@@ -41,7 +42,8 @@ class WalletPage extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            holdingsData: response
+            holdingsData: response,
+            loading: false
           });
           // this._isLoaded = true;
         }
@@ -58,7 +60,7 @@ class WalletPage extends React.Component {
 
     if (this.auth.isAuthenticated()) {
       this.loadWalletData();
-      this._isLoaded = true;
+      // this._isLoaded = true;
     }
     // Sets the data refresh rate
     var refreshRate = this.state.appSettings.refreshRate * 1000;
@@ -67,11 +69,12 @@ class WalletPage extends React.Component {
         this.loadWalletData();
       }
     }, refreshRate);
-    this._isLoaded = true;
+    // this._isLoaded = true;
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+    this.setState({ loading: false });
     //Cache data back to localStorage if unmounted
     localStorage.setItem(
       "holdingsData",
@@ -80,7 +83,7 @@ class WalletPage extends React.Component {
   }
 
   render() {
-    if (!this._isLoaded) return <Loading />;
+    if (this.state.loading) return <Loading />;
 
     return (
       <div>
