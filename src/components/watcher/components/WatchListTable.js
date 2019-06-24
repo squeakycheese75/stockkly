@@ -40,7 +40,7 @@ function priceChangeFormatter(cell, row) {
     <div>
       <ul>
         <li className="name">
-          {cell}
+          {cell.toFixed(2)}
           {cell > 0 ? (
             <i className="material-icons vertical-align-middle">
               arrow_drop_up
