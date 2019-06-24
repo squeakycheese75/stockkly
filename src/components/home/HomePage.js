@@ -12,9 +12,8 @@ class HomePage extends Component {
     return (
       <div style={styles}>
         <Jumbotron>
-          <p>
-            <h2>Welcome to Stockkly</h2>
-          </p>
+          <h4>Welcome to Stockkly</h4>
+
           <p>
             A simple, mobile friendly site for keeping track of all your
             favourite prices.

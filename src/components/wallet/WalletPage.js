@@ -66,9 +66,6 @@ class WalletPage extends React.Component {
       if (this._isMounted) {
         this.loadWalletData();
       }
-      // else {
-      //   console.log("Not mounted, so not loading");
-      // }
     }, refreshRate);
     this._isLoaded = true;
   }
@@ -83,14 +80,6 @@ class WalletPage extends React.Component {
   }
 
   render() {
-    // const data = this.state.holdingsData;
-    // function isEmpty(obj) {
-    //   for (var key in obj) {
-    //     if (obj.hasOwnProperty(key)) return false;
-    //   }
-    //   return true;
-    // }
-
     if (!this._isLoaded) return <Loading />;
 
     return (
