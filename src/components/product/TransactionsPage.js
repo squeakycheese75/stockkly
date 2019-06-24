@@ -14,6 +14,7 @@ class TransactionPage extends React.Component {
       showToast: false
     };
     this.auth = this.props.auth;
+    this.history = this.props.history;
   }
 
   componentDidMount() {
@@ -72,7 +73,7 @@ class TransactionPage extends React.Component {
             <strong className="mr-auto">Stockkly</strong>
             {/* <small>11 mins ago</small> */}
           </Toast.Header>
-          <Toast.Body>Added {this.state.pid} to watchList!</Toast.Body>
+          <Toast.Body>Transaction for {this.state.pid} complete!</Toast.Body>
         </Toast>
       </div>
     );

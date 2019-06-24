@@ -5,6 +5,7 @@ import Moment from "moment";
 import momentLocalizer from "react-widgets-moment";
 import { DateTimePicker } from "react-widgets";
 import "react-widgets/dist/css/react-widgets.css";
+import { withRouter } from "react-router-dom";
 // import NumberField from "./NumberField";
 // import { throwStatement } from "@babel/types";
 // import { t } from "typy";
@@ -80,20 +81,17 @@ class AddTransaction extends React.Component {
   }
 
   handleSubmit = event => {
-    // console.log("in handleSubmit this.state.t_pid");
-    // console.log("pid is " + this.state.t_pid);
-    this.insertTransaction();
-    this.props.onSubmit(event);
-  };
-
-  handleChange = event => {
-    console.log("in handleChange with", event);
-    // console.log("pid is " + this.state.t_pid);
     // this.insertTransaction();
-    // this.props.onSubmit(event);
+    this.props.onSubmit(event);
+    this.props.history.push(`/product/${this.state.t_pid}`);
+    // history.push(`/product/${row.ticker}`);
   };
 
   render() {
+    // const { history } = this.props;
+
+    // const handleOpen = () => this.setState({ showToast: true });
+
     return (
       <div>
         {/* <Form className="form-horizontal"> */}
@@ -300,6 +298,7 @@ class AddTransaction extends React.Component {
                 className="btn btn-default"
                 size="sm"
                 onClick={event => this.handleSubmit(event)}
+                // onClick={handleSubmit(event)}
               >
                 Submit
               </Button>
@@ -311,4 +310,4 @@ class AddTransaction extends React.Component {
   }
 }
 
-export default AddTransaction;
+export default withRouter(AddTransaction);
