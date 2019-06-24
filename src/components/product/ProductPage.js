@@ -66,7 +66,7 @@ class ProductForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.watchList !== this.props.watchList) {
-      console.log("Watchlist needs updating");
+      // console.log("Watchlist needs updating");
       this.setState({
         watchList: nextProps.watchList
       });
@@ -74,6 +74,7 @@ class ProductForm extends React.Component {
   }
 
   handleClick() {
+    // console.log("handle click pressed");
     this.props.addTickerToWatchList(this.state.pid);
     this.setState({ showToast: true });
   }
@@ -166,7 +167,7 @@ class ProductForm extends React.Component {
                 <Button
                   className="btn"
                   variant="outline-info"
-                  onClick={event => this.handleSubmit(this.state.pid)}
+                  onClick={this.handleClick}
                 >
                   Add to Watchlist
                 </Button>
