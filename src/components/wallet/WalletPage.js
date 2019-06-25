@@ -21,7 +21,7 @@ class WalletPage extends React.Component {
     this.auth = this.props.auth;
   }
 
-  async loadWalletData() {
+  loadWalletData() {
     // var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
     var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/holdings/";
 
@@ -66,6 +66,7 @@ class WalletPage extends React.Component {
     var refreshRate = this.state.appSettings.refreshRate * 1000;
     setInterval(() => {
       if (this._isMounted) {
+        console.log("Reloading wallet data!");
         this.loadWalletData();
       }
     }, refreshRate);

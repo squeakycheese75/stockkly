@@ -50,27 +50,8 @@ class TransactionPage extends React.Component {
               product={this.state.pid}
               onSubmit={handleOpen}
             />
-            {/* {showToast ? (
-              <>
-                <InsertedTransactionsForm />
-              </>
-            ) : (
-              <AddTransaction
-                auth={this.auth}
-                product={this.state.pid}
-                onSubmit={handleOpen}
-              />
-            )} */}
           </Card.Body>
         </Card>
-        {/* <Card key="addTransaction2">
-          <Card.Header as="h5">
-            Add Transaction for {this.state.pid}
-          </Card.Header>
-          <Card.Body> */}
-
-        {/* </Card.Body>
-        </Card> */}
         <Card key="transactionHostory">
           <Card.Header as="h5">
             Transaction History {this.state.pid}
@@ -106,7 +87,6 @@ class TransactionPage extends React.Component {
             Transaction inserted for {this.state.pid} complete!
           </Toast.Body>
         </Toast>
-        {/* <AddTransaction2 /> */}
       </div>
     );
   }

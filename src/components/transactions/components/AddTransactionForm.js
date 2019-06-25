@@ -97,7 +97,7 @@ class AddTransaction extends React.Component {
   render() {
     return (
       <div>
-        <Form className="form">
+        <Form>
           <Form.Group as={Row} controlId="formPlaintextEmail">
             <Form.Label column sm="4" xs="4" md="2">
               Transaction date:
