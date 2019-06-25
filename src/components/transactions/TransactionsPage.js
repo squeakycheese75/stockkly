@@ -2,16 +2,21 @@ import React from "react";
 import AddTransaction from "./components/AddTransactionForm";
 import { Card, Toast } from "react-bootstrap";
 import TransactionHistory from "./components/TransactionHistory";
+// import Loading from "../common/Loading";
+// import InsertedTransactionsForm from "./components/InsertedTransactionForm";
 
 class TransactionPage extends React.Component {
   _isMounted = false;
   _showToast = true;
+
   constructor(props) {
     super(props);
     this.state = {
       pid: props.match.params.pid,
       message: "",
       showToast: false
+      // loading: true,
+      // transactionHistoryData: []
     };
     this.auth = this.props.auth;
     this.history = this.props.history;
@@ -19,6 +24,7 @@ class TransactionPage extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+    // this.loadTransactionHistory();
   }
 
   componentWillUnmount() {
@@ -43,6 +49,17 @@ class TransactionPage extends React.Component {
               product={this.state.pid}
               onSubmit={handleOpen}
             />
+            {/* {showToast ? (
+              <>
+                <InsertedTransactionsForm />
+              </>
+            ) : (
+              <AddTransaction
+                auth={this.auth}
+                product={this.state.pid}
+                onSubmit={handleOpen}
+              />
+            )} */}
           </Card.Body>
         </Card>
         <Card key="transactionHostory">
@@ -50,7 +67,11 @@ class TransactionPage extends React.Component {
             Transaction History {this.state.pid}
           </Card.Header>
           <Card.Body>
-            <TransactionHistory auth={this.auth} pid={this.state.pid} />
+            <TransactionHistory
+              auth={this.auth}
+              pid={this.state.pid}
+              // transactionHistoryData={this.state.transactionHistoryData}
+            />
           </Card.Body>
         </Card>
         <Toast
@@ -71,9 +92,10 @@ class TransactionPage extends React.Component {
               alt=""
             />
             <strong className="mr-auto">Stockkly</strong>
-            {/* <small>11 mins ago</small> */}
           </Toast.Header>
-          <Toast.Body>Transaction for {this.state.pid} complete!</Toast.Body>
+          <Toast.Body>
+            Transaction inserted for {this.state.pid} complete!
+          </Toast.Body>
         </Toast>
       </div>
     );

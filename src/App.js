@@ -11,7 +11,7 @@ import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/product/ProductPage";
-import TransactionsPage from "./components/product/TransactionsPage";
+import TransactionsPage from "./components/transactions/TransactionsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
 
