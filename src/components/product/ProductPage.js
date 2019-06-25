@@ -1,6 +1,6 @@
 import React from "react";
 // import ProductChart from "./components/ProductChart";
-import TransactionHistory from "./components/TransactionHistory";
+import TransactionHistory from "../transactions/components/TransactionHistory";
 import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProductInfo from "./components/ProductInfo";
