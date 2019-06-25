@@ -11,15 +11,15 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
 
 function priceFormatter(cell, row) {
   return row.spot === 1 ? (
-    `${row.symbol}` + cell.toLocaleString()
+    `${row.symbol}` + cell.toFixed(2).toLocaleString()
   ) : (
     <div>
       <ul>
         <li className="name">
           {row.symbol}
-          {cell.toLocaleString()}
+          {cell.toFixed(2).toLocaleString()}
         </li>
-        <li className="details">({row.spot})</li>
+        <li className="details">({row.spot.toFixed(2)})</li>
       </ul>
     </div>
   );
@@ -154,7 +154,7 @@ class WalletTable extends React.Component {
             PRICE
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="25%"
+            width="20%"
             dataField="total"
             dataAlign="right"
             columnClassName="bstable bstable-header-bold"
@@ -165,7 +165,7 @@ class WalletTable extends React.Component {
             TOTAL
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="15%"
+            width="20%"
             dataField="change"
             dataAlign="center"
             headerAlign="center"
