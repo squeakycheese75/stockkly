@@ -2,6 +2,7 @@ import React from "react";
 import AddTransaction from "./components/AddTransactionForm";
 import { Card, Toast } from "react-bootstrap";
 import TransactionHistory from "./components/TransactionHistory";
+// import AddTransaction2 from "./components/AddTransaction2";
 // import Loading from "../common/Loading";
 // import InsertedTransactionsForm from "./components/InsertedTransactionForm";
 
@@ -62,6 +63,14 @@ class TransactionPage extends React.Component {
             )} */}
           </Card.Body>
         </Card>
+        {/* <Card key="addTransaction2">
+          <Card.Header as="h5">
+            Add Transaction for {this.state.pid}
+          </Card.Header>
+          <Card.Body> */}
+
+        {/* </Card.Body>
+        </Card> */}
         <Card key="transactionHostory">
           <Card.Header as="h5">
             Transaction History {this.state.pid}
@@ -97,6 +106,7 @@ class TransactionPage extends React.Component {
             Transaction inserted for {this.state.pid} complete!
           </Toast.Body>
         </Toast>
+        {/* <AddTransaction2 /> */}
       </div>
     );
   }

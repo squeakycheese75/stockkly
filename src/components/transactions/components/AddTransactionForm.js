@@ -5,7 +5,8 @@ import "react-widgets/dist/css/react-widgets.css";
 import Moment from "moment";
 import momentLocalizer from "react-widgets-moment";
 import simpleNumberLocalizer from "react-widgets-simple-number";
-import "./AddTransaction.css";
+// import "./AddTransaction.css";
+// import "./App.css";
 
 Moment.locale("en");
 momentLocalizer();
@@ -95,8 +96,8 @@ class AddTransaction extends React.Component {
 
   render() {
     return (
-      <div className="addTransaction">
-        <Form className="form-horizontal">
+      <div>
+        <Form className="form">
           <Form.Group as={Row} controlId="formPlaintextEmail">
             <Form.Label column sm="4" xs="4" md="2">
               Transaction date:
