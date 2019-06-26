@@ -149,11 +149,6 @@ class App extends Component {
       .catch(error => console.error("Error:", error));
   }
 
-  // componentDidCatch(error, info) {
-  //   // this.setState({ hasError: true });
-  //   // console.log(error, info);
-  // }
-
   addTickerToWatchList = input => {
     if (input) {
       //Check it's not already in the list

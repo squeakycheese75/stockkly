@@ -25,7 +25,7 @@ class WalletPage extends React.Component {
     // var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
     var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/holdings/";
 
-    // console.log("Calling ... " + url);
+    console.log("Loading WalletData");
 
     fetch(url, {
       method: "GET",
