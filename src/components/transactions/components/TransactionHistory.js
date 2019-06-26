@@ -98,7 +98,7 @@ class TransactionHistory extends React.Component {
             dataField="_id"
             isKey={true}
             columnClassName="bstable"
-            width="20%"
+            // width="20%"
             hidden={true}
           >
             ID
@@ -108,23 +108,23 @@ class TransactionHistory extends React.Component {
             columnClassName="bstable"
             dataSort={true}
             dataFormat={isoDateFormatter}
-            width="20%"
+            width="25%"
           >
             DATE
           </TableHeaderColumn>
-          <TableHeaderColumn
+          {/* <TableHeaderColumn
             dataField="ticker"
             dataSort={true}
             columnClassName="bstable"
             width="20%"
           >
             PRODUCT
-          </TableHeaderColumn>
+          </TableHeaderColumn> */}
           <TableHeaderColumn
             dataField="quantity"
             columnClassName={columnClassNameFormat}
             dataSort={true}
-            width="20%"
+            width="25%"
             dataAlign="right"
             dataFormat={qtyFormatter}
           >
@@ -134,7 +134,7 @@ class TransactionHistory extends React.Component {
             dataField="price"
             dataSort={true}
             columnClassName="bstable"
-            width="20%"
+            width="25%"
             dataAlign="right"
             dataFormat={priceFormatter}
           >
@@ -144,7 +144,7 @@ class TransactionHistory extends React.Component {
             dataField="transtype"
             dataSort={true}
             columnClassName="bstable"
-            width="20%"
+            width="25%"
             dataAlign="center"
           >
             TYPE

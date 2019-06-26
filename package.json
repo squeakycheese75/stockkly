@@ -58,7 +58,6 @@
   ],
   "devDependencies": {
     "increase-memory-limit": "^1.0.7",
-    "reactstrap": "^8.0.0",
     "uglify-js-brunch": "^2.10.0",
     "why-did-you-update": "^1.0.6"
   }

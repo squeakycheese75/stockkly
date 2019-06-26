@@ -10,7 +10,6 @@ import "./ProductPage.css";
 
 class ProductForm extends React.Component {
   _isMounted = false;
-  // _isLoaded = false;
 
   constructor(props) {
     super(props);
@@ -132,26 +131,26 @@ class ProductForm extends React.Component {
 
         {this.auth.isAuthenticated() ? (
           <>
-            <Card key="transactionHistory">
+            {/* <Card key="transactionHistory">
               <Card.Header as="h5">Transaction History:</Card.Header>
-              <Card.Body>
-                <TransactionHistory auth={this.auth} pid={this.state.pid} />
-                <Link to={`/transactions/${this.state.pid}`}>
-                  <Button className="btn">Add Transaction</Button>
-                </Link>{" "}
-                {this.state.watchList.includes(this.state.pid) ? (
-                  <></>
-                ) : (
-                  <Button
-                    className="btn"
-                    variant="outline-info"
-                    onClick={this.handleClick}
-                  >
-                    Add to Watchlist
-                  </Button>
-                )}
-              </Card.Body>
-            </Card>
+              <Card.Body> */}
+            <TransactionHistory auth={this.auth} pid={this.state.pid} />
+            <Link to={`/transactions/${this.state.pid}`}>
+              <Button className="btn">Add Transaction</Button>
+            </Link>{" "}
+            {this.state.watchList.includes(this.state.pid) ? (
+              <></>
+            ) : (
+              <Button
+                className="btn"
+                variant="outline-info"
+                onClick={this.handleClick}
+              >
+                Add to Watchlist
+              </Button>
+            )}
+            {/* </Card.Body>
+            </Card> */}
           </>
         ) : (
           <Card>
