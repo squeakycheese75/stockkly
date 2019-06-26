@@ -3,10 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
 import ManagePage from "./components/manage/ManagePage";
-// import PricingPage from "./components/tickers/PricingPage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
-// import NotFound from "./components/common/NotFound";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import { ToastProvider } from "react-toast-notifications";
@@ -14,11 +12,6 @@ import ProductForm from "./components/product/ProductPage";
 import TransactionsPage from "./components/transactions/TransactionsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
-
-//should all be done by service discovery - consul
-// const defaultTickersList = ["MSFT"];
-
-//require("dotenv").config();
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +21,6 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    // subscribedTickers: [],
     tokenRenewalComplete: false,
     appSettings: localStorage.getItem("userProfile")
       ? JSON.parse(localStorage.getItem("userProfile"))
@@ -157,33 +149,10 @@ class App extends Component {
       .catch(error => console.error("Error:", error));
   }
 
-  // authorisedTickerCall(method, ticker) {
-  //   var data = { ticker: ticker };
-  //   //fetch("http://localhost:5000/api/private/tickers", {
-  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/private/tickers";
-  //   fetch(url, {
-  //     method: method,
-  //     body: JSON.stringify(data), // data can be `string` or {object}!
-  //     headers: {
-  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
-  //       "Content-Type": "application/json"
-
-  //       // mode: "no-cors"
-  //     }
-  //   })
-  //     .then(response => {
-  //       if (response.status) return response;
-  //       throw new Error("Network response was not ok.");
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => console.log("Success:", JSON.stringify(response)))
-  //     .catch(error => console.error("Error:", error));
+  // componentDidCatch(error, info) {
+  //   // this.setState({ hasError: true });
+  //   // console.log(error, info);
   // }
-
-  componentDidCatch(error, info) {
-    // this.setState({ hasError: true });
-    // console.log(error, info);
-  }
 
   addTickerToWatchList = input => {
     if (input) {
@@ -207,46 +176,6 @@ class App extends Component {
     }
   };
 
-  // authorisedTickerCall(method, ticker) {
-  //   var data = { ticker: ticker };
-  //   //fetch("http://localhost:5000/api/private/tickers", {
-  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/private/tickers";
-  //   fetch(url, {
-  //     method: method,
-  //     body: JSON.stringify(data), // data can be `string` or {object}!
-  //     headers: {
-  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
-  //       "Content-Type": "application/json"
-
-  //       // mode: "no-cors"
-  //     }
-  //   })
-  //     .then(response => {
-  //       if (response.status) return response;
-  //       throw new Error("Network response was not ok.");
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => console.log("Success:", JSON.stringify(response)))
-  //     .catch(error => console.error("Error:", error));
-  // }
-
-  // removeTicker = index => {
-  //   this.setState(
-  //     prevState => ({
-  //       subscribedTickers: prevState.subscribedTickers.filter(
-  //         ticker => ticker !== index
-  //       )
-  //     }),
-  //     () => {
-  //       this.loadData();
-  //     }
-  //   );
-
-  //   if (this.auth.isAuthenticated()) {
-  //     this.authorisedTickerCall("DELETE", index);
-  //   }
-  // };
-
   removeTicker = index => {
     this.setState(
       prevState => ({
@@ -265,6 +194,8 @@ class App extends Component {
   };
 
   render() {
+    const isLoggedIn = this.auth.isAuthenticated();
+
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
     }
@@ -276,10 +207,26 @@ class App extends Component {
           <Nav auth={this.auth} />
 
           <Switch>
-            <Route
+            {/* <Route
               exact
               path="/"
               render={props => <HomePage auth={this.auth} {...props} />}
+            /> */}
+
+            <Route
+              exact
+              path="/"
+              render={props =>
+                isLoggedIn ? (
+                  <WalletPage
+                    auth={this.auth}
+                    appSettings={this.state.appSettings}
+                    {...props}
+                  />
+                ) : (
+                  <HomePage auth={this.auth} {...props} />
+                )
+              }
             />
 
             <Route path="/about" component={AboutPage} />
@@ -301,6 +248,7 @@ class App extends Component {
               path="/callback"
               render={props => <Callback auth={this.auth} {...props} />}
             />
+
             <Route
               path="/product/:pid"
               render={props => (
@@ -313,12 +261,10 @@ class App extends Component {
                 />
               )}
             />
-
             <Route
               path="/transactions/:pid"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
             />
-
             <Route
               path="/wallet"
               render={props => (
@@ -329,7 +275,6 @@ class App extends Component {
                 />
               )}
             />
-
             <Route
               path="/watching"
               render={props => (
