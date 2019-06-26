@@ -2,12 +2,10 @@ import React from "react";
 import WalletSummary from "./components/WalletSummary";
 import WalletTable from "./components/WalletTable";
 import { Alert } from "react-bootstrap";
-// import WatchingPage from "../watcher/WatchingPage";
 import Loading from "../common/Loading";
 
 class WalletPage extends React.Component {
   _isMounted = false;
-  // _isLoaded = false;
 
   constructor(props) {
     super(props);
@@ -22,11 +20,8 @@ class WalletPage extends React.Component {
   }
 
   loadWalletData() {
-    // var url = process.env["REACT_APP_PRICES_API"] + "/api/private/holdings/";
     var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/holdings/";
-
-    console.log("Loading WalletData");
-
+    // console.log("Loading WalletData")
     fetch(url, {
       method: "GET",
       headers: {
@@ -45,7 +40,6 @@ class WalletPage extends React.Component {
             holdingsData: response,
             loading: false
           });
-          // this._isLoaded = true;
         }
       })
       .catch(error => {
@@ -60,22 +54,21 @@ class WalletPage extends React.Component {
 
     if (this.auth.isAuthenticated()) {
       this.loadWalletData();
-      // this._isLoaded = true;
     }
     // Sets the data refresh rate
     var refreshRate = this.state.appSettings.refreshRate * 1000;
     setInterval(() => {
       if (this._isMounted) {
-        console.log("Reloading wallet data!");
+        // console.log("Reloading wallet data!");
         this.loadWalletData();
       }
     }, refreshRate);
-    // this._isLoaded = true;
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     this.setState({ loading: false });
+
     //Cache data back to localStorage if unmounted
     localStorage.setItem(
       "holdingsData",
