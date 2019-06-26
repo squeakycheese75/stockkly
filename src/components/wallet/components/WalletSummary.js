@@ -27,7 +27,8 @@ function priceChangeFormatter(change, movement) {
             </li>
           </>
         )}
-        <li className="details">({movement}%)</li>
+        {/* <li className="details">({movement}%)</li> */}
+        <li className="details" />
       </ul>
     </div>
   );
