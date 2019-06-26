@@ -52,18 +52,19 @@ class TransactionPage extends React.Component {
             />
           </Card.Body>
         </Card>
-        <Card key="transactionHostory">
+        {/* <Card key="transactionHostory">
           <Card.Header as="h5">
             Transaction History {this.state.pid}
           </Card.Header>
           <Card.Body>
-            <TransactionHistory
-              auth={this.auth}
-              pid={this.state.pid}
-              // transactionHistoryData={this.state.transactionHistoryData}
-            />
-          </Card.Body>
-        </Card>
+         
+          </Card.Body> 
+        </Card>*/}
+        <TransactionHistory
+          auth={this.auth}
+          pid={this.state.pid}
+          // transactionHistoryData={this.state.transactionHistoryData}
+        />
         <Toast
           onClose={handleClose}
           show={showToast}

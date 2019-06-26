@@ -3,11 +3,11 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { withRouter } from "react-router-dom";
 import "./WalletTable.css";
 
-function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
-  return fieldValue < 0
-    ? "td-column-price-down td-column-size"
-    : "td-column-price-up td-column-size";
-}
+// function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
+//   return fieldValue < 0
+//     ? "td-column-price-down td-column-size"
+//     : "td-column-price-up td-column-size";
+// }
 
 function priceFormatter(cell, row) {
   return row.spot === 1 ? (
@@ -29,29 +29,29 @@ function qtyFormatter(cell, row) {
   return cell.toFixed(2).toLocaleString();
 }
 
-function priceChangeFormatter(cell, row) {
-  return (
-    <div>
-      <ul>
-        <li className="name">
-          {cell.toFixed(2).toLocaleString()}
-          {cell > 0 ? (
-            <i className="material-icons vertical-align-middle">
-              arrow_drop_up
-            </i>
-          ) : (
-            <i className="material-icons vertical-align-middle">
-              arrow_drop_down
-            </i>
-          )}
-        </li>
-        <li className="details">
-          ({row.movement.toFixed(2).toLocaleString()}%)
-        </li>
-      </ul>
-    </div>
-  );
-}
+// function priceChangeFormatter(cell, row) {
+//   return (
+//     <div>
+//       <ul>
+//         <li className="name">
+//           {cell.toFixed(2).toLocaleString()}
+//           {cell > 0 ? (
+//             <i className="material-icons vertical-align-middle">
+//               arrow_drop_up
+//             </i>
+//           ) : (
+//             <i className="material-icons vertical-align-middle">
+//               arrow_drop_down
+//             </i>
+//           )}
+//         </li>
+//         <li className="details">
+//           ({row.movement.toFixed(2).toLocaleString()}%)
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// }
 
 function nameFormatter(cell, row) {
   return (
@@ -79,10 +79,16 @@ class WalletTable extends React.Component {
             </li>
             {row.total_change > 0 ? (
               <li className="details up">
+                <i className="material-icons vertical-align-middle">
+                  arrow_drop_up
+                </i>
                 {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
               </li>
             ) : (
               <li className="details down">
+                <i className="material-icons vertical-align-middle">
+                  arrow_drop_down
+                </i>
                 {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
               </li>
             )}
@@ -164,7 +170,7 @@ class WalletTable extends React.Component {
           >
             TOTAL
           </TableHeaderColumn>
-          <TableHeaderColumn
+          {/* <TableHeaderColumn
             width="20%"
             dataField="change"
             dataAlign="center"
@@ -174,7 +180,7 @@ class WalletTable extends React.Component {
             dataSort={true}
           >
             24HR
-          </TableHeaderColumn>
+          </TableHeaderColumn> */}
         </BootstrapTable>
       </div>
     );
