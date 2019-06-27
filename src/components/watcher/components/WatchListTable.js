@@ -61,7 +61,7 @@ function nameFormatter(cell, row) {
   return (
     <div>
       <ul>
-        <li className="name">{row.ticker.toString().toUpperCase()}</li>
+        <li className="name">{row.displayTicker}</li>
         <li className="details">{row.name}</li>
       </ul>
     </div>
