@@ -184,7 +184,7 @@ class WatchListTable extends Component {
           options={options}
         >
           <TableHeaderColumn
-            width="45%"
+            width="25%"
             dataField="ticker"
             isKey={true}
             dataSort={true}
@@ -201,6 +201,7 @@ class WatchListTable extends Component {
             dataSort={true}
             columnClassName="bstable bstable-header-bold"
             editable={false}
+            dataAlign="right"
           >
             PRICE
           </TableHeaderColumn>
@@ -209,20 +210,22 @@ class WatchListTable extends Component {
             dataField="change"
             columnClassName={columnClassNameFormat}
             dataSort={true}
+            dataAlign="right"
             dataFormat={priceChangeFormatter}
             editable={false}
           >
             CHANGE
           </TableHeaderColumn>
+          <TableHeaderColumn width="4%" />
           <TableHeaderColumn
-            width="5%"
+            width="8%"
             dataField="ticker"
             columnClassName="bstable bstable-icon"
             dataAlign="center"
             dataFormat={this.viewProductHelp.bind(this)}
           />
           <TableHeaderColumn
-            width="5%"
+            width="8%"
             dataField="ticker"
             columnClassName="bstable bstable-icon"
             dataAlign="center"

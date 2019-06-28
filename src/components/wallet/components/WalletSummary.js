@@ -4,33 +4,59 @@ import "./WalletSummary.css";
 
 const portfolioCcySymbol = "£";
 
-function priceChangeFormatter(change, movement) {
+// function priceChangeFormatter(change, movement) {
+//   return (
+//     <div>
+//       <ul>
+//         {change > 0 ? (
+//           <>
+//             <li className="name up">
+//               <i className="material-icons vertical-align-middle up">
+//                 arrow_drop_up
+//               </i>
+//               {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+//             </li>
+//           </>
+//         ) : (
+//           <>
+//             <li className="name down2">
+//               <i className="material-icons vertical-align-middle down">
+//                 arrow_drop_down
+//               </i>
+//               {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+//             </li>
+//           </>
+//         )}
+//         {/* <li className="details">({movement}%)</li> */}
+//         {/* <li className="details" /> */}
+//       </ul>
+//     </div>
+//   );
+// }
+
+function priceChangeFormatter2(change) {
   return (
-    <div>
-      <ul>
-        {change > 0 ? (
-          <>
-            <li className="name up">
-              +{change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-              <i className="material-icons vertical-align-middle up">
-                arrow_drop_up
-              </i>
-            </li>
-          </>
-        ) : (
-          <>
-            <li className="name down">
-              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}_
-              <i className="material-icons vertical-align-middle down">
-                arrow_drop_down
-              </i>
-            </li>
-          </>
-        )}
-        {/* <li className="details">({movement}%)</li> */}
-        <li className="details" />
-      </ul>
-    </div>
+    <>
+      {change >= 0 ? (
+        <>
+          <div className="up2">
+            <i className="material-icons vertical-align-middle up2">
+              arrow_drop_up
+            </i>
+            {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="down2">
+            <i className="material-icons vertical-align-middle down2">
+              arrow_drop_down
+            </i>
+            {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </div>
+        </>
+      )}
+    </>
   );
 }
 
@@ -57,9 +83,7 @@ class WalletSummary extends React.Component {
               <tbody>
                 <tr>
                   <td>{totalFormatter(sum(data, "total"))}</td>
-                  <td>
-                    {priceChangeFormatter(sum(data, "total_change"), 1.15)}
-                  </td>
+                  <td>{priceChangeFormatter2(sum(data, "total_change"))}</td>
                 </tr>
               </tbody>
             </table>
