@@ -43,7 +43,9 @@ function priceChangeFormatter2(change) {
             <i className="material-icons vertical-align-middle up2">
               arrow_drop_up
             </i>
-            {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            {Math.abs(change).toLocaleString(undefined, {
+              minimumFractionDigits: 2
+            })}
           </div>
         </>
       ) : (
