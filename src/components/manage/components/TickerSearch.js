@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-// import DropdownList from "react-widgets/lib/DropdownList";
-// import { DropdownList } from "react-widgets";
-// import SearchNew from "./SearchNew";
 import { DropdownList } from "react-widgets";
 import "./SearchNew.css";
 
