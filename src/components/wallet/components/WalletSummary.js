@@ -2,8 +2,6 @@ import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import "./WalletSummary.css";
 
-// const portfolioCcySymbol = "£";
-
 function sum(data, key) {
   return data.reduce((a, b) => a + (b[key] || 0), 0);
 }
@@ -13,8 +11,8 @@ function priceChangeFormatter(change) {
     <>
       {change >= 0 ? (
         <>
-          <div className="up2">
-            <i className="material-icons vertical-align-middle up2">
+          <div className="up_header pl">
+            <i className="material-icons vertical-align-middle up_header">
               arrow_drop_up
             </i>
             {change.toFixed(2).toLocaleString(undefined, {
@@ -24,8 +22,8 @@ function priceChangeFormatter(change) {
         </>
       ) : (
         <>
-          <div className="down2">
-            <i className="material-icons vertical-align-middle down2">
+          <div className="down_header pl">
+            <i className="material-icons vertical-align-middle down_header">
               arrow_drop_down
             </i>
             {Math.abs(change)
@@ -46,8 +44,12 @@ class WalletSummary extends React.Component {
 
     function totalFormatter(cell) {
       return (
-        `${settings.symbol}` +
-        cell.toLocaleString(undefined, { minimumFractionDigits: 2 })
+        // `${settings.symbol}` +
+        // cell.toFixed(2).toLocaleString(undefined, { minimumFractionDigits: 2 })
+        <>
+          {settings.symbol}
+          {cell.toFixed(2).toLocaleString()}
+        </>
       );
     }
 

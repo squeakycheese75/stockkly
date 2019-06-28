@@ -11,7 +11,11 @@ import "./WalletTable.css";
 
 function priceFormatter(cell, row) {
   return row.spot === 1 ? (
-    `${row.symbol}` + cell.toFixed(2).toLocaleString()
+    <div className="name">
+      {/* `${row.symbol}` + cell.toFixed(2).toLocaleString() */}
+      {row.symbol}
+      {cell.toFixed(2).toLocaleString()}
+    </div>
   ) : (
     <div>
       <ul>
