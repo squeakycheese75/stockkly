@@ -17,7 +17,7 @@ function priceChangeFormatter(change) {
             <i className="material-icons vertical-align-middle up2">
               arrow_drop_up
             </i>
-            {change.toLocaleString(undefined, {
+            {change.toFixed(2).toLocaleString(undefined, {
               minimumFractionDigits: 2
             })}
           </div>
@@ -28,9 +28,11 @@ function priceChangeFormatter(change) {
             <i className="material-icons vertical-align-middle down2">
               arrow_drop_down
             </i>
-            {Math.abs(change).toLocaleString(undefined, {
-              minimumFractionDigits: 2
-            })}
+            {Math.abs(change)
+              .toFixed(2)
+              .toLocaleString(undefined, {
+                minimumFractionDigits: 2
+              })}
           </div>
         </>
       )}
