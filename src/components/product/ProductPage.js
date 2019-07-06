@@ -89,6 +89,7 @@ class ProductForm extends React.Component {
           appSettings={this.state.appSettings}
           auth={this.auth}
           productId={this.state.pid}
+          userProfile={this.userProfile}
         />
 
         <ProductInfo productId={this.state.pid} />

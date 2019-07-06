@@ -12,6 +12,7 @@ import ProductForm from "./components/product/ProductPage";
 import TransactionsPage from "./components/transactions/TransactionsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
+import ProfilePage from "./components/profile/ProfilePage";
 
 class App extends Component {
   constructor(props) {
@@ -188,6 +189,22 @@ class App extends Component {
     );
   };
 
+  updateAppSettings = updatedAppSettings => {
+    if (updatedAppSettings) {
+      this.setState(
+        prevState => ({
+          appSettings: updatedAppSettings
+        }),
+        () => {
+          //Reload data in callback.
+          if (this.auth.isAuthenticated()) {
+            this.updateProfile();
+          }
+        }
+      );
+    }
+  };
+
   render() {
     const isLoggedIn = this.auth.isAuthenticated();
 
@@ -260,6 +277,19 @@ class App extends Component {
               path="/transactions/:pid"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
             />
+
+            <Route
+              path="/profile"
+              render={props => (
+                <ProfilePage
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  updateProfile={this.updateAppSettings}
+                  {...props}
+                />
+              )}
+            />
+
             <Route
               path="/wallet"
               render={props => (
