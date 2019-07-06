@@ -9,11 +9,11 @@ class SearchNew extends Component {
     value: "Select:"
   };
 
-  onTargetSelect = event => {
-    //event.preventDefault();
-    this.setState({ selectedValue: event });
-    this.props.filterExchanges(event);
-  };
+  // onTargetSelect = event => {
+  //   //event.preventDefault();
+  //   this.setState({ selectedValue: event });
+  //   this.props.filterExchanges(event);
+  // };
 
   render() {
     // eslint-disable-next-line

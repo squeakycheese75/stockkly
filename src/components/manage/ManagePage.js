@@ -82,7 +82,7 @@ class ManagePage extends React.Component {
   }
 
   filteredTickers = input => {
-    // console.log("In ManagePage.removeTicker with ", event);
+    console.log("In ManagePage.removeTicker with ", input);
     // const fProducts = this.state.products.filter(h => h.sector === input);
     // const filterSUbscribedTickers = filteredTickers.filter(
     //   id => !this.state.subscribedTickers.includes(id.ticker)
