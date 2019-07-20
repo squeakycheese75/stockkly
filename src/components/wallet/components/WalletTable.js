@@ -150,7 +150,7 @@ class WalletTable extends React.Component {
             dataSort={true}
             dataFormat={qtyFormatter}
           >
-            HELD
+            QTY
           </TableHeaderColumn>
           <TableHeaderColumn
             width="25%"

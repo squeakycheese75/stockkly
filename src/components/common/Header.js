@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styles from "./Header.css";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import logo from "./icon_256.png";
+import logo from "./icon_48.png";
+// import logo from "../../../public/images/icon_48";
 
 class Header extends Component {
   render() {
