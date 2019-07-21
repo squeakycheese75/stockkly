@@ -9,26 +9,15 @@ const AboutPage = () => {
       <Card border="dark">
         <Card.Header as="h5">What's new in version 0.2</Card.Header>
         <Card.Body>
-          <ul>
-            <li>
-              Added new Wallet function - including support for transactions and
-              wealth tracking.
-            </li>
-            <li>
-              Streamlined refreshing issues. Now remembers logged in users for 7
-              days!
-            </li>
-            <li>Lots of backend squirelling to make things go smoother.</li>
-            <li>Privacy improvements</li>
-          </ul>
-          {/* <ul>
-            <li>Added new Wallet function.</li>
-            <li>Added support for transactions and tracking.</li>
-            <li>
-              Streamlined refreshing issues. Now remember logged in users for 7
-              days!
-            </li>
-          </ul> */}
+          <p>
+            Added new Wallet function - including support for transactions and
+            wealth tracking
+          </p>
+          <p>
+            Streamlined refreshing issues. Now remembers logged in users for 7
+            days!
+          </p>
+          <p>Lots of backend squirelling to make things go smoother.</p>
         </Card.Body>
       </Card>
       <Card border="dark">
