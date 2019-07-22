@@ -185,7 +185,10 @@ class ProductSummary extends React.Component {
                   <></>
                 )} */}
                 <tr>
-                  <td>{this.state.pid}:</td>
+                  <td>
+                    {this.state.pid}
+                    {" - "}
+                  </td>
                   <td>{this.state.productSummary.name}</td>
                 </tr>
                 <tr />

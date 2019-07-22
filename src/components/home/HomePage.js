@@ -15,7 +15,7 @@ class HomePage extends Component {
           <h4>Welcome to Stockkly</h4>
 
           <p>
-            A simple, mobile friendly site for keeping track of all your
+            A simple, mobile-friendly site for keeping track of all your
             favourite prices.
           </p>
           <p>

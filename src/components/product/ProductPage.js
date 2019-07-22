@@ -78,6 +78,12 @@ class ProductForm extends React.Component {
     this.setState({ showToast: true });
   }
 
+  handleRemoveFromWatchlist() {
+    console.log("handleRemoveFromWatchlist");
+    // this.props.addTickerToWatchList(this.state.pid);
+    // this.setState({ showToast: true });
+  }
+
   render() {
     const { showToast } = this.state;
     // if (!this._isLoaded) return <Loading />;
@@ -140,18 +146,22 @@ class ProductForm extends React.Component {
               <Button className="btn">Add Transaction</Button>
             </Link>{" "}
             {this.state.watchList.includes(this.state.pid) ? (
-              <></>
-            ) : (
               <Button
                 className="btn"
-                variant="outline-info"
+                variant="danger"
+                onClick={this.handleRemove}
+              >
+                Remove from Watchlist
+              </Button>
+            ) : (
+              <Button
+                // className="btn"
+                variant="primary"
                 onClick={this.handleClick}
               >
                 Add to Watchlist
               </Button>
             )}
-            {/* </Card.Body>
-            </Card> */}
           </>
         ) : (
           <Card>
@@ -162,11 +172,17 @@ class ProductForm extends React.Component {
                 to you watch list!
               </Card.Text>
               {this.state.watchList.includes(this.state.pid) ? (
-                <></>
+                <Button
+                  // className="btn"
+                  variant="danger"
+                  onClick={this.handleRemove}
+                >
+                  Remove from Watchlist
+                </Button>
               ) : (
                 <Button
                   className="btn"
-                  variant="outline-info"
+                  variant="primary"
                   onClick={this.handleClick}
                 >
                   Add to Watchlist
