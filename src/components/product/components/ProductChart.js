@@ -47,8 +47,8 @@ class ProductChart extends React.Component {
       .then(response => response.json())
       .then(response => {
         this.setState({
-          y: Object.values(JSON.parse(response.message)),
-          x: Object.keys(JSON.parse(response.message))
+          y: Object.values(JSON.parse(response)),
+          x: Object.keys(JSON.parse(response))
         });
       })
       .catch(error => {

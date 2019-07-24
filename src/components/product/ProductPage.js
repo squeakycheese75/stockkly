@@ -1,5 +1,5 @@
 import React from "react";
-// import ProductChart from "./components/ProductChart";
+import ProductChart from "./components/ProductChart";
 import TransactionHistory from "../transactions/components/TransactionHistory";
 import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -100,7 +100,7 @@ class ProductForm extends React.Component {
 
         <ProductInfo productId={this.state.pid} />
 
-        {/* <Card border="info" key="productChart">
+        <Card border="info" key="productChart">
           <Card.Header as="h5" className="text-dark">
             Chart
           </Card.Header>
@@ -109,11 +109,9 @@ class ProductForm extends React.Component {
             {this.state.pid} Open 6m
           </Card.Subtitle>
           <Card.Body className="text-secondary">
-            <Collapse in={this.state.open}>
-              <ProductChart productId={this.state.pid} />
-            </Collapse>
+            <ProductChart productId={this.state.pid} />
           </Card.Body>
-        </Card> */}
+        </Card>
         <Toast
           onClose={handleClose}
           show={showToast}

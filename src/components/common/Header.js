@@ -59,7 +59,7 @@ class Header extends Component {
               {isAuthenticated() && (
                 <LinkContainer to="profile">
                   <Nav.Link>
-                    <Button>Profile</Button>
+                    <Button size="sm">Profile</Button>
                   </Nav.Link>
                 </LinkContainer>
               )}
