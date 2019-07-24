@@ -97,9 +97,9 @@ class WatchListPage extends React.Component {
     }
   }
 
-  removeTicker = event => {
-    this.props.removeTicker(event);
-  };
+  // removeTicker = event => {
+  //   this.props.removeTicker(event);
+  // };
 
   render() {
     function isEmpty(obj) {
@@ -123,7 +123,7 @@ class WatchListPage extends React.Component {
         ) : (
           <WatchListTable
             data={this.state.watchData}
-            onSubmit={this.removeTicker}
+            // onSubmit={this.removeTicker}
             settings={this.state.appSettings}
           />
         )}

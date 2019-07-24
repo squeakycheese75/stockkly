@@ -1,5 +1,5 @@
 import React from "react";
-import ProductChart from "./components/ProductChart";
+// import ProductChart from "./components/ProductChart";
 import TransactionHistory from "../transactions/components/TransactionHistory";
 import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -19,10 +19,12 @@ class ProductForm extends React.Component {
       productHoldings: {},
       productSummary: {},
       watchList: this.props.watchList,
-      showToast: false
+      showToast: false,
+      toastMsg: "Added"
     };
     this.auth = this.props.auth;
     this.handleClick = this.handleClick.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   async loadProductSummary() {
@@ -75,13 +77,18 @@ class ProductForm extends React.Component {
   handleClick() {
     // console.log("handle click pressed");
     this.props.addTickerToWatchList(this.state.pid);
-    this.setState({ showToast: true });
+    this.setState({ toastMsg: "Added" }, () => {
+      this.setState({ showToast: true });
+    });
   }
 
-  handleRemoveFromWatchlist() {
+  handleRemove() {
     console.log("handleRemoveFromWatchlist");
-    // this.props.addTickerToWatchList(this.state.pid);
-    // this.setState({ showToast: true });
+    this.props.removeTickerFromWatchList(this.state.pid);
+    // this.props.removeTicker(event);
+    this.setState({ toastMsg: "Removed" }, () => {
+      this.setState({ showToast: true });
+    });
   }
 
   render() {
@@ -100,7 +107,7 @@ class ProductForm extends React.Component {
 
         <ProductInfo productId={this.state.pid} />
 
-        <Card border="info" key="productChart">
+        {/* <Card border="info" key="productChart">
           <Card.Header as="h5" className="text-dark">
             Chart
           </Card.Header>
@@ -111,7 +118,7 @@ class ProductForm extends React.Component {
           <Card.Body className="text-secondary">
             <ProductChart productId={this.state.pid} />
           </Card.Body>
-        </Card>
+        </Card> */}
         <Toast
           onClose={handleClose}
           show={showToast}
@@ -131,7 +138,9 @@ class ProductForm extends React.Component {
             />
             <strong className="mr-auto">Stockkly</strong>
           </Toast.Header>
-          <Toast.Body>Added {this.state.pid} to watchList!</Toast.Body>
+          <Toast.Body>
+            {this.state.toastMsg} {this.state.pid} to watchList!
+          </Toast.Body>
         </Toast>
 
         {this.auth.isAuthenticated() ? (

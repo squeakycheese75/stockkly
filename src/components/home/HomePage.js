@@ -15,8 +15,7 @@ class HomePage extends Component {
           <h4>Welcome to Stockkly</h4>
 
           <p>
-            A simple, mobile-friendly site for keeping track of all your
-            favourite prices.
+            A simple, mobile-friendly, wealth tracker for the modern hodler.
           </p>
           <p>
             <LinkContainer to="/manage">
@@ -52,8 +51,8 @@ class HomePage extends Component {
             historical charting
           </p>
           <b>
-            * If you want to have your favourite prices saved for next time
-            you'll need to be logged in.{" "}
+            * If you want to have your start tracking your wealth then you'll
+            need to be logged in.{" "}
           </b>
         </Jumbotron>
       </div>
