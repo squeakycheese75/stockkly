@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { ButtonToolbar, OverlayTrigger, Tooltip, Toast } from "react-bootstrap";
 import { withRouter, Link } from "react-router-dom";
+import { Sparklines, SparklinesLine } from "react-sparklines";
 import "./WatchListTable.css";
 
 function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
@@ -64,6 +65,27 @@ function nameFormatter(cell, row) {
         <li className="name">{row.displayTicker}</li>
         <li className="details">{row.name}</li>
       </ul>
+    </div>
+  );
+}
+
+function trendFormatter(cell, row) {
+  return (
+    <div>
+      <Sparklines
+        data={cell}
+        svgWidth={75}
+        svgHeight={18}
+        scgMargin={5}
+        // color="blue"
+
+        // style={{ fill: "none" }}
+      >
+        <SparklinesLine
+          color="blue"
+          style={{ strokeWidth: 5, stroke: "#428bca", fill: "none" }}
+        />
+      </Sparklines>
     </div>
   );
 }
@@ -148,20 +170,35 @@ class WatchListTable extends Component {
 
   render() {
     // const { data, history } = this.props;
-    const { data } = this.props;
+    const { data, history } = this.props;
     const { showToast } = this.state;
+    // const { data, settings, history } = this.props;
+
     // const { pid } = this.state;
 
     const handleClose = () => this.setState({ showToast: false });
 
     const options = {
-      // onRowClick: function(row) {
-      //   history.push(`/product/${row.id}`);
-      // },
-      // onRowClick: this.removeButton.bind(this),
-      // onRowClick: this.onSelectedRow.bind(this),
+      onRowClick: function(row) {
+        history.push(`/product/${row.ticker}`);
+      },
       noDataText: "Loading..."
     };
+    const selectRowProp = {
+      hideSelectColumn: true,
+      mode: "checkbox",
+      clickToSelect: true,
+      bgColor: "rgb(178,214,225)"
+    };
+
+    // const options = {
+    //   // onRowClick: function(row) {
+    //   //   history.push(`/product/${row.id}`);
+    //   // },
+    //   // onRowClick: this.removeButton.bind(this),
+    //   // onRowClick: this.onSelectedRow.bind(this),
+    //   noDataText: "Loading..."
+    // };
     // const selectRowProp = {
     //   hideSelectColumn: true,
     //   mode: "checkbox",
@@ -180,11 +217,11 @@ class WatchListTable extends Component {
           bordered
           size="sm"
           version="4"
-          // selectRow={selectRowProp}
+          selectRow={selectRowProp}
           options={options}
         >
           <TableHeaderColumn
-            width="25%"
+            width="40%"
             dataField="ticker"
             isKey={true}
             dataSort={true}
@@ -195,7 +232,7 @@ class WatchListTable extends Component {
             NAME
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="25%"
+            width="20%"
             dataField="price"
             dataFormat={priceFormatter}
             dataSort={true}
@@ -206,7 +243,7 @@ class WatchListTable extends Component {
             PRICE
           </TableHeaderColumn>
           <TableHeaderColumn
-            width="25%"
+            width="20%"
             dataField="change"
             columnClassName={columnClassNameFormat}
             dataSort={true}
@@ -216,7 +253,18 @@ class WatchListTable extends Component {
           >
             CHANGE
           </TableHeaderColumn>
-          <TableHeaderColumn width="4%" />
+          <TableHeaderColumn
+            width="20%"
+            dataField="trend"
+            // columnClassName={trendFormatter}
+            // dataSort={true}
+            dataAlign="center"
+            dataFormat={trendFormatter}
+            // editable={false}
+          >
+            TREND
+          </TableHeaderColumn>
+          {/* <TableHeaderColumn width="4%" />
           <TableHeaderColumn
             width="8%"
             dataField="ticker"
@@ -231,7 +279,7 @@ class WatchListTable extends Component {
             dataAlign="center"
             dataFormat={this.removeButton.bind(this)}
             editable={false}
-          />
+          /> */}
         </BootstrapTable>
         <Toast
           onClose={handleClose}

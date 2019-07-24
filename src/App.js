@@ -172,16 +172,17 @@ class App extends Component {
     }
   };
 
-  removeTicker = index => {
+  removeTicker = input => {
+    console.log("Removed ticker from watchlist", input);
     this.setState(
       prevState => ({
         watchList: prevState.watchList.filter(
-          ticker => ticker.toLowerCase() !== index.toLowerCase()
+          ticker => ticker.toLowerCase() !== input.toLowerCase()
         )
       }),
       () => {
         //Need to remove from the backend
-        console.log("Removed ticker from watchlist" + index);
+        console.log("Removed ticker from watchlist" + input);
         if (this.auth.isAuthenticated()) {
           this.updateProfile();
         }
@@ -268,6 +269,7 @@ class App extends Component {
                   auth={this.auth}
                   appSettings={this.state.appSettings}
                   addTickerToWatchList={this.addTickerToWatchList}
+                  removeTickerFromWatchList={this.removeTicker}
                   watchList={this.state.watchList}
                   {...props}
                 />
@@ -307,7 +309,7 @@ class App extends Component {
                   auth={this.auth}
                   appSettings={this.state.appSettings}
                   watchList={this.state.watchList}
-                  removeTicker={this.removeTicker}
+                  // removeTicker={this.removeTicker}
                   onReload={this.reload}
                   {...props}
                 />

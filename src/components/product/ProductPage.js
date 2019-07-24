@@ -19,10 +19,12 @@ class ProductForm extends React.Component {
       productHoldings: {},
       productSummary: {},
       watchList: this.props.watchList,
-      showToast: false
+      showToast: false,
+      toastMsg: "Added"
     };
     this.auth = this.props.auth;
     this.handleClick = this.handleClick.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   async loadProductSummary() {
@@ -75,7 +77,18 @@ class ProductForm extends React.Component {
   handleClick() {
     // console.log("handle click pressed");
     this.props.addTickerToWatchList(this.state.pid);
-    this.setState({ showToast: true });
+    this.setState({ toastMsg: "Added" }, () => {
+      this.setState({ showToast: true });
+    });
+  }
+
+  handleRemove() {
+    console.log("handleRemoveFromWatchlist");
+    this.props.removeTickerFromWatchList(this.state.pid);
+    // this.props.removeTicker(event);
+    this.setState({ toastMsg: "Removed" }, () => {
+      this.setState({ showToast: true });
+    });
   }
 
   render() {
@@ -103,9 +116,7 @@ class ProductForm extends React.Component {
             {this.state.pid} Open 6m
           </Card.Subtitle>
           <Card.Body className="text-secondary">
-            <Collapse in={this.state.open}>
-              <ProductChart productId={this.state.pid} />
-            </Collapse>
+            <ProductChart productId={this.state.pid} />
           </Card.Body>
         </Card> */}
         <Toast
@@ -127,7 +138,9 @@ class ProductForm extends React.Component {
             />
             <strong className="mr-auto">Stockkly</strong>
           </Toast.Header>
-          <Toast.Body>Added {this.state.pid} to watchList!</Toast.Body>
+          <Toast.Body>
+            {this.state.toastMsg} {this.state.pid} to watchList!
+          </Toast.Body>
         </Toast>
 
         {this.auth.isAuthenticated() ? (
@@ -140,18 +153,22 @@ class ProductForm extends React.Component {
               <Button className="btn">Add Transaction</Button>
             </Link>{" "}
             {this.state.watchList.includes(this.state.pid) ? (
-              <></>
-            ) : (
               <Button
                 className="btn"
-                variant="outline-info"
+                variant="danger"
+                onClick={this.handleRemove}
+              >
+                Remove from Watchlist
+              </Button>
+            ) : (
+              <Button
+                // className="btn"
+                variant="primary"
                 onClick={this.handleClick}
               >
                 Add to Watchlist
               </Button>
             )}
-            {/* </Card.Body>
-            </Card> */}
           </>
         ) : (
           <Card>
@@ -162,11 +179,17 @@ class ProductForm extends React.Component {
                 to you watch list!
               </Card.Text>
               {this.state.watchList.includes(this.state.pid) ? (
-                <></>
+                <Button
+                  // className="btn"
+                  variant="danger"
+                  onClick={this.handleRemove}
+                >
+                  Remove from Watchlist
+                </Button>
               ) : (
                 <Button
                   className="btn"
-                  variant="outline-info"
+                  variant="primary"
                   onClick={this.handleClick}
                 >
                   Add to Watchlist
