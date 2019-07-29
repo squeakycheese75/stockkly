@@ -10,8 +10,10 @@ class ProductChart extends React.Component {
     super(props);
     this.state = {
       pid: this.props.productId,
-      x: ["2018-06-30", "2018-07-31", "2018-08-31", "2019-04-30"],
-      y: [22.3, 22.4, 22.1, 20.9],
+      // x: ["2018-06-30", "2018-07-31", "2018-08-31", "2019-04-30"],
+      // y: [22.3, 22.4, 22.1, 20.9],
+      x: [],
+      y: [],
       start_date: "2000-01-01",
       end_date: "2001-02-01",
       message: ""
@@ -22,7 +24,7 @@ class ProductChart extends React.Component {
     console.log("Loading data form chart from api");
     var uri =
       process.env["REACT_APP_PRICES_API"] +
-      "/api/product/prices/historical/" +
+      "/api/products/prices/historical/" +
       this.state.pid;
     // console.log(uri);
     var url = new URL(uri),
@@ -47,8 +49,8 @@ class ProductChart extends React.Component {
       .then(response => response.json())
       .then(response => {
         this.setState({
-          y: Object.values(JSON.parse(response)),
-          x: Object.keys(JSON.parse(response))
+          y: Object.values(JSON.parse(response.price)),
+          x: Object.keys(JSON.parse(response.price))
         });
       })
       .catch(error => {
@@ -59,7 +61,7 @@ class ProductChart extends React.Component {
   }
 
   componentDidMount() {
-    // this.loadProductChartData();
+    this.loadProductChartData();
   }
 
   render() {

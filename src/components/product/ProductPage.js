@@ -1,5 +1,5 @@
 import React from "react";
-// import ProductChart from "./components/ProductChart";
+import ProductChart from "./components/ProductChart";
 import TransactionHistory from "../transactions/components/TransactionHistory";
 import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -119,6 +119,7 @@ class ProductForm extends React.Component {
             <ProductChart productId={this.state.pid} />
           </Card.Body>
         </Card> */}
+        <ProductChart productId={this.state.pid} />
         <Toast
           onClose={handleClose}
           show={showToast}
