@@ -1,13 +1,14 @@
 // import React from "react";
 import React, { Component } from "react";
-import { Jumbotron, Button } from "react-bootstrap";
+import { Jumbotron, Button, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import styles from "../common/Header.css";
 
 // const HomePage = () => {
 class HomePage extends Component {
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, login, logout } = this.props.auth;
+    // const { isAuthenticated } = this.props.auth;
 
     return (
       <div style={styles}>
@@ -37,9 +38,20 @@ class HomePage extends Component {
             ) : (
               <>
                 Or,{" "}
-                <LinkContainer to="login">
+                {/* <LinkContainer to="login">
                   <Button size="sm">Login</Button>
-                </LinkContainer>{" "}
+                </LinkContainer>{" "} */}
+                <LinkContainer to="login">
+                  <Nav.Link>
+                    <Button
+                      className={styles}
+                      variant="outline-light"
+                      onClick={isAuthenticated() ? logout : login}
+                    >
+                      {isAuthenticated() ? "Log Out" : "Log In"}
+                    </Button>
+                  </Nav.Link>
+                </LinkContainer>
                 build a wallet
               </>
             )}{" "}

@@ -1,54 +1,74 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import "./WalletSummary.css";
+// import t from "typy";
 
 function sum(data, key) {
   return data.reduce((a, b) => a + (b[key] || 0), 0);
 }
 
-function priceChangeFormatter(change) {
-  return (
-    <>
-      {change >= 0 ? (
-        <>
-          <div className="up_header pl">
-            <i className="material-icons vertical-align-middle up_header">
-              arrow_drop_up
-            </i>
-            {change.toFixed(2).toLocaleString(undefined, {
-              minimumFractionDigits: 2
-            })}
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="down_header pl">
-            <i className="material-icons vertical-align-middle down_header">
-              arrow_drop_down
-            </i>
-            {Math.abs(change)
-              .toFixed(2)
-              .toLocaleString(undefined, {
-                minimumFractionDigits: 2
-              })}
-          </div>
-        </>
-      )}
-    </>
-  );
-}
-
 class WalletSummary extends React.Component {
   render() {
-    const { data, settings } = this.props;
+    const { data, appSettings } = this.props;
 
-    function totalFormatter(cell) {
+    function totalFormatter(total) {
       return (
-        // `${settings.symbol}` +
-        // cell.toFixed(2).toLocaleString(undefined, { minimumFractionDigits: 2 })
         <>
-          {settings.symbol}
-          {cell.toFixed(2).toLocaleString()}
+          {parseFloat(total).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            currency: appSettings.currency,
+            style: "currency"
+          })}
+        </>
+      );
+    }
+
+    function priceChangeFormatter(change) {
+      return (
+        <>
+          {change >= 0 ? (
+            <>
+              <div className="up_header pl">
+                <i className="material-icons vertical-align-middle up_header">
+                  arrow_drop_up
+                </i>
+                {parseFloat(change).toLocaleString("en-IN", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
+              </div>
+            </>
+          ) : (
+            <>
+              {change === 0 ? (
+                <>
+                  {" "}
+                  <div className="down_header pl">
+                    <i className="material-icons vertical-align-middle flat_header">
+                      arrow_drop_down
+                    </i>
+                    {parseFloat(Math.abs(change)).toLocaleString("en-IN", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="down_header pl">
+                    <i className="material-icons vertical-align-middle down_header">
+                      arrow_drop_down
+                    </i>
+                    {parseFloat(Math.abs(change)).toLocaleString("en-IN", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })}
+                  </div>
+                </>
+              )}
+            </>
+          )}
         </>
       );
     }

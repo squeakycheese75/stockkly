@@ -9,3 +9,31 @@
     background-clip: padding-box;
     border-bottom: $toast-border-width solid $toast-header-border-color; */
 }
+
+.card {
+  position: relative;
+  display: block;
+  /* width: 320px; */
+  /* height: 160px; */
+  border-radius: 10px;
+  /* background: url('https://images.pexels.com/photos/2613349/pexels-photo-2613349.jpeg') 
+              no-repeat 
+              center center/cover; */
+  /* These images can be injected with some JS */
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  width: 95%;
+  height: 100%;
+  top: 5%;
+  left: calc(5% / 2);
+  z-index: -1; /* Setting z-index to -1 could cause some issues. */
+  border-radius: 50px;
+  /* background: url('https://images.pexels.com/photos/2613349/pexels-photo-2613349.jpeg') 
+              no-repeat 
+              center center/cover; */
+  filter: blur(10px);
+  /* Again, images can be injected with some JS */
+}

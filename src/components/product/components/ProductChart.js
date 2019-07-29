@@ -14,6 +14,7 @@ class ProductChart extends React.Component {
       // y: [22.3, 22.4, 22.1, 20.9],
       x: [],
       y: [],
+      d: {},
       start_date: "2000-01-01",
       end_date: "2001-02-01",
       message: ""
@@ -27,16 +28,16 @@ class ProductChart extends React.Component {
       "/api/products/prices/historical/" +
       this.state.pid;
     // console.log(uri);
-    var url = new URL(uri),
-      params = {
-        start_date: this.state.start_date,
-        end_date: this.state.end_date
-      };
-    Object.keys(params).forEach(key =>
-      url.searchParams.append(key, params[key])
-    );
+    // var url = new URL(uri),
+    //   params = {
+    //     start_date: this.state.start_date,
+    //     end_date: this.state.end_date
+    //   };
+    // Object.keys(params).forEach(key =>
+    //   url.searchParams.append(key, params[key])
+    // );
 
-    fetch(url, {
+    fetch(uri, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -47,10 +48,14 @@ class ProductChart extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(response => response.json())
+      // .then(response => console.log(response))
       .then(response => {
         this.setState({
-          y: Object.values(JSON.parse(response.price)),
-          x: Object.keys(JSON.parse(response.price))
+          // y: Object.values(JSON.parse(response)),
+          // x: Object.keys(JSON.parse(response)),
+          y: Object.values(response),
+          x: Object.keys(response),
+          d: response
         });
       })
       .catch(error => {

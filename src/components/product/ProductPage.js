@@ -1,11 +1,11 @@
 import React from "react";
-import ProductChart from "./components/ProductChart";
+// import ProductChart from "./components/ProductChart";
 import TransactionHistory from "../transactions/components/TransactionHistory";
 import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ProductInfo from "./components/ProductInfo";
+// import ProductInfo from "./components/ProductInfo";
 import ProductSummary from "./components/ProductSummary";
-// import Loading from "../common/Loading";
+import Loading from "../common/Loading";
 import "./ProductPage.css";
 
 class ProductForm extends React.Component {
@@ -20,14 +20,15 @@ class ProductForm extends React.Component {
       productSummary: {},
       watchList: this.props.watchList,
       showToast: false,
-      toastMsg: "Added"
+      toastMsg: "Added",
+      loading: true
     };
     this.auth = this.props.auth;
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  async loadProductSummary() {
+  loadProductSummary() {
     var url =
       process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     fetch(url, {
@@ -43,7 +44,8 @@ class ProductForm extends React.Component {
       .then(response => {
         if (this._isMounted) {
           this.setState({
-            productSummary: response
+            productSummary: response,
+            loading: false
           });
         }
       })
@@ -62,7 +64,7 @@ class ProductForm extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    // this._isLoaded = false;
+    this.setState({ loading: false });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -96,8 +98,10 @@ class ProductForm extends React.Component {
     // if (!this._isLoaded) return <Loading />;
     const handleClose = () => this.setState({ showToast: false });
 
+    if (this.state.loading) return <Loading />;
+
     return (
-      <div>
+      <div className="card">
         <ProductSummary
           appSettings={this.state.appSettings}
           auth={this.auth}
@@ -105,9 +109,9 @@ class ProductForm extends React.Component {
           userProfile={this.userProfile}
         />
 
-        <ProductInfo productId={this.state.pid} />
+        {/* <ProductInfo productId={this.state.pid} /> */}
 
-        {/* <Card border="info" key="productChart">
+        {/* <Card key="productChart">
           <Card.Header as="h5" className="text-dark">
             Chart
           </Card.Header>
@@ -119,7 +123,7 @@ class ProductForm extends React.Component {
             <ProductChart productId={this.state.pid} />
           </Card.Body>
         </Card> */}
-        <ProductChart productId={this.state.pid} />
+        {/* <ProductChart productId={this.state.pid} /> */}
         <Toast
           onClose={handleClose}
           show={showToast}

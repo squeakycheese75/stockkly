@@ -92,7 +92,7 @@ class WalletPage extends React.Component {
           <>
             <WalletSummary
               data={this.state.holdingsData}
-              settings={this.state.appSettings}
+              appSettings={this.state.appSettings}
             />
             <WalletTable
               data={this.state.holdingsData}
