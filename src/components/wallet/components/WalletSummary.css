@@ -23,6 +23,10 @@
   text-align: center;
 }
 
+.jumbotron {
+  padding: 2rem 0rem;
+}
+
 .up {
   color: #4c9900;
 }
@@ -47,6 +51,11 @@
 .down_header {
   color: white;
   background-color: #ff2e00;
+}
+
+.flat_header {
+  color: white;
+  background-color: black;
 }
 
 h1 {

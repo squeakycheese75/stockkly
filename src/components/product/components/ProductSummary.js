@@ -3,43 +3,45 @@ import { Jumbotron } from "react-bootstrap";
 import "./ProductSummary.css";
 import t from "typy";
 
-function priceFormatter(symbol, price) {
+function changeFormatter(change) {
   return (
-    <div>
-      <ul>
-        {price > 0 ? (
-          <>
-            <li className="price-large up">
-              {symbol}
-              {parseFloat(price).toFixed(2)}
-              <i className="material-icons vertical-align-middle up">
-                arrow_drop_up
-              </i>
-            </li>
-          </>
-        ) : (
-          <>
-            <li className="price-large down">
-              {symbol}
-              {parseFloat(price).toFixed(2)}
-              <i className="material-icons vertical-align-middle down">
-                arrow_drop_down
-              </i>
-            </li>
-          </>
-        )}
-      </ul>
-    </div>
+    <>
+      {change >= 0 ? (
+        <>
+          <div className="up_header pl">
+            <i className="material-icons vertical-align-middle up_header">
+              arrow_drop_up
+            </i>
+            {/* {change.toFixed(2).toLocaleString(undefined, {
+              minimumFractionDigits: 2
+            })} */}
+            {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="down_header pl">
+            <i className="material-icons vertical-align-middle down_header">
+              arrow_drop_down
+            </i>
+            {Math.abs(change)
+              .toFixed(2)
+              .toLocaleString(undefined, {
+                minimumFractionDigits: 2
+              })}
+          </div>
+        </>
+      )}
+    </>
   );
 }
 
-function changeFormatter(change) {
+function priceFormatter(price, symbol) {
   return (
-    <div>
-      <ul>
-        <li className="details-large">({parseFloat(change).toFixed(2)}%)</li>
-      </ul>
-    </div>
+    <>
+      {symbol}
+      {price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+    </>
   );
 }
 
@@ -179,24 +181,33 @@ class ProductSummary extends React.Component {
           <h1 className="text-center">
             <table align="center">
               <tbody>
-                {/* {!isEmpty(this.state.productHoldings) ? (
-                     <></>
-                ) : (
-                  <></>
-                )} */}
                 <tr>
-                  <td>
+                  <td colSpan="2" className="name-large">
                     {this.state.pid}
-                    {" - "}
                   </td>
-                  <td>{this.state.productSummary.name}</td>
+                </tr>
+                <tr>
+                  <td colSpan="2" className="details-med">
+                    {this.state.productSummary.name}
+                  </td>
                 </tr>
                 <tr />
                 <tr>
-                  <td>
+                  {/* <td>
                     {priceFormatter(symbol, this.state.productPrice.price)}
                   </td>
-                  <td>{changeFormatter(this.state.productPrice.change)}</td>
+                  <td>{changeFormatter(this.state.productPrice.change)}</td> */}
+                  <td>
+                    {priceFormatter(
+                      parseFloat(this.state.productPrice.price),
+                      symbol
+                    )}
+                  </td>
+                  <td>
+                    {changeFormatter(
+                      parseFloat(this.state.productPrice.change)
+                    )}
+                  </td>
                 </tr>
               </tbody>
             </table>

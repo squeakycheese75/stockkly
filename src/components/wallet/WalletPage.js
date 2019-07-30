@@ -80,7 +80,7 @@ class WalletPage extends React.Component {
     if (this.state.loading) return <Loading />;
 
     return (
-      <div>
+      <div className="card">
         {this.state.holdingsData === undefined ? (
           <>
             <Alert key="empty" variant="secondary" as="h5">
@@ -92,18 +92,22 @@ class WalletPage extends React.Component {
           <>
             <WalletSummary
               data={this.state.holdingsData}
-              settings={this.state.appSettings}
+              appSettings={this.state.appSettings}
             />
             <WalletTable
               data={this.state.holdingsData}
-              settings={this.state.appSettings}
+              appSettings={this.state.appSettings}
             />
           </>
         ) : (
           <>
             <Alert key="empty" variant="secondary" as="h5">
               <Alert.Heading>Portfolio is empty!</Alert.Heading>
-              <p>Go and find stuff to add</p>
+              <p>
+                To add items to your portfolio, simply "Find" the asset you want
+                to track and then use the "Add Transaction" button. Fill in the
+                transaction details and then we'll do the rest!
+              </p>
             </Alert>
           </>
         )}
