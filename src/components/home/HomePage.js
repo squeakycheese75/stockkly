@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Jumbotron, Button, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import styles from "../common/Header.css";
+// import styles from "../common/Header.css";
 
 // const HomePage = () => {
 class HomePage extends Component {
@@ -11,7 +11,7 @@ class HomePage extends Component {
     // const { isAuthenticated } = this.props.auth;
 
     return (
-      <div style={styles}>
+      <div>
         <Jumbotron>
           <h4>Welcome to Stockkly</h4>
 
@@ -44,8 +44,8 @@ class HomePage extends Component {
                 <LinkContainer to="login">
                   <Nav.Link>
                     <Button
-                      className={styles}
-                      variant="outline-light"
+                      // className={styles}
+                      size="sm"
                       onClick={isAuthenticated() ? logout : login}
                     >
                       {isAuthenticated() ? "Log Out" : "Log In"}

@@ -80,7 +80,7 @@ class WalletPage extends React.Component {
     if (this.state.loading) return <Loading />;
 
     return (
-      <div>
+      <div className="card">
         {this.state.holdingsData === undefined ? (
           <>
             <Alert key="empty" variant="secondary" as="h5">

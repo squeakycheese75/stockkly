@@ -30,7 +30,14 @@ function priceFormatter(cell, row) {
 }
 
 function qtyFormatter(cell, row) {
-  return cell.toFixed(2).toLocaleString();
+  return (
+    <>
+      {cell.toLocaleString("en-IN", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      })}
+    </>
+  );
 }
 
 // function priceChangeFormatter(cell, row) {
@@ -122,9 +129,11 @@ class WalletTable extends React.Component {
         <BootstrapTable
           data={data}
           striped
-          hover
+          // hover
+          // bordered
           condensed
-          bordered
+          hover={false}
+          bordered={false}
           size="sm"
           version="4"
           headerContainerClass="bstable"
