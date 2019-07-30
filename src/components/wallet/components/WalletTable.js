@@ -3,32 +3,6 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { withRouter } from "react-router-dom";
 import "./WalletTable.css";
 
-// function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
-//   return fieldValue < 0
-//     ? "td-column-price-down td-column-size"
-//     : "td-column-price-up td-column-size";
-// }
-
-function priceFormatter(cell, row) {
-  return row.spot === 1 ? (
-    <div className="name">
-      {/* `${row.symbol}` + cell.toFixed(2).toLocaleString() */}
-      {row.symbol}
-      {cell.toFixed(2).toLocaleString()}
-    </div>
-  ) : (
-    <div>
-      <ul>
-        <li className="name">
-          {row.symbol}
-          {cell.toFixed(2).toLocaleString()}
-        </li>
-        <li className="details">({row.spot.toFixed(2)})</li>
-      </ul>
-    </div>
-  );
-}
-
 function qtyFormatter(cell, row) {
   return (
     <>
@@ -39,30 +13,6 @@ function qtyFormatter(cell, row) {
     </>
   );
 }
-
-// function priceChangeFormatter(cell, row) {
-//   return (
-//     <div>
-//       <ul>
-//         <li className="name">
-//           {cell.toFixed(2).toLocaleString()}
-//           {cell > 0 ? (
-//             <i className="material-icons vertical-align-middle">
-//               arrow_drop_up
-//             </i>
-//           ) : (
-//             <i className="material-icons vertical-align-middle">
-//               arrow_drop_down
-//             </i>
-//           )}
-//         </li>
-//         <li className="details">
-//           ({row.movement.toFixed(2).toLocaleString()}%)
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// }
 
 function nameFormatter(cell, row) {
   return (
@@ -77,15 +27,43 @@ function nameFormatter(cell, row) {
 
 class WalletTable extends React.Component {
   render() {
-    const { data, settings, history } = this.props;
-    // const { data, history } = this.props;
+    const { data, appSettings, history } = this.props;
+
+    function priceFormatter(cell, row) {
+      return row.spot === 1 ? (
+        <div className="name">
+          {/* {row.symbol}
+          {cell.toFixed(2).toLocaleString()} */}
+          {parseFloat(cell).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            currency: appSettings.currency,
+            style: "currency"
+          })}
+        </div>
+      ) : (
+        <div>
+          <ul>
+            <li className="name">
+              {parseFloat(cell).toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                currency: appSettings.currency,
+                style: "currency"
+              })}
+            </li>
+            <li className="details">({row.spot.toFixed(2)})</li>
+          </ul>
+        </div>
+      );
+    }
 
     const openFormatterTotal = (cell, row) => {
       return (
         <div>
           <ul>
             <li className="name">
-              {`${settings.symbol}` +
+              {`${appSettings.symbol}` +
                 cell.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </li>
             {row.total_change > 0 ? (
@@ -106,10 +84,8 @@ class WalletTable extends React.Component {
           </ul>
         </div>
       );
-      // openFormatterTotal
     };
 
-    // row.total_change
     const options = {
       onRowClick: function(row) {
         history.push(`/product/${row.ticker}`);
@@ -125,13 +101,12 @@ class WalletTable extends React.Component {
 
     return (
       <div>
-        {/* Portfolio */}
         <BootstrapTable
           data={data}
           striped
           // hover
           // bordered
-          condensed
+          condensed={false}
           hover={false}
           bordered={false}
           size="sm"

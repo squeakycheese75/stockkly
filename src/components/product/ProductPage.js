@@ -1,9 +1,9 @@
 import React from "react";
-// import ProductChart from "./components/ProductChart";
+import ProductChart from "./components/ProductChart";
 import TransactionHistory from "../transactions/components/TransactionHistory";
 import { Card, Button, Toast } from "react-bootstrap";
 import { Link } from "react-router-dom";
-// import ProductInfo from "./components/ProductInfo";
+import ProductInfo from "./components/ProductInfo";
 import ProductSummary from "./components/ProductSummary";
 import Loading from "../common/Loading";
 import "./ProductPage.css";
@@ -21,14 +21,16 @@ class ProductForm extends React.Component {
       watchList: this.props.watchList,
       showToast: false,
       toastMsg: "Added",
-      loading: true
+      loading: true,
+      x: [],
+      y: []
     };
     this.auth = this.props.auth;
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  loadProductSummary() {
+  async loadProductSummary() {
     var url =
       process.env["REACT_APP_PRICES_API"] + "/api/products/" + this.state.pid;
     fetch(url, {
@@ -56,10 +58,53 @@ class ProductForm extends React.Component {
       });
   }
 
+  async loadProductChartData() {
+    console.log("Loading data form chart from api");
+    var uri =
+      process.env["REACT_APP_PRICES_API"] +
+      "/api/products/prices/historical/" +
+      this.state.pid;
+    // console.log(uri);
+    var url = new URL(uri),
+      params = {
+        start_date: this.state.start_date,
+        end_date: this.state.end_date
+      };
+    Object.keys(params).forEach(key =>
+      url.searchParams.append(key, params[key])
+    );
+
+    fetch(uri, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) return response;
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          // y: Object.values(JSON.parse(response)),
+          // x: Object.keys(JSON.parse(response)),
+          y: Object.values(response),
+          x: Object.keys(response),
+          d: response
+        });
+      })
+      .catch(error => {
+        this.setState({
+          message: error.message
+        });
+      });
+  }
+
   componentDidMount() {
     this._isMounted = true;
+    this.loadProductChartData();
     this.loadProductSummary();
-    // this._isLoaded = true;
   }
 
   componentWillUnmount() {
@@ -95,11 +140,9 @@ class ProductForm extends React.Component {
 
   render() {
     const { showToast } = this.state;
-    // if (!this._isLoaded) return <Loading />;
     const handleClose = () => this.setState({ showToast: false });
 
     if (this.state.loading) return <Loading />;
-
     return (
       <div className="card">
         <ProductSummary
@@ -109,21 +152,22 @@ class ProductForm extends React.Component {
           userProfile={this.userProfile}
         />
 
-        {/* <ProductInfo productId={this.state.pid} /> */}
-
-        {/* <Card key="productChart">
+        <ProductInfo productId={this.state.pid} />
+        {/* 
+        <Card key="productChart">
           <Card.Header as="h5" className="text-dark">
-            Chart
-          </Card.Header>
-          <Card.Title>Chart</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
+            30 day open
+          </Card.Header> */}
+        {/* <Card.Subtitle className="mb-2 text-muted">
             {this.state.pid} Open 6m
-          </Card.Subtitle>
-          <Card.Body className="text-secondary">
-            <ProductChart productId={this.state.pid} />
-          </Card.Body>
-        </Card> */}
-        {/* <ProductChart productId={this.state.pid} /> */}
+          </Card.Subtitle> */}
+        <ProductChart
+          productId={this.state.pid}
+          x={this.state.x}
+          y={this.state.y}
+        />
+        {/* </Card> */}
+
         <Toast
           onClose={handleClose}
           show={showToast}
@@ -150,10 +194,12 @@ class ProductForm extends React.Component {
 
         {this.auth.isAuthenticated() ? (
           <>
-            {/* <Card key="transactionHistory">
+            <Card key="transactionHistory">
               <Card.Header as="h5">Transaction History:</Card.Header>
-              <Card.Body> */}
-            <TransactionHistory auth={this.auth} pid={this.state.pid} />
+              {/* <Card.Body> */}
+              <TransactionHistory auth={this.auth} pid={this.state.pid} />
+              {/* </Card.Body> */}
+            </Card>
             <Link to={`/transactions/${this.state.pid}`}>
               <Button className="btn">Add Transaction</Button>
             </Link>{" "}

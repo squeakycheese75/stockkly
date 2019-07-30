@@ -12,7 +12,7 @@ class Header extends Component {
       <div className={styles}>
         <Navbar collapseOnSelect={true} expand="sm" bg="primary" variant="dark">
           <LinkContainer to="/">
-            <Navbar.Brand>
+            <Navbar.Brand className="header">
               <img
                 alt=""
                 src={logo}

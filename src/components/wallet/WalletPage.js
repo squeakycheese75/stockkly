@@ -96,7 +96,7 @@ class WalletPage extends React.Component {
             />
             <WalletTable
               data={this.state.holdingsData}
-              settings={this.state.appSettings}
+              appSettings={this.state.appSettings}
             />
           </>
         ) : (

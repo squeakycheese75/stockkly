@@ -3,90 +3,6 @@ import { Jumbotron } from "react-bootstrap";
 import "./ProductSummary.css";
 import t from "typy";
 
-// function priceFormatter(symbol, price) {
-//   return (
-//     <div>
-//       <ul>
-//         {price > 0 ? (
-//           <>
-//             <li className="price-large up">
-//               {symbol}
-//               {parseFloat(price).toFixed(2)}
-//               <i className="material-icons vertical-align-middle up">
-//                 arrow_drop_up
-//               </i>
-//             </li>
-//           </>
-//         ) : (
-//           <>
-//             <li className="price-large down">
-//               {symbol}
-//               {parseFloat(price).toFixed(2)}
-//               <i className="material-icons vertical-align-middle down">
-//                 arrow_drop_down
-//               </i>
-//             </li>
-//           </>
-//         )}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// function priceChangeFormatter(change) {
-//   return (
-//     <>
-//       {change >= 0 ? (
-//         <>
-//           <div className="up_header pl">
-//             <i className="material-icons vertical-align-middle up_header">
-//               arrow_drop_up
-//             </i>
-//             {change.toFixed(2).toLocaleString(undefined, {
-//               minimumFractionDigits: 2
-//             })}
-//           </div>
-//         </>
-//       ) : (
-//         <>
-//           <div className="down_header pl">
-//             <i className="material-icons vertical-align-middle down_header">
-//               arrow_drop_down
-//             </i>
-//             {Math.abs(change)
-//               .toFixed(2)
-//               .toLocaleString(undefined, {
-//                 minimumFractionDigits: 2
-//               })}
-//           </div>
-//         </>
-//       )}
-//     </>
-//   );
-// }
-
-// function changeFormatter(change) {
-//   return (
-//     <div>
-//       <ul>
-//         {change > 0 ? (
-//           <>
-//             <li className="details-large">
-//               ({parseFloat(change).toFixed(2)}%)
-//             </li>
-//           </>
-//         ) : (
-//           <>
-//             <li className="details-large">
-//               ({parseFloat(change).toFixed(2)}%)
-//             </li>
-//           </>
-//         )}
-//       </ul>
-//     </div>
-//   );
-// }
-
 function changeFormatter(change) {
   return (
     <>
@@ -122,8 +38,6 @@ function changeFormatter(change) {
 
 function priceFormatter(price, symbol) {
   return (
-    // `${settings.symbol}` +
-    // cell.toFixed(2).toLocaleString(undefined, { minimumFractionDigits: 2 })
     <>
       {symbol}
       {price.toLocaleString(undefined, { minimumFractionDigits: 2 })}

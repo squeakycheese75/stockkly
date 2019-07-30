@@ -212,9 +212,10 @@ class WatchListTable extends Component {
           data={data}
           headerContainerClass="bstable"
           striped
-          hover
+          // hover
           condensed
-          bordered
+          hover={false}
+          bordered={false}
           size="sm"
           version="4"
           selectRow={selectRowProp}
