@@ -33,8 +33,16 @@
 .bstable {
   font-size: small;
   border: 0px;
+
   /* padding-left: 0.25em;
     padding-right: 0.25em; */
+}
+
+.react-bs-container-header {
+  background-color: lightsteelblue;
+  padding-bottom: 0px;
+  /* font-family: "Proxima Nova Semi Bold";
+  font-size: 14px; */
 }
 
 .vertical-align-middle {
@@ -43,15 +51,6 @@
 
 .padding-bottom-3 {
   padding-bottom: 3px;
-}
-
-.material-icons {
-  margin-left: -5px;
-}
-
-.material-icons.orange600 {
-  color: #fb8c00;
-  text-align: center;
 }
 
 ul {
@@ -74,10 +73,6 @@ li {
   margin-top: 5px;
 }
 
-/* .large {
-  font-size: 18px;
-} */
-
 .details {
   height: 10px;
   font-size: 11px;
@@ -93,9 +88,11 @@ li {
 .table td {
   padding: 0.2em;
   /* font-size: 12px; */
-  margin-left: 10px;
+  margin-left: 11px;
   vertical-align: middle;
   border: 0px;
+  /* font-family: "Proxima Nova Semi Bold"; */
+  font-weight: bold;
 }
 
 .table tr {

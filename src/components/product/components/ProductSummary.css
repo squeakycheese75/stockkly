@@ -6,8 +6,16 @@
   margin-top: 5px;
 }
 
+.name-large {
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 0px;
+  margin-top: 5px;
+}
+
 .price-large {
   /* height: 20px; */
+  /* font-family: "Proxima Nova Semi Bold"; */
   font-size: 25px;
   font-weight: bold;
   margin-left: 0px;
@@ -40,15 +48,6 @@
   margin-left: 0px;
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-.material-icons {
-  margin-left: -5px;
-}
-
-.material-icons.orange600 {
-  color: #fb8c00;
-  text-align: center;
 }
 
 .up {

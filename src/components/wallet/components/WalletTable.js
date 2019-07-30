@@ -104,8 +104,6 @@ class WalletTable extends React.Component {
         <BootstrapTable
           data={data}
           striped
-          // hover
-          // bordered
           condensed={false}
           hover={false}
           bordered={false}
