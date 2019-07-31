@@ -34,6 +34,31 @@ class ProductChart extends React.Component {
       line: { color: "#428bca" }
     };
 
+    // var updatemenus = [
+    //   {
+    //     buttons: [
+    //       {
+    //         args: ["type", "surface"],
+    //         label: "3D Surface",
+    //         method: "restyle"
+    //       },
+    //       {
+    //         args: ["type", "heatmap"],
+    //         label: "Heatmap",
+    //         method: "restyle"
+    //       }
+    //     ],
+    //     direction: "left",
+    //     pad: { r: 10, t: 10 },
+    //     showactive: true,
+    //     type: "buttons",
+    //     x: 0.1,
+    //     xanchor: "left",
+    //     y: 1.1,
+    //     yanchor: "top"
+    //   }
+    // ];
+
     return (
       <div className="container-fluid">
         {!Array.isArray(x) || !x.length ? (
@@ -41,10 +66,14 @@ class ProductChart extends React.Component {
         ) : (
           <Plot
             data={[trace1]}
-            layout={{ title: this.state.pid + " Chart", height: 320 }}
+            layout={{
+              title: this.state.pid + " Chart 30 day",
+              height: 320
+              // updatemenus: updatemenus
+            }}
             useResizeHandler={true}
             style={{ width: "100%", height: "100%" }}
-            config={{ displaylogo: false }}
+            config={{ displaylogo: false, showlegend: false }}
           />
         )}
       </div>
