@@ -31,7 +31,6 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.0",
     "react-spinners": "^0.5.13",
-    "react-toast-notifications": "^1.5.0",
     "react-widgets": "^4.4.11",
     "react-widgets-globalize": "^5.0.19",
     "react-widgets-moment": "^4.0.26",

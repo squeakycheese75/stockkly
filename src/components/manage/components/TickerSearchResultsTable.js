@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Alert, ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import { withToastManager } from "react-toast-notifications";
-import ToastButton from "./ToastButton";
+// import { withToastManager } from "react-toast-notifications";
+// import ToastButton from "./ToastButton";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 // import ProductForm from "./ProductForm";
 
-var FormWithToasts = withToastManager(ToastButton);
+// var FormWithToasts = withToastManager(ToastButton);
 
 function msg() {
   return (
@@ -48,13 +48,13 @@ class TickerSearchResultsTable extends Component {
     this.props.onSubmit(index);
   }
 
-  addButton(cell) {
-    return (
-      <>
-        <FormWithToasts content={cell} onClick={() => this.addItem(cell)} />
-      </>
-    );
-  }
+  // addButton(cell) {
+  //   return (
+  //     <>
+  //       <FormWithToasts content={cell} onClick={() => this.addItem(cell)} />
+  //     </>
+  //   );
+  // }
 
   viewProductHelp(cell, row) {
     return (
@@ -172,3 +172,4 @@ class TickerSearchResultsTable extends Component {
 }
 
 export default withRouter(TickerSearchResultsTable);
+// export default TickerSearchResultsTable;
