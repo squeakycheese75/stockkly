@@ -9,18 +9,17 @@ function changeFormatter(change) {
       {change >= 0 ? (
         <>
           <div className="up_header pl">
+            {" "}
             <i className="material-icons vertical-align-middle up_header">
               arrow_drop_up
             </i>
-            {/* {change.toFixed(2).toLocaleString(undefined, {
-              minimumFractionDigits: 2
-            })} */}
             {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </div>
         </>
       ) : (
         <>
           <div className="down_header pl">
+            {" "}
             <i className="material-icons vertical-align-middle down_header">
               arrow_drop_down
             </i>
@@ -191,13 +190,8 @@ class ProductSummary extends React.Component {
                     {this.state.productSummary.name}
                   </td>
                 </tr>
-                <tr />
-                <tr>
-                  {/* <td>
-                    {priceFormatter(symbol, this.state.productPrice.price)}
-                  </td>
-                  <td>{changeFormatter(this.state.productPrice.change)}</td> */}
-                  <td className="price-large">
+                <tr className="price-tr">
+                  <td className="price-large pl">
                     {priceFormatter(
                       parseFloat(this.state.productPrice.price),
                       symbol

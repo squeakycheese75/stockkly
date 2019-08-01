@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-// import LinkedInBadge from "./LinkedInBadge";
 import styles from "./AboutPage.css";
 
 const AboutPage = () => {
@@ -31,7 +30,7 @@ const AboutPage = () => {
             living and working from...<s>London</s>, <s>Berlin</s>,
             <s>Barcelona</s>, <s>Chamonix</s>, <s>Devon</s>, <s>Madrid</s>,
             <s>Santiago</s>, <s>Lima</s>, <s>Toronto</s>, <s>Coimbra</s>,{" "}
-            <s>Aviero</s>, Vancouver.
+            <s>Aviero</s>, <s>Vancouver</s>, <s> London</s>, Berlin.
           </p>
           <p>
             I built Stockkly as I wanted a mobile friendly, one-stop source for

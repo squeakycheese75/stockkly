@@ -13,10 +13,17 @@
   margin-top: 5px;
 }
 
+.pl {
+  font-size: 16px;
+  border-radius: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 7px;
+  padding-bottom: 1px;
+}
+
 .price-large {
-  /* height: 20px; */
-  /* font-family: "Proxima Nova Semi Bold"; */
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   margin-left: 0px;
   margin-top: 5px;
@@ -45,9 +52,16 @@
 
 .details-med {
   font-size: 18px;
+  font-weight: normal;
   margin-left: 0px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.price-tr {
+  /* height: 10px; */
+  padding: 0px;
+  height: 25px;
 }
 
 .up {

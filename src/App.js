@@ -7,7 +7,6 @@ import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
-import { ToastProvider } from "react-toast-notifications";
 import ProductForm from "./components/product/ProductPage";
 import TransactionsPage from "./components/transactions/TransactionsPage";
 import WalletPage from "./components/wallet/WalletPage";
@@ -243,18 +242,19 @@ class App extends Component {
             />
 
             <Route path="/about" component={AboutPage} />
+
             <Route
               path="/manage"
               render={() => (
-                <ToastProvider>
-                  <ManagePage
-                  // data={this.state.subscribedTickers}
-                  // addNewTicker={this.addNewTicker}
-                  // sectors={this.state.sectors}
-                  // filteredTickers={this.filteredTickers}
-                  // filteredTickersData={this.state.filteredTickers}
-                  />
-                </ToastProvider>
+                // <ToastProvider>
+                <ManagePage
+                // data={this.state.subscribedTickers}
+                // addNewTicker={this.addNewTicker}
+                // sectors={this.state.sectors}
+                // filteredTickers={this.filteredTickers}
+                // filteredTickersData={this.state.filteredTickers}
+                />
+                // </ToastProvider>
               )}
             />
             <Route
