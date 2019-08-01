@@ -190,13 +190,8 @@ class ProductSummary extends React.Component {
                     {this.state.productSummary.name}
                   </td>
                 </tr>
-                <tr />
-                <tr>
-                  {/* <td>
-                    {priceFormatter(symbol, this.state.productPrice.price)}
-                  </td>
-                  <td>{changeFormatter(this.state.productPrice.change)}</td> */}
-                  <td className="price-large">
+                <tr className="price-tr">
+                  <td className="price-large pl">
                     {priceFormatter(
                       parseFloat(this.state.productPrice.price),
                       symbol

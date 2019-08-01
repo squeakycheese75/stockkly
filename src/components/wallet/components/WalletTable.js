@@ -32,24 +32,26 @@ class WalletTable extends React.Component {
     function priceFormatter(cell, row) {
       return row.spot === 1 ? (
         <div className="name">
-          {/* {row.symbol}
+          {row.symbol}
+          {/* 
           {cell.toFixed(2).toLocaleString()} */}
           {parseFloat(cell).toLocaleString("en-IN", {
             minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-            currency: appSettings.currency,
-            style: "currency"
+            maximumFractionDigits: 2
+            // currency: appSettings.currency,
+            // style: "currency"
           })}
         </div>
       ) : (
         <div>
           <ul>
             <li className="name">
+              {row.symbol}
               {parseFloat(cell).toLocaleString("en-IN", {
                 minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-                currency: appSettings.currency,
-                style: "currency"
+                maximumFractionDigits: 2
+                // currency: appSettings.currency,
+                // style: "currency"
               })}
             </li>
             <li className="details">({row.spot.toFixed(2)})</li>
