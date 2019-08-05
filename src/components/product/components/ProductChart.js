@@ -34,31 +34,6 @@ class ProductChart extends React.Component {
       line: { color: "#428bca" }
     };
 
-    // var updatemenus = [
-    //   {
-    //     buttons: [
-    //       {
-    //         args: ["type", "surface"],
-    //         label: "3D Surface",
-    //         method: "restyle"
-    //       },
-    //       {
-    //         args: ["type", "heatmap"],
-    //         label: "Heatmap",
-    //         method: "restyle"
-    //       }
-    //     ],
-    //     direction: "left",
-    //     pad: { r: 10, t: 10 },
-    //     showactive: true,
-    //     type: "buttons",
-    //     x: 0.1,
-    //     xanchor: "left",
-    //     y: 1.1,
-    //     yanchor: "top"
-    //   }
-    // ];
-
     return (
       <div className="container-fluid">
         {!Array.isArray(x) || !x.length ? (
