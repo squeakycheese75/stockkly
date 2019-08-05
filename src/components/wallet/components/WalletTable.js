@@ -6,7 +6,7 @@ import "./WalletTable.css";
 function qtyFormatter(cell, row) {
   return (
     <>
-      {cell.toLocaleString("en-IN", {
+      {cell.toLocaleString("en-GB", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2
       })}
@@ -35,7 +35,7 @@ class WalletTable extends React.Component {
           {row.symbol}
           {/* 
           {cell.toFixed(2).toLocaleString()} */}
-          {parseFloat(cell).toLocaleString("en-IN", {
+          {parseFloat(cell).toLocaleString("en-GB", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
             // currency: appSettings.currency,
@@ -47,7 +47,7 @@ class WalletTable extends React.Component {
           <ul>
             <li className="name">
               {row.symbol}
-              {parseFloat(cell).toLocaleString("en-IN", {
+              {parseFloat(cell).toLocaleString("en-GB", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
                 // currency: appSettings.currency,
