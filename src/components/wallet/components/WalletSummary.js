@@ -14,7 +14,7 @@ class WalletSummary extends React.Component {
     function totalFormatter(total) {
       return (
         <>
-          {parseFloat(total).toLocaleString("en-IN", {
+          {parseFloat(total).toLocaleString("en-GB", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             currency: appSettings.currency,
@@ -33,7 +33,7 @@ class WalletSummary extends React.Component {
                 <i className="material-icons vertical-align-middle up_header">
                   arrow_drop_up
                 </i>
-                {parseFloat(change).toLocaleString("en-IN", {
+                {parseFloat(change).toLocaleString("en-GB", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2
                 })}
@@ -48,7 +48,7 @@ class WalletSummary extends React.Component {
                     <i className="material-icons vertical-align-middle flat_header">
                       arrow_drop_down
                     </i>
-                    {parseFloat(Math.abs(change)).toLocaleString("en-IN", {
+                    {parseFloat(Math.abs(change)).toLocaleString("en-GB", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2
                     })}
@@ -60,7 +60,7 @@ class WalletSummary extends React.Component {
                     <i className="material-icons vertical-align-middle down_header">
                       arrow_drop_down
                     </i>
-                    {parseFloat(Math.abs(change)).toLocaleString("en-IN", {
+                    {parseFloat(Math.abs(change)).toLocaleString("en-GB", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2
                     })}
