@@ -119,3 +119,8 @@ td.bstable-icon {
   /* animation: blinker 1s linear infinite; */
   color: #ff2e00;
 }
+
+.flat {
+  /* animation: blinker 1s linear infinite; */
+  color: black;
+}
