@@ -76,12 +76,24 @@ class WalletTable extends React.Component {
                 {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
               </li>
             ) : (
-              <li className="details down">
-                <i className="material-icons vertical-align-middle">
-                  arrow_drop_down
-                </i>
-                {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
-              </li>
+              <>
+                {row.total_change < 0 ? (
+                  <>
+                    <li className="details down">
+                      <i className="material-icons vertical-align-middle">
+                        arrow_drop_down
+                      </i>
+                      {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="details flat">
+                      {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+                    </li>
+                  </>
+                )}
+              </>
             )}
           </ul>
         </div>

@@ -44,10 +44,7 @@ class WalletSummary extends React.Component {
               {change === 0 ? (
                 <>
                   {" "}
-                  <div className="down_header pl">
-                    <i className="material-icons vertical-align-middle flat_header">
-                      arrow_drop_down
-                    </i>
+                  <div className="flat_header pl">
                     {parseFloat(Math.abs(change)).toLocaleString("en-GB", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2
