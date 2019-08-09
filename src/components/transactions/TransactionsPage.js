@@ -28,7 +28,7 @@ class TransactionPage extends React.Component {
     // this.loadTransactionHistory();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
   }
 

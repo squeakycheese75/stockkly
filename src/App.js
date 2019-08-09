@@ -66,7 +66,7 @@ class App extends Component {
   //   this.setState({ selectedSector: input });
   // };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // Check we've refreshed token
     this.auth.renewToken(() => {
       // update state
@@ -80,7 +80,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.auth.renewToken(() => this.setState({ tokenRenewalComplete: true }));
+    this.auth.renewToken(() => {
+      this.setState({ tokenRenewalComplete: true });
+      // if (this.auth.isAuthenticated()) {
+      //   this.loadProfile();
+      //   // console.log("Authenticated profile load");
+      // }
+    });
   }
 
   componentWillUnmount() {

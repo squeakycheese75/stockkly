@@ -65,7 +65,7 @@ class WalletPage extends React.Component {
     }, refreshRate);
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
     this.setState({ loading: false });
 

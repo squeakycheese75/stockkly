@@ -74,7 +74,7 @@ class WatchListPage extends React.Component {
     }, refreshRate);
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
     this.setState({ loading: false });
     //Cache data back to localStorage if unmounted
@@ -82,7 +82,7 @@ class WatchListPage extends React.Component {
     localStorage.setItem("watchList", JSON.stringify(this.state.watchList));
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // console.log("Received componentWillReceiveProps for in watchlist");
     if (nextProps.watchList !== this.props.watchList) {
       // console.log("watchList was updated");

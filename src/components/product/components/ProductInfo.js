@@ -82,7 +82,7 @@ class ProductInfo extends React.Component {
     this.loadProductInfo();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
   }
 
