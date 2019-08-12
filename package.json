@@ -7,6 +7,7 @@
     "node": ">=10.1"
   },
   "dependencies": {
+    "@types/redux-immutable-state-invariant": "^2.1.1",
     "auth0-js": "^9.11.3",
     "auth0-lock": "^11.17.2",
     "bootstrap": "^4.3.1",
@@ -27,6 +28,7 @@
     "react-json-pretty": "^2.1.0",
     "react-numeric-input": "^2.2.3",
     "react-plotly.js": "^2.3.0",
+    "react-redux": "^7.1.0",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.0",
@@ -35,6 +37,8 @@
     "react-widgets-globalize": "^5.0.19",
     "react-widgets-moment": "^4.0.26",
     "react-widgets-simple-number": "^4.1.23",
+    "redux": "^4.0.4",
+    "redux-immutable-state-invariant": "^2.1.0",
     "typeface-roboto": "0.0.54",
     "typy": "^3.1.0"
   },
