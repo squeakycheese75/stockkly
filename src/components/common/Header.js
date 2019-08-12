@@ -54,11 +54,11 @@ class Header extends Component {
                   <Button>About</Button>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/transactions">
+              {/* <LinkContainer to="/transactions">
                 <Nav.Link>
                   <Button>Transactions</Button>
                 </Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
             </Nav>
             <Nav pullright="true">
               {isAuthenticated() && (
