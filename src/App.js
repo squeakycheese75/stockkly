@@ -268,8 +268,8 @@ class App extends Component {
               path="/transactions/:pid"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
             />
-
-            {/* <Route
+            {/* 
+            <Route
               path="/transactions"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
             /> */}
