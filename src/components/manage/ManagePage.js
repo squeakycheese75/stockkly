@@ -99,7 +99,7 @@ class ManagePage extends React.Component {
     this.loadProducts();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
     //Cache data back to localStorage if unmounted
     localStorage.setItem("sectors", JSON.stringify(this.state.sectors));

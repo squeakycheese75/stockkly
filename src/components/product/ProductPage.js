@@ -107,7 +107,7 @@ class ProductForm extends React.Component {
     this.loadProductSummary();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
     this.setState({ loading: false });
   }

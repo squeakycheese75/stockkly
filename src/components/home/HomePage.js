@@ -38,9 +38,6 @@ class HomePage extends Component {
             ) : (
               <>
                 Or,{" "}
-                {/* <LinkContainer to="login">
-                  <Button size="sm">Login</Button>
-                </LinkContainer>{" "} */}
                 <LinkContainer to="login">
                   <Nav.Link>
                     <Button

@@ -161,7 +161,7 @@ class ProductSummary extends React.Component {
     this.loadProductPrice();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._isMounted = false;
   }
 

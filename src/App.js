@@ -9,6 +9,7 @@ import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import ProductForm from "./components/product/ProductPage";
 import TransactionsPage from "./components/transactions/TransactionsPage";
+// import TransactionsPage from "./components/history/TransactionsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
 import ProfilePage from "./components/profile/ProfilePage";
@@ -66,7 +67,7 @@ class App extends Component {
   //   this.setState({ selectedSector: input });
   // };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // Check we've refreshed token
     this.auth.renewToken(() => {
       // update state
@@ -80,7 +81,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.auth.renewToken(() => this.setState({ tokenRenewalComplete: true }));
+    this.auth.renewToken(() => {
+      this.setState({ tokenRenewalComplete: true });
+      // if (this.auth.isAuthenticated()) {
+      //   this.loadProfile();
+      //   // console.log("Authenticated profile load");
+      // }
+    });
   }
 
   componentWillUnmount() {
@@ -219,12 +226,6 @@ class App extends Component {
           <Nav auth={this.auth} />
 
           <Switch>
-            {/* <Route
-              exact
-              path="/"
-              render={props => <HomePage auth={this.auth} {...props} />}
-            /> */}
-
             <Route
               exact
               path="/"
@@ -243,20 +244,7 @@ class App extends Component {
 
             <Route path="/about" component={AboutPage} />
 
-            <Route
-              path="/manage"
-              render={() => (
-                // <ToastProvider>
-                <ManagePage
-                // data={this.state.subscribedTickers}
-                // addNewTicker={this.addNewTicker}
-                // sectors={this.state.sectors}
-                // filteredTickers={this.filteredTickers}
-                // filteredTickersData={this.state.filteredTickers}
-                />
-                // </ToastProvider>
-              )}
-            />
+            <Route path="/manage" render={() => <ManagePage />} />
             <Route
               path="/callback"
               render={props => <Callback auth={this.auth} {...props} />}
@@ -275,10 +263,16 @@ class App extends Component {
                 />
               )}
             />
+
             <Route
               path="/transactions/:pid"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
             />
+
+            {/* <Route
+              path="/transactions"
+              render={props => <TransactionsPage auth={this.auth} {...props} />}
+            /> */}
 
             <Route
               path="/profile"
