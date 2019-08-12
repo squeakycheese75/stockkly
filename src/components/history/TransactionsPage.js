@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 class TransactionsPage extends React.Component {
   state = {
     transaction: {
-      title: ""
+      title: "",
+      type: "Buy"
     }
   };
 
@@ -42,7 +43,9 @@ class TransactionsPage extends React.Component {
         <input type="submit" value="Save" />
 
         {this.props.transactions.map(transaction => (
-          <div>{transaction.title}</div>
+          <div>
+            {transaction.title}, {transaction.type}
+          </div>
         ))}
       </form>
     );
