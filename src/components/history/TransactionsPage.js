@@ -43,7 +43,7 @@ class TransactionsPage extends React.Component {
         <input type="submit" value="Save" />
 
         {this.props.transactions.map(transaction => (
-          <div>
+          <div key={transaction.title}>
             {transaction.title}, {transaction.type}
           </div>
         ))}

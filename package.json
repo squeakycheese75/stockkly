@@ -32,6 +32,7 @@
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.0",
+    "react-sparklines": "^1.7.0",
     "react-spinners": "^0.5.13",
     "react-widgets": "^4.4.11",
     "react-widgets-globalize": "^5.0.19",
@@ -61,7 +62,6 @@
   ],
   "devDependencies": {
     "increase-memory-limit": "^1.0.7",
-    "react-sparklines": "^1.7.0",
     "uglify-js-brunch": "^2.10.0",
     "why-did-you-update": "^1.0.6"
   }
