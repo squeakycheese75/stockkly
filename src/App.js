@@ -8,8 +8,9 @@ import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import ProductForm from "./components/product/ProductPage";
-import TransactionsPage from "./components/transactions/TransactionsPage";
-// import TransactionsPage from "./components/history/TransactionsPage";
+// import TransactionsPage from "./components/transactions/TransactionsPage";
+import TransactionsPage from "./components/history/TransactionsPage";
+import ProductsPage from "./components/history/ProductsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
 import ProfilePage from "./components/profile/ProfilePage";
@@ -263,16 +264,21 @@ class App extends Component {
                 />
               )}
             />
-
+            {/* 
             <Route
               path="/transactions/:pid"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
-            />
-            {/* 
+            /> */}
+
             <Route
               path="/transactions"
               render={props => <TransactionsPage auth={this.auth} {...props} />}
-            /> */}
+            />
+
+            <Route
+              path="/products"
+              render={props => <ProductsPage auth={this.auth} {...props} />}
+            />
 
             <Route
               path="/profile"

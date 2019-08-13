@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import transactions from "./transactionReducer";
+import products from "./productReducer";
 
 const rootReducer = combineReducers({
-  transactions
+  transactions,
+  products
 });
 
 export default rootReducer;
