@@ -25,7 +25,7 @@ const TransactionList = ({ transactions }) => (
               </a>
             </td>
             <td>
-              <Link to={"/course/" + trans.slug}>{trans.title}</Link>
+              <Link to={"/transaction/" + trans.slug}>{trans.title}</Link>
             </td>
             <td>{trans.productName}</td>
             <td>{trans.category}</td>

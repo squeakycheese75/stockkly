@@ -1,6 +1,7 @@
 import * as types from "../actions/actionTypes";
+import initalState from "./initialState";
 
-export default function productReducer(state = [], action) {
+export default function productReducer(state = initalState.products, action) {
   switch (action.type) {
     // case types.CREATE_TRANSACTION:
     //   return [...state, { ...action.transaction }];

@@ -5,15 +5,24 @@ import * as productActions from "../../redux/actions/productActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import TransactionList from "./TransactionsList";
+import { LinkContainer } from "react-router-bootstrap";
+import { Nav, Button } from "react-bootstrap";
 
 class TransactionsPage extends React.Component {
   componentDidMount() {
-    this.props.actions.loadTransactions().catch(error => {
-      alert("Loading Transactions failed ..." + error);
-    });
-    this.props.actions.loadProducts().catch(error => {
-      alert("Loading Products failed ..." + error);
-    });
+    const { transactions, products, actions } = this.props;
+
+    if (transactions.length === 0) {
+      actions.loadTransactions().catch(error => {
+        alert("Loading Transactions failed ..." + error);
+      });
+    }
+
+    if (products.length === 0) {
+      actions.loadProducts().catch(error => {
+        alert("Loading Products failed ..." + error);
+      });
+    }
   }
 
   render() {
@@ -24,6 +33,11 @@ class TransactionsPage extends React.Component {
         {/* {this.props.transactions.map(transaction => (
           <div key={transaction.title}>{transaction.title}</div>
         ))} */}
+        <LinkContainer to="/transaction">
+          <Nav.Link>
+            <Button>Add new transaction</Button>
+          </Nav.Link>
+        </LinkContainer>
       </>
     );
   }
@@ -33,7 +47,7 @@ TransactionsPage.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
-  transaction: PropTypes.array.isRequired
+  transactions: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
@@ -41,11 +55,13 @@ function mapStateToProps(state) {
     transactions:
       state.products.length === 0
         ? []
-        : state.transactions.map(trans => {
+        : state.transactions.map(transaction => {
             return {
-              ...trans,
-              productName: state.products.find(p => p.id === trans.productId)
-                .name
+              ...transaction,
+              productName: state.products.find(
+                // p => p.id === parseInt(transaction.productId)
+                p => p.id === parseInt(transaction.productId)
+              ).name
             };
           }),
     products: state.products

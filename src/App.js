@@ -10,6 +10,7 @@ import HomePage from "./components/home/HomePage";
 import ProductForm from "./components/product/ProductPage";
 // import TransactionsPage from "./components/transactions/TransactionsPage";
 import TransactionsPage from "./components/history/TransactionsPage";
+import ManageTransactionPage from "./components/history/ManageTransactionPage";
 import ProductsPage from "./components/history/ProductsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
@@ -221,106 +222,109 @@ class App extends Component {
     }
     if (!this.state.tokenRenewalComplete) return <Loading />;
 
-    let content = (
-      <>
-        <div>
-          <Nav auth={this.auth} />
+    return (
+      <div>
+        <Nav auth={this.auth} />
 
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={props =>
-                isLoggedIn ? (
-                  <WalletPage
-                    auth={this.auth}
-                    appSettings={this.state.appSettings}
-                    {...props}
-                  />
-                ) : (
-                  <HomePage auth={this.auth} {...props} />
-                )
-              }
-            />
-
-            <Route path="/about" component={AboutPage} />
-
-            <Route path="/manage" render={() => <ManagePage />} />
-            <Route
-              path="/callback"
-              render={props => <Callback auth={this.auth} {...props} />}
-            />
-
-            <Route
-              path="/product/:pid"
-              render={props => (
-                <ProductForm
-                  auth={this.auth}
-                  appSettings={this.state.appSettings}
-                  addTickerToWatchList={this.addTickerToWatchList}
-                  removeTickerFromWatchList={this.removeTicker}
-                  watchList={this.state.watchList}
-                  {...props}
-                />
-              )}
-            />
-            {/* 
-            <Route
-              path="/transactions/:pid"
-              render={props => <TransactionsPage auth={this.auth} {...props} />}
-            /> */}
-
-            <Route
-              path="/transactions"
-              render={props => <TransactionsPage auth={this.auth} {...props} />}
-            />
-
-            <Route
-              path="/products"
-              render={props => <ProductsPage auth={this.auth} {...props} />}
-            />
-
-            <Route
-              path="/profile"
-              render={props => (
-                <ProfilePage
-                  auth={this.auth}
-                  appSettings={this.state.appSettings}
-                  updateProfile={this.updateAppSettings}
-                  {...props}
-                />
-              )}
-            />
-
-            <Route
-              path="/wallet"
-              render={props => (
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={props =>
+              isLoggedIn ? (
                 <WalletPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
                   {...props}
                 />
-              )}
-            />
+              ) : (
+                <HomePage auth={this.auth} {...props} />
+              )
+            }
+          />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/manage" render={() => <ManagePage />} />
+          <Route
+            path="/callback"
+            render={props => <Callback auth={this.auth} {...props} />}
+          />
+          <Route
+            path="/product/:pid"
+            render={props => (
+              <ProductForm
+                auth={this.auth}
+                appSettings={this.state.appSettings}
+                addTickerToWatchList={this.addTickerToWatchList}
+                removeTickerFromWatchList={this.removeTicker}
+                watchList={this.state.watchList}
+                {...props}
+              />
+            )}
+          />
+          {/* 
             <Route
-              path="/watching"
-              render={props => (
-                <WatchListPage
-                  auth={this.auth}
-                  appSettings={this.state.appSettings}
-                  watchList={this.state.watchList}
-                  // removeTicker={this.removeTicker}
-                  onReload={this.reload}
-                  {...props}
-                />
-              )}
-            />
-          </Switch>
-        </div>
-      </>
+              path="/transactions/:pid"
+              render={props => <TransactionsPage auth={this.auth} {...props} />}
+            /> */}
+          <Route
+            exact
+            path="/transactions"
+            render={props => <TransactionsPage auth={this.auth} {...props} />}
+          />
+          <Route
+            path="/transaction/:slug"
+            render={props => (
+              <ManageTransactionPage auth={this.auth} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/transaction"
+            render={props => (
+              <ManageTransactionPage auth={this.auth} {...props} />
+            )}
+          />
+          <Route
+            path="/products"
+            render={props => <ProductsPage auth={this.auth} {...props} />}
+          />
+          <Route
+            path="/profile"
+            render={props => (
+              <ProfilePage
+                auth={this.auth}
+                appSettings={this.state.appSettings}
+                updateProfile={this.updateAppSettings}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/wallet"
+            render={props => (
+              <WalletPage
+                auth={this.auth}
+                appSettings={this.state.appSettings}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/watching"
+            render={props => (
+              <WatchListPage
+                auth={this.auth}
+                appSettings={this.state.appSettings}
+                watchList={this.state.watchList}
+                // removeTicker={this.removeTicker}
+                onReload={this.reload}
+                {...props}
+              />
+            )}
+          />
+        </Switch>
+      </div>
     );
-
-    return content;
   }
 }
 
