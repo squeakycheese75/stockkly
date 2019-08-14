@@ -33,17 +33,22 @@ function ManageTransactionPage({
   }, []);
 
   function handleChange(event) {
-    console.log(event.target.value);
+    console.log(
+      "handleChange",
+      event.target.value,
+      " name ",
+      event.target.value
+    );
     const { value, name } = event.target;
     setTransaction(prevTransaction => ({
       ...prevTransaction,
-      [name]: name === "transactionId" ? parseInt(value, 10) : value
+      [name]: name === "productId" ? parseInt(value, 10) : value
     }));
   }
 
   function handleSave(event) {
     event.preventDefault();
-    console.log(event.target.value);
+    // console.log("handleSave", event);
     saveTransaction(transaction).then(() => {
       history.push("/transactions");
     });

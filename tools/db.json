@@ -21,11 +21,11 @@
       "transtype": "Buy"
     },
     {
-      "title": "asdasd",
-      "productId": "1",
-      "category": "asdasd",
-      "createdAt": 1565809991678,
-      "slug": "asdasd",
+      "title": "a",
+      "productId": 1,
+      "category": "asdsa",
+      "createdAt": 1565819017751,
+      "slug": "a",
       "id": 3
     }
   ],

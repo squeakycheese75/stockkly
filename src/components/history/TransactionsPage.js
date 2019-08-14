@@ -60,7 +60,7 @@ function mapStateToProps(state) {
               ...transaction,
               productName: state.products.find(
                 // p => p.id === parseInt(transaction.productId)
-                p => p.id === parseInt(transaction.productId)
+                p => p.id === transaction.productId
               ).name
             };
           }),
