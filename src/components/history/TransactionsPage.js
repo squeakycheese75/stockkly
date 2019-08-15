@@ -44,7 +44,6 @@ class TransactionsPage extends React.Component {
 }
 
 TransactionsPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired
@@ -59,7 +58,6 @@ function mapStateToProps(state) {
             return {
               ...transaction,
               productName: state.products.find(
-                // p => p.id === parseInt(transaction.productId)
                 p => p.id === transaction.productId
               ).name
             };

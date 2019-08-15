@@ -18,9 +18,9 @@ class ProductChart extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // this.loadProductChartData();
-  }
+  // componentDidMount() {
+  //   // this.loadProductChartData();
+  // }
 
   render() {
     const { x, y } = this.props;

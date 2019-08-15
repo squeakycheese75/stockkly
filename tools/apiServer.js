@@ -34,6 +34,12 @@ server.use(function(req, res, next) {
 });
 
 // Declaring custom routes below. Add custom routes before JSON Server router
+server.use(
+  jsonServer.rewriter({
+    "/api/products": "/products",
+    "/api/transactions": "/transactions"
+  })
+);
 
 // Add createdAt to all POSTS
 server.use((req, res, next) => {
