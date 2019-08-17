@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import TransactionList from "./TransactionsList";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Button } from "react-bootstrap";
+import Loading from "../common/Loading";
 
 class TransactionsPage extends React.Component {
   componentDidMount() {
@@ -28,16 +29,23 @@ class TransactionsPage extends React.Component {
   render() {
     return (
       <>
+        {this.props.loading}
         <h2>Transactions</h2>
-        <TransactionList transactions={this.props.transactions} />
-        {/* {this.props.transactions.map(transaction => (
-          <div key={transaction.title}>{transaction.title}</div>
-        ))} */}
-        <LinkContainer to="/transaction">
-          <Nav.Link>
-            <Button>Add new transaction</Button>
-          </Nav.Link>
-        </LinkContainer>
+        {this.props.loading ? (
+          <Loading />
+        ) : (
+          <>
+            <TransactionList transactions={this.props.transactions} />
+            {/* {this.props.transactions.map(transaction => (
+            <div key={transaction.title}>{transaction.title}</div>
+          ))} */}
+            <LinkContainer to="/transaction">
+              <Nav.Link>
+                <Button>Add new transaction</Button>
+              </Nav.Link>
+            </LinkContainer>
+          </>
+        )}
       </>
     );
   }
@@ -46,7 +54,8 @@ class TransactionsPage extends React.Component {
 TransactionsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
-  transactions: PropTypes.array.isRequired
+  transactions: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
@@ -62,7 +71,8 @@ function mapStateToProps(state) {
               ).name
             };
           }),
-    products: state.products
+    products: state.products,
+    loading: state.apiCallsInProgress > 0
   };
 }
 

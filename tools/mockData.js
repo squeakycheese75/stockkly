@@ -26,6 +26,7 @@ const products = [
     id: 1,
     name: "Bitcoin",
     ticker: "BTC:USD",
+    slug: "BTC:USD",
     displayTicker: "BTC:USD",
     description: "Bitcoin",
     company: "na",
@@ -37,6 +38,7 @@ const products = [
     id: 2,
     name: "Litecoin",
     ticker: "LTC:USD",
+    slug: "LTC:USD",
     displayTicker: "LTC:USD",
     description: "Litecoin",
     company: "na",
@@ -46,16 +48,45 @@ const products = [
   }
 ];
 
+const holdings = [
+  {
+    id: 1,
+    productId: 1,
+    qty: 100
+  },
+  {
+    id: 2,
+    productId: 2,
+    qty: 10
+  }
+];
+
+const prices = [
+  {
+    id: 1,
+    productId: 1,
+    ticker: "BTC:USD",
+    open: 100,
+    price: 101.3,
+    priceDate: "2019-08-16"
+  }
+];
+
 const newTransaction = {
   id: null,
   title: "",
   productId: null,
-  category: ""
+  category: "",
+  quantity: null,
+  price: null,
+  transtype: ""
 };
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   newTransaction,
   transactions,
-  products
+  products,
+  prices,
+  holdings
 };

@@ -4,7 +4,8 @@ import * as transactionActions from "../../redux/actions/transactionActions";
 import * as productActions from "../../redux/actions/productActions";
 import PropTypes from "prop-types";
 import TransactionForm from "./TransactionForm";
-// import { newTransaction } from "../../../tools/mockData";
+import Loading from "../common/Loading";
+import { toast } from "react-toastify";
 
 function ManageTransactionPage({
   transactions,
@@ -17,11 +18,15 @@ function ManageTransactionPage({
 }) {
   const [transaction, setTransaction] = useState({ ...props.transaction });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
+
   useEffect(() => {
     if (transactions.length === 0) {
       loadTransactions().catch(error => {
         alert("Loading transactions failed" + error);
       });
+    } else {
+      setTransaction({ ...props.transaction });
     }
 
     if (products.length === 0) {
@@ -30,7 +35,7 @@ function ManageTransactionPage({
       });
     }
     // eslint-disable-next-line
-  }, []);
+  }, [props.transaction]);
 
   function handleChange(event) {
     console.log(
@@ -48,19 +53,23 @@ function ManageTransactionPage({
 
   function handleSave(event) {
     event.preventDefault();
-    // console.log("handleSave", event);
+    setSaving(true);
     saveTransaction(transaction).then(() => {
+      toast.info("Some message");
       history.push("/transactions");
     });
   }
 
-  return (
+  return transactions.length === 0 || products.length === 0 ? (
+    <Loading />
+  ) : (
     <TransactionForm
       transaction={transaction}
       errors={errors}
       products={products}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }
@@ -75,8 +84,18 @@ ManageTransactionPage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+export function getTransactionBySlug(transactions, slug) {
+  return transactions.find(transaction => transaction.slug === slug) || null;
+}
+
+function mapStateToProps(state, ownProps) {
+  const slug = ownProps.match.params.slug;
+  const transaction =
+    slug && state.transactions.length > 0
+      ? getTransactionBySlug(state.transactions, slug)
+      : state.saveTransaction;
   return {
+    transaction,
     transactions: state.transactions,
     products: state.products
   };

@@ -15,6 +15,9 @@ import ProductsPage from "./components/history/ProductsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
 import ProfilePage from "./components/profile/ProfilePage";
+import NotFound from "./components/common/NotFound";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   constructor(props) {
@@ -322,7 +325,9 @@ class App extends Component {
               />
             )}
           />
+          <Route component={NotFound} />
         </Switch>
+        <ToastContainer autoClose={3000} hideProgressBar toas />
       </div>
     );
   }

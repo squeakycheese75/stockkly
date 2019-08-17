@@ -1,4 +1,5 @@
 export default {
   transactions: [],
-  products: []
+  products: [],
+  apiCallsInProgress: 0
 };
