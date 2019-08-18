@@ -2,6 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
+import NumberInput from "../common/NumberInput";
+
+const ttype = [
+  {
+    value: "Buy",
+    text: "Buy"
+  },
+  {
+    value: "Sell",
+    text: "Sell"
+  }
+];
 
 const TransactionForm = ({
   transaction,
@@ -39,13 +51,31 @@ const TransactionForm = ({
         onChange={onChange}
         error={errors.product}
       />
-
+      {/* 
       <TextInput
         name="category"
         label="Category"
         value={transaction.category}
         onChange={onChange}
         error={errors.category}
+      /> */}
+
+      <SelectInput
+        name="category"
+        label="Category"
+        value={transaction.category || ""}
+        defaultOption="Select transaction type"
+        options={ttype}
+        onChange={onChange}
+        error={errors.category}
+      />
+
+      <NumberInput
+        name="quantity"
+        label="quantity"
+        value={transaction.quantity}
+        onChange={onChange}
+        error={errors.quantity}
       />
 
       <button type="submit" disabled={saving} className="btn btn-primary">

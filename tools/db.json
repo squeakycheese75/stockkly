@@ -15,18 +15,10 @@
       "title": "React: The Big Picture",
       "slug": "react-big-picture",
       "productId": 2,
-      "category": "JavaScript",
+      "category": "Sell",
       "quantity": 100,
       "price": 8,
       "transtype": "Buy"
-    },
-    {
-      "title": "a",
-      "productId": 1,
-      "category": "b",
-      "createdAt": 1566044698455,
-      "slug": "a",
-      "id": 3
     }
   ],
   "products": [

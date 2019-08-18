@@ -10,6 +10,7 @@ const TransactionList = ({ transactions }) => (
         <th>Title</th>
         <th>Product</th>
         <th>Category</th>
+        <th>Quantity</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@ const TransactionList = ({ transactions }) => (
             </td>
             <td>{trans.productName}</td>
             <td>{trans.category}</td>
+            <td>{trans.quantity}</td>
           </tr>
         );
       })}

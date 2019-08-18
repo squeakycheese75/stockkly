@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import TransactionForm from "./TransactionForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
+// import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 function ManageTransactionPage({
   transactions,
@@ -54,10 +55,15 @@ function ManageTransactionPage({
   function handleSave(event) {
     event.preventDefault();
     setSaving(true);
-    saveTransaction(transaction).then(() => {
-      toast.info("Some message");
-      history.push("/transactions");
-    });
+    saveTransaction(transaction)
+      .then(() => {
+        toast.info("Some message");
+        history.push("/transactions");
+      })
+      .catch(error => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
   return transactions.length === 0 || products.length === 0 ? (
