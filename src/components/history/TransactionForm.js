@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import NumberInput from "../common/NumberInput";
+import DateInput from "../common/DateInput";
 
 const ttype = [
   {
@@ -41,7 +42,7 @@ const TransactionForm = ({
 
       <SelectInput
         name="productId"
-        label="product"
+        label="Product"
         value={transaction.productId || ""}
         defaultOption="Select product"
         options={products.map(product => ({
@@ -51,28 +52,28 @@ const TransactionForm = ({
         onChange={onChange}
         error={errors.product}
       />
-      {/* 
-      <TextInput
-        name="category"
-        label="Category"
-        value={transaction.category}
-        onChange={onChange}
-        error={errors.category}
-      /> */}
 
       <SelectInput
-        name="category"
-        label="Category"
-        value={transaction.category || ""}
+        name="type"
+        label="Type"
+        value={transaction.type || ""}
         defaultOption="Select transaction type"
         options={ttype}
         onChange={onChange}
-        error={errors.category}
+        error={errors.type}
+      />
+
+      <DateInput
+        name="trandate"
+        label="Date"
+        value={transaction.trandate || ""}
+        onChange={onChange}
+        error={errors.trandate}
       />
 
       <NumberInput
         name="quantity"
-        label="quantity"
+        label="Quantity"
         value={transaction.quantity}
         onChange={onChange}
         error={errors.quantity}

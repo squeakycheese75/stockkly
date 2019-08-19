@@ -82,6 +82,7 @@ function createSlug(value) {
 function validateTransaction(transaction) {
   if (!transaction.title) return "Title is required.";
   if (!transaction.productId) return "Product is required.";
-  // if (!transaction.category) return "Category is required.";
+  if (!transaction.type) return "Type is required.";
+  if (!transaction.quantity) return "Quantity is required.";
   return "";
 }

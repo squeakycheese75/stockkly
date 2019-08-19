@@ -52,8 +52,23 @@ function ManageTransactionPage({
     }));
   }
 
+  function formIsValid() {
+    const { title, productId, type, quantity } = transaction;
+    const errors = {};
+
+    if (!title) errors.title = "Title is required.";
+    if (!productId) errors.product = "Product is required";
+    if (!type) errors.type = "Type is required";
+    if (!quantity) errors.quantity = "Type is required";
+
+    setErrors(errors);
+    // Form is valid if the errors object still has no properties
+    return Object.keys(errors).length === 0;
+  }
+
   function handleSave(event) {
     event.preventDefault();
+    if (!formIsValid()) return;
     setSaving(true);
     saveTransaction(transaction)
       .then(() => {

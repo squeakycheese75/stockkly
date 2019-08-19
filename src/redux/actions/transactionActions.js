@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as transactionApi from "../../api/transactionApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadTransactionsSuccess(transactions) {
   return { type: types.LOAD_TRANSACTIONS_SUCCESS, transactions };
@@ -40,6 +40,7 @@ export function saveTransaction(transaction) {
           : dispatch(createTransactionSuccess(savedTransaction));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };

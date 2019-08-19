@@ -9,7 +9,7 @@ const TransactionList = ({ transactions }) => (
         <th />
         <th>Title</th>
         <th>Product</th>
-        <th>Category</th>
+        <th>Type</th>
         <th>Quantity</th>
       </tr>
     </thead>
@@ -29,7 +29,7 @@ const TransactionList = ({ transactions }) => (
               <Link to={"/transaction/" + trans.slug}>{trans.title}</Link>
             </td>
             <td>{trans.productName}</td>
-            <td>{trans.category}</td>
+            <td>{trans.type}</td>
             <td>{trans.quantity}</td>
           </tr>
         );

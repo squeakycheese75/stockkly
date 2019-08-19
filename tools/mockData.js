@@ -4,7 +4,7 @@ const transactions = [
     title: "Securing React Apps with Auth0",
     slug: "react-auth0-authentication-security",
     productId: 1,
-    category: "JavaScript",
+    type: "JavaScript",
     quantity: 1,
     price: 11000.0,
     transtype: "Buy"
@@ -14,7 +14,7 @@ const transactions = [
     title: "React: The Big Picture",
     slug: "react-big-picture",
     productId: 2,
-    category: "JavaScript",
+    type: "JavaScript",
     quantity: 100,
     price: 8.0,
     transtype: "Buy"
@@ -76,7 +76,7 @@ const newTransaction = {
   id: null,
   title: "",
   productId: null,
-  category: "",
+  type: "",
   quantity: null,
   price: null,
   transtype: ""
