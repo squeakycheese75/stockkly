@@ -14,6 +14,10 @@ export function createTransactionSuccess(transaction) {
   return { type: types.CREATE_TRANSACTION_SUCCESS, transaction };
 }
 
+export function deleteTransactionOptimistic(transaction) {
+  return { type: types.DELETE_TRANSACTION_OPTIMISTIC, transaction };
+}
+
 export function loadTransactions() {
   return function(dispatch) {
     dispatch(beginApiCall());
@@ -43,5 +47,12 @@ export function saveTransaction(transaction) {
         dispatch(apiCallError(error));
         throw error;
       });
+  };
+}
+
+export function deleteTransaction(transaction) {
+  return function(dispatch) {
+    dispatch(deleteTransactionOptimistic(transaction));
+    return transactionApi.deleteTransaction(transaction.id);
   };
 }

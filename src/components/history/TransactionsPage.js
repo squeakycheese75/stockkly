@@ -8,6 +8,7 @@ import TransactionList from "./TransactionsList";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Button } from "react-bootstrap";
 import Loading from "../common/Loading";
+import { toast } from "react-toastify";
 
 class TransactionsPage extends React.Component {
   componentDidMount() {
@@ -26,6 +27,15 @@ class TransactionsPage extends React.Component {
     }
   }
 
+  handleDelete = transaction => {
+    toast.info("Transaction Deleted!");
+    this.props.actions.deleteTransaction(transaction).catch(error => {
+      toast.error("Transaction delete has Failed! " + error.message, {
+        autoClose: false
+      });
+    });
+  };
+
   render() {
     return (
       <>
@@ -35,7 +45,10 @@ class TransactionsPage extends React.Component {
           <Loading />
         ) : (
           <>
-            <TransactionList transactions={this.props.transactions} />
+            <TransactionList
+              transactions={this.props.transactions}
+              onDeleteClick={this.handleDelete}
+            />
             {/* {this.props.transactions.map(transaction => (
             <div key={transaction.title}>{transaction.title}</div>
           ))} */}
@@ -83,7 +96,11 @@ function mapDispatchToProps(dispatch) {
         transactionActions.loadTransactions,
         dispatch
       ),
-      loadProducts: bindActionCreators(productActions.loadProducts, dispatch)
+      loadProducts: bindActionCreators(productActions.loadProducts, dispatch),
+      deleteTransaction: bindActionCreators(
+        transactionActions.deleteTransaction,
+        dispatch
+      )
     }
   };
 }

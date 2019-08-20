@@ -6,7 +6,15 @@ import PropTypes from "prop-types";
 import TransactionForm from "./TransactionForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
-// import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
+
+const newTransaction = {
+  id: null,
+  title: "",
+  productId: null,
+  type: "Buy",
+  quantity: 1,
+  trandate: ""
+};
 
 function ManageTransactionPage({
   transactions,
@@ -114,7 +122,7 @@ function mapStateToProps(state, ownProps) {
   const transaction =
     slug && state.transactions.length > 0
       ? getTransactionBySlug(state.transactions, slug)
-      : state.saveTransaction;
+      : newTransaction;
   return {
     transaction,
     transactions: state.transactions,

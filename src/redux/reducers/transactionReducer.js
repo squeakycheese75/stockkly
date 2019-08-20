@@ -16,6 +16,8 @@ export default function transactionReducer(
       );
     case types.LOAD_TRANSACTIONS_SUCCESS:
       return action.transactions;
+    case types.DELETE_TRANSACTION_OPTIMISTIC:
+      return state.filter(trans => trans.id !== action.transaction.id);
     default:
       return state;
   }

@@ -7,7 +7,8 @@ const transactions = [
     type: "JavaScript",
     quantity: 1,
     price: 11000.0,
-    transtype: "Buy"
+    transtype: "Buy",
+    trandate: "2012-04-30"
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ const transactions = [
     type: "JavaScript",
     quantity: 100,
     price: 8.0,
-    transtype: "Buy"
+    transtype: "Buy",
+    trandate: "2012-04-30"
   }
 ];
 
@@ -78,8 +80,8 @@ const newTransaction = {
   productId: null,
   type: "",
   quantity: null,
-  price: null,
-  transtype: ""
+  // price: null,
+  trandate: null
 };
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)

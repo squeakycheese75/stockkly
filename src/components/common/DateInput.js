@@ -10,6 +10,7 @@ const DateInput = ({ name, label, onChange, placeholder, value, error }) => {
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
+
       <div className="field">
         <input
           type="date"
@@ -19,6 +20,7 @@ const DateInput = ({ name, label, onChange, placeholder, value, error }) => {
           value={value}
           onChange={onChange}
         />
+
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>
@@ -30,7 +32,8 @@ DateInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.instanceOf(Date),
+  // value: PropTypes.instanceOf(Date),
+  value: PropTypes.string,
   error: PropTypes.string
 };
 
