@@ -9,17 +9,11 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Button } from "react-bootstrap";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
+import ProductList from "./ProductList";
 
-class TransactionsPage extends React.Component {
+class ProductsPage extends React.Component {
   componentDidMount() {
-    const { transactions, products, actions } = this.props;
-
-    if (transactions.length === 0) {
-      actions.loadTransactions().catch(error => {
-        alert("Loading Transactions failed ..." + error);
-      });
-    }
-
+    const { products, actions } = this.props;
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
         alert("Loading Products failed ..." + error);
@@ -40,18 +34,12 @@ class TransactionsPage extends React.Component {
     return (
       <>
         {this.props.loading}
-        <h2>Transactions</h2>
+        <h2>Products</h2>
         {this.props.loading ? (
           <Loading />
         ) : (
           <>
-            <TransactionList
-              transactions={this.props.transactions}
-              onDeleteClick={this.handleDelete}
-            />
-            {/* {this.props.transactions.map(transaction => (
-            <div key={transaction.title}>{transaction.title}</div>
-          ))} */}
+            <ProductList products={this.props.products} />}
             <LinkContainer to="/transaction">
               <Nav.Link>
                 <Button>Add new transaction</Button>
@@ -67,25 +55,24 @@ class TransactionsPage extends React.Component {
 TransactionsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
-  transactions: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    transactions:
-      state.products.length === 0
-        ? []
-        : state.transactions.map(transaction => {
-            return {
-              ...transaction,
-              productName: state.products.find(
-                p => p.id === transaction.productId
-              ).name,
-              ticker: state.products.find(p => p.id === transaction.productId)
-                .ticker
-            };
-          }),
+    // transactions:
+    //   state.products.length === 0
+    //     ? []
+    //     : state.transactions.map(transaction => {
+    //         return {
+    //           ...transaction,
+    //           productName: state.products.find(
+    //             p => p.id === transaction.productId
+    //           ).name,
+    //           ticker: state.products.find(p => p.id === transaction.productId)
+    //             .ticker
+    //         };
+    //       }),
     products: state.products,
     loading: state.apiCallsInProgress > 0
   };
@@ -94,15 +81,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadTransactions: bindActionCreators(
-        transactionActions.loadTransactions,
-        dispatch
-      ),
-      loadProducts: bindActionCreators(productActions.loadProducts, dispatch),
-      deleteTransaction: bindActionCreators(
-        transactionActions.deleteTransaction,
-        dispatch
-      )
+      loadProducts: bindActionCreators(productActions.loadProducts, dispatch)
     }
   };
 }
@@ -110,4 +89,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TransactionsPage);
+)(ProductsPage);

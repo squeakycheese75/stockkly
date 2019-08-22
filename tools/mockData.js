@@ -1,24 +1,23 @@
 const transactions = [
   {
     id: 1,
-    title: "Securing React Apps with Auth0",
-    slug: "react-auth0-authentication-security",
+    // title: "Securing React Apps with Auth0",
+    // slug: "react-auth0-authentication-security",
     productId: 1,
-    type: "JavaScript",
-    quantity: 1,
+    type: "Buy",
+    quantity: 10.0,
     price: 11000.0,
     transtype: "Buy",
     trandate: "2012-04-30"
   },
   {
     id: 2,
-    title: "React: The Big Picture",
-    slug: "react-big-picture",
-    productId: 2,
-    type: "JavaScript",
-    quantity: 100,
+    // title: "React: The Big Picture",
+    // slug: "react-big-picture",
+    productId: 1,
+    type: "Sell",
+    quantity: 1.0,
     price: 8.0,
-    transtype: "Buy",
     trandate: "2012-04-30"
   }
 ];

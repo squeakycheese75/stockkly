@@ -7,15 +7,17 @@ import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
-import ProductForm from "./components/product/ProductPage";
+// import ProductsPage from "./components/products/ProductsPage";
+import ManageProductPage from "./components/products/ManageProductPage";
 // import TransactionsPage from "./components/transactions/TransactionsPage";
 import TransactionsPage from "./components/history/TransactionsPage";
 import ManageTransactionPage from "./components/history/ManageTransactionPage";
-import ProductsPage from "./components/history/ProductsPage";
+
+// import ProductsPage from "./components/history/ProductsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
 import ProfilePage from "./components/profile/ProfilePage";
-import NotFound from "./components/common/NotFound";
+// import NotFound from "./components/common/NotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -251,7 +253,7 @@ class App extends Component {
             path="/callback"
             render={props => <Callback auth={this.auth} {...props} />}
           />
-          <Route
+          {/* <Route
             path="/product/:pid"
             render={props => (
               <ProductForm
@@ -263,7 +265,7 @@ class App extends Component {
                 {...props}
               />
             )}
-          />
+          /> */}
           {/* 
             <Route
               path="/transactions/:pid"
@@ -274,8 +276,14 @@ class App extends Component {
             path="/transactions"
             render={props => <TransactionsPage auth={this.auth} {...props} />}
           />
-          <Route
+          {/* <Route
             path="/transaction/:slug"
+            render={props => (
+              <ManageTransactionPage auth={this.auth} {...props} />
+            )}
+          /> */}
+          <Route
+            path="/transaction/:id"
             render={props => (
               <ManageTransactionPage auth={this.auth} {...props} />
             )}
@@ -289,8 +297,17 @@ class App extends Component {
           />
           <Route
             path="/products"
-            render={props => <ProductsPage auth={this.auth} {...props} />}
+            render={props => <ManageProductPage auth={this.auth} {...props} />}
           />
+          <Route
+            path="/product/:ticker"
+            render={props => <ManageProductPage auth={this.auth} {...props} />}
+          />
+          {/* <Route
+            path="/product"
+            render={props => <ManageProductPage auth={this.auth} {...props} />}
+          /> */}
+
           <Route
             path="/profile"
             render={props => (
@@ -325,7 +342,7 @@ class App extends Component {
               />
             )}
           />
-          <Route component={NotFound} />
+          {/* <Route component={NotFound} /> */}
         </Switch>
         <ToastContainer autoClose={3000} hideProgressBar toas />
       </div>

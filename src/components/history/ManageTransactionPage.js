@@ -61,10 +61,10 @@ function ManageTransactionPage({
   }
 
   function formIsValid() {
-    const { title, productId, type, quantity } = transaction;
+    const { productId, type, quantity } = transaction;
     const errors = {};
 
-    if (!title) errors.title = "Title is required.";
+    // if (!title) errors.title = "Title is required.";
     if (!productId) errors.product = "Product is required";
     if (!type) errors.type = "Type is required";
     if (!quantity) errors.quantity = "Type is required";
@@ -113,15 +113,24 @@ ManageTransactionPage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-export function getTransactionBySlug(transactions, slug) {
-  return transactions.find(transaction => transaction.slug === slug) || null;
+// export function getTransactionBySlug(transactions, slug) {
+//   return transactions.find(transaction => transaction.slug === slug) || null;
+// }
+
+export function getTransactionById(transactions, id) {
+  return (
+    transactions.find(transaction => transaction.id === parseInt(id)) || null
+  );
 }
 
 function mapStateToProps(state, ownProps) {
-  const slug = ownProps.match.params.slug;
+  // const slug = ownProps.match.params.slug;
+  // debugger;
+  const id = ownProps.match.params.id;
   const transaction =
-    slug && state.transactions.length > 0
-      ? getTransactionBySlug(state.transactions, slug)
+    id && state.transactions.length > 0
+      ? // ? getTransactionBySlug(state.transactions, slug)
+        getTransactionById(state.transactions, id)
       : newTransaction;
   return {
     transaction,

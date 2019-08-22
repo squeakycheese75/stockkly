@@ -16,3 +16,20 @@ export function handleError(error) {
   console.error("API call failed. " + error);
   throw error;
 }
+
+export function getHeader() {
+  let token = localStorage.getItem("access_token") || null;
+  let config = {
+    headers: { "content-type": "application/json" }
+  };
+
+  if (token) {
+    config = {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    };
+  }
+  return config.headers;
+}

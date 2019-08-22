@@ -6,11 +6,11 @@ const TransactionList = ({ transactions, onDeleteClick }) => (
   <table className="table">
     <thead>
       <tr>
-        <th />
-        <th>Title</th>
+        <th>#</th>
         <th>Product</th>
         <th>Type</th>
         <th>Quantity</th>
+        <th>Date</th>
         <th />
       </tr>
     </thead>
@@ -18,20 +18,27 @@ const TransactionList = ({ transactions, onDeleteClick }) => (
       {transactions.map(trans => {
         return (
           <tr key={trans.id}>
-            <td>
+            {/* <td>
               <a
                 className="btn btn-light"
                 href={"http://pluralsight.com/courses/" + trans.slug}
               >
                 Watch
               </a>
-            </td>
-            <td>
+            </td> */}
+            {/* <td>
               <Link to={"/transaction/" + trans.slug}>{trans.title}</Link>
+            </td> */}
+            <td>
+              <Link to={"/transaction/" + trans.id}>{trans.id}</Link>
             </td>
-            <td>{trans.productName}</td>
+            {/* <td>{trans.productName}</td> */}
+            <td>
+              <Link to={"/product/" + trans.ticker}>{trans.productName}</Link>
+            </td>
             <td>{trans.type}</td>
             <td>{trans.quantity}</td>
+            <td>{trans.trandate}</td>
             <td>
               <button
                 className="btn btn-outline-danger"
