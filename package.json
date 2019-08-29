@@ -45,7 +45,7 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.75",
-    "typy": "^3.1.0"
+    "typy": "^3.2.1"
   },
   "scripts": {
     "start": "run-p start:dev start:api",
