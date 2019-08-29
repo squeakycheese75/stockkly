@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
@@ -12,7 +13,6 @@ import ManageProductPage from "./components/products/ManageProductPage";
 // import TransactionsPage from "./components/transactions/TransactionsPage";
 import TransactionsPage from "./components/history/TransactionsPage";
 import ManageTransactionPage from "./components/history/ManageTransactionPage";
-
 // import ProductsPage from "./components/history/ProductsPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watcher/WatchListPage";
@@ -20,6 +20,9 @@ import ProfilePage from "./components/profile/ProfilePage";
 // import NotFound from "./components/common/NotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PropTypes from "prop-types";
+import * as profileActions from "./redux/actions/profileActions";
+import { bindActionCreators } from "redux";
 
 class App extends Component {
   constructor(props) {
@@ -102,40 +105,49 @@ class App extends Component {
     localStorage.setItem("userProfile", JSON.stringify(this.state.appSettings));
   }
 
-  async loadProfile() {
+  loadProfile() {
+    // debugger;
     console.log("Loading user profile data from and authenticated user.");
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
-
-    fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) return response;
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => response.json())
-      .then(response => {
-        // if (this._isMounted) {
-        this.setState(
-          {
-            appSettings: response,
-            watchList: response.watchList
-          },
-          () => {
-            console.log("Back from api and state has been set!");
-          }
-        );
-      })
-      .catch(error => {
-        this.setState({
-          message: error.message
-        });
-      });
+    this.props.actions.loadProfile().catch(error => {
+      alert("Loading Profile failed ..." + error);
+    });
+    // .then(console.log("Loaded profile"));
   }
+
+  // async loadProfile() {
+  //   console.log("Loading user profile data from and authenticated user.");
+  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
+
+  //   fetch(url, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //     .then(response => {
+  //       if (response.ok) return response;
+  //       throw new Error("Network response was not ok.");
+  //     })
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       // if (this._isMounted) {
+  //       this.setState(
+  //         {
+  //           appSettings: response,
+  //           watchList: response.watchList
+  //         },
+  //         () => {
+  //           console.log("Back from api and state has been set!");
+  //         }
+  //       );
+  //     })
+  //     .catch(error => {
+  //       this.setState({
+  //         message: error.message
+  //       });
+  //     });
+  // }
 
   async updateProfile() {
     var data = {
@@ -350,4 +362,27 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    profile: state.profile,
+    loading: state.apiCallsInProgress > 0
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      loadProfile: bindActionCreators(profileActions.loadProfile, dispatch)
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
