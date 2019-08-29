@@ -73,6 +73,13 @@ const prices = [
   }
 ];
 
+const profile = {
+  watchList: [],
+  currency: "GBP",
+  symbol: "£",
+  refreshRate: 30
+};
+
 const newTransaction = {
   id: null,
   title: "",
@@ -89,5 +96,6 @@ module.exports = {
   transactions,
   products,
   prices,
-  holdings
+  holdings,
+  profile
 };

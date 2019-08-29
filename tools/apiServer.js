@@ -38,7 +38,9 @@ server.use(function(req, res, next) {
 server.use(
   jsonServer.rewriter({
     "/api/products": "/products",
-    "/api/transactions": "/transactions"
+    "/api/transactions": "/transactions",
+    "/api/holdings": "/holdings",
+    "api/profile": "/profile"
   })
 );
 
