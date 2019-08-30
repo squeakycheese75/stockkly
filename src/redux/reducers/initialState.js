@@ -7,5 +7,6 @@ export default {
     currency: "GBP",
     symbol: "£",
     refreshRate: 100
-  }
+  },
+  prices: []
 };

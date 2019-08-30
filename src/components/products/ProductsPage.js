@@ -1,15 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as transactionActions from "../../redux/actions/transactionActions";
+// import * as transactionActions from "../../redux/actions/transactionActions";
 import * as productActions from "../../redux/actions/productActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import TransactionList from "./TransactionsList";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav, Button } from "react-bootstrap";
+// import TransactionList from "./TransactionsList";
+// import { LinkContainer } from "react-router-bootstrap";
+// import { Nav, Button } from "react-bootstrap";
 import Loading from "../common/Loading";
-import { toast } from "react-toastify";
-import ProductList from "./ProductList";
+// import { toast } from "react-toastify";
+// import ProductList from "./ProductList";
+import ProductTable from "./ProductTable";
 
 class ProductsPage extends React.Component {
   componentDidMount() {
@@ -21,14 +22,14 @@ class ProductsPage extends React.Component {
     }
   }
 
-  handleDelete = transaction => {
-    toast.info("Transaction Deleted!");
-    this.props.actions.deleteTransaction(transaction).catch(error => {
-      toast.error("Transaction delete has Failed! " + error.message, {
-        autoClose: false
-      });
-    });
-  };
+  // handleDelete = transaction => {
+  //   toast.info("Transaction Deleted!");
+  //   this.props.actions.deleteTransaction(transaction).catch(error => {
+  //     toast.error("Transaction delete has Failed! " + error.message, {
+  //       autoClose: false
+  //     });
+  //   });
+  // };
 
   render() {
     return (
@@ -39,12 +40,13 @@ class ProductsPage extends React.Component {
           <Loading />
         ) : (
           <>
-            <ProductList products={this.props.products} />}
-            <LinkContainer to="/transaction">
+            {/* <ProductList products={this.props.products} />} */}
+            <ProductTable data={this.props.products} />
+            {/* <LinkContainer to="/product">
               <Nav.Link>
                 <Button>Add new transaction</Button>
               </Nav.Link>
-            </LinkContainer>
+            </LinkContainer> */}
           </>
         )}
       </>
@@ -52,7 +54,7 @@ class ProductsPage extends React.Component {
   }
 }
 
-TransactionsPage.propTypes = {
+ProductsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired

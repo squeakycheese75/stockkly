@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 // import ProductForm from "./ProductForm";
 import Loading from "../common/Loading";
 // import { toast } from "react-toastify";
-import ProductList from "./ProductList";
-// import ProductTable from "./ProductTable";
 
 const newProduct = {
   id: null
@@ -32,8 +30,10 @@ function ManageProductPage({ products, loadProducts, history, ...props }) {
   ) : (
     <>
       {/* <h1>Products</h1> */}
-      <ProductList products={products} />
-      {/* <ProductTable data={products} /> */}
+      {/* <ProductList products={products} />
+      <ProductTable data={products} /> */}
+      {/* <ProductForm /> */}
+      Load individual product...
     </>
   );
 }

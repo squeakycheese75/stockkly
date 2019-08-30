@@ -8,7 +8,7 @@ import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
-// import ProductsPage from "./components/products/ProductsPage";
+import ProductsPage from "./components/products/ProductsPage";
 import ManageProductPage from "./components/products/ManageProductPage";
 // import TransactionsPage from "./components/transactions/TransactionsPage";
 import TransactionsPage from "./components/history/TransactionsPage";
@@ -309,7 +309,7 @@ class App extends Component {
           />
           <Route
             path="/products"
-            render={props => <ManageProductPage auth={this.auth} {...props} />}
+            render={props => <ProductsPage auth={this.auth} {...props} />}
           />
           <Route
             path="/product/:ticker"
@@ -348,7 +348,6 @@ class App extends Component {
                 auth={this.auth}
                 appSettings={this.state.appSettings}
                 watchList={this.state.watchList}
-                // removeTicker={this.removeTicker}
                 onReload={this.reload}
                 {...props}
               />
