@@ -37,14 +37,6 @@ class TickerSearchResultsTable extends Component {
     this.props.onSubmit(index);
   }
 
-  // addButton(cell) {
-  //   return (
-  //     <>
-  //       <FormWithToasts content={cell} onClick={() => this.addItem(cell)} />
-  //     </>
-  //   );
-  // }
-
   viewProductHelp(cell, row) {
     return (
       <ButtonToolbar>
@@ -98,7 +90,7 @@ class TickerSearchResultsTable extends Component {
           selectRow={selectRowProps}
         >
           <TableHeaderColumn
-            width="30%"
+            width="20%"
             dataField="displayTicker"
             isKey
             dataSort={true}
@@ -116,6 +108,14 @@ class TickerSearchResultsTable extends Component {
           </TableHeaderColumn>
           <TableHeaderColumn
             width="20%"
+            dataField="sector"
+            dataSort={true}
+            columnClassName="bstable"
+          >
+            Sector
+          </TableHeaderColumn>
+          <TableHeaderColumn
+            width="20%"
             dataField="exchange"
             dataSort={true}
             columnClassName="bstable"
@@ -129,4 +129,3 @@ class TickerSearchResultsTable extends Component {
 }
 
 export default withRouter(TickerSearchResultsTable);
-// export default TickerSearchResultsTable;

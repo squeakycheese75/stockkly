@@ -15,7 +15,8 @@ import TransactionsPage from "./components/history/TransactionsPage";
 import ManageTransactionPage from "./components/history/ManageTransactionPage";
 // import ProductsPage from "./components/history/ProductsPage";
 import WalletPage from "./components/wallet/WalletPage";
-import WatchListPage from "./components/watcher/WatchListPage";
+// import WatchListPage from "./components/watcher/WatchListPage";
+import WatchListPage from "./components/watchlist/WatchlistPage";
 import ProfilePage from "./components/profile/ProfilePage";
 // import NotFound from "./components/common/NotFound";
 import { ToastContainer } from "react-toastify";
@@ -319,7 +320,6 @@ class App extends Component {
             path="/product"
             render={props => <ManageProductPage auth={this.auth} {...props} />}
           /> */}
-
           <Route
             path="/profile"
             render={props => (

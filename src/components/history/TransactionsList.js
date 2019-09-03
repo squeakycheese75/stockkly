@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const TransactionList = ({ transactions, onDeleteClick }) => (
+const TransactionList = ({ transactions, showDelete, onDeleteClick }) => (
   <table className="table">
     <thead>
+      <h1>showDelete is {showDelete}</h1>
       <tr>
         <th>#</th>
         <th>Product</th>
@@ -40,6 +41,7 @@ const TransactionList = ({ transactions, onDeleteClick }) => (
             <td>{trans.quantity}</td>
             <td>{trans.trandate}</td>
             <td>
+              {showDelete ? showDelete : showDelete}
               <button
                 className="btn btn-outline-danger"
                 onClick={() => onDeleteClick(trans)}
@@ -56,7 +58,8 @@ const TransactionList = ({ transactions, onDeleteClick }) => (
 
 TransactionList.propTypes = {
   transactions: PropTypes.array.isRequired,
-  onDeleteClick: PropTypes.func.isRequired
+  onDeleteClick: PropTypes.func.isRequired,
+  showDelete: PropTypes.bool.isRequired
 };
 
 export default TransactionList;

@@ -48,6 +48,7 @@ class TransactionsPage extends React.Component {
             <TransactionList
               transactions={this.props.transactions}
               onDeleteClick={this.handleDelete}
+              showDelete={true}
             />
             {/* {this.props.transactions.map(transaction => (
             <div key={transaction.title}>{transaction.title}</div>

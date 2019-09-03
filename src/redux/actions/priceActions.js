@@ -2,8 +2,8 @@ import * as types from "./actionTypes";
 import * as pricesApi from "../../api/pricesApi";
 import { beginApiCall } from "./apiStatusActions";
 
-export function loadProductsSuccess(products) {
-  return { type: types.LOAD_PRODUCTS_SUCCESS, products };
+export function loadPricesSuccess(prices) {
+  return { type: types.LOAD_PRICES_SUCCESS, prices };
 }
 
 export function loadPrices() {

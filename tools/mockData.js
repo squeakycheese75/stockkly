@@ -17,6 +17,16 @@ const transactions = [
     productId: 1,
     type: "Sell",
     quantity: 1.0,
+    price: 8000.0,
+    trandate: "2012-04-30"
+  },
+  {
+    id: 3,
+    // title: "React: The Big Picture",
+    // slug: "react-big-picture",
+    productId: 2,
+    type: "Buy",
+    quantity: 100.0,
     price: 8.0,
     trandate: "2012-04-30"
   }
