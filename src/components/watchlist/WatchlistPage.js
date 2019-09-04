@@ -10,8 +10,8 @@ import WatchListTable from "./components/WatchListTable";
 
 class WatchlistPage extends React.Component {
   componentDidMount() {
-    debugger;
-    const { profile, products, prices, actions } = this.props;
+    // debugger;
+    const { profile, products, prices, watchData, actions } = this.props;
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
         alert("Loading Products failed ..." + error);
@@ -38,7 +38,7 @@ class WatchlistPage extends React.Component {
           <Loading />
         ) : (
           <>
-            <WatchListTable data={watchData} />
+            <WatchListTable data={this.props.watchData} />
           </>
         )}
       </>
@@ -61,20 +61,56 @@ function mapStateToProps(state) {
     products: state.products,
     prices: state.prices,
     // watchData: [{}, {}],
-    watchData:
-      state.profile.watchList.length === 0
-        ? []
-        : state.profile.watchList.map(item => {
-            return {
-              ...item,
-              price: state.price.find(p => p.ticker == item).price
-              // productName: state.products.find(
-              //   p => p.id === transaction.productId
-              // ).name,
-              // ticker: state.products.find(p => p.id === transaction.productId)
-              //   .ticker
-            };
-          }),
+    // watchData:
+    //   state.profile.watchList.length === 0
+    //     ? []
+    //     : state.profile.watchList.map(item => {
+    //         return {
+    //           ...item,
+    //           price: state.prices.find(p => p.ticker === item).price
+    //           // productName: state.products.find(
+    //           //   p => p.id === transaction.productId
+    //           // ).name,
+    //           // ticker: state.products.find(p => p.id === transaction.productId)
+    //           //   .ticker
+    //         };
+    //       }),
+    // watchData:
+    //   state.profile.watchList.length === 0
+    //     ? []
+    //     : state.profile.watchList.map(watchItem => {
+    //         return {
+    //           // ...watchItem,
+    //           ticker: "BTC:USD",
+    //           price: 1.0
+    //           // price: state.prices.find(p => p.ticker === item).price
+    //           // productName: state.products.find(
+    //           //   p => p.id === transaction.productId
+    //           // ).name,
+    //           // ticker: state.products.find(p => p.id === transaction.productId)
+    //           //   .ticker
+    //         };
+    //       }),
+    watchData: [
+      {
+        name: "BTC:USD",
+        ticker: "BTC:USD",
+        price: "1.00",
+        change: 0.009,
+        trend: [],
+        movement: 0.12,
+        displayTicker: "BTC:USD",
+        details: "Bitcoin",
+        symbol: "£"
+      }
+    ],
+    r: state.profile.watchList.map(watchItem => {
+      return {
+        ticker: watchItem,
+        // price: state.prices.find(p => p.ticker === watchItem).price
+        price: state.prices.find(p => p.id === watchItem)
+      };
+    }),
     loading: state.apiCallsInProgress > 0
   };
 }

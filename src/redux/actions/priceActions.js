@@ -8,6 +8,7 @@ export function loadPricesSuccess(prices) {
 
 export function loadPrices() {
   return function(dispatch) {
+    // debugger;
     dispatch(beginApiCall());
     return pricesApi
       .getPrices()

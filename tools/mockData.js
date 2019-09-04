@@ -76,15 +76,23 @@ const prices = [
   {
     id: 1,
     productId: 1,
-    ticker: "BTC:USD",
+    ticker: "BTC:GBP",
     open: 100,
     price: 101.3,
+    priceDate: "2019-08-16"
+  },
+  {
+    id: 2,
+    productId: 2,
+    ticker: "LTC:GBP",
+    open: 10,
+    price: 10.3,
     priceDate: "2019-08-16"
   }
 ];
 
 const profile = {
-  watchList: [],
+  watchList: [1, 2],
   currency: "GBP",
   symbol: "£",
   refreshRate: 30
