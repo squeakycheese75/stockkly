@@ -56,43 +56,137 @@ const products = [
     sector: "Crypto",
     quote: { ccy: "USD", symbol: "$" },
     exchange: "COINBASE"
+  },
+  {
+    id: 3,
+    name: "Gold (Oz)",
+    ticker: "GOLD:GBP:OZ",
+    slug: "GOLD:GBP:OZ",
+    displayTicker: "GOLD:GBP:OZ",
+    description: "Gold Oz",
+    company: "na",
+    sector: "Precious metal",
+    quote: { ccy: "GBP", symbol: "£" },
+    exchange: ""
   }
 ];
 
-const holdings = [
+const wallet = [
   {
     id: 1,
+    ccy: "GBP",
     productId: 1,
-    qty: 100
-  },
-  {
-    id: 2,
-    productId: 2,
-    qty: 10
+    change: -36.13000000000011,
+    displayTicker: "GOLD:OZ",
+    movement: -2.9354414130417212,
+    name: "Gold",
+    price: 1230.82,
+    qty: 6,
+    spot: 1,
+    symbol: "£",
+    ticker: "GOLD:OZ:GBP",
+    total: 7384.92,
+    total_change: -216.78000000000065
   }
 ];
 
-const prices = [
+const watchlist = [
   {
     id: 1,
-    productId: 1,
-    ticker: "BTC:GBP",
-    open: 100,
-    price: 101.3,
-    priceDate: "2019-08-16"
+    ccy: "USD",
+    change: 10.008642301438158,
+    movement: 0.09446216113523867,
+    name: "Bitcoin",
+    price: 10595.398391435361,
+    spot: 0,
+    symbol: "$",
+    ticker: "BTC:USD",
+    displayTicker: "BTC:USD",
+    trend: [
+      11967.787190573517,
+      11879.328255338634,
+      11838.86353262985,
+      11309.829831529987,
+      11505.116518140103,
+      11377.616704314423,
+      10884.87606986713,
+      10097.014966873041,
+      10366.66837062287,
+      10396.53804965891,
+      10274.863380063787,
+      10361.692727143509,
+      10872.01243366271,
+      10798.350269539762,
+      10060.28126475644,
+      10126.396406327241,
+      10413.607969752773,
+      10180.337315205184,
+      10087.992379640062,
+      10368.505552466911,
+      10188.661551199999,
+      9768.055147446887,
+      9515.080785314474,
+      9615.744227815805,
+      9649.592395028361,
+      9785.855104604077,
+      10360.894718635236,
+      10596.775698140751,
+      10550.04035976066,
+      10595.398391435361
+    ]
   },
   {
     id: 2,
-    productId: 2,
-    ticker: "LTC:GBP",
-    open: 10,
-    price: 10.3,
-    priceDate: "2019-08-16"
+    ccy: "USD",
+    change: -1.5331304260924696,
+    movement: -2.338453779367772,
+    name: "Litecoin",
+    price: 65.56171602018874,
+    spot: 0,
+    symbol: "$",
+    ticker: "LTC:USD",
+    displayTicker: "LTC:USD",
+    trend: [
+      91.25806385574482,
+      89.845874533884,
+      83.68716435033738,
+      85.51198253225478,
+      89.68945678036984,
+      85.62668500971164,
+      84.5641208516509,
+      76.79959388225697,
+      76.75506982453017,
+      75.07530640253674,
+      73.29830828864749,
+      76.70437024446277,
+      77.06001380024887,
+      75.44956104614045,
+      72.81913819436767,
+      73.75855351524332,
+      75.49651110089044,
+      73.60725005418757,
+      72.27996024373437,
+      73.7310736166249,
+      72.85730166706972,
+      67.08713333353217,
+      63.66148300059102,
+      64.91008691940168,
+      64.70315001785777,
+      66.44212843586689,
+      66.79081685233427,
+      69.44236729410578,
+      66.95253421303931,
+      65.56171602018874
+    ]
   }
 ];
 
 const profile = {
-  watchList: [1, 2],
+  watchList: ["BTC:USD"],
+  tickers: [
+    { productId: 1, watchdate: "2019-08-16" },
+    { productId: 2, watchdate: "2019-08-16" }
+  ],
   currency: "GBP",
   symbol: "£",
   refreshRate: 30
@@ -113,7 +207,7 @@ module.exports = {
   newTransaction,
   transactions,
   products,
-  prices,
-  holdings,
+  watchlist,
+  wallet,
   profile
 };

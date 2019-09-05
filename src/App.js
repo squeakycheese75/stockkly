@@ -14,7 +14,7 @@ import ManageProductPage from "./components/products/ManageProductPage";
 import TransactionsPage from "./components/history/TransactionsPage";
 import ManageTransactionPage from "./components/history/ManageTransactionPage";
 // import ProductsPage from "./components/history/ProductsPage";
-import WalletPage from "./components/wallet/WalletPage";
+import PortfolioPage from "./components/portfolio/PortfolioPage";
 // import WatchListPage from "./components/watcher/WatchListPage";
 import WatchListPage from "./components/watchlist/WatchlistPage";
 import ProfilePage from "./components/profile/ProfilePage";
@@ -250,7 +250,7 @@ class App extends Component {
             path="/"
             render={props =>
               isLoggedIn ? (
-                <WalletPage
+                <PortfolioPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
                   {...props}
@@ -334,7 +334,7 @@ class App extends Component {
           <Route
             path="/wallet"
             render={props => (
-              <WalletPage
+              <PortfolioPage
                 auth={this.auth}
                 appSettings={this.state.appSettings}
                 {...props}

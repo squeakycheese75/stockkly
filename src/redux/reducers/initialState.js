@@ -8,5 +8,7 @@ export default {
     symbol: "£",
     refreshRate: 100
   },
-  prices: []
+  prices: [],
+  watchlist: [],
+  portfolio: []
 };

@@ -1,22 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
 // import * as productActions from "../../redux/actions/productActions";
-import * as watchlistActions from "../../redux/actions/watchlistActions";
+// import * as watchlistActions from "../../redux/actions/watchlistActions";
 import * as profileActions from "../../redux/actions/profileActions";
+import * as portfolioActions from "../../redux/actions/portfolioActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
-import WatchListTable from "./components/WatchListTable";
+// import WatchListTable from "./components/WatchListTable";
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
 
   componentDidMount() {
     this._isMounted = true;
-    const { watchlist, profile, actions } = this.props;
-    if (watchlist.length === 0) {
-      actions.loadWatchlist().catch(error => {
-        alert("Loading Watchlist failed ..." + error);
+    const { portfolio, profile, actions } = this.props;
+    if (portfolio.length === 0) {
+      actions.loadPortfolio().catch(error => {
+        alert("Loading Portfolio failed ..." + error);
       });
     }
 
@@ -25,19 +26,6 @@ class WatchlistPage extends React.Component {
         alert("Loading Profile failed ..." + error);
       });
     }
-
-    var refreshRate = profile.refreshRate * 1000;
-    // var refreshRate = 30000;
-    console.log("Refresh rate us ", refreshRate);
-    setInterval(() => {
-      // if (this._isMounted) {
-      //   this.loadWatchData();
-      // }
-      console.log("loading watchlist");
-      actions.loadWatchlist().catch(error => {
-        alert("Loading Watchlist failed ..." + error);
-      });
-    }, refreshRate);
   }
 
   render() {
@@ -47,7 +35,8 @@ class WatchlistPage extends React.Component {
           <Loading />
         ) : (
           <>
-            <WatchListTable data={this.props.watchlist} />
+            {/* <WatchListTable data={this.props.watchlist} /> */}
+            Portfolio
           </>
         )}
       </>
@@ -57,7 +46,7 @@ class WatchlistPage extends React.Component {
 
 WatchlistPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  watchlist: PropTypes.array.isRequired,
+  portfolio: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -65,7 +54,7 @@ WatchlistPage.propTypes = {
 function mapStateToProps(state) {
   return {
     profile: state.profile,
-    watchlist: state.watchlist,
+    portfolio: state.portfolio,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -74,8 +63,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
-      loadWatchlist: bindActionCreators(
-        watchlistActions.loadWatchlist,
+      loadPortfolio: bindActionCreators(
+        portfolioActions.loadPortfolio,
         dispatch
       )
     }

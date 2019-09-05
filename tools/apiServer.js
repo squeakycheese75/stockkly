@@ -39,8 +39,9 @@ server.use(
   jsonServer.rewriter({
     "/api/products": "/products",
     "/api/transactions": "/transactions",
-    "/api/holdings": "/holdings",
-    "api/profile": "/profile"
+    "/api/profile": "/profile",
+    "/api/watchlist": "/watchlist",
+    "/api/wallet": "/wallet"
   })
 );
 
