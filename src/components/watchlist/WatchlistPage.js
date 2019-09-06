@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-// import * as productActions from "../../redux/actions/productActions";
 import * as watchlistActions from "../../redux/actions/watchlistActions";
 import * as profileActions from "../../redux/actions/profileActions";
 import PropTypes from "prop-types";
@@ -12,40 +11,35 @@ class WatchlistPage extends React.Component {
   _isMounted = false;
 
   componentDidMount() {
-    // debugger;
     this._isMounted = true;
     const { watchlist, profile, actions } = this.props;
+
     if (watchlist.length === 0) {
       actions.loadWatchlist().catch(error => {
-        alert("Loading Watchlist failed ..." + error);
+        console.log("Loading Watchlist failed ..." + error);
       });
     }
 
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {
-        alert("Loading Profile failed ..." + error);
+        console.log("Loading Profile failed ..." + error);
       });
     }
 
     var refreshRate = profile.refreshRate * 1000;
-    // var refreshRate = 30000;
-    console.log("Refresh rate us ", refreshRate);
+
     setInterval(() => {
-      // debugger;
-      console.log("isMounted is: ", this._isMounted);
       if (this._isMounted) {
-        console.log("isMounted so loading watchlist");
         actions.loadWatchlist().catch(error => {
-          alert("Loading Watchlist failed ..." + error);
+          // alert("Loading Watchlist failed ..." + error);
+          console.log("Loading Watchlist failed ..." + error);
         });
       }
     }, refreshRate);
   }
 
   componentWillUnmount() {
-    console.log("Un-mounting watchlist!");
     this._isMounted = false;
-    //Cache data back to localStorage if unmounted
     localStorage.setItem("watchlist", JSON.stringify(this.props.watchlist));
   }
 
