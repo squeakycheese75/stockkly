@@ -9,6 +9,9 @@ export default {
     refreshRate: 100
   },
   prices: [],
-  watchlist: [],
+  // watchlist: [],
+  watchlist: localStorage.getItem("watchlist")
+    ? JSON.parse(localStorage.getItem("watchlist"))
+    : [],
   portfolio: []
 };

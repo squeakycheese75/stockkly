@@ -12,6 +12,7 @@ class WatchlistPage extends React.Component {
   _isMounted = false;
 
   componentDidMount() {
+    // debugger;
     this._isMounted = true;
     const { watchlist, profile, actions } = this.props;
     if (watchlist.length === 0) {
@@ -30,14 +31,22 @@ class WatchlistPage extends React.Component {
     // var refreshRate = 30000;
     console.log("Refresh rate us ", refreshRate);
     setInterval(() => {
-      // if (this._isMounted) {
-      //   this.loadWatchData();
-      // }
-      console.log("loading watchlist");
-      actions.loadWatchlist().catch(error => {
-        alert("Loading Watchlist failed ..." + error);
-      });
+      // debugger;
+      console.log("isMounted is: ", this._isMounted);
+      if (this._isMounted) {
+        console.log("isMounted so loading watchlist");
+        actions.loadWatchlist().catch(error => {
+          alert("Loading Watchlist failed ..." + error);
+        });
+      }
     }, refreshRate);
+  }
+
+  componentWillUnmount() {
+    console.log("Un-mounting watchlist!");
+    this._isMounted = false;
+    //Cache data back to localStorage if unmounted
+    localStorage.setItem("watchlist", JSON.stringify(this.props.watchlist));
   }
 
   render() {
