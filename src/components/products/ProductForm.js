@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ProductSummary from "./components/ProductSummary";
-import TransactionList from "../history/TransactionsList";
-import ProductChart from "./components/ProductChart";
+// import TransactionList from "../history/TransactionsList";
+// import ProductChart from "./components/ProductChart";
 
-const SHOWDELETE = false;
+// const SHOWDELETE = false;
 
 const ProductForm = ({
   transactions,
@@ -20,21 +20,21 @@ const ProductForm = ({
   return (
     <div>
       <ProductSummary product={product} price={price} />
-      <br />
+      {/* <br />
       <ProductChart chartData={chartData} />
       <br />
       <TransactionList
         transactions={transactions}
-        showDelete={SHOWDELETE}
+        // showDelete={SHOWDELETE}
         // onDeleteClick={this.handleDelete}
-      />
+      /> */}
     </div>
   );
 };
 
 ProductForm.propTypes = {
   product: PropTypes.object.isRequired,
-  price: PropTypes.object.isRequired,
+  // price: PropTypes.object.isRequired,
   transactions: PropTypes.array.isRequired,
   showDelete: PropTypes.bool.isRequired,
   errors: PropTypes.object

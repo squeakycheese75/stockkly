@@ -77,33 +77,33 @@ const wallet = [
     ccy: "GBP",
     productId: 1,
     change: -36.13000000000011,
-    displayTicker: "GOLD:OZ",
+    displayTicker: "BTC:USD",
     movement: -2.9354414130417212,
     name: "Gold",
     price: 1230.82,
     qty: 6,
     spot: 1,
     symbol: "£",
-    ticker: "GOLD:OZ:GBP",
+    ticker: "BTC:USD",
     total: 7384.92,
     total_change: -216.78000000000065
-  },
-  {
-    id: 2,
-    ccy: "GBP",
-    productId: 2,
-    change: -10.13,
-    displayTicker: "SILVER:OZ",
-    movement: 1.48,
-    name: "Silver",
-    price: 230.82,
-    qty: 20,
-    spot: 1,
-    symbol: "£",
-    ticker: "SILVER:OZ:GBP",
-    total: 599.92,
-    total_change: 45.78000000000065
   }
+  // {
+  //   id: 2,
+  //   ccy: "GBP",
+  //   productId: 2,
+  //   change: -10.13,
+  //   displayTicker: "LTC:USD",
+  //   movement: 1.48,
+  //   name: "Silver",
+  //   price: 230.82,
+  //   qty: 20,
+  //   spot: 1,
+  //   symbol: "£",
+  //   ticker: "LTC:USD",
+  //   total: 599.92,
+  //   total_change: 45.78000000000065
+  // }
 ];
 
 const watchlist = [

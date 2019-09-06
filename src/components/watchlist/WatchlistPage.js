@@ -12,13 +12,13 @@ class WatchlistPage extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    const { watchlist, profile, actions } = this.props;
+    const { profile, actions } = this.props;
 
-    if (watchlist.length === 0) {
-      actions.loadWatchlist().catch(error => {
-        console.log("Loading Watchlist failed ..." + error);
-      });
-    }
+    // if (watchlist.length === 0) {
+    actions.loadWatchlist().catch(error => {
+      console.log("Loading Watchlist failed ..." + error);
+    });
+    // }
 
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {

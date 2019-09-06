@@ -50,38 +50,7 @@ ProductsPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    // transactions:
-    //   state.products.length === 0
-    //     ? []
-    //     : state.transactions.map(transaction => {
-    //         return {
-    //           ...transaction,
-    //           productName: state.products.find(
-    //             p => p.id === transaction.productId
-    //           ).name,
-    //           ticker: state.products.find(p => p.id === transaction.productId)
-    //             .ticker
-    //         };
-    //       }),
     products: state.products,
-    // price: state.products.map(product => {
-    //   return {
-    //     ...product,
-    //     price: state.prices.find(p => p.ticker === product.ticker)
-    //   };
-    // }),
-    // transactions: state.transactions.map(product => {
-    //   return {
-    //     ...product,
-    //     price: state.prices.find(p => p.ticker === product.ticker)
-    //   };
-    // }),
-    // transactions: state.products.map(product => {
-    //   return {
-    //     ...product,
-    //     price: state.transactions.find(t => t.ticker === product.ticker)
-    //   };
-    // }),
     transactions: state.transactions,
     loading: state.apiCallsInProgress > 0
   };

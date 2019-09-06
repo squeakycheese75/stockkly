@@ -13,20 +13,17 @@ class PortfolioPage extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    const { wallet, profile, actions } = this.props;
+    const { profile, actions } = this.props;
 
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {
         console.log("Loading Profile failed ..." + error);
       });
     }
-
-    if (wallet.length === 0) {
-      // debugger;
-      actions.loadWallet().catch(error => {
-        console.log("Loading Wallet failed ..." + error);
-      });
-    }
+    //Force wallet load because we default to cache
+    actions.loadWallet().catch(error => {
+      console.log("Loading Wallet failed ..." + error);
+    });
 
     var refreshRate = profile.refreshRate * 1000;
 

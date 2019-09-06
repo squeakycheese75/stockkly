@@ -125,7 +125,6 @@ export function getTransactionById(transactions, id) {
 
 function mapStateToProps(state, ownProps) {
   // const slug = ownProps.match.params.slug;
-  // debugger;
   const id = ownProps.match.params.id;
   const transaction =
     id && state.transactions.length > 0
