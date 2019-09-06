@@ -1,31 +1,47 @@
 import React from "react";
 import { connect } from "react-redux";
-// import * as productActions from "../../redux/actions/productActions";
-// import * as watchlistActions from "../../redux/actions/watchlistActions";
 import * as profileActions from "../../redux/actions/profileActions";
-import * as portfolioActions from "../../redux/actions/portfolioActions";
+import * as walletActions from "../../redux/actions/walletActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
-// import WatchListTable from "./components/WatchListTable";
+import WalletTable from "./components/WalletTable";
+import WalletSummary from "./components/WalletSummary";
 
-class WatchlistPage extends React.Component {
+class PortfolioPage extends React.Component {
   _isMounted = false;
 
   componentDidMount() {
     this._isMounted = true;
-    const { portfolio, profile, actions } = this.props;
-    if (portfolio.length === 0) {
-      actions.loadPortfolio().catch(error => {
-        alert("Loading Portfolio failed ..." + error);
-      });
-    }
+    const { wallet, profile, actions } = this.props;
 
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {
-        alert("Loading Profile failed ..." + error);
+        console.log("Loading Profile failed ..." + error);
       });
     }
+
+    if (wallet.length === 0) {
+      // debugger;
+      actions.loadWallet().catch(error => {
+        console.log("Loading Wallet failed ..." + error);
+      });
+    }
+
+    var refreshRate = profile.refreshRate * 1000;
+
+    setInterval(() => {
+      if (this._isMounted) {
+        actions.loadWallet().catch(error => {
+          console.log("Loading Portfolio failed ..." + error);
+        });
+      }
+    }, refreshRate);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+    localStorage.setItem("wallet", JSON.stringify(this.props.wallet));
   }
 
   render() {
@@ -35,8 +51,14 @@ class WatchlistPage extends React.Component {
           <Loading />
         ) : (
           <>
-            {/* <WatchListTable data={this.props.watchlist} /> */}
-            Portfolio
+            <WalletSummary
+              data={this.props.wallet}
+              profile={this.props.profile}
+            />
+            <WalletTable
+              data={this.props.wallet}
+              profile={this.props.profile}
+            />
           </>
         )}
       </>
@@ -44,9 +66,9 @@ class WatchlistPage extends React.Component {
   }
 }
 
-WatchlistPage.propTypes = {
+PortfolioPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  portfolio: PropTypes.array.isRequired,
+  wallet: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -54,7 +76,7 @@ WatchlistPage.propTypes = {
 function mapStateToProps(state) {
   return {
     profile: state.profile,
-    portfolio: state.portfolio,
+    wallet: state.wallet,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -63,10 +85,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
-      loadPortfolio: bindActionCreators(
-        portfolioActions.loadPortfolio,
-        dispatch
-      )
+      loadWallet: bindActionCreators(walletActions.loadWallet, dispatch)
     }
   };
 }
@@ -74,4 +93,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WatchlistPage);
+)(PortfolioPage);

@@ -1,0 +1,126 @@
+.td-column-size {
+  font-size: small;
+  font-weight: bold;
+}
+
+.td-column-price-down {
+  /* animation: blinker 1s linear infinite; */
+  color: #ff2e00;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.td-column-price-up {
+  color: #4c9900;
+}
+
+.bstable-header-bold {
+  font-weight: bold;
+}
+
+.twenty {
+  width: 20%;
+}
+
+.forty {
+  width: 40%;
+}
+
+.bstable {
+  font-size: small;
+  border: 0px;
+
+  /* padding-left: 0.25em;
+    padding-right: 0.25em; */
+}
+
+.react-bs-container-header {
+  background-color: lightsteelblue;
+  padding-bottom: 0px;
+  /* font-family: "Proxima Nova Semi Bold";
+  font-size: 14px; */
+}
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+.padding-bottom-3 {
+  padding-bottom: 3px;
+}
+
+ul {
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+li {
+  list-style: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.name {
+  height: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 0px;
+  margin-top: 5px;
+}
+
+.details {
+  height: 10px;
+  font-size: 11px;
+  font-weight: normal;
+  margin-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.table {
+  margin-bottom: 0.25em;
+}
+
+.table td {
+  padding: 0.2em;
+  /* font-size: 12px; */
+  margin-left: 11px;
+  vertical-align: middle;
+  border: 0px;
+  /* font-family: "Proxima Nova Semi Bold"; */
+  font-weight: bold;
+}
+
+.table tr {
+  /* line-height: 0.5em; */
+  border: 0px;
+}
+
+.table th {
+  margin-left: 10px;
+  padding: 0.2em;
+  border: 0px;
+}
+
+td.bstable-icon {
+  text-align: right;
+}
+
+.up {
+  color: #4c9900;
+}
+
+.down {
+  /* animation: blinker 1s linear infinite; */
+  color: #ff2e00;
+}
+
+.flat {
+  /* animation: blinker 1s linear infinite; */
+  color: black;
+}

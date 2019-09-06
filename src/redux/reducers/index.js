@@ -3,14 +3,14 @@ import transactions from "./transactionReducer";
 import products from "./productReducer";
 import profile from "./profileReducer";
 import watchlist from "./watchlistReducer";
-import portfolio from "./productReducer";
+import wallet from "./walletReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 
 const rootReducer = combineReducers({
   transactions,
   products,
   profile,
-  portfolio,
+  wallet,
   watchlist,
   apiCallsInProgress
 });

@@ -8,10 +8,10 @@ export default {
     symbol: "£",
     refreshRate: 100
   },
-  prices: [],
-  // watchlist: [],
   watchlist: localStorage.getItem("watchlist")
     ? JSON.parse(localStorage.getItem("watchlist"))
     : [],
-  portfolio: []
+  wallet: localStorage.getItem("wallet")
+    ? JSON.parse(localStorage.getItem("wallet"))
+    : []
 };

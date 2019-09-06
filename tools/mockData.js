@@ -87,6 +87,22 @@ const wallet = [
     ticker: "GOLD:OZ:GBP",
     total: 7384.92,
     total_change: -216.78000000000065
+  },
+  {
+    id: 2,
+    ccy: "GBP",
+    productId: 2,
+    change: -10.13,
+    displayTicker: "SILVER:OZ",
+    movement: 1.48,
+    name: "Silver",
+    price: 230.82,
+    qty: 20,
+    spot: 1,
+    symbol: "£",
+    ticker: "SILVER:OZ:GBP",
+    total: 599.92,
+    total_change: 45.78000000000065
   }
 ];
 
