@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
-import ManagePage from "./components/manage/ManagePage";
+// import ManagePage from "./components/manage/ManagePage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
@@ -256,7 +256,7 @@ class App extends Component {
             }
           />
           <Route path="/about" component={AboutPage} />
-          <Route path="/manage" render={() => <ManagePage />} />
+          {/* <Route path="/manage" render={() => <ManagePage />} /> */}
           <Route
             path="/callback"
             render={props => <Callback auth={this.auth} {...props} />}
