@@ -26,8 +26,6 @@ class ProductsPage extends React.Component {
   render() {
     return (
       <>
-        {this.props.loading}
-        <h2>Products</h2>
         {this.props.loading ? (
           <Loading />
         ) : (

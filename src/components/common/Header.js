@@ -43,17 +43,17 @@ class Header extends Component {
                   <Button>WatchList</Button>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/manage">
+              {/* <LinkContainer to="/manage">
                 <Nav.Link>
                   <Button>Find</Button>
                 </Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
 
-              <LinkContainer to="/about">
+              {/* <LinkContainer to="/about">
                 <Nav.Link>
                   <Button>About</Button>
                 </Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
               <LinkContainer to="/transactions">
                 <Nav.Link>
                   <Button>Transactions</Button>
@@ -61,7 +61,7 @@ class Header extends Component {
               </LinkContainer>
               <LinkContainer to="/products">
                 <Nav.Link>
-                  <Button>Products</Button>
+                  <Button>Find</Button>
                 </Nav.Link>
               </LinkContainer>
             </Nav>

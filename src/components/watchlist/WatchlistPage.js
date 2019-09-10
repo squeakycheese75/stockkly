@@ -26,12 +26,11 @@ class WatchlistPage extends React.Component {
       });
     }
 
-    var refreshRate = profile.refreshRate * 1000;
+    const refreshRate = profile.refreshRate * 1000;
 
     setInterval(() => {
       if (this._isMounted) {
         actions.loadWatchlist().catch(error => {
-          // alert("Loading Watchlist failed ..." + error);
           console.log("Loading Watchlist failed ..." + error);
         });
       }

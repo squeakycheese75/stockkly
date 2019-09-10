@@ -1,119 +1,93 @@
 import React from "react";
-import WalletSummary from "./components/WalletSummary";
-import WalletTable from "./components/WalletTable";
-import { Alert } from "react-bootstrap";
+import { connect } from "react-redux";
+import * as profileActions from "../../redux/actions/profileActions";
+import * as walletActions from "../../redux/actions/walletActions";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
+import WalletTable from "./components/WalletTable";
+import WalletSummary from "./components/WalletSummary";
 
 class WalletPage extends React.Component {
   _isMounted = false;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      appSettings: this.props.appSettings,
-      holdingsData: localStorage.getItem("holdingsData")
-        ? JSON.parse(localStorage.getItem("holdingsData"))
-        : [],
-      loading: true
-    };
-    this.auth = this.props.auth;
-  }
-
-  loadWalletData() {
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/wallet/holdings/";
-    // console.log("Loading WalletData")
-    fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) return response;
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (this._isMounted) {
-          this.setState({
-            holdingsData: response,
-            loading: false
-          });
-        }
-      })
-      .catch(error => {
-        this.setState({
-          message: error.message
-        });
-      });
-  }
-
   componentDidMount() {
     this._isMounted = true;
+    const { profile, actions } = this.props;
 
-    if (this.auth.isAuthenticated()) {
-      this.loadWalletData();
+    if (profile.length === 0) {
+      actions.loadProfile().catch(error => {
+        console.log("Loading Profile failed ..." + error);
+      });
     }
-    // Sets the data refresh rate
-    var refreshRate = this.state.appSettings.refreshRate * 1000;
+    //Force wallet load because we default to cache
+    actions.loadWallet().catch(error => {
+      console.log("Loading Wallet failed ..." + error);
+    });
+
+    var refreshRate = profile.refreshRate * 1000;
+
     setInterval(() => {
       if (this._isMounted) {
-        // console.log("Reloading wallet data!");
-        this.loadWalletData();
+        actions.loadWallet().catch(error => {
+          console.log("Loading Portfolio failed ..." + error);
+        });
       }
     }, refreshRate);
   }
 
-  UNSAFE_componentWillUnmount() {
+  componentWillUnmount() {
     this._isMounted = false;
-    this.setState({ loading: false });
-
-    //Cache data back to localStorage if unmounted
-    localStorage.setItem(
-      "holdingsData",
-      JSON.stringify(this.state.holdingsData)
-    );
+    localStorage.setItem("wallet", JSON.stringify(this.props.wallet));
   }
 
   render() {
-    if (this.state.loading) return <Loading />;
-
     return (
-      <div className="card">
-        {this.state.holdingsData === undefined ? (
-          <>
-            <Alert key="empty" variant="secondary" as="h5">
-              <Alert.Heading>Portfolio is empty!</Alert.Heading>
-              <p>Go and find stuff to add</p>
-            </Alert>
-          </>
-        ) : this.state.holdingsData.length > 0 ? (
-          <>
-            <WalletSummary
-              data={this.state.holdingsData}
-              appSettings={this.state.appSettings}
-            />
-            <WalletTable
-              data={this.state.holdingsData}
-              appSettings={this.state.appSettings}
-            />
-          </>
+      <>
+        {this.props.loading && !this._isMounted ? (
+          <Loading />
         ) : (
           <>
-            <Alert key="empty" variant="secondary" as="h5">
-              <Alert.Heading>Portfolio is empty!</Alert.Heading>
-              <p>
-                To add items to your portfolio, simply "Find" the asset you want
-                to track and then use the "Add Transaction" button. Fill in the
-                transaction details and then we'll do the rest!
-              </p>
-            </Alert>
+            <WalletSummary
+              data={this.props.wallet}
+              profile={this.props.profile}
+            />
+            <WalletTable
+              data={this.props.wallet}
+              profile={this.props.profile}
+            />
           </>
         )}
-      </div>
+      </>
     );
   }
 }
 
-export default WalletPage;
+WalletPage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  wallet: PropTypes.array.isRequired,
+  profile: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    profile: state.profile,
+    wallet: state.wallet,
+    loading: state.apiCallsInProgress > 0
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
+      loadWallet: bindActionCreators(walletActions.loadWallet, dispatch)
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletPage);

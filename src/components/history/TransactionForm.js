@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
+// import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import NumberInput from "../common/NumberInput";
 import DateInput from "../common/DateInput";
@@ -32,13 +32,6 @@ const TransactionForm = ({
           {errors.onSave}
         </div>
       )}
-      <TextInput
-        name="title"
-        label="Title"
-        value={transaction.title}
-        onChange={onChange}
-        error={errors.title}
-      />
 
       <SelectInput
         name="productId"

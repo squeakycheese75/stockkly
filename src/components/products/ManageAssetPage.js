@@ -10,7 +10,7 @@ import { Nav, Button } from "react-bootstrap";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
 
-class TransactionsPage extends React.Component {
+class AssetPage extends React.Component {
   componentDidMount() {
     const { transactions, products, actions } = this.props;
 
@@ -27,14 +27,14 @@ class TransactionsPage extends React.Component {
     }
   }
 
-  handleDelete = transaction => {
-    toast.info("Transaction Deleted!");
-    this.props.actions.deleteTransaction(transaction).catch(error => {
-      toast.error("Transaction delete has Failed! " + error.message, {
-        autoClose: false
-      });
-    });
-  };
+  // handleDelete = transaction => {
+  //   toast.info("Transaction Deleted!");
+  //   this.props.actions.deleteTransaction(transaction).catch(error => {
+  //     toast.error("Transaction delete has Failed! " + error.message, {
+  //       autoClose: false
+  //     });
+  //   });
+  // };
 
   render() {
     return (
@@ -43,14 +43,21 @@ class TransactionsPage extends React.Component {
           <Loading />
         ) : (
           <>
-            <TransactionList
-              transactions={this.props.transactions}
-              onDeleteClick={this.handleDelete}
-              showDelete={true}
-            />
-            {/* {this.props.transactions.map(transaction => (
-            <div key={transaction.title}>{transaction.title}</div>
-          ))} */}
+            Product details
+            <table>
+              <tr>
+                <td>slug</td>
+                <td>{state.product.slug}</td>
+              </tr>
+              <tr>
+                <td>name</td>
+                <td>{state.product.name}</td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>{state.product.id}</td>
+              </tr>
+            </table>
             <LinkContainer to="/transaction">
               <Nav.Link>
                 <Button>Add new transaction</Button>
@@ -63,15 +70,27 @@ class TransactionsPage extends React.Component {
   }
 }
 
-TransactionsPage.propTypes = {
+AssetPage.propTypes = {
   actions: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired
 };
 
+export function getTransactionBySlug(products, slug) {
+  return products.find(product => product.slug === slug) || null;
+}
+
 function mapStateToProps(state) {
+  // const slug = ownProps.match.params.slug;
+  const id = ownProps.match.params.slug;
+  const product =
+    id && state.products.length > 0
+      ? getProductsBySlug(state.products, id)
+      : {};
   return {
+    product,
     transactions:
       state.products.length === 0
         ? []
@@ -109,4 +128,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TransactionsPage);
+)(AssetPage);

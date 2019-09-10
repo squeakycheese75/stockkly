@@ -1,8 +1,6 @@
 const transactions = [
   {
     id: 1,
-    // title: "Securing React Apps with Auth0",
-    // slug: "react-auth0-authentication-security",
     productId: 1,
     type: "Buy",
     quantity: 10.0,
@@ -12,8 +10,6 @@ const transactions = [
   },
   {
     id: 2,
-    // title: "React: The Big Picture",
-    // slug: "react-big-picture",
     productId: 1,
     type: "Sell",
     quantity: 1.0,
@@ -22,8 +18,6 @@ const transactions = [
   },
   {
     id: 3,
-    // title: "React: The Big Picture",
-    // slug: "react-big-picture",
     productId: 2,
     type: "Buy",
     quantity: 100.0,
@@ -79,31 +73,31 @@ const wallet = [
     change: -36.13000000000011,
     displayTicker: "BTC:USD",
     movement: -2.9354414130417212,
-    name: "Gold",
+    name: "Bitcoin",
     price: 1230.82,
     qty: 6,
-    spot: 1,
+    spot: 1.22,
     symbol: "£",
     ticker: "BTC:USD",
     total: 7384.92,
     total_change: -216.78000000000065
+  },
+  {
+    id: 2,
+    ccy: "USD",
+    productId: 2,
+    change: -10.13,
+    displayTicker: "LTC:USD",
+    movement: 1.48,
+    name: "Litecoin",
+    price: 230.82,
+    qty: 20,
+    spot: 1.22,
+    symbol: "$",
+    ticker: "LTC:USD",
+    total: 599.92,
+    total_change: 45.78000000000065
   }
-  // {
-  //   id: 2,
-  //   ccy: "GBP",
-  //   productId: 2,
-  //   change: -10.13,
-  //   displayTicker: "LTC:USD",
-  //   movement: 1.48,
-  //   name: "Silver",
-  //   price: 230.82,
-  //   qty: 20,
-  //   spot: 1,
-  //   symbol: "£",
-  //   ticker: "LTC:USD",
-  //   total: 599.92,
-  //   total_change: 45.78000000000065
-  // }
 ];
 
 const watchlist = [

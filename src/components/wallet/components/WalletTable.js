@@ -27,19 +27,15 @@ function nameFormatter(cell, row) {
 
 class WalletTable extends React.Component {
   render() {
-    const { data, appSettings, history } = this.props;
+    const { data, profile, history } = this.props;
 
     function priceFormatter(cell, row) {
       return row.spot === 1 ? (
         <div className="name">
           {row.symbol}
-          {/* 
-          {cell.toFixed(2).toLocaleString()} */}
           {parseFloat(cell).toLocaleString("en-GB", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
-            // currency: appSettings.currency,
-            // style: "currency"
           })}
         </div>
       ) : (
@@ -65,7 +61,7 @@ class WalletTable extends React.Component {
         <div>
           <ul>
             <li className="name">
-              {`${appSettings.symbol}` +
+              {`${profile.symbol}` +
                 cell.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </li>
             {row.total_change > 0 ? (
@@ -170,17 +166,6 @@ class WalletTable extends React.Component {
           >
             TOTAL
           </TableHeaderColumn>
-          {/* <TableHeaderColumn
-            width="20%"
-            dataField="change"
-            dataAlign="center"
-            headerAlign="center"
-            columnClassName={columnClassNameFormat}
-            dataFormat={priceChangeFormatter}
-            dataSort={true}
-          >
-            24HR
-          </TableHeaderColumn> */}
         </BootstrapTable>
       </div>
     );

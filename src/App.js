@@ -10,15 +10,11 @@ import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import ProductsPage from "./components/products/ProductsPage";
 import ManageProductPage from "./components/products/ManageProductPage";
-// import TransactionsPage from "./components/transactions/TransactionsPage";
 import TransactionsPage from "./components/history/TransactionsPage";
 import ManageTransactionPage from "./components/history/ManageTransactionPage";
-// import ProductsPage from "./components/history/ProductsPage";
-import PortfolioPage from "./components/portfolio/PortfolioPage";
-// import WatchListPage from "./components/watcher/WatchListPage";
+import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watchlist/WatchlistPage";
 import ProfilePage from "./components/profile/ProfilePage";
-// import NotFound from "./components/common/NotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
@@ -250,7 +246,7 @@ class App extends Component {
             path="/"
             render={props =>
               isLoggedIn ? (
-                <PortfolioPage
+                <WalletPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
                   {...props}
@@ -316,10 +312,6 @@ class App extends Component {
             path="/product/:ticker"
             render={props => <ManageProductPage auth={this.auth} {...props} />}
           />
-          {/* <Route
-            path="/product"
-            render={props => <ManageProductPage auth={this.auth} {...props} />}
-          /> */}
           <Route
             path="/profile"
             render={props => (
@@ -334,7 +326,7 @@ class App extends Component {
           <Route
             path="/wallet"
             render={props => (
-              <PortfolioPage
+              <WalletPage
                 auth={this.auth}
                 appSettings={this.state.appSettings}
                 {...props}
