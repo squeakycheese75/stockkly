@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const TransactionList = ({ transactions, showDelete, onDeleteClick }) => (
+const TransactionList = ({ transactions, onDeleteClick }) => (
   <table className="table">
     <thead>
       <h1>showDelete is {showDelete}</h1>
@@ -19,21 +19,9 @@ const TransactionList = ({ transactions, showDelete, onDeleteClick }) => (
       {transactions.map(trans => {
         return (
           <tr key={trans.id}>
-            {/* <td>
-              <a
-                className="btn btn-light"
-                href={"http://pluralsight.com/courses/" + trans.slug}
-              >
-                Watch
-              </a>
-            </td> */}
-            {/* <td>
-              <Link to={"/transaction/" + trans.slug}>{trans.title}</Link>
-            </td> */}
             <td>
               <Link to={"/transaction/" + trans.id}>{trans.id}</Link>
             </td>
-            {/* <td>{trans.productName}</td> */}
             <td>
               <Link to={"/product/" + trans.ticker}>{trans.productName}</Link>
             </td>
@@ -41,7 +29,6 @@ const TransactionList = ({ transactions, showDelete, onDeleteClick }) => (
             <td>{trans.quantity}</td>
             <td>{trans.trandate}</td>
             <td>
-              {showDelete ? showDelete : showDelete}
               <button
                 className="btn btn-outline-danger"
                 onClick={() => onDeleteClick(trans)}

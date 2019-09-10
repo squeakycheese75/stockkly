@@ -20,6 +20,7 @@ class WalletPage extends React.Component {
         console.log("Loading Profile failed ..." + error);
       });
     }
+
     //Force wallet load because we default to cache
     actions.loadWallet().catch(error => {
       console.log("Loading Wallet failed ..." + error);

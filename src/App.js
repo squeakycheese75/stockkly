@@ -10,8 +10,8 @@ import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import ProductsPage from "./components/products/ProductsPage";
 import ManageProductPage from "./components/products/ManageProductPage";
-import TransactionsPage from "./components/history/TransactionsPage";
-import ManageTransactionPage from "./components/history/ManageTransactionPage";
+import TransactionsPage from "./components/transactions/TransactionsPage";
+import ManageTransactionPage from "./components/transactions/ManageTransactionPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watchlist/WatchlistPage";
 import ProfilePage from "./components/profile/ProfilePage";
@@ -106,9 +106,8 @@ class App extends Component {
     // debugger;
     console.log("Loading user profile data from and authenticated user.");
     this.props.actions.loadProfile().catch(error => {
-      alert("Loading Profile failed ..." + error);
+      console.log("Loading Profile failed ..." + error);
     });
-    // .then(console.log("Loaded profile"));
   }
 
   // async loadProfile() {
@@ -262,24 +261,7 @@ class App extends Component {
             path="/callback"
             render={props => <Callback auth={this.auth} {...props} />}
           />
-          {/* <Route
-            path="/product/:pid"
-            render={props => (
-              <ProductForm
-                auth={this.auth}
-                appSettings={this.state.appSettings}
-                addTickerToWatchList={this.addTickerToWatchList}
-                removeTickerFromWatchList={this.removeTicker}
-                watchList={this.state.watchList}
-                {...props}
-              />
-            )}
-          /> */}
-          {/* 
-            <Route
-              path="/transactions/:pid"
-              render={props => <TransactionsPage auth={this.auth} {...props} />}
-            /> */}
+
           <Route
             exact
             path="/transactions"
@@ -345,7 +327,6 @@ class App extends Component {
               />
             )}
           />
-          {/* <Route component={NotFound} /> */}
         </Switch>
         <ToastContainer autoClose={3000} hideProgressBar toas />
       </div>

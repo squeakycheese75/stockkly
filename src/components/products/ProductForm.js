@@ -36,7 +36,7 @@ ProductForm.propTypes = {
   product: PropTypes.object.isRequired,
   // price: PropTypes.object.isRequired,
   transactions: PropTypes.array.isRequired,
-  showDelete: PropTypes.bool.isRequired,
+  // showDelete: PropTypes.bool.isRequired,
   errors: PropTypes.object
 };
 
