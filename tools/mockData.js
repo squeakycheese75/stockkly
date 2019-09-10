@@ -5,7 +5,6 @@ const transactions = [
     type: "Buy",
     quantity: 10.0,
     price: 11000.0,
-    transtype: "Buy",
     trandate: "2012-04-30"
   },
   {

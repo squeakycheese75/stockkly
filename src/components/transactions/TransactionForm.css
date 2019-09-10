@@ -1,0 +1,8 @@
+.form {
+  background-color: #44014c;
+  min-height: 200px;
+  box-sizing: border-box;
+  color: white;
+  border-width: 5px;
+  border-color: red;
+}

@@ -6,14 +6,14 @@ import PropTypes from "prop-types";
 import TransactionForm from "./TransactionForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
+// import { tsConstructSignatureDeclaration } from "@babel/types";
 
 const newTransaction = {
   id: null,
-  title: "",
-  productId: null,
+  productId: 1,
   type: "Buy",
-  quantity: 1,
-  trandate: ""
+  quantity: 1
+  // trandate: ""
 };
 
 function ManageTransactionPage({
@@ -47,12 +47,12 @@ function ManageTransactionPage({
   }, [props.transaction]);
 
   function handleChange(event) {
-    console.log(
-      "handleChange",
-      event.target.value,
-      " name ",
-      event.target.value
-    );
+    // console.log(
+    //   "handleChange",
+    //   event.target.value,
+    //   " name ",
+    //   event.target.value
+    // );
     const { value, name } = event.target;
     setTransaction(prevTransaction => ({
       ...prevTransaction,
@@ -61,13 +61,15 @@ function ManageTransactionPage({
   }
 
   function formIsValid() {
-    const { productId, type, quantity } = transaction;
+    const { productId, type, quantity, trandate } = transaction;
     const errors = {};
+    // debugger;
+    console.log("in formIsValid with ", transaction);
 
-    // if (!title) errors.title = "Title is required.";
     if (!productId) errors.product = "Product is required";
-    if (!type) errors.type = "Type is required";
-    if (!quantity) errors.quantity = "Type is required";
+    // if (!type) errors.type = "Type is required";
+    // if (!quantity) errors.quantity = "Quantity is required";
+    // if (!trandate) errors.trandate = "Transaction date is required";
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties
@@ -75,6 +77,7 @@ function ManageTransactionPage({
   }
 
   function handleSave(event) {
+    debugger;
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);
@@ -84,6 +87,7 @@ function ManageTransactionPage({
         history.push("/transactions");
       })
       .catch(error => {
+        // console.log("here");
         setSaving(false);
         setErrors({ onSave: error.message });
       });

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import TextInput from "../common/TextInput";
+import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import NumberInput from "../common/NumberInput";
 import DateInput from "../common/DateInput";
@@ -33,6 +33,15 @@ const TransactionForm = ({
         </div>
       )}
 
+      <TextInput
+        name="title"
+        label="Title"
+        value={transaction.title || ""}
+        placeholder="Type here"
+        onChange={onChange}
+        error={errors.title}
+      />
+
       <SelectInput
         name="productId"
         label="Product"
@@ -56,7 +65,7 @@ const TransactionForm = ({
         error={errors.type}
       />
 
-      <DateInput
+      {/* <DateInput
         name="trandate"
         label="Date"
         value={transaction.trandate || ""}
@@ -70,7 +79,7 @@ const TransactionForm = ({
         value={transaction.quantity}
         onChange={onChange}
         error={errors.quantity}
-      />
+      /> */}
 
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}

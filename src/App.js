@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Nav from "./components/common/Header";
 import AboutPage from "./components/about/AboutPage";
-// import ManagePage from "./components/manage/ManagePage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
@@ -29,17 +28,17 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    tokenRenewalComplete: false,
-    appSettings: localStorage.getItem("userProfile")
-      ? JSON.parse(localStorage.getItem("userProfile"))
-      : {
-          currency: "GBP",
-          symbol: "£",
-          refreshRate: 30
-        },
-    watchList: localStorage.getItem("watchList")
-      ? JSON.parse(localStorage.getItem("watchList"))
-      : []
+    tokenRenewalComplete: false
+    // appSettings: localStorage.getItem("userProfile")
+    //   ? JSON.parse(localStorage.getItem("userProfile"))
+    //   : {
+    //       currency: "GBP",
+    //       symbol: "£",
+    //       refreshRate: 30
+    //     },
+    // watchList: localStorage.getItem("watchList")
+    //   ? JSON.parse(localStorage.getItem("watchList"))
+    //   : []
   };
 
   //Load component data
@@ -256,7 +255,6 @@ class App extends Component {
             }
           />
           <Route path="/about" component={AboutPage} />
-          {/* <Route path="/manage" render={() => <ManagePage />} /> */}
           <Route
             path="/callback"
             render={props => <Callback auth={this.auth} {...props} />}
@@ -267,12 +265,6 @@ class App extends Component {
             path="/transactions"
             render={props => <TransactionsPage auth={this.auth} {...props} />}
           />
-          {/* <Route
-            path="/transaction/:slug"
-            render={props => (
-              <ManageTransactionPage auth={this.auth} {...props} />
-            )}
-          /> */}
           <Route
             path="/transaction/:id"
             render={props => (
