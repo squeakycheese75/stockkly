@@ -2,13 +2,19 @@ import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
 // import { ButtonToolbar, OverlayTrigger, Tooltip, Toast } from "react-bootstrap";
-// import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
+const TransactionTable = ({
+  transactions,
+  onDeleteClick,
+  history,
+  errors = {}
+}) => {
   const options = {
-    //   onRowClick: function(row) {
-    //     history.push(`/product/${row.ticker}`);
-    //   },
+    onRowClick: function(row) {
+      history.push(`/transaction/${row.id}`);
+    },
+    // <Link to={"/product/" + product.ticker}>{product.name}</Link>
     noDataText: "Loading..."
   };
   const selectRowProp = {
@@ -116,4 +122,4 @@ TransactionTable.propTypes = {
   onDeleteClick: PropTypes.func.isRequired
 };
 
-export default TransactionTable;
+export default withRouter(TransactionTable);

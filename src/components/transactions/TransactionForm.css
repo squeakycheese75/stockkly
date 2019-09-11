@@ -1,8 +1,23 @@
 .form {
-  background-color: #44014c;
-  min-height: 200px;
+  width: 80%;
+  padding-left: 16px;
+  padding-right: 16px;
   box-sizing: border-box;
-  color: white;
-  border-width: 5px;
-  border-color: red;
+  border: 1px solid grey;
+  border-radius: 4px;
+  background-color: #f5fbfd;
+  resize: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
+
+/* .App {
+  background-color: pink;
+  width: 100%;
+} */
+/* 
+body {
+  background-color: green;
+} */

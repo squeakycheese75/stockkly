@@ -67,7 +67,7 @@ function ManageTransactionPage({
     console.log("in formIsValid with ", transaction);
 
     if (!productId) errors.product = "Product is required";
-    // if (!type) errors.type = "Type is required";
+    if (!type) errors.type = "Type is required";
     // if (!quantity) errors.quantity = "Quantity is required";
     // if (!trandate) errors.trandate = "Transaction date is required";
 
@@ -77,7 +77,7 @@ function ManageTransactionPage({
   }
 
   function handleSave(event) {
-    debugger;
+    // debugger;
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);

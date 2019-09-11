@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
 import * as profileActions from "./redux/actions/profileActions";
 import { bindActionCreators } from "redux";
+import styles from "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -235,7 +236,7 @@ class App extends Component {
     if (!this.state.tokenRenewalComplete) return <Loading />;
 
     return (
-      <div>
+      <div className={styles}>
         <Nav auth={this.auth} />
 
         <Switch>
@@ -320,7 +321,11 @@ class App extends Component {
             )}
           />
         </Switch>
-        <ToastContainer autoClose={3000} hideProgressBar toas />
+        <ToastContainer
+          autoClose={3000}
+          hideProgressBar
+          position="bottom-right"
+        />
       </div>
     );
   }

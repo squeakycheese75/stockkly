@@ -3,7 +3,6 @@ import styles from "./Header.css";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import logo from "./icon_48.png";
-// import logo from "../../../public/images/icon_48";
 
 class Header extends Component {
   render() {
@@ -33,32 +32,18 @@ class Header extends Component {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              {/* <LinkContainer to="/pricing">
-                <Nav.Link>
-                  <Button>Pricing</Button>
-                </Nav.Link>
-              </LinkContainer> */}
               <LinkContainer to="/watching">
                 <Nav.Link>
                   <Button>WatchList</Button>
                 </Nav.Link>
               </LinkContainer>
-              {/* <LinkContainer to="/manage">
-                <Nav.Link>
-                  <Button>Find</Button>
-                </Nav.Link>
-              </LinkContainer> */}
-
-              {/* <LinkContainer to="/about">
-                <Nav.Link>
-                  <Button>About</Button>
-                </Nav.Link>
-              </LinkContainer> */}
-              <LinkContainer to="/transactions">
-                <Nav.Link>
-                  <Button>Transactions</Button>
-                </Nav.Link>
-              </LinkContainer>
+              {isAuthenticated() && (
+                <LinkContainer to="/transactions">
+                  <Nav.Link>
+                    <Button>Transactions</Button>
+                  </Nav.Link>
+                </LinkContainer>
+              )}
               <LinkContainer to="/products">
                 <Nav.Link>
                   <Button>Find</Button>
