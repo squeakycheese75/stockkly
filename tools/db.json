@@ -4,7 +4,7 @@
       "id": 1,
       "productId": 1,
       "type": "Buy",
-      "quantity": "11",
+      "quantity": 10,
       "price": 11000,
       "trandate": "2012-04-30"
     },
@@ -18,7 +18,7 @@
     },
     {
       "id": 3,
-      "productId": 2,
+      "productId": 3,
       "type": "Buy",
       "quantity": 100,
       "price": 8,
@@ -197,9 +197,7 @@
     }
   ],
   "profile": {
-    "watchList": [
-      "BTC:USD"
-    ],
+    "id": 1,
     "tickers": [
       {
         "productId": 1,
@@ -210,7 +208,7 @@
         "watchdate": "2019-08-16"
       }
     ],
-    "currency": "GBP",
+    "currency": "EUR",
     "symbol": "£",
     "refreshRate": 30
   }

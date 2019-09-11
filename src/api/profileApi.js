@@ -1,41 +1,23 @@
 import { handleResponse, handleError, getHeader } from "./apiUtils";
-const baseUrl = process.env.REACT_APP_API_URL + "/profile/";
+const baseUrl = process.env.REACT_APP_API_URL + "/profile";
 
 export function getProfile() {
-  console.log(baseUrl);
+  // console.log(baseUrl);
   return fetch(baseUrl)
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function saveProfile(profile) {
-  return fetch(baseUrl + (profile.id || ""), {
+  // console.log("in profileApi.saveprofile with: ", profile);
+
+  // const bd = JSON.stringify(profile);
+  // console.log("in profileApi.saveprofile with: bd: ", bd);
+  return fetch(baseUrl, {
     method: profile.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
-    headers: getHeader().headers,
+    headers: getHeader(),
     body: JSON.stringify(profile)
   })
     .then(handleResponse)
     .catch(handleError);
 }
-
-//   export function deleteTransaction(transactionId) {
-//     return fetch(baseUrl + transactionId, {
-//       method: "DELETE",
-//       header: getHeader().headers
-//     })
-//       .then(handleResponse)
-//       .catch(handleError);
-//   }
-
-// export function saveTransaction(transaction) {
-//   // console.log("t", transaction);
-//   return fetch(baseUrl + (transaction.id || ""), {
-//     method: transaction.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
-//     // headers: getHeader().headers,
-//     headers: { "content-type": "application/json" },
-//     body: JSON.stringify(transaction)
-//     // body: JSON.stringify(transaction)
-//   })
-//     .then(handleResponse)
-//     .catch(handleError);
-// }

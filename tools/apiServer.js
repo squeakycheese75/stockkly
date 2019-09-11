@@ -38,7 +38,7 @@ server.use(
   jsonServer.rewriter({
     "/api/products": "/products",
     "/api/transactions": "/transactions",
-    "/api/profile": "/profile",
+    // "/api/profile": "/profile",
     "/api/watchlist": "/watchlist",
     "/api/wallet": "/wallet"
   })
@@ -55,6 +55,17 @@ server.use((req, res, next) => {
 
 server.post("/transactions/", function(req, res, next) {
   const error = validateTransaction(req.body);
+  if (error) {
+    res.status(400).send(error);
+  } else {
+    // req.body.slug = createSlug(req.body.id); // Generate a slug for new courses.
+    next();
+  }
+});
+
+server.put("/profile", function(req, res, next) {
+  console.log("post body: ", req.body);
+  const error = false;
   if (error) {
     res.status(400).send(error);
   } else {
@@ -90,3 +101,9 @@ function validateTransaction(transaction) {
   if (!transaction.trandate) return "Transaction date is required.";
   return "";
 }
+
+// function validateProfile(profile) {
+//   debugger;
+//   if (!profile.currency) return "Currency is required.";
+//   return "";
+// }

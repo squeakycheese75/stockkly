@@ -34,10 +34,10 @@ export function saveProfile(profile) {
     dispatch(beginApiCall());
     return profileApi
       .saveProfile(profile)
-      .then(saveProfile => {
+      .then(savedProfile => {
         profile.id
-          ? dispatch(updateProfileSuccess(saveProfile))
-          : dispatch(createProfileSuccess(saveProfile));
+          ? dispatch(updateProfileSuccess(savedProfile))
+          : dispatch(createProfileSuccess(savedProfile));
       })
       .catch(error => {
         dispatch(apiCallError(error));
@@ -45,21 +45,3 @@ export function saveProfile(profile) {
       });
   };
 }
-
-// export function saveTransaction(transaction) {
-//   //eslint-disable-next-line no-unused-vars
-//   return function(dispatch, getState) {
-//     dispatch(beginApiCall());
-//     return transactionApi
-//       .saveTransaction(transaction)
-//       .then(savedTransaction => {
-//         transaction.id
-//           ? dispatch(updateTransactionSuccess(savedTransaction))
-//           : dispatch(createTransactionSuccess(savedTransaction));
-//       })
-//       .catch(error => {
-//         dispatch(apiCallError(error));
-//         throw error;
-//       });
-//   };
-// }

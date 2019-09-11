@@ -3,7 +3,8 @@ export default {
   products: [],
   apiCallsInProgress: 0,
   profile: {
-    watchList: [],
+    id: 1,
+    tickers: [],
     currency: "GBP",
     symbol: "£",
     refreshRate: 100

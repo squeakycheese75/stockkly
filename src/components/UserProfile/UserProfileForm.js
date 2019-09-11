@@ -36,7 +36,12 @@ const UserProfileForm = ({
       <div className={styles}>
         <Container className="App">
           <form onSubmit={onSave} className="form">
-            <h2>Edit profile</h2>
+            <h2>{profile.id ? "Edit" : "Add"} profile</h2>
+            {errors.onSave && (
+              <div className="alert alert-danger" role="alert">
+                {errors.onSave}
+              </div>
+            )}
 
             <SelectInput
               name="currency"
@@ -63,10 +68,10 @@ const UserProfileForm = ({
 
 UserProfileForm.propTypes = {
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object
-  //   onSave: PropTypes.func.isRequired,
-  //   onChange: PropTypes.func.isRequired,
-  //   saving: PropTypes.bool
+  errors: PropTypes.object,
+  onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  saving: PropTypes.bool
 };
 
 export default UserProfileForm;
