@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import TransactionForm from "./TransactionForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
-// import { tsConstructSignatureDeclaration } from "@babel/types";
 
 const newTransaction = {
   id: null,
@@ -32,7 +31,7 @@ function ManageTransactionPage({
   useEffect(() => {
     if (transactions.length === 0) {
       loadTransactions().catch(error => {
-        alert("Loading transactions failed" + error);
+        console.log("Loading transactions failed" + error);
       });
     } else {
       setTransaction({ ...props.transaction });
@@ -40,19 +39,13 @@ function ManageTransactionPage({
 
     if (products.length === 0) {
       loadProducts().catch(error => {
-        alert("Loading products failed" + error);
+        console.log("Loading products failed" + error);
       });
     }
     // eslint-disable-next-line
   }, [props.transaction]);
 
   function handleChange(event) {
-    // console.log(
-    //   "handleChange",
-    //   event.target.value,
-    //   " name ",
-    //   event.target.value
-    // );
     const { value, name } = event.target;
     setTransaction(prevTransaction => ({
       ...prevTransaction,
@@ -64,7 +57,7 @@ function ManageTransactionPage({
     const { productId, type, quantity, trandate } = transaction;
     const errors = {};
     // debugger;
-    console.log("in formIsValid with ", transaction);
+    // console.log("in formIsValid with ", transaction);
 
     if (!productId) errors.product = "Product is required";
     if (!type) errors.type = "Type is required";
@@ -83,11 +76,12 @@ function ManageTransactionPage({
     setSaving(true);
     saveTransaction(transaction)
       .then(() => {
-        toast.info("Some message");
+        toast.info(
+          transaction.id ? "Transaction updated" : "Transaction saved!"
+        );
         history.push("/transactions");
       })
       .catch(error => {
-        // console.log("here");
         setSaving(false);
         setErrors({ onSave: error.message });
       });
@@ -117,10 +111,6 @@ ManageTransactionPage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-// export function getTransactionBySlug(transactions, slug) {
-//   return transactions.find(transaction => transaction.slug === slug) || null;
-// }
-
 export function getTransactionById(transactions, id) {
   return (
     transactions.find(transaction => transaction.id === parseInt(id)) || null
@@ -128,12 +118,10 @@ export function getTransactionById(transactions, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  // const slug = ownProps.match.params.slug;
   const id = ownProps.match.params.id;
   const transaction =
     id && state.transactions.length > 0
-      ? // ? getTransactionBySlug(state.transactions, slug)
-        getTransactionById(state.transactions, id)
+      ? getTransactionById(state.transactions, id)
       : newTransaction;
   return {
     transaction,

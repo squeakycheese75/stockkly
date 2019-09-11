@@ -1,21 +1,19 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
-// import { ButtonToolbar, OverlayTrigger, Tooltip, Toast } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 const TransactionTable = ({
   transactions,
   onDeleteClick,
-  history,
+  // history,
   errors = {}
 }) => {
   const options = {
-    onRowClick: function(row) {
-      history.push(`/transaction/${row.id}`);
-    },
-    // <Link to={"/product/" + product.ticker}>{product.name}</Link>
-    noDataText: "Loading..."
+    // onRowClick: function(row) {
+    //   history.push(`/transaction/${row.id}`);
+    // },
+    noDataText: ""
   };
   const selectRowProp = {
     hideSelectColumn: true,
@@ -33,6 +31,14 @@ const TransactionTable = ({
         Delete
       </button>
     );
+  }
+
+  function idFormatter(cell, row) {
+    return <Link to={"/transaction/" + cell}>{cell}</Link>;
+  }
+
+  function nameFormatter(cell, row) {
+    return <Link to={"/product/" + cell}>{cell}</Link>;
   }
 
   return (
@@ -55,7 +61,7 @@ const TransactionTable = ({
           dataField="id"
           dataSort={true}
           columnClassName="bstable"
-          // dataFormat={nameFormatter}
+          dataFormat={idFormatter}
           dataAlign="left"
           editable={false}
         >
@@ -122,4 +128,4 @@ TransactionTable.propTypes = {
   onDeleteClick: PropTypes.func.isRequired
 };
 
-export default withRouter(TransactionTable);
+export default TransactionTable;
