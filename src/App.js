@@ -13,7 +13,8 @@ import TransactionsPage from "./components/transactions/TransactionsPage";
 import ManageTransactionPage from "./components/transactions/ManageTransactionPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watchlist/WatchlistPage";
-import ProfilePage from "./components/profile/ProfilePage";
+import UserProfilePage from "./components/UserProfile/UserProfilePage";
+// import ProfilePage from "./components/profile/ProfilePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
@@ -103,8 +104,7 @@ class App extends Component {
   }
 
   loadProfile() {
-    // debugger;
-    console.log("Loading user profile data from and authenticated user.");
+    // console.log("Loading user profile data from and authenticated user.");
     this.props.actions.loadProfile().catch(error => {
       console.log("Loading Profile failed ..." + error);
     });
@@ -287,7 +287,12 @@ class App extends Component {
             path="/product/:ticker"
             render={props => <ManageProductPage auth={this.auth} {...props} />}
           />
+
           <Route
+            path="/profile"
+            render={props => <UserProfilePage auth={this.auth} {...props} />}
+          />
+          {/* <Route
             path="/profile"
             render={props => (
               <ProfilePage
@@ -297,7 +302,7 @@ class App extends Component {
                 {...props}
               />
             )}
-          />
+          /> */}
           <Route
             path="/wallet"
             render={props => (

@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 class ProductsPage extends React.Component {
   componentDidMount() {
     this.props.actions.loadProducts().catch(error => {
-      alert("Loading Products failed ..." + error);
+      console.log("Loading Products failed ..." + error);
     });
   }
 

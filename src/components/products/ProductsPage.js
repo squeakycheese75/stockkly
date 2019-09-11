@@ -10,15 +10,16 @@ import ProductTable from "./ProductTable";
 class ProductsPage extends React.Component {
   componentDidMount() {
     const { transactions, products, actions } = this.props;
+
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
-        alert("Loading Products failed ..." + error);
+        console.log("Loading Products failed ..." + error);
       });
     }
 
     if (transactions.length === 0) {
       actions.loadTransactions().catch(error => {
-        alert("Loading Transactions failed ..." + error);
+        console.log("Loading Transactions failed ..." + error);
       });
     }
   }
@@ -30,7 +31,6 @@ class ProductsPage extends React.Component {
           <Loading />
         ) : (
           <>
-            {/* <ProductList products={this.props.products} />} */}
             <ProductTable data={this.props.products} />
           </>
         )}

@@ -4,7 +4,6 @@ import * as transactionActions from "../../redux/actions/transactionActions";
 import * as productActions from "../../redux/actions/productActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-// import TransactionList from "./TransactionsList";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Button } from "react-bootstrap";
 import Loading from "../common/Loading";
@@ -51,11 +50,6 @@ class TransactionsPage extends React.Component {
           <Loading />
         ) : (
           <>
-            {/* <TransactionList
-              transactions={this.props.transactions}
-              onDeleteClick={this.handleDelete}
-              showDelete={true}
-            /> */}
             <TransactionTable
               transactions={this.props.transactions}
               onDeleteClick={this.handleDelete}

@@ -68,7 +68,6 @@ function ManageTransactionPage({
   }
 
   function handleSave(event) {
-    // debugger;
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);

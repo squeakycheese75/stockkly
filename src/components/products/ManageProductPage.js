@@ -25,16 +25,15 @@ function ManageProductPage({
   const [product, setProduct] = useState({ ...props.product });
   // const [transactions, setTransactions] = useState({ ...props.transactions });
   useEffect(() => {
-    // debugger;
     if (products.length === 0) {
       loadProducts().catch(error => {
-        alert("Loading products failed" + error);
+        console.log("Loading products failed" + error);
       });
     }
 
     if (transactions.length === 0) {
       loadTransactions().catch(error => {
-        alert("Loading transactions failed" + error);
+        console.log("Loading transactions failed" + error);
       });
     }
     // eslint-disable-next-line
