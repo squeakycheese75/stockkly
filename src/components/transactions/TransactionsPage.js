@@ -12,20 +12,27 @@ import { toast } from "react-toastify";
 import TransactionTable from "./components/TransactionTable";
 
 class TransactionsPage extends React.Component {
+  _isMounted = false;
+
   componentDidMount() {
     const { transactions, products, actions } = this.props;
 
-    if (transactions.length === 0) {
-      actions.loadTransactions().catch(error => {
-        alert("Loading Transactions failed ..." + error);
-      });
-    }
+    // if (transactions.length === 0) {
+    actions.loadTransactions().catch(error => {
+      console.log("Loading Transactions failed ..." + error);
+    });
+    // }
 
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
-        alert("Loading Products failed ..." + error);
+        console.log("Loading Products failed ..." + error);
       });
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+    localStorage.setItem("transactions", JSON.stringify(this.props.watchlist));
   }
 
   handleDelete = transaction => {

@@ -58,7 +58,7 @@ server.post("/transactions/", function(req, res, next) {
   if (error) {
     res.status(400).send(error);
   } else {
-    req.body.slug = createSlug(req.body.title); // Generate a slug for new courses.
+    // req.body.slug = createSlug(req.body.id); // Generate a slug for new courses.
     next();
   }
 });
@@ -83,9 +83,10 @@ function createSlug(value) {
 }
 
 function validateTransaction(transaction) {
-  if (!transaction.title) return "Title is required.";
+  // if (!transaction.title) return "Title is required.";
   if (!transaction.productId) return "Product is required.";
   if (!transaction.type) return "Type is required.";
   if (!transaction.quantity) return "Quantity is required.";
+  if (!transaction.trandate) return "Transaction date is required.";
   return "";
 }

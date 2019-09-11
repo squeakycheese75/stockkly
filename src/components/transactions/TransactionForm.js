@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextInput from "../common/TextInput";
+// import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
-// import NumberInput from "../common/NumberInput";
-// import DateInput from "../common/DateInput";
+import NumberInput from "../common/NumberInput";
+import DateInput from "../common/DateInput";
 // import { Container } from "react-bootstrap";
 import styles from "./TransactionForm.css";
 import { Container } from "react-bootstrap";
@@ -41,14 +41,14 @@ const TransactionForm = ({
             </div>
           )}
 
-          <TextInput
+          {/* <TextInput
             name="title"
             label="Title"
             value={transaction.title || ""}
             placeholder="Type here"
             onChange={onChange}
             error={errors.title}
-          />
+          /> */}
 
           <SelectInput
             name="productId"
@@ -73,21 +73,21 @@ const TransactionForm = ({
             error={errors.type}
           />
 
-          {/* <DateInput
-        name="trandate"
-        label="Date"
-        value={transaction.trandate || ""}
-        onChange={onChange}
-        error={errors.trandate}
-      />
+          <DateInput
+            name="trandate"
+            label="Date"
+            value={transaction.trandate || ""}
+            onChange={onChange}
+            error={errors.trandate}
+          />
 
-      <NumberInput
-        name="quantity"
-        label="Quantity"
-        value={transaction.quantity}
-        onChange={onChange}
-        error={errors.quantity}
-      /> */}
+          <NumberInput
+            name="quantity"
+            label="Quantity"
+            value={transaction.quantity}
+            onChange={onChange}
+            error={errors.quantity}
+          />
 
           <button type="submit" disabled={saving} className="btn btn-primary">
             {saving ? "Saving..." : "Save"}

@@ -203,7 +203,7 @@ const profile = {
 
 const newTransaction = {
   id: null,
-  title: "",
+  // title: "",
   productId: null,
   type: "",
   quantity: null,

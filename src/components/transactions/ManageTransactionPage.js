@@ -56,13 +56,11 @@ function ManageTransactionPage({
   function formIsValid() {
     const { productId, type, quantity, trandate } = transaction;
     const errors = {};
-    // debugger;
-    // console.log("in formIsValid with ", transaction);
 
     if (!productId) errors.product = "Product is required";
     if (!type) errors.type = "Type is required";
-    // if (!quantity) errors.quantity = "Quantity is required";
-    // if (!trandate) errors.trandate = "Transaction date is required";
+    if (!quantity) errors.quantity = "Quantity is required";
+    if (!trandate) errors.trandate = "Transaction date is required";
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties

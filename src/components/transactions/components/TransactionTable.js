@@ -1,25 +1,12 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
-const TransactionTable = ({
-  transactions,
-  onDeleteClick,
-  // history,
-  errors = {}
-}) => {
+const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   const options = {
-    // onRowClick: function(row) {
-    //   history.push(`/transaction/${row.id}`);
-    // },
     noDataText: ""
-  };
-  const selectRowProp = {
-    hideSelectColumn: true,
-    mode: "checkbox",
-    clickToSelect: true,
-    bgColor: "rgb(178,214,225)"
   };
 
   function deleteFormatter(cell, row) {
@@ -34,11 +21,18 @@ const TransactionTable = ({
   }
 
   function idFormatter(cell, row) {
-    return <Link to={"/transaction/" + cell}>{cell}</Link>;
+    return (
+      <>
+        <Link to={"/transaction/" + cell}>#{cell}</Link>
+      </>
+    );
   }
 
-  function nameFormatter(cell, row) {
-    return <Link to={"/product/" + cell}>{cell}</Link>;
+  function dateFormatter(cell) {
+    if (!cell) {
+      return "";
+    }
+    return `${moment(cell).format("Do MMM YYYY")}`;
   }
 
   return (
@@ -53,7 +47,6 @@ const TransactionTable = ({
         bordered={false}
         size="sm"
         version="4"
-        selectRow={selectRowProp}
         options={options}
       >
         <TableHeaderColumn
@@ -64,50 +57,48 @@ const TransactionTable = ({
           dataFormat={idFormatter}
           dataAlign="left"
           editable={false}
-        >
-          #
-        </TableHeaderColumn>
+        ></TableHeaderColumn>
         <TableHeaderColumn
           width="15%"
           dataField="productName"
           isKey={true}
           dataSort={true}
           columnClassName="bstable"
-          // dataFormat={nameFormatter}
+          dataAlign="left"
           editable={false}
         >
-          NAME
+          Name
         </TableHeaderColumn>
         <TableHeaderColumn
           width="15%"
           dataField="type"
           dataSort={true}
           columnClassName="bstable"
-          // dataFormat={nameFormatter}
+          dataAlign="left"
           editable={false}
         >
-          TYPE
+          Type
         </TableHeaderColumn>
         <TableHeaderColumn
           width="10%"
           dataField="quantity"
           dataSort={true}
           columnClassName="bstable"
-          // dataFormat={nameFormatter}
           dataAlign="right"
           editable={false}
         >
-          QTY
+          Qty
         </TableHeaderColumn>
         <TableHeaderColumn
           width="10%"
           dataField="trandate"
           dataSort={true}
           columnClassName="bstable"
-          // dataFormat={nameFormatter}
+          dataFormat={dateFormatter}
+          dataAlign="right"
           editable={false}
         >
-          trandate
+          Tran. Date
         </TableHeaderColumn>
 
         <TableHeaderColumn
@@ -116,6 +107,7 @@ const TransactionTable = ({
           columnClassName="bstable"
           dataFormat={deleteFormatter}
           editable={false}
+          dataAlign="center"
         ></TableHeaderColumn>
       </BootstrapTable>
     </div>

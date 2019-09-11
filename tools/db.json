@@ -4,8 +4,16 @@
       "id": 1,
       "productId": 1,
       "type": "Buy",
-      "quantity": 10,
+      "quantity": "11",
       "price": 11000,
+      "trandate": "2012-04-30"
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "type": "Sell",
+      "quantity": 1,
+      "price": 8000,
       "trandate": "2012-04-30"
     },
     {
@@ -15,6 +23,14 @@
       "quantity": 100,
       "price": 8,
       "trandate": "2012-04-30"
+    },
+    {
+      "id": 5,
+      "productId": 1,
+      "type": "Buy",
+      "quantity": 1,
+      "trandate": "2019-09-11",
+      "createdAt": 1568203921350
     }
   ],
   "products": [
