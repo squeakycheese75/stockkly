@@ -1,5 +1,5 @@
 export default {
-  transactions: [],
+  // transactions: [],
   products: [],
   apiCallsInProgress: 0,
   profile: {
@@ -14,8 +14,8 @@ export default {
     : [],
   wallet: localStorage.getItem("wallet")
     ? JSON.parse(localStorage.getItem("wallet"))
+    : [],
+  transactions: localStorage.getItem("transactions")
+    ? JSON.parse(localStorage.getItem("transactions"))
     : []
-  // transactions: localStorage.getItem("transactions")
-  //   ? JSON.parse(localStorage.getItem("transactions"))
-  //   : []
 };

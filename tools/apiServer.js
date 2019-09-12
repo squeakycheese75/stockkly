@@ -64,7 +64,7 @@ server.post("/transactions/", function(req, res, next) {
 });
 
 server.put("/profile", function(req, res, next) {
-  console.log("post body: ", req.body);
+  // console.log("post body: ", req.body);
   const error = false;
   if (error) {
     res.status(400).send(error);

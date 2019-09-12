@@ -18,7 +18,7 @@
     },
     {
       "id": 3,
-      "productId": 3,
+      "productId": 2,
       "type": "Buy",
       "quantity": 100,
       "price": 8,

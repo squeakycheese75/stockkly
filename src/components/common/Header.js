@@ -63,6 +63,7 @@ class Header extends Component {
                   <Button
                     className={styles}
                     variant="outline-light"
+                    size="sm"
                     onClick={isAuthenticated() ? logout : login}
                   >
                     {isAuthenticated() ? "Log Out" : "Log In"}
