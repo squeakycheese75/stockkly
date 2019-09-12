@@ -51,7 +51,7 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
     saveProfile(profile)
       .then(() => {
         toast.info("Profile updated");
-        history.push("/transactions");
+        history.push("/");
       })
       .catch(error => {
         setSaving(false);

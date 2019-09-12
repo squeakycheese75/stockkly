@@ -2,13 +2,14 @@ import { handleResponse, handleError, getHeader } from "./apiUtils";
 const baseUrl = process.env.REACT_APP_API_URL + "/profile";
 
 export function getProfile() {
-  // console.log(baseUrl);
+  console.log(baseUrl);
   return fetch(baseUrl)
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function saveProfile(profile) {
+  console.log(baseUrl);
   // console.log("in profileApi.saveprofile with: ", profile);
 
   // const bd = JSON.stringify(profile);

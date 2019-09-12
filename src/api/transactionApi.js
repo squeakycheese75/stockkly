@@ -2,6 +2,7 @@ import { handleResponse, handleError, getHeader } from "./apiUtils";
 const baseUrl = process.env.REACT_APP_API_URL + "/transactions/";
 
 export function getTransactions() {
+  console.log(baseUrl);
   return fetch(baseUrl, {
     headers: getHeader().headers
   })
@@ -10,11 +11,11 @@ export function getTransactions() {
 }
 
 export function saveTransaction(transaction) {
-  // console.log("t", transaction);
+  console.log(baseUrl);
   return fetch(baseUrl + (transaction.id || ""), {
     method: transaction.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
-    // headers: getHeader().headers,
-    headers: { "content-type": "application/json" },
+    headers: getHeader(),
+    // headers: { "content-type": "application/json" },
     body: JSON.stringify(transaction)
     // body: JSON.stringify(transaction)
   })
@@ -23,6 +24,7 @@ export function saveTransaction(transaction) {
 }
 
 export function deleteTransaction(transactionId) {
+  console.log(baseUrl);
   return fetch(baseUrl + transactionId, {
     method: "DELETE",
     header: getHeader().headers
