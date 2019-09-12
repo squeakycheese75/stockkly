@@ -18,11 +18,11 @@
     },
     {
       "id": 3,
-      "productId": 1,
+      "productId": 3,
       "type": "Buy",
-      "quantity": 1,
-      "trandate": "2019-09-12",
-      "createdAt": 1568284862002
+      "quantity": 100,
+      "price": 8,
+      "trandate": "2012-04-30"
     }
   ],
   "products": [
@@ -208,7 +208,7 @@
         "watchdate": "2019-08-16"
       }
     ],
-    "currency": "USD",
+    "currency": "GBP",
     "symbol": "£",
     "refreshRate": 30
   }

@@ -1,52 +1,100 @@
-import React, { Component } from "react";
-import WalletSettings from "./components/WalletSettings";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import * as profileActions from "../../redux/actions/profileActions";
+import PropTypes from "prop-types";
+import ProfileForm from "./ProfileForm";
+import Loading from "../common/Loading";
+import { toast } from "react-toastify";
 
-class ProfilePage extends Component {
-  // _isMounted = false;
+function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
+  const [profile, setProfile] = useState({ ...props.profile });
+  const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      appSettings: this.props.appSettings,
-      profileCcy: this.props.appSettings.currency
-    };
-    this.auth = this.props.auth;
-    this.updateProfile = this.updateProfile.bind(this);
+  useEffect(() => {
+    if (!profile || !profile === {}) {
+      loadProfile().catch(error => {
+        console.log("Loading profile failed" + error);
+      });
+    } else {
+      setProfile({ ...props.profile });
+    }
+    // eslint-disable-next-line
+  }, [props.profile]);
+
+  function handleChange(event) {
+    // console.log("handleChange before", profile);
+    const { value, name } = event.target;
+    setProfile(prevProfile => ({
+      ...prevProfile,
+      [name]: value
+    }));
+    // console.log("handleChange after", profile);
   }
-  componentDidMount() {
-    // this.loadUserProfile();
+
+  function formIsValid() {
+    const { currency } = profile;
+    const errors = {};
+
+    if (!currency) errors.currency = "Currency is required";
+
+    setErrors(errors);
+    // Form is valid if the errors object still has no properties
+    return Object.keys(errors).length === 0;
   }
 
-  updateProfile(appSettings) {
-    // this.props.auth.getProfile((profile, error) =>
-    //   this.setState({ profile, error })
-    // );
-    console.log(appSettings);
-    // this.setState(prevState => ({
-    //   appSettings: (prevState.appSettings.currency = input)
-    // }));
-    // this.setState({
-    //   profileCcy: input
-    // });
-    // console.log("appsettings", this.state.appSettings);
-    // console.log("Setting ccy: ", this.state.profileCcy);
-    this.props.updateProfile(appSettings);
+  function handleSave(event) {
+    event.preventDefault();
+    if (!formIsValid()) return;
+    setSaving(true);
+    saveProfile(profile)
+      .then(() => {
+        toast.info("Profile updated");
+        history.push("/");
+      })
+      .catch(error => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
-  render() {
-    // const { profile } = this.state;
-
-    // if (!this.auth.isAuthenticated()) return null;
-    return (
-      <>
-        {/* <h1>Profile</h1>> */}
-        <WalletSettings
-          appSettings={this.state.appSettings}
-          updateProfile={this.updateProfile}
-        />
-      </>
-    );
+  function handleCancel(event) {
+    event.preventDefault();
+    history.goBack();
   }
+
+  return profile.length === 0 ? (
+    <Loading />
+  ) : (
+    <ProfileForm
+      profile={profile}
+      errors={errors}
+      onChange={handleChange}
+      onSave={handleSave}
+      saving={saving}
+      cancel={handleCancel}
+    />
+  );
 }
 
-export default ProfilePage;
+UserProfilePage.propTypes = {
+  profile: PropTypes.object.isRequired,
+  loadProfile: PropTypes.func.isRequired,
+  saveProfile: PropTypes.func.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    profile: state.profile
+  };
+}
+
+const mapDispatchToProps = {
+  loadProfile: profileActions.loadProfile,
+  saveProfile: profileActions.saveProfile
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfilePage);

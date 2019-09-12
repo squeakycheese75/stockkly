@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
-// import NumberInput from "../common/NumberInput";
-// import DateInput from "../common/DateInput";
-// import styles from "./TransactionForm.css";
-import styles from "./UserProfileForm.css";
+import styles from "./ProfileForm.css";
 import { Container } from "react-bootstrap";
 
 const portfolioCurrencies = [
@@ -28,6 +24,7 @@ const UserProfileForm = ({
   onSave,
   onChange,
   saving = false,
+  cancel,
   errors = {}
 }) => {
   return (
@@ -42,7 +39,6 @@ const UserProfileForm = ({
                 {errors.onSave}
               </div>
             )}
-
             <SelectInput
               name="currency"
               label="Portfolio currency:"
@@ -52,13 +48,23 @@ const UserProfileForm = ({
               onChange={onChange}
               error={errors.currency}
             />
-
-            <button type="submit" disabled={saving} className="btn btn-primary">
+            <button
+              type="submit"
+              disabled={saving}
+              className="btn btn-primary"
+              value="save"
+            >
               {saving ? "Saving..." : "Save"}
+            </button>{" "}
+            <button
+              type="button"
+              disabled={saving}
+              className="btn btn-outline-danger right"
+              onClick={cancel}
+              value="cancel"
+            >
+              Cancel
             </button>
-            {/* <button type="cancel" className="btn btn-alert">
-        Cancel
-      </button> */}
           </form>
         </Container>
       </div>

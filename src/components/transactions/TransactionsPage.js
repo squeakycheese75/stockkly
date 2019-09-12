@@ -31,7 +31,10 @@ class TransactionsPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    localStorage.setItem("transactions", JSON.stringify(this.props.watchlist));
+    localStorage.setItem(
+      "transactions",
+      JSON.stringify(this.props.transactions)
+    );
   }
 
   handleDelete = transaction => {

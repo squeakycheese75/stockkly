@@ -25,6 +25,7 @@ const TransactionForm = ({
   onSave,
   onChange,
   saving = false,
+  cancel,
   errors = {}
 }) => {
   return (
@@ -92,9 +93,15 @@ const TransactionForm = ({
           <button type="submit" disabled={saving} className="btn btn-primary">
             {saving ? "Saving..." : "Save"}
           </button>
-          {/* <button type="cancel" className="btn btn-alert">
-        Cancel
-      </button> */}
+          <button
+            type="button"
+            disabled={saving}
+            className="btn btn-outline-danger"
+            onClick={cancel}
+            value="cancel"
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </>

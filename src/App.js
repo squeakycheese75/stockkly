@@ -13,8 +13,7 @@ import TransactionsPage from "./components/transactions/TransactionsPage";
 import ManageTransactionPage from "./components/transactions/ManageTransactionPage";
 import WalletPage from "./components/wallet/WalletPage";
 import WatchListPage from "./components/watchlist/WatchlistPage";
-import UserProfilePage from "./components/UserProfile/UserProfilePage";
-// import ProfilePage from "./components/profile/ProfilePage";
+import ProfilePage from "./components/profile/ProfilePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
@@ -290,25 +289,14 @@ class App extends Component {
 
           <Route
             path="/profile"
-            render={props => <UserProfilePage auth={this.auth} {...props} />}
+            render={props => <ProfilePage auth={this.auth} {...props} />}
           />
-          {/* <Route
-            path="/profile"
-            render={props => (
-              <ProfilePage
-                auth={this.auth}
-                appSettings={this.state.appSettings}
-                updateProfile={this.updateAppSettings}
-                {...props}
-              />
-            )}
-          /> */}
           <Route
             path="/wallet"
             render={props => (
               <WalletPage
                 auth={this.auth}
-                appSettings={this.state.appSettings}
+                // appSettings={this.state.appSettings}
                 {...props}
               />
             )}
@@ -318,9 +306,9 @@ class App extends Component {
             render={props => (
               <WatchListPage
                 auth={this.auth}
-                appSettings={this.state.appSettings}
-                watchList={this.state.watchList}
-                onReload={this.reload}
+                // appSettings={this.state.appSettings}
+                // watchList={this.state.watchList}
+                // onReload={this.reload}
                 {...props}
               />
             )}

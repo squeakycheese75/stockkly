@@ -84,6 +84,11 @@ function ManageTransactionPage({
       });
   }
 
+  function handleCancel(event) {
+    event.preventDefault();
+    history.goBack();
+  }
+
   return transactions.length === 0 || products.length === 0 ? (
     <Loading />
   ) : (
@@ -94,6 +99,7 @@ function ManageTransactionPage({
       onChange={handleChange}
       onSave={handleSave}
       saving={saving}
+      cancel={handleCancel}
     />
   );
 }
