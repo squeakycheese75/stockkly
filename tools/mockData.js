@@ -213,6 +213,7 @@ const newTransaction = {
 const prices = [
   {
     id: "BTC:USD",
+    productId: 1,
     ticker: "BTC:USD",
     open: 10190.017905283235,
     change: 142.56263695119924,
@@ -222,6 +223,7 @@ const prices = [
   },
   {
     id: "LTC:USD",
+    productId: 2,
     ticker: "LTC:USD",
     open: 70.01665183013162,
     change: -1.050021668562934,
@@ -231,6 +233,7 @@ const prices = [
   },
   {
     id: "GOLD:OZ:GBP",
+    productId: 3,
     ticker: "GOLD:OZ:GBP",
     open: 1210.62,
     change: 4.7000000000000455,

@@ -7,12 +7,26 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import ProductSummary from "./components/ProductSummary";
+import ProductChart from "./components/ProductChart";
+import TransactionTable from "../transactions/components/TransactionTable";
+import { LinkContainer } from "react-router-bootstrap";
+import { Nav, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const newProduct = {
   id: null
 };
 
 class ProductPage extends React.Component {
+  handleDelete = transaction => {
+    toast.info("Transaction Deleted!");
+    this.props.actions.deleteTransaction(transaction).catch(error => {
+      toast.error("Transaction delete has Failed! " + error.message, {
+        autoClose: false
+      });
+    });
+  };
+
   componentDidMount() {
     const { transactions, products, actions } = this.props;
 
@@ -27,7 +41,7 @@ class ProductPage extends React.Component {
         console.log("Loading Transactions failed ..." + error);
       });
     }
-
+    console.log(this.props.match.params);
     const ticker = this.props.match.params.ticker;
     if (ticker) {
       actions.loadPrice(ticker).catch(error => {
@@ -47,6 +61,24 @@ class ProductPage extends React.Component {
               product={this.props.product}
               price={this.props.price}
             />
+            <br />
+            <ProductChart
+              chartData={{
+                x: ["2016-01-01", "2017-01-01", "2018-01-01"],
+                y: [1, 2, 3],
+                pid: this.ticker
+              }}
+            />
+            <br />
+            <TransactionTable
+              transactions={this.props.transactions}
+              onDeleteClick={this.handleDelete}
+            />
+            <LinkContainer to="/transaction">
+              <Nav.Link>
+                <Button>Add new transaction</Button>
+              </Nav.Link>
+            </LinkContainer>
           </>
         )}
       </>
@@ -107,7 +139,11 @@ function mapDispatchToProps(dispatch) {
         transactionActions.loadTransactions,
         dispatch
       ),
-      loadPrice: bindActionCreators(priceActions.loadPrice, dispatch)
+      loadPrice: bindActionCreators(priceActions.loadPrice, dispatch),
+      deleteTransaction: bindActionCreators(
+        transactionActions.deleteTransaction,
+        dispatch
+      )
     }
   };
 }
