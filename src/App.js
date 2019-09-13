@@ -8,7 +8,7 @@ import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import ProductsPage from "./components/products/ProductsPage";
-import ManageProductPage from "./components/products/ProductPage";
+import ProductPage from "./components/products/ProductPage";
 import TransactionsPage from "./components/transactions/TransactionsPage";
 import ManageTransactionPage from "./components/transactions/ManageTransactionPage";
 import WalletPage from "./components/wallet/WalletPage";
@@ -126,7 +126,7 @@ class App extends Component {
           />
           <Route
             path="/product/:ticker"
-            render={props => <ManageProductPage auth={this.auth} {...props} />}
+            render={props => <ProductPage auth={this.auth} {...props} />}
           />
 
           <Route

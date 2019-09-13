@@ -28,8 +28,9 @@ class ProductPage extends React.Component {
   };
 
   componentDidMount() {
+    debugger;
     const { transactions, products, actions } = this.props;
-
+    console.log("in componentDidMount");
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
         console.log("Loading Products failed ..." + error);
@@ -53,7 +54,7 @@ class ProductPage extends React.Component {
   render() {
     return (
       <>
-        {this.props.loading ? (
+        {this.props.loading || !this.props.product ? (
           <Loading />
         ) : (
           <>
@@ -125,9 +126,9 @@ function mapStateToProps(state, ownProps) {
                 .ticker
             };
           }),
-    loading: state.apiCallsInProgress > 0,
     product,
-    price: state.price
+    price: state.price,
+    loading: state.apiCallsInProgress > 0
   };
 }
 
