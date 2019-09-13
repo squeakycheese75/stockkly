@@ -2,9 +2,9 @@
   "transactions": [
     {
       "id": 1,
-      "productId": 1,
+      "productId": 3,
       "type": "Buy",
-      "quantity": 10,
+      "quantity": "11",
       "price": 11000,
       "trandate": "2012-04-30"
     },
@@ -14,6 +14,14 @@
       "type": "Sell",
       "quantity": 1,
       "price": 8000,
+      "trandate": "2012-04-30"
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "type": "Buy",
+      "quantity": 100,
+      "price": 8,
       "trandate": "2012-04-30"
     }
   ],

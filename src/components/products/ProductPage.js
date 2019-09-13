@@ -71,10 +71,12 @@ class ProductPage extends React.Component {
               }}
             />
             <br />
+            <h5>Transactions:</h5>
             <TransactionTable
               transactions={this.props.transactions}
               onDeleteClick={this.handleDelete}
             />
+            <br />
             <LinkContainer to="/transaction">
               <Nav.Link>
                 <Button>Add new transaction</Button>
