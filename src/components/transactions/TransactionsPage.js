@@ -16,25 +16,17 @@ class TransactionsPage extends React.Component {
   componentDidMount() {
     const { transactions, products, actions } = this.props;
 
-    // if (transactions.length === 0) {
-    actions.loadTransactions().catch(error => {
-      console.log("Loading Transactions failed ..." + error);
-    });
-    // }
+    if (transactions.length === 0) {
+      actions.loadTransactions().catch(error => {
+        console.log("Loading Transactions failed ..." + error);
+      });
+    }
 
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
         console.log("Loading Products failed ..." + error);
       });
     }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-    localStorage.setItem(
-      "transactions",
-      JSON.stringify(this.props.transactions)
-    );
   }
 
   handleDelete = transaction => {

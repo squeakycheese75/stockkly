@@ -210,6 +210,35 @@ const newTransaction = {
   trandate: null
 };
 
+const prices = [
+  {
+    id: "BTC:USD",
+    ticker: "BTC:USD",
+    open: 10190.017905283235,
+    change: 142.56263695119924,
+    price: 10332.580542234435,
+    movement: 1.379738937126832,
+    priceDate: "2019-09-12T00:00:00"
+  },
+  {
+    id: "LTC:USD",
+    ticker: "LTC:USD",
+    open: 70.01665183013162,
+    change: -1.050021668562934,
+    price: 68.96663016156869,
+    movement: -1.5225068502013794,
+    priceDate: "2019-09-12T00:00:00"
+  },
+  {
+    id: "GOLD:OZ:GBP",
+    ticker: "GOLD:OZ:GBP",
+    open: 1210.62,
+    change: 4.7000000000000455,
+    price: 1215.32,
+    movement: 0.38672942105783215,
+    priceDate: "2019-09-12T00:00:00"
+  }
+];
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   newTransaction,
@@ -217,5 +246,6 @@ module.exports = {
   products,
   watchlist,
   wallet,
-  profile
+  profile,
+  prices
 };

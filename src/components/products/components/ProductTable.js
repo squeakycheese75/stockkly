@@ -13,7 +13,7 @@ function msg() {
   );
 }
 
-class TickerSearchResultsTable extends Component {
+class ProductTable extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -128,4 +128,4 @@ class TickerSearchResultsTable extends Component {
   }
 }
 
-export default withRouter(TickerSearchResultsTable);
+export default withRouter(ProductTable);

@@ -5,7 +5,6 @@ import * as productActions from "../../redux/actions/productActions";
 import PropTypes from "prop-types";
 import ProductForm from "./ProductForm";
 import Loading from "../common/Loading";
-// import { toast } from "react-toastify";
 
 const newProduct = {
   id: null
@@ -19,11 +18,8 @@ function ManageProductPage({
   history,
   ...props
 }) {
-  // const [product, setProduct] = useState({ ...props.product });
-  //   const [errors, setErrors] = useState({});
-  //   const [saving, setSaving] = useState(false);
   const [product, setProduct] = useState({ ...props.product });
-  // const [transactions, setTransactions] = useState({ ...props.transactions });
+  const [loading, setLoading] = useState({ ...props.loading });
   useEffect(() => {
     if (products.length === 0) {
       loadProducts().catch(error => {
@@ -38,20 +34,17 @@ function ManageProductPage({
     }
     // eslint-disable-next-line
   }, [props.product]);
-  // handleDelete = transaction => {
-  //   toast.info("Transaction Deleted!");
-  //   this.props.actions.deleteTransaction(transaction).catch(error => {
-  //     toast.error("Transaction delete has Failed! " + error.message, {
-  //       autoClose: false
-  //     });
-  //   });
-  // };
 
-  return products.length === 0 ? (
-    <Loading />
-  ) : (
+  return (
     <>
-      <ProductForm product={product} transactions={transactions} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {" "}
+          <ProductForm product={product} transactions={transactions} />
+        </>
+      )}
     </>
   );
 }
@@ -62,7 +55,8 @@ ManageProductPage.propTypes = {
   loadTransactions: PropTypes.func.isRequired,
   transactions: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export function getProductByTicker(products, ticker) {
@@ -71,17 +65,25 @@ export function getProductByTicker(products, ticker) {
 
 function mapStateToProps(state, ownProps) {
   const ticker = ownProps.match.params.ticker;
+  console.log("passed ticker is: ", ticker);
+  console.log("products length: ", state.products.length);
+  // if (state.products.length > 0) {
+  //   const product = getProductByTicker(
+  //     state.products,
+  //     ownProps.match.params.ticker
+  //   );
+  // }
   const product =
     ticker && state.products.length > 0
       ? getProductByTicker(state.products, ticker)
       : newProduct;
+  console.log("product ", product);
 
   const filteredTransactions = state.transactions.filter(
     transaction => transaction.productId === product.id
   );
 
   return {
-    product,
     products: state.products,
     transactions:
       filteredTransactions.length === 0
@@ -95,7 +97,9 @@ function mapStateToProps(state, ownProps) {
               ticker: state.products.find(p => p.id === transaction.productId)
                 .ticker
             };
-          })
+          }),
+    product,
+    loading: state.apiCallsInProgress > 0
   };
 }
 

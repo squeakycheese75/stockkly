@@ -5,7 +5,7 @@ import * as transactionActions from "../../redux/actions/transactionActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
-import ProductTable from "./ProductTable";
+import ProductTable from "./components/ProductTable";
 
 class ProductsPage extends React.Component {
   componentDidMount() {

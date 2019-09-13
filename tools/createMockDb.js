@@ -3,13 +3,14 @@ const fs = require("fs");
 const path = require("path");
 const mockData = require("./mockData");
 
-const { transactions, products, watchlist, wallet, profile } = mockData;
+const { transactions, products, watchlist, wallet, profile, prices } = mockData;
 const data = JSON.stringify({
   transactions,
   products,
   watchlist,
   wallet,
-  profile
+  profile,
+  prices
 });
 const filepath = path.join(__dirname, "db.json");
 

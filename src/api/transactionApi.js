@@ -2,16 +2,16 @@ import { handleResponse, handleError, getHeader } from "./apiUtils";
 const baseUrl = process.env.REACT_APP_API_URL + "/transactions/";
 
 export function getTransactions() {
-  console.log(baseUrl);
+  // console.log(baseUrl);
   return fetch(baseUrl, {
-    headers: getHeader().headers
+    headers: getHeader()
   })
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function saveTransaction(transaction) {
-  console.log(baseUrl);
+  // console.log(baseUrl);
   return fetch(baseUrl + (transaction.id || ""), {
     method: transaction.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: getHeader(),
@@ -24,10 +24,10 @@ export function saveTransaction(transaction) {
 }
 
 export function deleteTransaction(transactionId) {
-  console.log(baseUrl);
+  // console.log(baseUrl);
   return fetch(baseUrl + transactionId, {
     method: "DELETE",
-    header: getHeader().headers
+    header: getHeader()
   })
     .then(handleResponse)
     .catch(handleError);

@@ -3,10 +3,51 @@ import PropTypes from "prop-types";
 import { Jumbotron } from "react-bootstrap";
 import "./ProductSummary.css";
 
-const ProductSummary = ({ product, error }) => {
+const ProductSummary = ({ product, price, error }) => {
   let wrapperClass = "form-group";
   if (error && error.length > 0) {
     wrapperClass += " has-error";
+  }
+
+  function changeFormatter(change) {
+    return (
+      <>
+        {change >= 0 ? (
+          <>
+            <div className="up_header pl">
+              {" "}
+              <i className="material-icons vertical-align-middle up_header">
+                arrow_drop_up
+              </i>
+              {change.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="down_header pl">
+              {" "}
+              <i className="material-icons vertical-align-middle down_header">
+                arrow_drop_down
+              </i>
+              {Math.abs(change)
+                .toFixed(2)
+                .toLocaleString(undefined, {
+                  minimumFractionDigits: 2
+                })}
+            </div>
+          </>
+        )}
+      </>
+    );
+  }
+
+  function priceFormatter(price, symbol) {
+    return (
+      <>
+        {symbol}
+        {price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+      </>
+    );
   }
 
   return (
@@ -27,16 +68,12 @@ const ProductSummary = ({ product, error }) => {
               </tr>
               <tr className="price-tr">
                 <td className="price-large pl">
-                  {/* {priceFormatter(
-                    parseFloat(this.state.productPrice.price),
-                    symbol
-                  )} */}
-                  100.00
+                  {priceFormatter(
+                    parseFloat(price.price),
+                    product.quote.symbol
+                  )}
                 </td>
-                <td>
-                  {/* {changeFormatter(parseFloat(product.price.change))} */}
-                  200.00
-                </td>
+                <td>{changeFormatter(parseFloat(price.change))}</td>
               </tr>
             </tbody>
           </table>

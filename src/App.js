@@ -8,7 +8,7 @@ import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
 import ProductsPage from "./components/products/ProductsPage";
-import ManageProductPage from "./components/products/ManageProductPage";
+import ManageProductPage from "./components/products/ProductPage";
 import TransactionsPage from "./components/transactions/TransactionsPage";
 import ManageTransactionPage from "./components/transactions/ManageTransactionPage";
 import WalletPage from "./components/wallet/WalletPage";
@@ -30,49 +30,7 @@ class App extends Component {
     isLoaded: false,
     hasError: false,
     tokenRenewalComplete: false
-    // appSettings: localStorage.getItem("userProfile")
-    //   ? JSON.parse(localStorage.getItem("userProfile"))
-    //   : {
-    //       currency: "GBP",
-    //       symbol: "£",
-    //       refreshRate: 30
-    //     },
-    // watchList: localStorage.getItem("watchList")
-    //   ? JSON.parse(localStorage.getItem("watchList"))
-    //   : []
   };
-
-  //Load component data
-  // fetchTickers = () => {
-  //   var url = process.env["REACT_APP_PRICES_API"] + "/tickers/";
-  //   // console.log("fetchTickers fetching: ", url);
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(allTickers => {
-  //       this.setState({
-  //         tickers: allTickers
-  //       });
-  //       //Might not setstate here
-  //     }) //.then(console.log('done'))
-  //     .then(res => this.determineUniqueSectors());
-  // };
-
-  // determineUniqueSectors = () => {
-  //   const sectors = this.state.tickers
-  //     ? Array.from(new Set(this.state.tickers.map(t => t.sector)))
-  //     : [];
-  //   sectors.unshift(null);
-  //   this.setState({ sectors: sectors });
-  // };
-
-  // filteredTickers = input => {
-  //   const filteredTickers = this.state.tickers.filter(h => h.sector === input);
-  //   const filterSUbscribedTickers = filteredTickers.filter(
-  //     id => !this.state.subscribedTickers.includes(id.ticker)
-  //   );
-  //   this.setState({ filteredTickers: filterSUbscribedTickers });
-  //   this.setState({ selectedSector: input });
-  // };
 
   UNSAFE_componentWillMount() {
     // Check we've refreshed token
@@ -90,10 +48,11 @@ class App extends Component {
   componentDidMount() {
     this.auth.renewToken(() => {
       this.setState({ tokenRenewalComplete: true });
-      // if (this.auth.isAuthenticated()) {
-      //   this.loadProfile();
-      //   // console.log("Authenticated profile load");
-      // }
+      if (this.auth.isAuthenticated()) {
+        this.props.actions.loadProfile().catch(error => {
+          console.log("Loading profile failed" + error);
+        });
+      }
     });
   }
 
@@ -108,123 +67,6 @@ class App extends Component {
       console.log("Loading Profile failed ..." + error);
     });
   }
-
-  // async loadProfile() {
-  //   console.log("Loading user profile data from and authenticated user.");
-  //   var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
-
-  //   fetch(url, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${this.auth.getAccessToken()}`,
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(response => {
-  //       if (response.ok) return response;
-  //       throw new Error("Network response was not ok.");
-  //     })
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       // if (this._isMounted) {
-  //       this.setState(
-  //         {
-  //           appSettings: response,
-  //           watchList: response.watchList
-  //         },
-  //         () => {
-  //           console.log("Back from api and state has been set!");
-  //         }
-  //       );
-  //     })
-  //     .catch(error => {
-  //       this.setState({
-  //         message: error.message
-  //       });
-  //     });
-  // }
-
-  async updateProfile() {
-    var data = {
-      currency: this.state.appSettings.currency,
-      symbol: this.state.appSettings.symbol,
-      refreshRate: this.state.appSettings.refreshRate,
-      watchList: this.state.watchList
-    };
-
-    var url = process.env["REACT_APP_PRICES_API"] + "/api/profile/user/";
-    fetch(url, {
-      method: "PUT",
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.status) return response;
-        throw new Error("Network response was not ok.");
-      })
-      // .then(response => response.json())
-      .then(response => console.log("Success:", JSON.stringify(response)))
-      .catch(error => console.error("Error:", error));
-  }
-
-  addTickerToWatchList = input => {
-    if (input) {
-      //Check it's not already in the list
-      var resval = this.state.watchList.some(item => input === item);
-      console.log("compare is ", resval);
-      if (!resval) {
-        this.setState(
-          prevState => ({
-            watchList: prevState.watchList.concat(input)
-          }),
-          () => {
-            //Reload data in callback.
-            console.log("Added ticker from watchlist", input);
-            if (this.auth.isAuthenticated()) {
-              this.updateProfile();
-            }
-          }
-        );
-      }
-    }
-  };
-
-  removeTicker = input => {
-    console.log("Removed ticker from watchlist", input);
-    this.setState(
-      prevState => ({
-        watchList: prevState.watchList.filter(
-          ticker => ticker.toLowerCase() !== input.toLowerCase()
-        )
-      }),
-      () => {
-        //Need to remove from the backend
-        console.log("Removed ticker from watchlist" + input);
-        if (this.auth.isAuthenticated()) {
-          this.updateProfile();
-        }
-      }
-    );
-  };
-
-  updateAppSettings = updatedAppSettings => {
-    if (updatedAppSettings) {
-      this.setState(
-        prevState => ({
-          appSettings: updatedAppSettings
-        }),
-        () => {
-          //Reload data in callback.
-          if (this.auth.isAuthenticated()) {
-            this.updateProfile();
-          }
-        }
-      );
-    }
-  };
 
   render() {
     const isLoggedIn = this.auth.isAuthenticated();
@@ -293,25 +135,11 @@ class App extends Component {
           />
           <Route
             path="/wallet"
-            render={props => (
-              <WalletPage
-                auth={this.auth}
-                // appSettings={this.state.appSettings}
-                {...props}
-              />
-            )}
+            render={props => <WalletPage auth={this.auth} {...props} />}
           />
           <Route
             path="/watching"
-            render={props => (
-              <WatchListPage
-                auth={this.auth}
-                // appSettings={this.state.appSettings}
-                // watchList={this.state.watchList}
-                // onReload={this.reload}
-                {...props}
-              />
-            )}
+            render={props => <WatchListPage auth={this.auth} {...props} />}
           />
         </Switch>
         <ToastContainer
