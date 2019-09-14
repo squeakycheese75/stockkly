@@ -41,7 +41,8 @@ server.use(
     "/api/profile": "/profile",
     "/api/watchlist": "/watchlist",
     "/api/wallet": "/wallet",
-    "/api/prices": "/prices"
+    "/api/prices": "/prices",
+    "/api/prices/historical": "/prices/historical"
   })
 );
 
@@ -66,6 +67,9 @@ server.post("/transactions/", function(req, res, next) {
 
 server.put("/profile", function(req, res, next) {
   // console.log("post body: ", req.body);
+  // const error = validateProfile(req.body);
+  // console.log("post body: ", req.body);
+
   const error = false;
   if (error) {
     res.status(400).send(error);
@@ -95,7 +99,6 @@ function createSlug(value) {
 }
 
 function validateTransaction(transaction) {
-  // if (!transaction.title) return "Title is required.";
   if (!transaction.productId) return "Product is required.";
   if (!transaction.type) return "Type is required.";
   if (!transaction.quantity) return "Quantity is required.";
@@ -103,8 +106,8 @@ function validateTransaction(transaction) {
   return "";
 }
 
-// function validateProfile(profile) {
-//   debugger;
-//   if (!profile.currency) return "Currency is required.";
-//   return "";
-// }
+function validateProfile(profile) {
+  debugger;
+  if (!profile.currency) return "Currency is required.";
+  return "";
+}

@@ -3,6 +3,7 @@ export default {
   products: [],
   apiCallsInProgress: 0,
   price: {},
+  pricesHistorical: {},
   profile: {
     id: 1,
     tickers: [],
@@ -16,7 +17,4 @@ export default {
   wallet: localStorage.getItem("wallet")
     ? JSON.parse(localStorage.getItem("wallet"))
     : []
-  // transactions: localStorage.getItem("transactions")
-  //   ? JSON.parse(localStorage.getItem("transactions"))
-  //   : []
 };

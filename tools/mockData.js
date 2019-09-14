@@ -242,6 +242,9 @@ const prices = [
     priceDate: "2019-09-12T00:00:00"
   }
 ];
+
+const pricesHistorical = [{ id: 1 }, { id: 2 }];
+
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   newTransaction,
@@ -250,5 +253,6 @@ module.exports = {
   watchlist,
   wallet,
   profile,
-  prices
+  prices,
+  pricesHistorical
 };
