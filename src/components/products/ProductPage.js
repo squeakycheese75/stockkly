@@ -3,25 +3,17 @@ import { connect } from "react-redux";
 import * as productActions from "../../redux/actions/productActions";
 import * as transactionActions from "../../redux/actions/transactionActions";
 import * as priceActions from "../../redux/actions/priceActions";
-// import * as pricesHistoricalActions from "../../redux/actions/pricesHistoricalActions";
+import * as pricesHistoricalActions from "../../redux/actions/pricesHistoricalActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import ProductSummary from "./components/ProductSummary";
 import ProductChart from "./components/ProductChart";
-import ProductInfo from "./components/ProductInfo";
+// import ProductInfo from "./components/ProductInfo";
 import TransactionTable from "../transactions/components/TransactionTable";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-
-// const newProduct = {
-//   // id: null,
-//   // quote: {
-//   //   currency: "£",
-//   //   symbol: "GBP"
-//   // }
-// };
 
 class ProductPage extends React.Component {
   handleDelete = transaction => {
@@ -54,13 +46,17 @@ class ProductPage extends React.Component {
       actions.loadPrice(ticker).catch(error => {
         console.log("Loading Price failed ..." + error);
       });
+
+      actions.loadPricesHistorical(ticker).catch(error => {
+        console.log("Loading PricesHistorical failed ..." + error);
+      });
     }
   }
 
   render() {
     return (
       <>
-        {this.props.loading || !this.props.product ? (
+        {this.props.loading || !this.props.product === {} ? (
           <Loading />
         ) : (
           <>
@@ -69,8 +65,8 @@ class ProductPage extends React.Component {
               price={this.props.price}
             />
             <br />
-            <ProductInfo product={this.props.product} />
-            <br />
+            {/* <ProductInfo product={this.props.product} />
+            <br /> */}
             <ProductChart
               chartData={{
                 x: ["2016-01-01", "2017-01-01", "2018-01-01"],
@@ -103,7 +99,8 @@ ProductPage.propTypes = {
   products: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  price: PropTypes.object.isRequired
+  price: PropTypes.object.isRequired,
+  pricesHistorical: PropTypes.object.isRequired
 };
 
 export function getProductByTicker(products, ticker) {
@@ -115,7 +112,7 @@ function mapStateToProps(state, ownProps) {
   const product =
     ticker && state.products.length > 0
       ? getProductByTicker(state.products, ticker)
-      : null;
+      : {};
 
   const filteredTransactions = state.transactions.filter(
     transaction => transaction.productId === product.id
@@ -138,6 +135,7 @@ function mapStateToProps(state, ownProps) {
           }),
     product,
     price: state.price,
+    pricesHistorical: state.pricesHistorical,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -154,11 +152,11 @@ function mapDispatchToProps(dispatch) {
       deleteTransaction: bindActionCreators(
         transactionActions.deleteTransaction,
         dispatch
+      ),
+      loadPricesHistorical: bindActionCreators(
+        pricesHistoricalActions.loadPricesHistorical,
+        dispatch
       )
-      // loadPricesHistorical: bindActionCreators(
-      //   pricesHistoricalActions.loadPricesHistorical,
-      //   dispatch
-      // )
     }
   };
 }
