@@ -56,7 +56,7 @@ class ProductPage extends React.Component {
   render() {
     return (
       <>
-        {this.props.loading || !this.props.product === {} ? (
+        {this.props.loading || !this.props.product ? (
           <Loading />
         ) : (
           <>
@@ -68,9 +68,10 @@ class ProductPage extends React.Component {
             {/* <ProductInfo product={this.props.product} />
             <br /> */}
             <ProductChart
+              pid={this.props.match.params.ticker}
               chartData={{
-                x: ["2016-01-01", "2017-01-01", "2018-01-01"],
-                y: [1, 2, 3],
+                x: Object.keys(this.props.pricesHistorical.data),
+                y: Object.values(this.props.pricesHistorical.data),
                 pid: this.props.match.params.ticker
               }}
             />
@@ -112,7 +113,7 @@ function mapStateToProps(state, ownProps) {
   const product =
     ticker && state.products.length > 0
       ? getProductByTicker(state.products, ticker)
-      : {};
+      : null;
 
   const filteredTransactions = state.transactions.filter(
     transaction => transaction.productId === product.id

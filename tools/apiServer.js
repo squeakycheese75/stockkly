@@ -42,7 +42,7 @@ server.use(
     "/api/watchlist": "/watchlist",
     "/api/wallet": "/wallet",
     "/api/prices": "/prices",
-    "/api/prices/historical": "/prices/historical"
+    "/api/pricesHistorical": "/pricesHistorical"
   })
 );
 

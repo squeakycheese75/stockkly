@@ -2,8 +2,8 @@ import * as types from "./actionTypes";
 import * as pricesHistoricalApi from "../../api/pricesHistoricalApi";
 import { beginApiCall } from "./apiStatusActions";
 
-export function loadPricesHistoricalSuccess(price) {
-  return { type: types.LOAD_PRICE_HISTORICAL_SUCCESS, price };
+export function loadPricesHistoricalSuccess(pricesHistorical) {
+  return { type: types.LOAD_PRICE_HISTORICAL_SUCCESS, pricesHistorical };
 }
 
 export function loadPricesHistorical(ticker) {
@@ -11,8 +11,8 @@ export function loadPricesHistorical(ticker) {
     dispatch(beginApiCall());
     return pricesHistoricalApi
       .getPriceHistorical(ticker)
-      .then(prices => {
-        dispatch(loadPricesHistoricalSuccess(prices));
+      .then(pricesHistorical => {
+        dispatch(loadPricesHistoricalSuccess(pricesHistorical));
       })
       .catch(error => {
         throw error;
