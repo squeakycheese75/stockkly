@@ -50,13 +50,14 @@ class ProductPage extends React.Component {
       actions.loadPricesHistorical(ticker).catch(error => {
         console.log("Loading PricesHistorical failed ..." + error);
       });
+      // !this.props.product ||
     }
   }
 
   render() {
     return (
       <>
-        {this.props.loading || !this.props.product ? (
+        {this.props.loading || Object.keys(this.props.product).length === 0 ? (
           <Loading />
         ) : (
           <>
@@ -67,11 +68,20 @@ class ProductPage extends React.Component {
             <br />
             {/* <ProductInfo product={this.props.product} />
             <br /> */}
+
             <ProductChart
               pid={this.props.match.params.ticker}
               chartData={{
-                x: Object.keys(this.props.pricesHistorical.data),
-                y: Object.values(this.props.pricesHistorical.data),
+                x:
+                  this.props.pricesHistorical &&
+                  this.props.pricesHistorical.data
+                    ? Object.keys(this.props.pricesHistorical.data)
+                    : [],
+                y:
+                  this.props.pricesHistorical &&
+                  this.props.pricesHistorical.data
+                    ? Object.values(this.props.pricesHistorical.data)
+                    : [],
                 pid: this.props.match.params.ticker
               }}
             />
@@ -113,7 +123,7 @@ function mapStateToProps(state, ownProps) {
   const product =
     ticker && state.products.length > 0
       ? getProductByTicker(state.products, ticker)
-      : null;
+      : {};
 
   const filteredTransactions = state.transactions.filter(
     transaction => transaction.productId === product.id

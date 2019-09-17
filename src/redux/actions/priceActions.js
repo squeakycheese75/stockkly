@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as priceApi from "../../api/priceApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadPriceSuccess(price) {
   return { type: types.LOAD_PRICE_SUCCESS, price };
@@ -15,6 +15,7 @@ export function loadPrice(ticker) {
         dispatch(loadPriceSuccess(price));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
