@@ -17,7 +17,6 @@ export function saveTransaction(transaction) {
     headers: getHeader(),
     // headers: { "content-type": "application/json" },
     body: JSON.stringify(transaction)
-    // body: JSON.stringify(transaction)
   })
     .then(handleResponse)
     .catch(handleError);
