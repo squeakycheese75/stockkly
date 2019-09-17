@@ -1,5 +1,5 @@
 import { handleResponse, handleError, getHeader } from "./apiUtils";
-const baseUrl = process.env.REACT_APP_API_URL + "/transactions/";
+const baseUrl = process.env.REACT_APP_API_URL + "/api/transactions/";
 
 export function getTransactions() {
   // console.log(baseUrl);
