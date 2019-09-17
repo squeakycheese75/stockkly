@@ -8,16 +8,9 @@ export default function pricesHistoricalReducer(
   switch (action.type) {
     case types.LOAD_PRICE_HISTORICAL_SUCCESS:
       return action.pricesHistorical;
+    case types.RESET_PRICE_HISTORICAL_SUCCESS:
+      return initalState.pricesHistorical;
     default:
       return state;
   }
 }
-
-// export default function priceReducer(state = initalState.price, action) {
-//   switch (action.type) {
-//     case types.LOAD_PRICE_SUCCESS:
-//       return action.price;
-//     default:
-//       return state;
-//   }
-// }

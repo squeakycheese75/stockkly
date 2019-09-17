@@ -54,6 +54,12 @@ class ProductPage extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const { actions } = this.props;
+    actions.resetPrice();
+    actions.resetPricesHistorical();
+  }
+
   render() {
     return (
       <>
@@ -166,6 +172,11 @@ function mapDispatchToProps(dispatch) {
       ),
       loadPricesHistorical: bindActionCreators(
         pricesHistoricalActions.loadPricesHistorical,
+        dispatch
+      ),
+      resetPrice: bindActionCreators(priceActions.resetPrice, dispatch),
+      resetPricesHistorical: bindActionCreators(
+        pricesHistoricalActions.resetPricesHistorical,
         dispatch
       )
     }

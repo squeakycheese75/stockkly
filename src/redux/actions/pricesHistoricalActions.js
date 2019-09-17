@@ -6,6 +6,10 @@ export function loadPricesHistoricalSuccess(pricesHistorical) {
   return { type: types.LOAD_PRICE_HISTORICAL_SUCCESS, pricesHistorical };
 }
 
+export function resetPricesHistoricalSuccess(pricesHistorical) {
+  return { type: types.RESET_PRICE_HISTORICAL_SUCCESS, pricesHistorical };
+}
+
 export function loadPricesHistorical(ticker) {
   return function(dispatch) {
     dispatch(beginApiCall());
@@ -18,5 +22,11 @@ export function loadPricesHistorical(ticker) {
         dispatch(apiCallError(error));
         throw error;
       });
+  };
+}
+
+export function resetPricesHistorical() {
+  return function(dispatch) {
+    dispatch(resetPricesHistoricalSuccess());
   };
 }

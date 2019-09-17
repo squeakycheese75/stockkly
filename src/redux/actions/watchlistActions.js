@@ -15,6 +15,7 @@ export function loadWatchlist() {
         dispatch(loadWatchlistSuccess(watchlist));
       })
       .catch(error => {
+        // dispatch(apiCallError(error));
         throw error;
       });
   };
