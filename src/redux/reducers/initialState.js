@@ -7,6 +7,7 @@ export default {
   profile: {
     id: 1,
     tickers: [],
+    watchList: ["BTC:USD"],
     currency: "GBP",
     symbol: "£",
     refreshRate: 100

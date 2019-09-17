@@ -15,7 +15,20 @@ export function loadWatchlist() {
         dispatch(loadWatchlistSuccess(watchlist));
       })
       .catch(error => {
-        // dispatch(apiCallError(error));
+        throw error;
+      });
+  };
+}
+
+export function loadWatchlistWithTickers(tickers) {
+  return function(dispatch) {
+    dispatch(beginApiCall());
+    return watchlistApi
+      .getWatchListWithTickers(tickers)
+      .then(watchlist => {
+        dispatch(loadWatchlistSuccess(watchlist));
+      })
+      .catch(error => {
         throw error;
       });
   };

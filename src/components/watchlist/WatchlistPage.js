@@ -14,17 +14,19 @@ class WatchlistPage extends React.Component {
     this._isMounted = true;
     const { profile, actions } = this.props;
 
-    // if (watchlist.length === 0) {
-    actions.loadWatchlist().catch(error => {
-      console.log("Loading Watchlist failed ..." + error);
-    });
-    // }
-
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {
         console.log("Loading Profile failed ..." + error);
       });
     }
+
+    // actions.loadWatchlist().catch(error => {
+    //   console.log("Loading Watchlist failed ..." + error);
+    // });
+
+    actions.loadWatchlist("BTC:USD,LTC:USD").catch(error => {
+      console.log("Loading Watchlist failed ..." + error);
+    });
 
     const refreshRate = profile.refreshRate * 1000;
 
@@ -76,8 +78,12 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
+      // loadWatchlist: bindActionCreators(
+      //   watchlistActions.loadWatchlist,
+      //   dispatch
+      // ),
       loadWatchlist: bindActionCreators(
-        watchlistActions.loadWatchlist,
+        watchlistActions.loadWatchlistWithTickers,
         dispatch
       )
     }

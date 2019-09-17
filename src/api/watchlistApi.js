@@ -6,3 +6,11 @@ export function getWatchlist() {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function getWatchListWithTickers(tickers) {
+  return fetch(baseUrl + tickers, {
+    headers: { "content-type": "application/json" }
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}

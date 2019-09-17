@@ -9,7 +9,7 @@ import ProductTable from "./components/ProductTable";
 
 class ProductsPage extends React.Component {
   componentDidMount() {
-    const { transactions, products, actions } = this.props;
+    const { transactions, products, actions, auth } = this.props;
 
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
@@ -17,10 +17,12 @@ class ProductsPage extends React.Component {
       });
     }
 
-    if (transactions.length === 0) {
-      actions.loadTransactions().catch(error => {
-        console.log("Loading Transactions failed ..." + error);
-      });
+    if (auth.isAuthenticated()) {
+      if (transactions.length === 0) {
+        actions.loadTransactions().catch(error => {
+          console.log("Loading Transactions failed ..." + error);
+        });
+      }
     }
   }
 
