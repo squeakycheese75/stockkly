@@ -192,6 +192,7 @@ const watchlist = [
 
 const profile = {
   id: 1,
+  watchList: ["BTC:USD"],
   tickers: [
     { productId: 1, watchdate: "2019-08-16" },
     { productId: 2, watchdate: "2019-08-16" }

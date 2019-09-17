@@ -29,7 +29,7 @@ class ProductPage extends React.Component {
     console.log("Removing ticker from watchlist", input);
     // debugger;
     let newProfile = this.props.profile;
-    newProfile.tickers.filter(
+    newProfile.watchList.filter(
       ticker => ticker.toLowerCase() !== input.toLowerCase()
     );
     this.props.actions.saveProfile(newProfile).catch(error => {
@@ -114,7 +114,7 @@ class ProductPage extends React.Component {
               }}
             />
 
-            {this.props.isAuthenticated ? (
+            {this.props.auth.isAuthenticated ? (
               <>
                 <br />
                 <h5>Transactions:</h5>
@@ -141,7 +141,7 @@ class ProductPage extends React.Component {
                   </Button>
                 ) : (
                   <Button
-                    // className="btn"
+                    className="btn"
                     variant="primary"
                     onClick={this.handleClick}
                   >
@@ -154,28 +154,6 @@ class ProductPage extends React.Component {
                 <p>You need to be logged in for Transactions.</p>
               </>
             )}
-            {/* 
-            {this.props.isAuthenticated &&
-            this.props.profile &&
-            this.props.profile.watchList.includes(
-              this.props.match.params.ticker
-            ) ? (
-              <Button
-                className="btn"
-                variant="danger"
-                onClick={this.removeTicker}
-              >
-                Remove from Watchlist
-              </Button>
-            ) : (
-              <Button
-                // className="btn"
-                variant="primary"
-                onClick={this.handleClick}
-              >
-                Add to Watchlist
-              </Button>
-            )} */}
           </>
         )}
       </>

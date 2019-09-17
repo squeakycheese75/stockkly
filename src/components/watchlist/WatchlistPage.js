@@ -24,7 +24,7 @@ class WatchlistPage extends React.Component {
     //   console.log("Loading Watchlist failed ..." + error);
     // });
 
-    actions.loadWatchlist("BTC:USD,LTC:USD").catch(error => {
+    actions.loadWatchlist(profile.watchList).catch(error => {
       console.log("Loading Watchlist failed ..." + error);
     });
 

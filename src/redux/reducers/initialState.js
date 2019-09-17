@@ -6,7 +6,7 @@ export default {
   pricesHistorical: {},
   profile: {
     id: 1,
-    tickers: [],
+    // tickers: [],
     watchList: ["BTC:USD"],
     currency: "GBP",
     symbol: "£",
