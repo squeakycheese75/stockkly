@@ -115,9 +115,7 @@ ManageTransactionPage.propTypes = {
 };
 
 export function getTransactionById(transactions, id) {
-  return (
-    transactions.find(transaction => transaction.id === parseInt(id)) || null
-  );
+  return transactions.find(transaction => transaction.id === id) || null;
 }
 
 function mapStateToProps(state, ownProps) {

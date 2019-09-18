@@ -3,6 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import moment from "moment";
+// import ObjectId from "bson-objectid";
 
 const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   const options = {
@@ -21,6 +22,11 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   }
 
   function idFormatter(cell, row) {
+    // cell["_id"] = cell["_id"].toString();
+    // JSON.stringify(cell["_id"]);
+    // console.log(cell["$oid"].toString());
+    // var userId = JSON.stringify(cell);
+    // console.log(userId);
     return (
       <>
         <Link to={"/transaction/" + cell}>#{cell}</Link>

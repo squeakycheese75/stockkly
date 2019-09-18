@@ -34,8 +34,9 @@ export function saveProfile(profile) {
     dispatch(beginApiCall());
     return profileApi
       .saveProfile(profile)
+      .then(console.log("saved profile: ", profile))
       .then(savedProfile => {
-        profile.id
+        profile._id
           ? dispatch(updateProfileSuccess(savedProfile))
           : dispatch(createProfileSuccess(savedProfile));
       })

@@ -9,10 +9,7 @@ import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
 
 class WalletPage extends React.Component {
-  _isMounted = false;
-
   componentDidMount() {
-    this._isMounted = true;
     const { profile, actions } = this.props;
 
     if (profile.length === 0) {
@@ -35,6 +32,7 @@ class WalletPage extends React.Component {
         });
       }
     }, refreshRate);
+    this._isMounted = true;
   }
 
   componentWillUnmount() {
@@ -45,7 +43,7 @@ class WalletPage extends React.Component {
   render() {
     return (
       <>
-        {this.props.loading && !this._isMounted ? (
+        {!this._isMounted || this.props.loading ? (
           <Loading />
         ) : (
           <>

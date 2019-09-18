@@ -1,5 +1,8 @@
 export async function handleResponse(response) {
+  // console.log(response);
+  // if (response.ok && response.status === 204) return response;
   if (response.ok) return response.json();
+  // debugger;
   if (response.status === 400) {
     // So, a server-side validation error occurred.
     // Server side validation returns a string error message, so parse as text instead of json.
@@ -12,6 +15,7 @@ export async function handleResponse(response) {
 // In a real app, would likely call an error logging service.
 export function handleError(error) {
   // eslint-disable-next-line no-console
+  // debugger;
   console.error("API call failed. " + error);
   throw error;
 }
