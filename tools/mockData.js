@@ -6,7 +6,8 @@ const transactions = [
     type: "Buy",
     quantity: 10.0,
     price: 11000.0,
-    trandate: "2012-04-30"
+    trandate: "2012-04-30",
+    details: "Buying because money is screwed"
   },
   {
     id: "5d82815ba759305b7ba490b6",
@@ -15,7 +16,8 @@ const transactions = [
     type: "Sell",
     quantity: 1.0,
     price: 8000.0,
-    trandate: "2012-04-30"
+    trandate: "2012-04-30",
+    details: "Cant believe I ever sold any!"
   },
   {
     id: "5d828164e3af8165c9af6c21",
@@ -24,17 +26,18 @@ const transactions = [
     type: "Buy",
     quantity: 100.0,
     price: 8.0,
-    trandate: "2012-04-30"
-  },
-  {
-    id: "5d0fce9cc3452a48a8533ee6",
-    ticker: "GOLD:OZ:GBP",
-    transdate: "2019-06-23T19:10:11.197Z",
-    transtype: "BUY",
-    quantity: 6,
-    price: 1,
-    details: "Trade info"
+    trandate: "2012-04-30",
+    details: "Buying LTC because it was cheap"
   }
+  // {
+  //   id: "5d0fce9cc3452a48a8533ee6",
+  //   ticker: "GOLD:OZ:GBP",
+  //   transdate: "2019-06-23T19:10:11.197Z",
+  //   transtype: "BUY",
+  //   quantity: 6,
+  //   price: 1,
+  //   details: "Buying because it's shiny"
+  // }
 ];
 
 const products = [

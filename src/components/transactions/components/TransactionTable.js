@@ -1,9 +1,10 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import moment from "moment";
-// import ObjectId from "bson-objectid";
+import { Nav, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   const options = {
@@ -22,14 +23,16 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   }
 
   function idFormatter(cell, row) {
-    // cell["_id"] = cell["_id"].toString();
-    // JSON.stringify(cell["_id"]);
-    // console.log(cell["$oid"].toString());
-    // var userId = JSON.stringify(cell);
-    // console.log(userId);
     return (
       <>
-        <Link to={"/transaction/" + cell}>#{cell}</Link>
+        {/* <Link to={"/transaction/" + cell}>EDIT</Link> */}
+        <LinkContainer to={"/transaction/" + cell}>
+          <Nav.Link>
+            <Button className="button" variant="outline-info" size="sm">
+              Edit
+            </Button>
+          </Nav.Link>
+        </LinkContainer>
       </>
     );
   }
@@ -56,15 +59,6 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         options={options}
       >
         <TableHeaderColumn
-          width="10%"
-          dataField="id"
-          dataSort={true}
-          columnClassName="bstable"
-          dataFormat={idFormatter}
-          dataAlign="left"
-          editable={false}
-        ></TableHeaderColumn>
-        <TableHeaderColumn
           width="15%"
           dataField="productName"
           isKey={true}
@@ -84,6 +78,15 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           editable={false}
         >
           Type
+        </TableHeaderColumn>
+        <TableHeaderColumn
+          width="20%"
+          dataField="details"
+          dataSort={false}
+          columnClassName="bstable"
+          dataAlign="right"
+        >
+          Details
         </TableHeaderColumn>
         <TableHeaderColumn
           width="10%"
@@ -106,7 +109,15 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         >
           Tran. Date
         </TableHeaderColumn>
-
+        <TableHeaderColumn
+          width="10%"
+          dataField="id"
+          dataSort={true}
+          columnClassName="bstable"
+          dataFormat={idFormatter}
+          dataAlign="left"
+          editable={false}
+        ></TableHeaderColumn>
         <TableHeaderColumn
           width="10%"
           dataField="id"

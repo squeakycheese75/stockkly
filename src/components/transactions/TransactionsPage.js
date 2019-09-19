@@ -70,27 +70,28 @@ TransactionsPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    products: state.products,
     transactions:
       state.products.length === 0
         ? []
         : state.transactions.map(transaction => {
             return {
               ...transaction,
-              // productName: state.products.find(
-              //   p => p.id === transaction.productId
-              // ).name,
-              // productName: state.products.find(
-              //   item => item.ticker === transaction.ticker
-              // ).name
               productName: state.products.find(function(item) {
-                if (item.ticker === transaction.ticker) return item;
-                return {};
+                if (item.ticker === transaction.ticker) {
+                  // console.log(
+                  //   "Found item ",
+                  //   item,
+                  //   " with key ",
+                  //   transaction.ticker
+                  // );
+                  // console.log("returning", item.name);
+                  return item;
+                }
               }).name
-              // ticker: state.products.find(p => p.id === transaction.productId)
-              //   .ticker
             };
           }),
-    products: state.products,
+
     loading: state.apiCallsInProgress > 0
   };
 }
