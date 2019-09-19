@@ -76,11 +76,18 @@ function mapStateToProps(state) {
         : state.transactions.map(transaction => {
             return {
               ...transaction,
-              productName: state.products.find(
-                p => p.id === transaction.productId
-              ).name,
-              ticker: state.products.find(p => p.id === transaction.productId)
-                .ticker
+              // productName: state.products.find(
+              //   p => p.id === transaction.productId
+              // ).name,
+              // productName: state.products.find(
+              //   item => item.ticker === transaction.ticker
+              // ).name
+              productName: state.products.find(function(item) {
+                if (item.ticker === transaction.ticker) return item;
+                return {};
+              }).name
+              // ticker: state.products.find(p => p.id === transaction.productId)
+              //   .ticker
             };
           }),
     products: state.products,

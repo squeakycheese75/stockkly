@@ -42,26 +42,17 @@ const TransactionForm = ({
             </div>
           )}
 
-          {/* <TextInput
-            name="title"
-            label="Title"
-            value={transaction.title || ""}
-            placeholder="Type here"
-            onChange={onChange}
-            error={errors.title}
-          /> */}
-
           <SelectInput
-            name="productId"
+            name="ticker"
             label="Product"
-            value={transaction.productId || ""}
+            value={transaction.ticker || ""}
             defaultOption="Select product"
             options={products.map(product => ({
-              value: product.id,
+              value: product.ticker,
               text: product.name
             }))}
             onChange={onChange}
-            error={errors.product}
+            error={errors.ticker}
           />
 
           <SelectInput

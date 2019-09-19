@@ -38,11 +38,15 @@ server.use(
   jsonServer.rewriter({
     "/api/products": "/products",
     "/api/transactions": "/transactions",
+    "/api/transactions/:id": "/transactions/:id",
     "/api/profile": "/profile",
     "/api/watchlist": "/watchlist",
+    "/api/watchlist/:tickers": "/watchlist/:tickers",
     "/api/wallet": "/wallet",
     "/api/prices": "/prices",
-    "/api/pricesHistorical": "/pricesHistorical"
+    "/api/prices/:ticker": "/prices/:ticker",
+    "/api/pricesHistorical": "/pricesHistorical",
+    "/api/pricesHistorical/:ticker": "/pricesHistorical/:ticker"
   })
 );
 
@@ -65,19 +69,19 @@ server.post("/transactions/", function(req, res, next) {
   }
 });
 
-server.put("/profile", function(req, res, next) {
-  // console.log("post body: ", req.body);
-  // const error = validateProfile(req.body);
-  // console.log("post body: ", req.body);
+// server.put("/profile", function(req, res, next) {
+//   // console.log("post body: ", req.body);
+//   // const error = validateProfile(req.body);
+//   // console.log("post body: ", req.body);
 
-  const error = false;
-  if (error) {
-    res.status(400).send(error);
-  } else {
-    // req.body.slug = createSlug(req.body.id); // Generate a slug for new courses.
-    next();
-  }
-});
+//   const error = false;
+//   if (error) {
+//     res.status(400).send(error);
+//   } else {
+//     // req.body.slug = createSlug(req.body.id); // Generate a slug for new courses.
+//     next();
+//   }
+// });
 
 // Use default router
 server.use(router);
@@ -99,7 +103,7 @@ function createSlug(value) {
 }
 
 function validateTransaction(transaction) {
-  if (!transaction.productId) return "Product is required.";
+  if (!transaction.ticker) return "Product is required.";
   if (!transaction.type) return "Type is required.";
   if (!transaction.quantity) return "Quantity is required.";
   if (!transaction.trandate) return "Transaction date is required.";

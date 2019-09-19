@@ -1,33 +1,45 @@
 const transactions = [
   {
-    id: 1,
-    productId: 1,
+    id: "5d828150bab5d048613fb00a",
+    // productId: 1,
+    ticker: "BTC:USD",
     type: "Buy",
     quantity: 10.0,
     price: 11000.0,
     trandate: "2012-04-30"
   },
   {
-    id: 2,
-    productId: 1,
+    id: "5d82815ba759305b7ba490b6",
+    // productId: 1,
+    ticker: "BTC:USD",
     type: "Sell",
     quantity: 1.0,
     price: 8000.0,
     trandate: "2012-04-30"
   },
   {
-    id: 3,
-    productId: 2,
+    id: "5d828164e3af8165c9af6c21",
+    ticker: "LTC:USD",
+    // productId: 2,
     type: "Buy",
     quantity: 100.0,
     price: 8.0,
     trandate: "2012-04-30"
+  },
+  {
+    id: "5d0fce9cc3452a48a8533ee6",
+    ticker: "GOLD:OZ:GBP",
+    transdate: "2019-06-23T19:10:11.197Z",
+    transtype: "BUY",
+    quantity: 6,
+    price: 1,
+    details: "Trade info"
   }
 ];
 
 const products = [
   {
-    id: 1,
+    // id: 1,
     name: "Bitcoin",
     ticker: "BTC:USD",
     slug: "BTC:USD",
@@ -39,7 +51,7 @@ const products = [
     exchange: "COINBASE"
   },
   {
-    id: 2,
+    // id: 2,
     name: "Litecoin",
     ticker: "LTC:USD",
     slug: "LTC:USD",
@@ -51,7 +63,7 @@ const products = [
     exchange: "COINBASE"
   },
   {
-    id: 3,
+    // id: 3,
     name: "Gold (Oz)",
     ticker: "GOLD:GBP:OZ",
     slug: "GOLD:GBP:OZ",
@@ -191,7 +203,7 @@ const watchlist = [
 ];
 
 const profile = {
-  id: 1,
+  id: "5d828112defd9aa7ab05a9e4",
   watchList: ["BTC:USD"],
   tickers: [
     { productId: 1, watchdate: "2019-08-16" },
@@ -203,7 +215,7 @@ const profile = {
 };
 
 const newTransaction = {
-  id: null,
+  // id: null,
   productId: null,
   type: "",
   quantity: null,

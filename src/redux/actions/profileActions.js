@@ -36,7 +36,7 @@ export function saveProfile(profile) {
       .saveProfile(profile)
       .then(console.log("saved profile: ", profile))
       .then(savedProfile => {
-        profile._id
+        profile.id
           ? dispatch(updateProfileSuccess(savedProfile))
           : dispatch(createProfileSuccess(savedProfile));
       })

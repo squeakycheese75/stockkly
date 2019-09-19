@@ -184,7 +184,7 @@ function mapStateToProps(state, ownProps) {
       : {};
 
   const filteredTransactions = state.transactions.filter(
-    transaction => transaction.productId === product.id
+    transaction => transaction.ticker === product.ticker
   );
 
   return {
@@ -196,17 +196,14 @@ function mapStateToProps(state, ownProps) {
             return {
               ...transaction,
               // productName: state.products.find(
-              //   p => p.ticker == transaction.ticker
-              // ).name,
+              //   item => item.ticker === transaction.ticker
+              // ).name
               productName: state.products.find(function(item) {
-                console.log(item);
-                console.log(transaction.ticker);
                 if (item.ticker === transaction.ticker) return item;
-                // debugger;
                 return {};
-              }).name,
-              ticker: state.products.find(p => p.id === transaction.productId)
-                .ticker
+              }).name
+              // ticker: state.products.find(p => p.id === transaction.productId)
+              //   .ticker
             };
           }),
     product,

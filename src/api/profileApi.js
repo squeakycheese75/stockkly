@@ -11,7 +11,7 @@ export function getProfile() {
 
 export function saveProfile(profile) {
   return fetch(baseUrl, {
-    method: profile._id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
+    method: profile.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: getHeader(),
     body: JSON.stringify(profile)
   })

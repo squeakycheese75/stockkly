@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const newTransaction = {
   id: null,
   productId: 1,
+  ticker: "",
   type: "Buy",
   quantity: 1
   // trandate: ""
@@ -51,13 +52,17 @@ function ManageTransactionPage({
       ...prevTransaction,
       [name]: name === "productId" ? parseInt(value, 10) : value
     }));
+    // setTransaction(prevTransaction => ({
+    //   ...prevTransaction,
+    //   [name]: name === "productId" ? parseInt(value, 10) : value
+    // }));
   }
 
   function formIsValid() {
-    const { productId, type, quantity, trandate } = transaction;
+    const { ticker, type, quantity, trandate } = transaction;
     const errors = {};
 
-    if (!productId) errors.product = "Product is required";
+    if (!ticker) errors.product = "Product is required";
     if (!type) errors.type = "Type is required";
     if (!quantity) errors.quantity = "Quantity is required";
     if (!trandate) errors.trandate = "Transaction date is required";

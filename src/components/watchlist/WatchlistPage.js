@@ -78,10 +78,6 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
-      // loadWatchlist: bindActionCreators(
-      //   watchlistActions.loadWatchlist,
-      //   dispatch
-      // ),
       loadWatchlist: bindActionCreators(
         watchlistActions.loadWatchlistWithTickers,
         dispatch
