@@ -25,7 +25,6 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   function idFormatter(cell, row) {
     return (
       <>
-        {/* <Link to={"/transaction/" + cell}>EDIT</Link> */}
         <LinkContainer to={"/transaction/" + cell}>
           <Nav.Link>
             <Button className="button" variant="outline-info" size="sm">
@@ -71,7 +70,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         </TableHeaderColumn>
         <TableHeaderColumn
           width="15%"
-          dataField="type"
+          dataField="transtype"
           dataSort={true}
           columnClassName="bstable"
           dataAlign="left"
@@ -84,7 +83,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           dataField="details"
           dataSort={false}
           columnClassName="bstable"
-          dataAlign="right"
+          dataAlign="left"
         >
           Details
         </TableHeaderColumn>
@@ -100,7 +99,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         </TableHeaderColumn>
         <TableHeaderColumn
           width="10%"
-          dataField="trandate"
+          dataField="transdate"
           dataSort={true}
           columnClassName="bstable"
           dataFormat={dateFormatter}
@@ -110,7 +109,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Tran. Date
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="10%"
+          width="8"
           dataField="id"
           dataSort={true}
           columnClassName="bstable"
@@ -119,7 +118,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           editable={false}
         ></TableHeaderColumn>
         <TableHeaderColumn
-          width="10%"
+          width="10"
           dataField="id"
           columnClassName="bstable"
           dataFormat={deleteFormatter}

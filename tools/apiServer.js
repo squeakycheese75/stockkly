@@ -106,7 +106,7 @@ function validateTransaction(transaction) {
   if (!transaction.ticker) return "Product is required.";
   if (!transaction.type) return "Type is required.";
   if (!transaction.quantity) return "Quantity is required.";
-  if (!transaction.trandate) return "Transaction date is required.";
+  if (!transaction.transdate) return "Transaction date is required.";
   return "";
 }
 

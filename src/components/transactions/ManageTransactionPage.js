@@ -11,9 +11,9 @@ const newTransaction = {
   id: null,
   productId: 1,
   ticker: "",
-  type: "Buy",
+  transtype: "Buy",
   quantity: 1
-  // trandate: ""
+  // transdate: ""
 };
 
 function ManageTransactionPage({
@@ -59,13 +59,13 @@ function ManageTransactionPage({
   }
 
   function formIsValid() {
-    const { ticker, type, quantity, trandate } = transaction;
+    const { ticker, transtype, quantity, transdate } = transaction;
     const errors = {};
 
     if (!ticker) errors.product = "Product is required";
-    if (!type) errors.type = "Type is required";
+    if (!transtype) errors.transtype = "Type is required";
     if (!quantity) errors.quantity = "Quantity is required";
-    if (!trandate) errors.trandate = "Transaction date is required";
+    if (!transdate) errors.transdate = "Transaction date is required";
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties

@@ -58,7 +58,7 @@ const TransactionForm = ({
           <SelectInput
             name="type"
             label="Type"
-            value={transaction.type || ""}
+            value={transaction.transtype || ""}
             defaultOption="Select transaction type"
             options={ttype}
             onChange={onChange}
@@ -74,11 +74,11 @@ const TransactionForm = ({
           />
 
           <DateInput
-            name="trandate"
+            name="transdate"
             label="Date"
-            value={transaction.trandate || ""}
+            value={transaction.transdate || ""}
             onChange={onChange}
-            error={errors.trandate}
+            error={errors.transdate}
           />
 
           <NumberInput

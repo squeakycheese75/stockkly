@@ -10,6 +10,7 @@ export function getProfile() {
 }
 
 export function saveProfile(profile) {
+  console.log("profile api received: ", profile);
   return fetch(baseUrl, {
     method: profile.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: getHeader(),

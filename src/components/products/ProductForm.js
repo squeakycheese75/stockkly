@@ -1,42 +1,103 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ProductSummary from "./components/ProductSummary";
-// import TransactionList from "../history/TransactionsList";
-// import ProductChart from "./components/ProductChart";
-
-// const SHOWDELETE = false;
+import ProductChart from "./components/ProductChart";
+import TransactionTable from "../transactions/components/TransactionTable";
+import styles from "./ProductForm.css";
 
 const ProductForm = ({
+  profile,
   transactions,
   product,
-  price = { current: 1.22 },
-  chartData = {
-    x: ["2016-01-01", "2017-01-01", "2018-01-01"],
-    y: [1, 2, 3],
-    pid: product.name
-  },
+  price,
+  ticker,
+  pricesHistorical,
+  onDelete,
+  updateProfile,
+  // onAddWatchlist,
+  // onRemoveWatchlist,
+  // onSave,
   errors = {}
 }) => {
   return (
-    <div>
-      <ProductSummary product={product} price={price} />
-      {/* <br />
-      <ProductChart chartData={chartData} />
-      <br />
-      <TransactionList
-        transactions={transactions}
-        // showDelete={SHOWDELETE}
-        // onDeleteClick={this.handleDelete}
-      /> */}
+    <div className={styles}>
+      <form className="form">
+        {errors.onSave && (
+          <div className="alert alert-danger" role="alert">
+            {errors.onSave}
+          </div>
+        )}
+        <ProductSummary product={product} price={price} />
+        {/* <br /> */}
+        <ProductChart
+          pid={ticker}
+          chartData={{
+            x:
+              pricesHistorical && pricesHistorical.data
+                ? Object.keys(pricesHistorical.data)
+                : [],
+            y:
+              pricesHistorical && pricesHistorical.data
+                ? Object.values(pricesHistorical.data)
+                : [],
+            pid: ticker
+          }}
+        />
+        {/* <br /> */}
+        <TransactionTable
+          transactions={transactions}
+          onDeleteClick={onDelete}
+        />
+        {profile && profile.watchList.includes(ticker) ? (
+          <>
+            {" "}
+            <button
+              type="button"
+              // disabled={saving}
+              className="btn btn-outline-danger"
+              // onClick={() => onRemoveWatchlist(profile)}
+              onClick={() => {
+                let newProfile = Object.assign({}, profile, {
+                  watchList: profile.watchList.filter(
+                    item => item.toLowerCase() !== ticker.toLowerCase()
+                  )
+                });
+                updateProfile(newProfile);
+              }}
+            >
+              Remove from watchList
+            </button>
+          </>
+        ) : (
+          <>
+            {" "}
+            <button
+              type="button"
+              // disabled={saving}
+              className="btn btn-primary"
+              // onClick={() => onRemoveWatchlist(profile)}
+              onClick={() => {
+                let newProfile = Object.assign({}, profile, {
+                  watchList: profile.watchList.concat(ticker)
+                });
+                updateProfile(newProfile);
+              }}
+            >
+              Add to watchList
+            </button>
+          </>
+        )}
+      </form>
     </div>
   );
 };
 
 ProductForm.propTypes = {
   product: PropTypes.object.isRequired,
-  // price: PropTypes.object.isRequired,
   transactions: PropTypes.array.isRequired,
-  // showDelete: PropTypes.bool.isRequired,
+  price: PropTypes.object.isRequired,
+  ticker: PropTypes.string.isRequired,
+  pricesHistorical: PropTypes.object.isRequired,
   errors: PropTypes.object
 };
 

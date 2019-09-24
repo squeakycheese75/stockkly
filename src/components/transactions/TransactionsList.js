@@ -27,7 +27,7 @@ const TransactionList = ({ transactions, onDeleteClick }) => (
             </td>
             <td>{trans.type}</td>
             <td>{trans.quantity}</td>
-            <td>{trans.trandate}</td>
+            <td>{trans.transdate}</td>
             <td>
               <button
                 className="btn btn-outline-danger"

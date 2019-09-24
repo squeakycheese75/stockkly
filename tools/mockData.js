@@ -3,30 +3,30 @@ const transactions = [
     id: "5d828150bab5d048613fb00a",
     // productId: 1,
     ticker: "BTC:USD",
-    type: "Buy",
+    transtype: "Buy",
     quantity: 10.0,
     price: 11000.0,
-    trandate: "2012-04-30",
+    transdate: "2012-04-30",
     details: "Buying because money is screwed"
   },
   {
     id: "5d82815ba759305b7ba490b6",
     // productId: 1,
     ticker: "BTC:USD",
-    type: "Sell",
+    transtype: "Sell",
     quantity: 1.0,
     price: 8000.0,
-    trandate: "2012-04-30",
+    transdate: "2012-04-30",
     details: "Cant believe I ever sold any!"
   },
   {
     id: "5d828164e3af8165c9af6c21",
     ticker: "LTC:USD",
     // productId: 2,
-    type: "Buy",
+    transtype: "Buy",
     quantity: 100.0,
     price: 8.0,
-    trandate: "2012-04-30",
+    transdate: "2012-04-30",
     details: "Buying LTC because it was cheap"
   }
   // {
@@ -207,7 +207,7 @@ const watchlist = [
 
 const profile = {
   id: "5d828112defd9aa7ab05a9e4",
-  watchList: ["BTC:USD"],
+  watchList: ["GOLD:OZ:GBP", "BTC:USD"],
   tickers: [
     { productId: 1, watchdate: "2019-08-16" },
     { productId: 2, watchdate: "2019-08-16" }
@@ -223,7 +223,7 @@ const newTransaction = {
   type: "",
   quantity: null,
   // price: null,
-  trandate: null
+  transdate: null
 };
 
 const prices = [
