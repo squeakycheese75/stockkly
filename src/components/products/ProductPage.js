@@ -9,45 +9,18 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import ProductForm from "./ProductForm";
-// import ProductSummary from "./components/ProductSummary";
-// import ProductChart from "./components/ProductChart";
-// import TransactionTable from "../transactions/components/TransactionTable";
-// import { LinkContainer } from "react-router-bootstrap";
-// import { Nav, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 class ProductPage extends React.Component {
-  // handleDelete = transaction => {
-  //   toast.info("Transaction Deleted!");
-  //   this.props.actions.deleteTransaction(transaction).catch(error => {
-  //     toast.error("Transaction delete has Failed! " + error.message, {
-  //       autoClose: false
-  //     });
-  //   });
-  // };
-
   updateProfile = profile => {
-    // let profile = this.props.profile;
-    // console.log("profile: ", profile);
-
-    // let newProfile = Object.assign({}, profile, {
-    //   watchList: profile.watchList.filter(
-    //     item => item.toLowerCase() !== ticker.toLowerCase()
-    //   )
-    // });
-    this.props.actions.saveProfile(profile).catch(error => {
-      toast.error("Profile update has Failed! " + error.message, {
-        autoClose: false
+    this.props.actions
+      .saveProfile(profile)
+      .then(toast.info("Watchlist updated"))
+      .catch(error => {
+        toast.error("Profile update has Failed! " + error.message, {
+          autoClose: false
+        });
       });
-    });
-  };
-
-  addTicker = ticker => {
-    console.log("Adding ticker to watchlist", ticker);
-    // debugger;
-    // const { value, name } = event.target;
-    // console.log("Adding ticker to value", value);
-    // console.log("Adding ticker to name", name);
   };
 
   handleDelete = transaction => {
@@ -117,8 +90,7 @@ class ProductPage extends React.Component {
             pricesHistorical={this.props.pricesHistorical}
             onDelete={this.handleDelete}
             updateProfile={this.updateProfile}
-            // onAddWatchlist={this.updateProfile}
-            // onRemoveWatchlist={this.updateProfile}
+            auth={this.props.auth}
           />
         )}
       </>

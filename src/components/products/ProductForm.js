@@ -4,6 +4,7 @@ import ProductSummary from "./components/ProductSummary";
 import ProductChart from "./components/ProductChart";
 import TransactionTable from "../transactions/components/TransactionTable";
 import styles from "./ProductForm.css";
+import { Link } from "react-router-dom";
 
 const ProductForm = ({
   profile,
@@ -14,6 +15,7 @@ const ProductForm = ({
   pricesHistorical,
   onDelete,
   updateProfile,
+  auth,
   // onAddWatchlist,
   // onRemoveWatchlist,
   // onSave,
@@ -53,7 +55,6 @@ const ProductForm = ({
             {" "}
             <button
               type="button"
-              // disabled={saving}
               className="btn btn-outline-danger"
               // onClick={() => onRemoveWatchlist(profile)}
               onClick={() => {
@@ -73,7 +74,6 @@ const ProductForm = ({
             {" "}
             <button
               type="button"
-              // disabled={saving}
               className="btn btn-primary"
               // onClick={() => onRemoveWatchlist(profile)}
               onClick={() => {
@@ -83,10 +83,26 @@ const ProductForm = ({
                 updateProfile(newProfile);
               }}
             >
-              Add to watchList
+              Add to WatchList
             </button>
           </>
         )}
+        {auth.isAuthenticated() ? (
+          <>
+            {" "}
+            <Link to="/transaction">
+              <button
+                type="button"
+                className="btn btn-primary"
+                style={{ marginLeft: "auto" }}
+              >
+                Add Transaction
+              </button>
+            </Link>
+          </>
+        ) : (
+          <> </>
+        )}{" "}
       </form>
     </div>
   );

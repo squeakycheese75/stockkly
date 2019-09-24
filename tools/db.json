@@ -10,15 +10,6 @@
       "details": "Buying because money is screwed"
     },
     {
-      "id": "5d82815ba759305b7ba490b6",
-      "ticker": "BTC:USD",
-      "transtype": "Sell",
-      "quantity": 1,
-      "price": 8000,
-      "transdate": "2012-04-30",
-      "details": "Cant believe I ever sold any!"
-    },
-    {
       "id": "5d828164e3af8165c9af6c21",
       "ticker": "LTC:USD",
       "transtype": "Buy",
@@ -162,40 +153,7 @@
       ]
     }
   ],
-  "wallet": [
-    {
-      "id": 1,
-      "ccy": "GBP",
-      "productId": 1,
-      "change": -36.13000000000011,
-      "displayTicker": "BTC:USD",
-      "movement": -2.9354414130417212,
-      "name": "Bitcoin",
-      "price": 1230.82,
-      "qty": 6,
-      "spot": 1.22,
-      "symbol": "£",
-      "ticker": "BTC:USD",
-      "total": 7384.92,
-      "total_change": -216.78000000000065
-    },
-    {
-      "id": 2,
-      "ccy": "USD",
-      "productId": 2,
-      "change": -10.13,
-      "displayTicker": "LTC:USD",
-      "movement": 1.48,
-      "name": "Litecoin",
-      "price": 230.82,
-      "qty": 20,
-      "spot": 1.22,
-      "symbol": "$",
-      "ticker": "LTC:USD",
-      "total": 599.92,
-      "total_change": 45.78000000000065
-    }
-  ],
+  "wallet": [],
   "profile": {
     "id": "5d828112defd9aa7ab05a9e4",
     "watchList": [
@@ -215,38 +173,7 @@
     "symbol": "£",
     "refreshRate": 30
   },
-  "prices": [
-    {
-      "id": "BTC:USD",
-      "productId": 1,
-      "ticker": "BTC:USD",
-      "open": 10190.017905283235,
-      "change": 142.56263695119924,
-      "price": 10332.580542234435,
-      "movement": 1.379738937126832,
-      "priceDate": "2019-09-12T00:00:00"
-    },
-    {
-      "id": "LTC:USD",
-      "productId": 2,
-      "ticker": "LTC:USD",
-      "open": 70.01665183013162,
-      "change": -1.050021668562934,
-      "price": 68.96663016156869,
-      "movement": -1.5225068502013794,
-      "priceDate": "2019-09-12T00:00:00"
-    },
-    {
-      "id": "GOLD:OZ:GBP",
-      "productId": 3,
-      "ticker": "GOLD:OZ:GBP",
-      "open": 1210.62,
-      "change": 4.7000000000000455,
-      "price": 1215.32,
-      "movement": 0.38672942105783215,
-      "priceDate": "2019-09-12T00:00:00"
-    }
-  ],
+  "prices": [],
   "pricesHistorical": [
     {
       "id": "BTC:USD",
