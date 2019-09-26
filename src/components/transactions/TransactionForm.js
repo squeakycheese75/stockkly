@@ -10,11 +10,11 @@ import styles from "./TransactionForm.css";
 
 const ttype = [
   {
-    value: "Buy",
+    value: "BUY",
     text: "Buy"
   },
   {
-    value: "Sell",
+    value: "SELL",
     text: "Sell"
   }
 ];
@@ -41,7 +41,6 @@ const TransactionForm = ({
               {errors.onSave}
             </div>
           )}
-
           <SelectInput
             name="ticker"
             label="Product"

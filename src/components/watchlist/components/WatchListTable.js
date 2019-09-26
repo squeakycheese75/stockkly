@@ -11,16 +11,48 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
     : "td-column-price-up td-column-size";
 }
 
+// function priceFormatter(cell, row) {
+//   if (!cell) {
+//     return (
+//       `${row.symbol}` +
+//       parseFloat(row.price)
+//         .toFixed(2)
+//         .toLocaleString()
+//     );
+//   }
+//   return (
+//     `${row.symbol}` +
+//     parseFloat(cell)
+//       .toFixed(2)
+//       .toLocaleString()
+//   );
+//   // cell.toLocaleString();
+// }
 function priceFormatter(cell, row) {
-  if (!cell) {
-    return (
-      `${row.symbol}` +
-      parseFloat(row.price)
-        .toFixed(2)
-        .toLocaleString()
-    );
-  }
-  return `${row.symbol}` + cell.toLocaleString();
+  return row.spot === 1 ? (
+    <div className="name">
+      {row.symbol}
+      {parseFloat(cell).toLocaleString("en-GB", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}
+    </div>
+  ) : (
+    <div>
+      <ul>
+        <li className="name">
+          {row.symbol}
+          {parseFloat(cell).toLocaleString("en-GB", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+            // currency: appSettings.currency,
+            // style: "currency"
+          })}
+        </li>
+        <li className="details">({row.spot.toFixed(2)})</li>
+      </ul>
+    </div>
+  );
 }
 
 function priceChangeFormatter(cell, row) {

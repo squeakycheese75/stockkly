@@ -8,12 +8,10 @@ import Loading from "../common/Loading";
 import { toast } from "react-toastify";
 
 const newTransaction = {
-  id: null,
-  productId: 1,
   ticker: "",
   transtype: "Buy",
-  quantity: 1
-  // transdate: ""
+  quantity: 1,
+  transdate: ""
 };
 
 function ManageTransactionPage({
@@ -125,6 +123,8 @@ export function getTransactionById(transactions, id) {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
+  // const ticker = ownProps.match.params.ticker;
+  // console.log(ownProps.match.params);
   const transaction =
     id && state.transactions.length > 0
       ? getTransactionById(state.transactions, id)

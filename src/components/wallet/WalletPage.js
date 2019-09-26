@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
+import HowToWallet from "../common/HowToWallet";
 
 class WalletPage extends React.Component {
   componentDidMount() {
@@ -45,7 +46,7 @@ class WalletPage extends React.Component {
       <>
         {!this._isMounted || this.props.loading ? (
           <Loading />
-        ) : (
+        ) : this.props.wallet.length > 0 ? (
           <>
             <WalletSummary
               data={this.props.wallet}
@@ -55,6 +56,10 @@ class WalletPage extends React.Component {
               data={this.props.wallet}
               profile={this.props.profile}
             />
+          </>
+        ) : (
+          <>
+            <HowToWallet />
           </>
         )}
       </>

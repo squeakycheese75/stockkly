@@ -90,6 +90,7 @@ const ProductForm = ({
         {auth.isAuthenticated() ? (
           <>
             {" "}
+            {/* <Link to="/transaction/na/BTC:USD"> My Link </Link> */}
             <Link to="/transaction">
               <button
                 type="button"

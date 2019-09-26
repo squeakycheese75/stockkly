@@ -79,13 +79,6 @@ function mapStateToProps(state) {
               ...transaction,
               productName: state.products.find(function(item) {
                 if (item.ticker === transaction.ticker) {
-                  // console.log(
-                  //   "Found item ",
-                  //   item,
-                  //   " with key ",
-                  //   transaction.ticker
-                  // );
-                  // console.log("returning", item.name);
                   return item;
                 }
               }).name

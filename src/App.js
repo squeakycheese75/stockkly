@@ -86,11 +86,12 @@ class App extends Component {
             path="/"
             render={props =>
               isLoggedIn ? (
-                <WalletPage
-                  auth={this.auth}
-                  appSettings={this.state.appSettings}
-                  {...props}
-                />
+                // <WalletPage
+                //   auth={this.auth}
+                //   appSettings={this.state.appSettings}
+                //   {...props}
+                // />
+                <HomePage auth={this.auth} {...props} />
               ) : (
                 <HomePage auth={this.auth} {...props} />
               )
@@ -108,18 +109,18 @@ class App extends Component {
             render={props => <TransactionsPage auth={this.auth} {...props} />}
           />
           <Route
-            path="/transaction/:id"
+            path="/transaction/:id?"
             render={props => (
               <ManageTransactionPage auth={this.auth} {...props} />
             )}
           />
-          <Route
+          {/* <Route
             exact
             path="/transaction"
             render={props => (
               <ManageTransactionPage auth={this.auth} {...props} />
             )}
-          />
+          /> */}
           <Route
             path="/products"
             render={props => <ProductsPage auth={this.auth} {...props} />}

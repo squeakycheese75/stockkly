@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 const DateInput = ({ name, label, onChange, placeholder, value, error }) => {
   let wrapperClass = "form-group";
@@ -17,7 +18,7 @@ const DateInput = ({ name, label, onChange, placeholder, value, error }) => {
           name={name}
           className="form-control"
           placeholder={placeholder}
-          value={value}
+          value={moment(value).format("YYYY-MM-DD")}
           onChange={onChange}
         />
 
