@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import WatchListTable from "./components/WatchListTable";
+import HowToWatchlist from "../common/HowToWatchlist";
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -19,10 +20,6 @@ class WatchlistPage extends React.Component {
         console.log("Loading Profile failed ..." + error);
       });
     }
-
-    // actions.loadWatchlist().catch(error => {
-    //   console.log("Loading Watchlist failed ..." + error);
-    // });
 
     actions.loadWatchlist(profile.watchList).catch(error => {
       console.log("Loading Watchlist failed ..." + error);
@@ -55,8 +52,7 @@ class WatchlistPage extends React.Component {
           </>
         ) : (
           <>
-            {" "}
-            <p>Nothing to show</p>
+            <HowToWatchlist />
           </>
         )}
       </>

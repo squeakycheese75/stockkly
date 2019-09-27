@@ -30,27 +30,29 @@ const HowToWallet = () => {
 
           <h3>How to build your wallet tracker:</h3>
           <ListGroup variant="flush">
-            <ListGroup.Item variant="dark">
-              1. Create an account via the Login button.
+            <ListGroup.Item variant="info">
+              1.{" "}
+              <b>
+                <i>Login</i>
+              </b>{" "}
+              or create an account.
             </ListGroup.Item>
             <ListGroup.Item variant="dark">
-              2. Click the "Add Transaction" button from either the Transactions
-              page or from a Product.
+              2. Click the "
+              <b>
+                <i>Add to Transaction</i>
+              </b>
+              " button from either the Transactions page or from a Product.
             </ListGroup.Item>
             <ListGroup.Item variant="dark">
-              3. Fill in the Trade details and press "Save".
+              3. Fill in the Trade details and press "
+              <b>
+                <i>Save</i>
+              </b>
+              ".
             </ListGroup.Item>
-            {/* <ListGroup.Item>
-            3. Fill in the Trade details and press "Save".
-          </ListGroup.Item> */}
           </ListGroup>
           <br></br>
-          {/* <h4>
-          Voila! Your trade will be added to your wallet and tracked live.
-        </h4>
-        <h5>
-          Voila! Your trade will be added to your wallet and tracked live.
-        </h5> */}
           <h6>
             Voila! Your trade will be added to your wallet and tracked live.
           </h6>
