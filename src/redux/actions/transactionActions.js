@@ -53,6 +53,9 @@ export function saveTransaction(transaction) {
 export function deleteTransaction(transaction) {
   return function(dispatch) {
     dispatch(deleteTransactionOptimistic(transaction));
-    return transactionApi.deleteTransaction(transaction.id);
+    return transactionApi.deleteTransaction(transaction.id).catch(error => {
+      dispatch(apiCallError(error));
+      throw error;
+    });
   };
 }

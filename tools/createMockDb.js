@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 const fs = require("fs");
 const path = require("path");
-const mockData = require("./mockData");
+// const mockData = require("./mockData");
+const mockData = require("./mockDataEmpty");
 
 const {
   transactions,

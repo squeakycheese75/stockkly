@@ -4,9 +4,7 @@ import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import NumberInput from "../common/NumberInput";
 import DateInput from "../common/DateInput";
-// import { Container } from "react-bootstrap";
 import styles from "./TransactionForm.css";
-// import { Container } from "react-bootstrap";
 
 const ttype = [
   {
@@ -86,6 +84,14 @@ const TransactionForm = ({
             value={transaction.quantity}
             onChange={onChange}
             error={errors.quantity}
+          />
+
+          <NumberInput
+            name="price"
+            label="Price"
+            value={transaction.price}
+            onChange={onChange}
+            error={errors.price}
           />
 
           <button type="submit" disabled={saving} className="btn btn-primary">

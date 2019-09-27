@@ -23,6 +23,7 @@ export function loadProfile() {
         dispatch(loadProfileSuccess(profile));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
@@ -46,29 +47,3 @@ export function saveProfile(profile) {
       });
   };
 }
-
-// export function deleteTransaction(transaction) {
-//   return function(dispatch) {
-//     dispatch(deleteTransactionOptimistic(transaction));
-//     return transactionApi.deleteTransaction(transaction.id);
-//   };
-// }
-
-// export function removeTicker(item) {
-//   //eslint-disable-next-line no-unused-vars
-//   return function(dispatch, getState) {
-//     dispatch(beginApiCall());
-//     return profileApi
-//       .saveProfile(profile)
-//       .then(console.log("saved profile: ", profile))
-//       .then(savedProfile => {
-//         profile.id
-//           ? dispatch(updateProfileSuccess(savedProfile))
-//           : dispatch(createProfileSuccess(savedProfile));
-//       })
-//       .catch(error => {
-//         dispatch(apiCallError(error));
-//         throw error;
-//       });
-//   };
-// }

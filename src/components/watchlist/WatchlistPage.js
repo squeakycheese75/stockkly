@@ -49,9 +49,14 @@ class WatchlistPage extends React.Component {
       <>
         {this.props.loading && !this._isMounted ? (
           <Loading />
-        ) : (
+        ) : this.props.watchlist.length > 0 ? (
           <>
             <WatchListTable data={this.props.watchlist} />
+          </>
+        ) : (
+          <>
+            {" "}
+            <p>Nothing to show</p>
           </>
         )}
       </>

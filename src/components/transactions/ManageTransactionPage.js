@@ -11,7 +11,8 @@ const newTransaction = {
   ticker: "",
   transtype: "Buy",
   quantity: 1,
-  transdate: ""
+  transdate: "",
+  price: 1
 };
 
 function ManageTransactionPage({
@@ -92,7 +93,8 @@ function ManageTransactionPage({
     history.goBack();
   }
 
-  return transactions.length === 0 || products.length === 0 ? (
+  // return transactions.length === 0 ||
+  return products.length === 0 ? (
     <Loading />
   ) : (
     <TransactionForm
@@ -123,8 +125,6 @@ export function getTransactionById(transactions, id) {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
-  // const ticker = ownProps.match.params.ticker;
-  // console.log(ownProps.match.params);
   const transaction =
     id && state.transactions.length > 0
       ? getTransactionById(state.transactions, id)

@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as productApi from "../../api/productApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadProductsSuccess(products) {
   return { type: types.LOAD_PRODUCTS_SUCCESS, products };
@@ -15,6 +15,7 @@ export function loadProducts() {
         dispatch(loadProductsSuccess(products));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };

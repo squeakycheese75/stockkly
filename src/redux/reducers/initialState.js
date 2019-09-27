@@ -5,13 +5,12 @@ export default {
   price: {},
   pricesHistorical: {},
   profile: {
-    id: 1,
-    // tickers: [],
-    watchList: ["BTC:USD"],
+    watchList: [],
     currency: "GBP",
     symbol: "£",
     refreshRate: 100
   },
+  // profile: {},
   watchlist: localStorage.getItem("watchlist")
     ? JSON.parse(localStorage.getItem("watchlist"))
     : [],
