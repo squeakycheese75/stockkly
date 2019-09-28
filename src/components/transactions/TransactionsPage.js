@@ -9,6 +9,7 @@ import { Nav, Button } from "react-bootstrap";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
 import TransactionTable from "./components/TransactionTable";
+import HowToWallet from "../common/HowToWallet";
 
 class TransactionsPage extends React.Component {
   _isMounted = false;
@@ -45,10 +46,18 @@ class TransactionsPage extends React.Component {
           <Loading />
         ) : (
           <>
-            <TransactionTable
-              transactions={this.props.transactions}
-              onDeleteClick={this.handleDelete}
-            />
+            {this.props.transactions.length > 0 ? (
+              <>
+                <TransactionTable
+                  transactions={this.props.transactions}
+                  onDeleteClick={this.handleDelete}
+                />
+              </>
+            ) : (
+              <>
+                <HowToWallet />
+              </>
+            )}
             <LinkContainer to="/transaction">
               <Nav.Link>
                 <Button>Add new transaction</Button>

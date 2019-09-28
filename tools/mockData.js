@@ -1,7 +1,6 @@
 const transactions = [
   {
     id: "5d828150bab5d048613fb00a",
-    // productId: 1,
     ticker: "BTC:USD",
     transtype: "Buy",
     quantity: 10.0,
@@ -11,7 +10,6 @@ const transactions = [
   },
   {
     id: "5d82815ba759305b7ba490b6",
-    // productId: 1,
     ticker: "BTC:USD",
     transtype: "Sell",
     quantity: 1.0,
@@ -22,7 +20,6 @@ const transactions = [
   {
     id: "5d828164e3af8165c9af6c21",
     ticker: "LTC:USD",
-    // productId: 2,
     transtype: "Buy",
     quantity: 100.0,
     price: 8.0,

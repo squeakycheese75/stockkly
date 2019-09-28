@@ -21,15 +21,15 @@ const ProductForm = ({
 }) => {
   return (
     <div className={styles}>
-      <form className="form">
+      <form className="productform">
         {errors.onSave && (
           <div className="alert alert-danger" role="alert">
             {errors.onSave}
           </div>
         )}
         <ProductSummary product={product} price={price} />
-        <br />
-        <h6>Chart:</h6>
+        {/* <br />
+        <h6>Chart:</h6> */}
         <ProductChart
           pid={ticker}
           chartData={{
@@ -45,7 +45,7 @@ const ProductForm = ({
           }}
         />
         <br />
-        <h6>Transactions:</h6>
+        {/* <h6>Transactions:</h6> */}
         <TransactionTable
           transactions={transactions}
           onDeleteClick={onDelete}
@@ -98,8 +98,13 @@ const ProductForm = ({
             Add Transaction
           </button>
         </Link>
-        {!auth.isAuthenticated()}
-        {<LoginPrompt />}
+        {!auth.isAuthenticated() ? (
+          <>
+            <LoginPrompt />
+          </>
+        ) : (
+          <></>
+        )}
       </form>
     </div>
   );

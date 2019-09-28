@@ -17,7 +17,8 @@ const ProductChart = ({ chartData, errors = {} }) => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container">
+      {/* <div className="container-fluid"></div> */}
       {!Array.isArray(chartData.x) || !chartData.x.length ? (
         "No Data"
       ) : (

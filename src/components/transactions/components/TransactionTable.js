@@ -1,7 +1,6 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
-// import { Link } from "react-router-dom";
 import moment from "moment";
 import { Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -14,10 +13,12 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   function deleteFormatter(cell, row) {
     return (
       <button
-        className="btn btn-outline-danger"
+        className="btn"
+        // className="btn btn-outline-danger"
+
         onClick={() => onDeleteClick(row)}
       >
-        Delete
+        <i className="material-icons vertical-align-middle">delete_outline</i>
       </button>
     );
   }
@@ -27,9 +28,10 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
       <>
         <LinkContainer to={"/transaction/" + cell}>
           <Nav.Link>
-            <Button className="button" variant="outline-info" size="sm">
-              Edit
-            </Button>
+            {/* <Button className="button" variant="outline-info" size="sm">
+            <i className="material-icons vertical-align-middle">delete_forever</i>
+            </Button> */}
+            <i className="material-icons vertical-align-middle">edit</i>
           </Nav.Link>
         </LinkContainer>
       </>
@@ -40,7 +42,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
     if (!cell) {
       return "";
     }
-    return `${moment(cell).format("Do MMM YYYY")}`;
+    return `${moment(cell).format("DD/MM/YYYY")}`;
   }
 
   return (
@@ -58,7 +60,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         options={options}
       >
         <TableHeaderColumn
-          width="15%"
+          width="20%"
           dataField="productName"
           isKey={true}
           dataSort={true}
@@ -69,7 +71,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Name
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="15%"
+          width="10%"
           dataField="transtype"
           dataSort={true}
           columnClassName="bstable"
@@ -79,7 +81,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Type
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="20%"
+          width="40%"
           dataField="details"
           dataSort={false}
           columnClassName="bstable"
@@ -98,7 +100,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Qty
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="10%"
+          width="12%"
           dataField="transdate"
           dataSort={true}
           columnClassName="bstable"
@@ -109,21 +111,21 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Tran. Date
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="8"
+          width="4%"
           dataField="id"
           dataSort={true}
           columnClassName="bstable"
           dataFormat={idFormatter}
-          dataAlign="left"
+          dataAlign="right"
           editable={false}
         ></TableHeaderColumn>
         <TableHeaderColumn
-          width="10"
+          width="4%"
           dataField="id"
           columnClassName="bstable"
           dataFormat={deleteFormatter}
           editable={false}
-          dataAlign="center"
+          dataAlign="right"
         ></TableHeaderColumn>
       </BootstrapTable>
     </div>

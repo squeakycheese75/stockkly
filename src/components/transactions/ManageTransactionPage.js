@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import TransactionForm from "./TransactionForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
+import HowToWallet from "../common/HowToWallet";
 
 const newTransaction = {
   ticker: "",
@@ -96,7 +97,7 @@ function ManageTransactionPage({
   // return transactions.length === 0 ||
   return products.length === 0 ? (
     <Loading />
-  ) : (
+  ) : transactions.length > 1 ? (
     <TransactionForm
       transaction={transaction}
       errors={errors}
@@ -106,6 +107,8 @@ function ManageTransactionPage({
       saving={saving}
       cancel={handleCancel}
     />
+  ) : (
+    <HowToWallet />
   );
 }
 
