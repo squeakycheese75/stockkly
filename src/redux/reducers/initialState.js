@@ -6,7 +6,7 @@ export default {
   pricesHistorical: {},
   profile: {
     id: null,
-    watchList: ["BTC:USD"],
+    watchList: ["BTC:USD", "INDEXNASDAQ:.IXIC"],
     currency: "GBP",
     symbol: "£",
     refreshRate: 30
