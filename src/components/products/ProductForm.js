@@ -33,14 +33,8 @@ const ProductForm = ({
         <ProductChart
           pid={ticker}
           chartData={{
-            x:
-              pricesHistorical && pricesHistorical.data
-                ? Object.keys(pricesHistorical.data)
-                : [],
-            y:
-              pricesHistorical && pricesHistorical.data
-                ? Object.values(pricesHistorical.data)
-                : [],
+            x: pricesHistorical ? Object.keys(pricesHistorical) : [],
+            y: pricesHistorical ? Object.values(pricesHistorical) : [],
             pid: ticker
           }}
         />
