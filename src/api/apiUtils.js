@@ -1,6 +1,7 @@
 export async function handleResponse(response) {
   // console.log(response);
   // if (response.ok && response.status === 204) return response;
+  if (response.ok && response.status === 204) return;
   if (response.ok) return response.json();
   // debugger;
   if (response.status === 400) {

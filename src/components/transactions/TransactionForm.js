@@ -5,15 +5,16 @@ import SelectInput from "../common/SelectInput";
 import NumberInput from "../common/NumberInput";
 import DateInput from "../common/DateInput";
 import styles from "./TransactionForm.css";
+import moment from "moment";
 
-const ttype = [
+const TRANSTYPES = [
   {
     value: "BUY",
-    text: "Buy"
+    text: "BUY"
   },
   {
     value: "SELL",
-    text: "Sell"
+    text: "SELL"
   }
 ];
 
@@ -53,13 +54,13 @@ const TransactionForm = ({
           />
 
           <SelectInput
-            name="type"
+            name="transtype"
             label="Type"
             value={transaction.transtype || ""}
             defaultOption="Select transaction type"
-            options={ttype}
+            options={TRANSTYPES}
             onChange={onChange}
-            error={errors.type}
+            error={errors.transtype}
           />
 
           <TextInput
@@ -73,7 +74,9 @@ const TransactionForm = ({
           <DateInput
             name="transdate"
             label="Date"
-            value={transaction.transdate || ""}
+            value={
+              transaction.transdate || moment(Date.now()).format("YYYY-MM-DD")
+            }
             onChange={onChange}
             error={errors.transdate}
           />

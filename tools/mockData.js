@@ -2,7 +2,7 @@ const transactions = [
   {
     id: "5d828150bab5d048613fb00a",
     ticker: "BTC:USD",
-    transtype: "Buy",
+    transtype: "BUY",
     quantity: 10.0,
     price: 11000.0,
     transdate: "2012-04-30",
@@ -11,7 +11,7 @@ const transactions = [
   {
     id: "5d82815ba759305b7ba490b6",
     ticker: "BTC:USD",
-    transtype: "Sell",
+    transtype: "SELL",
     quantity: 1.0,
     price: 8000.0,
     transdate: "2012-04-30",
@@ -20,7 +20,7 @@ const transactions = [
   {
     id: "5d828164e3af8165c9af6c21",
     ticker: "LTC:USD",
-    transtype: "Buy",
+    transtype: "BUY",
     quantity: 100.0,
     price: 8.0,
     transdate: "2012-04-30",

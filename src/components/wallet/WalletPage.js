@@ -20,6 +20,7 @@ class WalletPage extends React.Component {
     }
 
     //Force wallet load because we default to cache
+    console.log("loadWallet ");
     actions.loadWallet().catch(error => {
       console.log("Loading Wallet failed ..." + error);
     });
@@ -28,6 +29,7 @@ class WalletPage extends React.Component {
 
     setInterval(() => {
       if (this._isMounted) {
+        console.log("loadWallet ");
         actions.loadWallet().catch(error => {
           console.log("Loading Portfolio failed ..." + error);
         });
@@ -44,7 +46,7 @@ class WalletPage extends React.Component {
   render() {
     return (
       <>
-        {!this._isMounted || this.props.loading ? (
+        {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.wallet.length > 0 ? (
           <>

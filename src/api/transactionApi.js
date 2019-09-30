@@ -15,7 +15,6 @@ export function saveTransaction(transaction) {
   return fetch(baseUrl + (transaction.id || ""), {
     method: transaction.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: getHeader(),
-    // headers: { "content-type": "application/json" },
     body: JSON.stringify(transaction)
   })
     .then(handleResponse)
@@ -23,10 +22,11 @@ export function saveTransaction(transaction) {
 }
 
 export function deleteTransaction(transactionId) {
-  // console.log(baseUrl);
+  // console.log(transactionId);
   return fetch(baseUrl + transactionId, {
     method: "DELETE",
-    header: getHeader()
+    headers: getHeader(),
+    body: JSON.stringify(transactionId)
   })
     .then(handleResponse)
     .catch(handleError);

@@ -2,7 +2,7 @@ import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import PropTypes from "prop-types";
 import moment from "moment";
-import { Nav, Button } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {

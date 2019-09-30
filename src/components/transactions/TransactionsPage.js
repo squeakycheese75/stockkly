@@ -17,11 +17,12 @@ class TransactionsPage extends React.Component {
   componentDidMount() {
     const { transactions, products, actions } = this.props;
 
-    if (transactions.length === 0) {
-      actions.loadTransactions().catch(error => {
-        console.log("Loading Transactions failed ..." + error);
-      });
-    }
+    // if (transactions.length === 0) {
+    console.log("Loading transactions");
+    actions.loadTransactions().catch(error => {
+      console.log("Loading Transactions failed ..." + error);
+    });
+    // }
 
     if (products.length === 0) {
       actions.loadProducts().catch(error => {
@@ -90,6 +91,7 @@ function mapStateToProps(state) {
                 if (item.ticker === transaction.ticker) {
                   return item;
                 }
+                return { name: "na" };
               }).name
             };
           }),

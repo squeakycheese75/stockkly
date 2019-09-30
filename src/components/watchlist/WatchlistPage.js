@@ -12,7 +12,6 @@ class WatchlistPage extends React.Component {
   _isMounted = false;
 
   componentDidMount() {
-    this._isMounted = true;
     const { profile, actions } = this.props;
 
     if (profile.length === 0) {
@@ -21,6 +20,7 @@ class WatchlistPage extends React.Component {
       });
     }
 
+    console.log("profile.watchlist: ", profile.watchList);
     actions.loadWatchlist(profile.watchList).catch(error => {
       console.log("Loading Watchlist failed ..." + error);
     });
@@ -29,11 +29,13 @@ class WatchlistPage extends React.Component {
 
     setInterval(() => {
       if (this._isMounted) {
-        actions.loadWatchlist().catch(error => {
+        console.log("profile.watchlist: ", profile.watchList);
+        actions.loadWatchlist(profile.watchList).catch(error => {
           console.log("Loading Watchlist failed ..." + error);
         });
       }
     }, refreshRate);
+    this._isMounted = true;
   }
 
   componentWillUnmount() {
@@ -78,7 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
+      loadProfile: bindActionCreators(profileActions.loadProfile, dispatch),
       loadWatchlist: bindActionCreators(
         watchlistActions.loadWatchlistWithTickers,
         dispatch
