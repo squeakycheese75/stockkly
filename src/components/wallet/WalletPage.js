@@ -20,7 +20,7 @@ class WalletPage extends React.Component {
     }
 
     //Force wallet load because we default to cache
-    console.log("loadWallet ");
+    // console.log("loadWallet ");
     actions.loadWallet().catch(error => {
       console.log("Loading Wallet failed ..." + error);
     });
@@ -29,7 +29,7 @@ class WalletPage extends React.Component {
 
     setInterval(() => {
       if (this._isMounted) {
-        console.log("loadWallet ");
+        // console.log("loadWallet ");
         actions.loadWallet().catch(error => {
           console.log("Loading Portfolio failed ..." + error);
         });
