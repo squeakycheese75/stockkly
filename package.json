@@ -43,15 +43,12 @@
     "typy": "^3.3.0"
   },
   "scripts": {
-    "start": "run-p start:dev start:api",
-    "start:dev": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watchAll",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "",
-    "prestart:api": "node tools/createMockDb.js",
-    "start:api": "node tools/apiServer.js"
+    "deploy": ""
   },
   "eslintConfig": {
     "extends": "react-app"
