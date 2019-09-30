@@ -121,7 +121,7 @@ function mapStateToProps(state, ownProps) {
       : {};
 
   const filteredTransactions = state.transactions.filter(
-    transaction => transaction.ticker === product.ticker
+    transaction => transaction.ticker === ticker
   );
 
   return {
