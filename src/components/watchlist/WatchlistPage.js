@@ -20,7 +20,7 @@ class WatchlistPage extends React.Component {
       });
     }
 
-    console.log("profile.watchlist: ", profile.watchList);
+    // console.log("profile.watchlist: ", profile.watchList);
     actions.loadWatchlist(profile.watchList).catch(error => {
       console.log("Loading Watchlist failed ..." + error);
     });
@@ -29,7 +29,7 @@ class WatchlistPage extends React.Component {
 
     setInterval(() => {
       if (this._isMounted) {
-        console.log("profile.watchlist: ", profile.watchList);
+        // console.log("profile.watchlist: ", profile.watchList);
         actions.loadWatchlist(profile.watchList).catch(error => {
           console.log("Loading Watchlist failed ..." + error);
         });
