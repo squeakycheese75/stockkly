@@ -91,7 +91,6 @@ class App extends Component {
                   {...props}
                 />
               ) : (
-                // <HomePage auth={this.auth} {...props} />
                 <HomePage auth={this.auth} {...props} />
               )
             }
