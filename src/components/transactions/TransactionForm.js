@@ -5,7 +5,7 @@ import SelectInput from "../common/SelectInput";
 import NumberInput from "../common/NumberInput";
 import DateInput from "../common/DateInput";
 import styles from "./TransactionForm.css";
-import moment from "moment";
+// import moment from "moment";
 
 const TRANSTYPES = [
   {
@@ -74,9 +74,7 @@ const TransactionForm = ({
           <DateInput
             name="transdate"
             label="Date"
-            value={
-              transaction.transdate || moment(Date.now()).format("YYYY-MM-DD")
-            }
+            value={transaction.transdate || ""}
             onChange={onChange}
             error={errors.transdate}
           />

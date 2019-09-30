@@ -15,7 +15,7 @@ class TransactionsPage extends React.Component {
   _isMounted = false;
 
   componentDidMount() {
-    const { transactions, products, actions } = this.props;
+    const { products, actions } = this.props;
 
     // if (transactions.length === 0) {
     console.log("Loading transactions");
@@ -80,22 +80,20 @@ TransactionsPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    products: state.products,
+    // transactions: state.transactions,
     transactions:
       state.products.length === 0
         ? []
-        : state.transactions.map(transaction => {
-            return {
-              ...transaction,
-              productName: state.products.find(function(item) {
-                if (item.ticker === transaction.ticker) {
-                  return item;
-                }
-                return { name: "na" };
-              }).name
-            };
-          }),
-
+        : state.transactions
+            .filter(value => JSON.stringify(value) !== "{}")
+            .map(t => {
+              return {
+                ...t,
+                productName: state.products.find(a => a.ticker === t.ticker)
+                  .name
+              };
+            }),
+    products: state.products,
     loading: state.apiCallsInProgress > 0
   };
 }

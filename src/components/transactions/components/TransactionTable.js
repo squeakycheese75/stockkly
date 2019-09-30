@@ -100,7 +100,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Qty
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="12%"
+          width="14%"
           dataField="transdate"
           dataSort={true}
           columnClassName="bstable"
@@ -108,10 +108,10 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           dataAlign="right"
           editable={false}
         >
-          Tran. Date
+          Date
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="4%"
+          width="3%"
           dataField="id"
           dataSort={true}
           columnClassName="bstable"
@@ -120,7 +120,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           editable={false}
         ></TableHeaderColumn>
         <TableHeaderColumn
-          width="4%"
+          width="3%"
           dataField="id"
           columnClassName="bstable"
           dataFormat={deleteFormatter}
