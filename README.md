@@ -1,4 +1,4 @@
-A lightweight, mobile-first ReactJs app for watching Stocks (NASDAQ & FTSE), Funds, Crypto, FX and derived prices.
+A lightweight, mobile-first wealth tracker for watching Stocks (NASDAQ & FTSE), Funds, Crypto, FX and derived prices.
 
 https://stockkly.com/
 

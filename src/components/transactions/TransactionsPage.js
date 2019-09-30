@@ -1,96 +1,120 @@
 import React from "react";
-import AddTransaction from "./components/AddTransactionForm";
-import { Card, Toast } from "react-bootstrap";
-import TransactionHistory from "./components/TransactionHistory";
-// import AddTransaction2 from "./components/AddTransaction2";
-// import Loading from "../common/Loading";
-// import InsertedTransactionsForm from "./components/InsertedTransactionForm";
+import { connect } from "react-redux";
+import * as transactionActions from "../../redux/actions/transactionActions";
+import * as productActions from "../../redux/actions/productActions";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+import { LinkContainer } from "react-router-bootstrap";
+import { Nav, Button } from "react-bootstrap";
+import Loading from "../common/Loading";
+import { toast } from "react-toastify";
+import TransactionTable from "./components/TransactionTable";
+import HowToWallet from "../common/HowToWallet";
 
-class TransactionPage extends React.Component {
+class TransactionsPage extends React.Component {
   _isMounted = false;
-  _showToast = true;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      pid: props.match.params.pid,
-      message: "",
-      showToast: false
-      // loading: true,
-      // transactionHistoryData: []
-    };
-    this.auth = this.props.auth;
-    this.history = this.props.history;
-  }
 
   componentDidMount() {
-    this._isMounted = true;
-    // this.loadTransactionHistory();
+    const { products, actions } = this.props;
+
+    // if (transactions.length === 0) {
+    console.log("Loading transactions");
+    actions.loadTransactions().catch(error => {
+      console.log("Loading Transactions failed ..." + error);
+    });
+    // }
+
+    if (products.length === 0) {
+      actions.loadProducts().catch(error => {
+        console.log("Loading Products failed ..." + error);
+      });
+    }
   }
 
-  UNSAFE_componentWillUnmount() {
-    this._isMounted = false;
-  }
+  handleDelete = transaction => {
+    toast.info("Transaction Deleted!");
+    this.props.actions.deleteTransaction(transaction).catch(error => {
+      toast.error("Transaction delete has Failed! " + error.message, {
+        autoClose: false
+      });
+    });
+  };
 
   render() {
-    const { showToast } = this.state;
-
-    const handleClose = () => this.setState({ showToast: false });
-    const handleOpen = () => this.setState({ showToast: true });
-
     return (
-      <div>
-        <Card key="addTransaction">
-          <Card.Header as="h5">
-            Add Transaction for {this.state.pid}
-          </Card.Header>
-          <Card.Body>
-            <AddTransaction
-              auth={this.auth}
-              product={this.state.pid}
-              onSubmit={handleOpen}
-            />
-          </Card.Body>
-        </Card>
-        {/* <Card key="transactionHostory">
-          <Card.Header as="h5">
-            Transaction History {this.state.pid}
-          </Card.Header>
-          <Card.Body>
-         
-          </Card.Body> 
-        </Card>*/}
-        <TransactionHistory
-          auth={this.auth}
-          pid={this.state.pid}
-          // transactionHistoryData={this.state.transactionHistoryData}
-        />
-        <Toast
-          onClose={handleClose}
-          show={showToast}
-          delay={3000}
-          autohide
-          style={{
-            position: "absolute",
-            bottom: 20,
-            right: 20
-          }}
-        >
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
-              alt=""
-            />
-            <strong className="mr-auto">Stockkly</strong>
-          </Toast.Header>
-          <Toast.Body>
-            Transaction inserted for {this.state.pid} complete!
-          </Toast.Body>
-        </Toast>
-      </div>
+      <>
+        {this.props.loading ? (
+          <Loading />
+        ) : (
+          <>
+            {this.props.transactions.length > 0 ? (
+              <>
+                <TransactionTable
+                  transactions={this.props.transactions}
+                  onDeleteClick={this.handleDelete}
+                />
+              </>
+            ) : (
+              <>
+                <HowToWallet />
+              </>
+            )}
+            <LinkContainer to="/transaction">
+              <Nav.Link>
+                <Button>Add new transaction</Button>
+              </Nav.Link>
+            </LinkContainer>
+          </>
+        )}
+      </>
     );
   }
 }
 
-export default TransactionPage;
+TransactionsPage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
+  transactions: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    // transactions: state.transactions,
+    transactions:
+      state.products.length === 0
+        ? []
+        : state.transactions
+            .filter(value => JSON.stringify(value) !== "{}")
+            .map(t => {
+              return {
+                ...t,
+                productName: state.products.find(a => a.ticker === t.ticker)
+                  .name
+              };
+            }),
+    products: state.products,
+    loading: state.apiCallsInProgress > 0
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      loadTransactions: bindActionCreators(
+        transactionActions.loadTransactions,
+        dispatch
+      ),
+      loadProducts: bindActionCreators(productActions.loadProducts, dispatch),
+      deleteTransaction: bindActionCreators(
+        transactionActions.deleteTransaction,
+        dispatch
+      )
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TransactionsPage);
