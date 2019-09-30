@@ -1,7 +1,23 @@
-export default function transactionReducer(state = [], action) {
+import * as types from "../actions/actionTypes";
+import initalState from "./initialState";
+
+export default function transactionReducer(
+  state = initalState.transactions,
+  action
+) {
   switch (action.type) {
-    case "CREATE_TRANSACTION":
+    case types.CREATE_TRANSACTION_SUCCESS:
       return [...state, { ...action.transaction }];
+    case types.UPDATE_TRANSACTION_SUCCESS:
+      return state.map(transaction =>
+        transaction.id === action.transaction.id
+          ? action.transaction
+          : transaction
+      );
+    case types.LOAD_TRANSACTIONS_SUCCESS:
+      return action.transactions;
+    case types.DELETE_TRANSACTION_OPTIMISTIC:
+      return state.filter(trans => trans.id !== action.transaction.id);
     default:
       return state;
   }

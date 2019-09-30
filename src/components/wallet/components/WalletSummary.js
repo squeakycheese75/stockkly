@@ -1,7 +1,6 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import "./WalletSummary.css";
-// import t from "typy";
 
 function sum(data, key) {
   return data.reduce((a, b) => a + (b[key] || 0), 0);
@@ -9,7 +8,7 @@ function sum(data, key) {
 
 class WalletSummary extends React.Component {
   render() {
-    const { data, appSettings } = this.props;
+    const { data, profile } = this.props;
 
     function totalFormatter(total) {
       return (
@@ -17,7 +16,7 @@ class WalletSummary extends React.Component {
           {parseFloat(total).toLocaleString("en-GB", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-            currency: appSettings.currency,
+            currency: profile.currency,
             style: "currency"
           })}
         </>

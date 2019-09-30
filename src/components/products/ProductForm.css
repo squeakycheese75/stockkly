@@ -1,0 +1,16 @@
+.productform {
+  /* width: 98%; */
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  border: 1px solid grey;
+  border-radius: 4px;
+  /* background-color: #abb8c3; */
+  resize: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 4px;
+}
