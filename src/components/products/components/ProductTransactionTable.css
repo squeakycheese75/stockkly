@@ -1,0 +1,10 @@
+.block__title {
+  font-style: normal;
+  font-weight: 700;
+  /* font-size: 24px;
+  font-size: 1.5rem; */
+  color: #4c5c66;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eaecee;
+}
