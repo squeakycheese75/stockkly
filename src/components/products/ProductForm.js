@@ -6,6 +6,8 @@ import ProductTransactionTable from "./components/ProductTransactionTable";
 import styles from "./ProductForm.css";
 import { Link } from "react-router-dom";
 import LoginPrompt from "../common/LoginPrompt";
+// import TestTable from "./components/TestTable";
+// import createRowData from "./components/createRowData";
 
 const ProductForm = ({
   profile,
@@ -44,6 +46,7 @@ const ProductForm = ({
           transactions={transactions}
           onDeleteClick={onDelete}
         />
+        {/* <TestTable rows={createRowData(10)} /> */}
         {profile && profile.watchList.includes(ticker) ? (
           <>
             {" "}

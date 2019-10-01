@@ -139,19 +139,6 @@ function mapStateToProps(state, ownProps) {
                 }).name
               };
             }),
-    // transactions:
-    //   filteredTransactions.length === 0
-    //     ? []
-    //     : filteredTransactions
-    //         .filter(value => JSON.stringify(value) !== "{}")
-    //         .map(transaction => {
-    //           return {
-    //             ...transaction,
-    //             productName: state.products.find(
-    //               a => a.ticker === transaction.ticker
-    //             ).name
-    //           };
-    //         }),
     product,
     price: state.price,
     profile: state.profile,
