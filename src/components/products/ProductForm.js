@@ -41,7 +41,6 @@ const ProductForm = ({
           }}
         />
         <br />
-        {/* <h6>Transactions:</h6> */}
         <ProductTransactionTable
           transactions={transactions}
           onDeleteClick={onDelete}

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import "./ProductTransactionTable.css";
 
 const ProductTransactionTable = ({
   transactions,
@@ -54,6 +55,7 @@ const ProductTransactionTable = ({
 
   return (
     <div>
+      <h6 className="block__title">Transactions</h6>
       <BootstrapTable
         data={transactions}
         headerContainerClass="bstable"
