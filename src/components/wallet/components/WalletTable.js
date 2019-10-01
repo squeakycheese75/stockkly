@@ -110,7 +110,7 @@ class WalletTable extends React.Component {
     };
 
     return (
-      <div>
+      <div className="walletTable">
         <BootstrapTable
           data={data}
           striped
