@@ -75,17 +75,6 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         version="4"
         options={options}
       >
-        {/* <TableHeaderColumn
-          width="20%"
-          dataField="productName"
-          isKey={true}
-          dataSort={true}
-          columnClassName="bstable"
-          dataAlign="left"
-          editable={false}
-        >
-          Name
-        </TableHeaderColumn> */}
         <TableHeaderColumn
           isKey={true}
           width="20%"
