@@ -27,6 +27,7 @@ export function loadTransactions() {
         dispatch(loadTransactionsSuccess(transactions));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
