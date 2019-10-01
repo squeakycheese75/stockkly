@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ProductSummary from "./components/ProductSummary";
 import ProductChart from "./components/ProductChart";
-import TransactionTable from "../transactions/components/TransactionTable";
+import ProductTransactionTable from "./components/ProductTransactionTable";
 import styles from "./ProductForm.css";
 import { Link } from "react-router-dom";
 import LoginPrompt from "../common/LoginPrompt";
@@ -40,7 +40,7 @@ const ProductForm = ({
         />
         <br />
         {/* <h6>Transactions:</h6> */}
-        <TransactionTable
+        <ProductTransactionTable
           transactions={transactions}
           onDeleteClick={onDelete}
         />
