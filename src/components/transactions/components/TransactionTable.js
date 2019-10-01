@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 
 const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
   const options = {
@@ -20,6 +21,21 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
       >
         <i className="material-icons vertical-align-middle">delete_outline</i>
       </button>
+    );
+  }
+
+  function nameFormatter(cell, row) {
+    return (
+      <div>
+        <ul>
+          <li className="name">
+            <Link to={`/product/${row.ticker.toString().toUpperCase()}`}>
+              {row.ticker}
+            </Link>
+          </li>
+          <li className="details">{row.productName}</li>
+        </ul>
+      </div>
     );
   }
 
@@ -59,7 +75,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
         version="4"
         options={options}
       >
-        <TableHeaderColumn
+        {/* <TableHeaderColumn
           width="20%"
           dataField="productName"
           isKey={true}
@@ -69,6 +85,17 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           editable={false}
         >
           Name
+        </TableHeaderColumn> */}
+        <TableHeaderColumn
+          isKey={true}
+          width="20%"
+          dataField="ticker"
+          columnClassName="bstable"
+          dataAlign="left"
+          dataFormat={nameFormatter}
+          dataSort={true}
+        >
+          TICKER
         </TableHeaderColumn>
         <TableHeaderColumn
           width="10%"

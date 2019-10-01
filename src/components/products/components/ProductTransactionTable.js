@@ -16,12 +16,7 @@ const ProductTransactionTable = ({
 
   function deleteFormatter(cell, row) {
     return (
-      <button
-        className="btn"
-        // className="btn btn-outline-danger"
-
-        onClick={() => onDeleteClick(row)}
-      >
+      <button className="btn" onClick={() => onDeleteClick(row)}>
         <i className="material-icons vertical-align-middle">delete_outline</i>
       </button>
     );
@@ -63,7 +58,6 @@ const ProductTransactionTable = ({
         data={transactions}
         headerContainerClass="bstable"
         striped
-        // hover
         condensed
         hover={false}
         bordered={true}
@@ -83,6 +77,17 @@ const ProductTransactionTable = ({
           Name
         </TableHeaderColumn>
         <TableHeaderColumn
+          width="14%"
+          dataField="transdate"
+          dataSort={true}
+          columnClassName="bstable"
+          dataFormat={dateFormatter}
+          dataAlign="left"
+          editable={false}
+        >
+          Date
+        </TableHeaderColumn>
+        <TableHeaderColumn
           width="10%"
           dataField="transtype"
           dataSort={true}
@@ -91,15 +96,6 @@ const ProductTransactionTable = ({
           editable={false}
         >
           Type
-        </TableHeaderColumn>
-        <TableHeaderColumn
-          width="60%"
-          dataField="details"
-          dataSort={false}
-          columnClassName="bstable"
-          dataAlign="left"
-        >
-          Details
         </TableHeaderColumn>
         <TableHeaderColumn
           width="10%"
@@ -112,15 +108,13 @@ const ProductTransactionTable = ({
           Qty
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="14%"
-          dataField="transdate"
-          dataSort={true}
+          width="60%"
+          dataField="details"
+          dataSort={false}
           columnClassName="bstable"
-          dataFormat={dateFormatter}
-          dataAlign="right"
-          editable={false}
+          dataAlign="left"
         >
-          Date
+          Details
         </TableHeaderColumn>
         <TableHeaderColumn
           width="3%"
