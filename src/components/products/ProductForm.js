@@ -30,8 +30,6 @@ const ProductForm = ({
           </div>
         )}
         <ProductSummary product={product} price={price} />
-        {/* <br />
-        <h6>Chart:</h6> */}
         <ProductChart
           pid={ticker}
           chartData={{
@@ -40,7 +38,6 @@ const ProductForm = ({
             pid: ticker
           }}
         />
-        <br />
         <ProductTransactionTable
           transactions={transactions}
           onDeleteClick={onDelete}
