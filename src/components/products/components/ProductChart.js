@@ -7,6 +7,7 @@ import createPlotlyComponent from "react-plotly.js/factory";
 const Plot = createPlotlyComponent(Plotly);
 
 const ProductChart = ({ chartData, errors = {} }) => {
+  var CHARTDAYS = 90;
   var trace1 = {
     type: "scatter",
     mode: "lines",
@@ -26,7 +27,7 @@ const ProductChart = ({ chartData, errors = {} }) => {
         <Plot
           data={[trace1]}
           layout={{
-            title: chartData.pid + " Chart 30 day",
+            title: chartData.pid + " Chart " + CHARTDAYS + " day",
             height: 320
             // updatemenus: updatemenus
           }}
