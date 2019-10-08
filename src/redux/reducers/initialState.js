@@ -11,6 +11,8 @@ export default {
     symbol: "£",
     refreshRate: 30
   },
+  // watchlist: [],
+  // wallet: []
   watchlist: localStorage.getItem("watchlist")
     ? JSON.parse(localStorage.getItem("watchlist"))
     : [],

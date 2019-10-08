@@ -21,6 +21,8 @@ import * as profileActions from "./redux/actions/profileActions";
 import { bindActionCreators } from "redux";
 import styles from "./App.css";
 
+require("dotenv").config();
+
 class App extends Component {
   constructor(props) {
     super(props);
