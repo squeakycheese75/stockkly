@@ -8,6 +8,7 @@ import Loading from "../common/Loading";
 import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
 import HowToWallet from "../common/HowToWallet";
+import WatchBar from "../common/WatchBar";
 
 class WalletPage extends React.Component {
   componentDidMount() {
@@ -20,9 +21,12 @@ class WalletPage extends React.Component {
     }
 
     //Force wallet load because we default to cache
-    actions.loadWallet().catch(error => {
-      console.log("Loading Wallet failed ..." + error);
-    });
+    actions
+      .loadWallet()
+      .then(localStorage.setItem("wallet", JSON.stringify(this.props.wallet)))
+      .catch(error => {
+        console.log("Loading Wallet failed ..." + error);
+      });
 
     var refreshRate = profile.refreshRate * 1000;
 
@@ -49,6 +53,7 @@ class WalletPage extends React.Component {
   render() {
     return (
       <>
+        <WatchBar />
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.wallet.length > 0 ? (

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/common/Header";
-import Footer from "./components/common/Footer";
+// import Footer from "./components/common/Footer";
 import AboutPage from "./components/about/AboutPage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
@@ -81,7 +81,6 @@ class App extends Component {
     return (
       <div className={styles}>
         <Header auth={this.auth} />
-
         <Switch>
           <Route
             exact

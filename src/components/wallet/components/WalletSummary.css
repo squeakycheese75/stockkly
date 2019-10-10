@@ -65,15 +65,15 @@ h1 {
 
 .jumbotron {
   border-style: solid;
-  /* margin-bottom: 0px;
+  margin-bottom: 0px;
   background-position: 0% 25%;
   background-size: cover;
   background-repeat: no-repeat;
-  color: white;
-  text-shadow: black 0.3em 0.3em 0.3em; */
-  /* background: black; */
-  border: 5px;
+  color: black;
+  background: white;
+  border: 0.5px;
   border-color: black;
+  padding: 1rem 0rem;
 }
 
 table.summary td {
@@ -81,6 +81,7 @@ table.summary td {
   /* margin: 12px 12px 12px 12px;
   padding: 12px 12px 12px 12px; */
 }
+
 table.summary {
   border-collapse: separate;
   border-spacing: 12px;

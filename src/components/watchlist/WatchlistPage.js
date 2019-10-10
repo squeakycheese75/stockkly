@@ -21,9 +21,14 @@ class WatchlistPage extends React.Component {
     }
 
     // console.log("profile.watchlist: ", profile.watchList);
-    actions.loadWatchlist(profile.watchList).catch(error => {
-      console.log("Loading Watchlist failed ..." + error);
-    });
+    actions
+      .loadWatchlist(profile.watchList)
+      .then(
+        localStorage.setItem("watchlist", JSON.stringify(this.props.watchlist))
+      )
+      .catch(error => {
+        console.log("Loading Watchlist failed ..." + error);
+      });
 
     const refreshRate = profile.refreshRate * 1000;
 

@@ -4,10 +4,10 @@ import { Jumbotron } from "react-bootstrap";
 import "./ProductSummary.css";
 
 const ProductSummary = ({ product, price, error }) => {
-  let wrapperClass = "form-group";
-  if (error && error.length > 0) {
-    wrapperClass += " has-error";
-  }
+  // let wrapperClass = "form-group";
+  // if (error && error.length > 0) {
+  //   wrapperClass += " has-error";
+  // }
 
   function changeFormatter(change) {
     return (
@@ -51,7 +51,7 @@ const ProductSummary = ({ product, price, error }) => {
   }
 
   return (
-    <div className={wrapperClass}>
+    <div>
       <Jumbotron>
         <h1 className="text-center">
           <table align="center">
