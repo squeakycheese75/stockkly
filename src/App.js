@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import Nav from "./components/common/Header";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
 import AboutPage from "./components/about/AboutPage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
@@ -20,6 +21,8 @@ import PropTypes from "prop-types";
 import * as profileActions from "./redux/actions/profileActions";
 import { bindActionCreators } from "redux";
 import styles from "./App.css";
+
+require("dotenv").config();
 
 class App extends Component {
   constructor(props) {
@@ -77,7 +80,7 @@ class App extends Component {
 
     return (
       <div className={styles}>
-        <Nav auth={this.auth} />
+        <Header auth={this.auth} />
 
         <Switch>
           <Route
@@ -146,6 +149,7 @@ class App extends Component {
           hideProgressBar
           position="bottom-right"
         />
+        {/* <Footer /> */}
       </div>
     );
   }

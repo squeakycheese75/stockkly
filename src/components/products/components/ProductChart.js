@@ -8,6 +8,7 @@ const Plot = createPlotlyComponent(Plotly);
 
 const ProductChart = ({ chartData, errors = {} }) => {
   var CHARTDAYS = 90;
+
   var trace1 = {
     type: "scatter",
     mode: "lines",
@@ -19,7 +20,6 @@ const ProductChart = ({ chartData, errors = {} }) => {
 
   return (
     <div>
-      {/* <h6 className="block__title">Chart</h6> */}
       {/* <div className="container-fluid"></div> */}
       {!Array.isArray(chartData.x) || !chartData.x.length ? (
         "No Data"

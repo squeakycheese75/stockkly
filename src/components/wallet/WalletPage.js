@@ -28,10 +28,14 @@ class WalletPage extends React.Component {
 
     setInterval(() => {
       if (this._isMounted) {
-        // console.log("loadWallet ");
-        actions.loadWallet().catch(error => {
-          console.log("Loading Portfolio failed ..." + error);
-        });
+        actions
+          .loadWallet()
+          .then(
+            localStorage.setItem("wallet", JSON.stringify(this.props.wallet))
+          )
+          .catch(error => {
+            console.log("Loading Portfolio failed ..." + error);
+          });
       }
     }, refreshRate);
     this._isMounted = true;

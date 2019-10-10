@@ -29,10 +29,17 @@ class WatchlistPage extends React.Component {
 
     setInterval(() => {
       if (this._isMounted) {
-        // console.log("profile.watchlist: ", profile.watchList);
-        actions.loadWatchlist(profile.watchList).catch(error => {
-          console.log("Loading Watchlist failed ..." + error);
-        });
+        actions
+          .loadWatchlist(profile.watchList)
+          .then(
+            localStorage.setItem(
+              "watchlist",
+              JSON.stringify(this.props.watchlist)
+            )
+          )
+          .catch(error => {
+            console.log("Loading Watchlist failed ..." + error);
+          });
       }
     }, refreshRate);
     this._isMounted = true;
