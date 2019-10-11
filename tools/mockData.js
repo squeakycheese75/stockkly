@@ -331,6 +331,14 @@ const pricesHistorical = [
   }
 ];
 
+const watchBarPrices = [
+  { ticker: "BTC:USD", price: 8000.0, change: 0.11, symbol: "$" },
+  { ticker: "LTC:USD", price: 80.0, change: -0.19, symbol: "$" },
+  { ticker: "VIX", price: 80.0, change: 0.19, symbol: "$" },
+  { ticker: "AAPL", price: 80.0, change: 0.19, symbol: "$" },
+  { ticker: "FTSE:100", price: 80.0, change: 0.19, symbol: "£" }
+];
+
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   newTransaction,
@@ -340,5 +348,6 @@ module.exports = {
   wallet,
   profile,
   prices,
-  pricesHistorical
+  pricesHistorical,
+  watchBarPrices
 };

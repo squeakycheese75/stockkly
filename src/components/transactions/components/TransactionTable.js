@@ -77,7 +77,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
       >
         <TableHeaderColumn
           isKey={true}
-          width="20%"
+          width="25%"
           dataField="ticker"
           columnClassName="bstable"
           dataAlign="left"
@@ -87,16 +87,16 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           TICKER
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="10%"
+          width="15%"
           dataField="transtype"
           dataSort={true}
           columnClassName="bstable"
-          dataAlign="left"
+          dataAlign="right"
           editable={false}
         >
           Type
         </TableHeaderColumn>
-        <TableHeaderColumn
+        {/* <TableHeaderColumn
           width="40%"
           dataField="details"
           dataSort={false}
@@ -104,9 +104,9 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           dataAlign="left"
         >
           Details
-        </TableHeaderColumn>
+        </TableHeaderColumn> */}
         <TableHeaderColumn
-          width="10%"
+          width="20%"
           dataField="quantity"
           dataSort={true}
           columnClassName="bstable"
@@ -116,7 +116,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Qty
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="14%"
+          width="20%"
           dataField="transdate"
           dataSort={true}
           columnClassName="bstable"
@@ -127,7 +127,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           Date
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="3%"
+          width="10%"
           dataField="id"
           dataSort={true}
           columnClassName="bstable"
@@ -136,7 +136,7 @@ const TransactionTable = ({ transactions, onDeleteClick, errors = {} }) => {
           editable={false}
         ></TableHeaderColumn>
         <TableHeaderColumn
-          width="3%"
+          width="10%"
           dataField="id"
           columnClassName="bstable"
           dataFormat={deleteFormatter}

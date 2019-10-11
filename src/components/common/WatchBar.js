@@ -56,9 +56,9 @@ const WatchBar = ({
   return (
     <div className="d-flex justify-content-center w-100" style={styles}>
       <div className="d-flex flex-row w-100">
-        <div className="flex-column w-5"> </div>
+        {/* <div className="flex-column"> </div> */}
         {prices.map(p => (
-          <div className="flex-column w-20">
+          <div className="flex-column w-20" key={"watchbaritem-" + p.ticker}>
             <h3 className="text-center">
               <table align="center">
                 <tbody>
@@ -76,18 +76,14 @@ const WatchBar = ({
             </h3>
           </div>
         ))}
-        <div className="flex-column w-5"> </div>
+        {/* <div className="flex-column w-5"> </div> */}
       </div>
     </div>
   );
 };
 
 WatchBar.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
+  prices: PropTypes.array.isRequired,
   error: PropTypes.string
 };
 
