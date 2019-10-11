@@ -56,7 +56,7 @@ const WatchBar = ({
   return (
     <div className="d-flex justify-content-center w-100" style={styles}>
       <div className="d-flex flex-row w-100">
-        <div className="flex-column w-20"> </div>
+        <div className="flex-column w-5"> </div>
         {prices.map(p => (
           <div className="flex-column w-20">
             <h3 className="text-center">
@@ -76,7 +76,7 @@ const WatchBar = ({
             </h3>
           </div>
         ))}
-        <div className="flex-column w-20"> </div>
+        <div className="flex-column w-5"> </div>
       </div>
     </div>
   );

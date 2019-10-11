@@ -6,8 +6,14 @@
   width: 80% !important;
 }
 
+.w-5 {
+  width: 5% !important;
+}
+
 .material-icons {
   margin-left: -5px;
+  margin-right: -5px;
+  font-size: 20px;
 }
 
 .price-large {
@@ -27,14 +33,14 @@
   color: #66757f;
   padding-top: 8px;
   font-family: "proxima-nova-n7", "proxima-nova", "Arial", Verdana, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 700;
 }
 
 .price {
   font-family: "proxima-nova-n7", "proxima-nova", "Arial", Verdana, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
 }
@@ -53,7 +59,7 @@
 
 .name {
   /* height: 20px; */
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   margin-left: 0px;
   margin-top: 5px;
@@ -61,7 +67,7 @@
 
 .details {
   /* height: 15px; */
-  font-size: 15px;
+  font-size: 11px;
   margin-left: 0px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -69,7 +75,7 @@
 
 .pl2 {
   padding-top: 1px;
-  font-size: 18px;
+  /* font-size: 14px; */
   border-radius: 5px;
   padding-bottom: 1px;
   font-style: normal;
@@ -78,7 +84,7 @@
 
 .pl3 {
   padding-top: 1px;
-  font-size: 14px;
+  font-size: 10px;
   border-radius: 5px;
   padding-bottom: 1px;
   font-style: normal;

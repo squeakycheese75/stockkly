@@ -20,7 +20,6 @@ class WatchlistPage extends React.Component {
       });
     }
 
-    // console.log("profile.watchlist: ", profile.watchList);
     actions
       .loadWatchlist(profile.watchList)
       .then(
