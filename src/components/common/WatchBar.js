@@ -2,31 +2,86 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./WatchBar.css";
 
-const WatchBar = ({ prices, error }) => {
+function changeFormatter(change) {
   return (
-    <div className={wrapperClass} style={styles}>
-      {/* <label htmlFor={name}>{label}</label>
-      <div className="field">
-        <input
-          type="text"
-          name={name}
-          className="form-control"
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-        />
-        {error && <div className="alert alert-danger">{error}</div>}
-      </div> */}
+    <>
+      {change >= 0 ? (
+        <>
+          <div className="up_watchbar pl3">
+            {" "}
+            <i className="material-icons vertical-align-middle up_watchbar">
+              arrow_drop_up
+            </i>
+            {parseFloat(change).toLocaleString("en-GB", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="down_watchbar pl3">
+            {" "}
+            <i className="material-icons vertical-align-middle down_watchbar">
+              arrow_drop_down
+            </i>
+            {parseFloat(Math.abs(change)).toLocaleString("en-GB", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })}
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+function priceFormatter(price, symbol) {
+  return (
+    <>
+      {symbol}
+      {parseFloat(price).toLocaleString("en-GB", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}
+    </>
+  );
+}
+
+const WatchBar = ({ prices, error }) => {
+  return prices && prices.length > 0 ? (
+    <div className="d-flex justify-content-center w-100" style={styles}>
+      <div className="d-flex flex-row w-100">
+        {/* <div className="flex-column"> </div> */}
+        {prices.map(p => (
+          <div className="flex-column w-20" key={"watchbaritem-" + p.ticker}>
+            <h3 className="text-center">
+              <table align="center">
+                <tbody>
+                  <tr>
+                    <td colSpan="2" className="name-large ticker">
+                      {p.displayTicker}
+                    </td>
+                  </tr>
+                  <tr className="price">
+                    <td className="pl2">{priceFormatter(p.price, p.symbol)}</td>
+                    <td>{changeFormatter(parseFloat(p.change))}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </h3>
+          </div>
+        ))}
+        {/* <div className="flex-column w-5"> </div> */}
+      </div>
     </div>
+  ) : (
+    <>None</>
   );
 };
 
 WatchBar.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
+  prices: PropTypes.array.isRequired,
   error: PropTypes.string
 };
 

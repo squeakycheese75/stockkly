@@ -6,6 +6,7 @@ import watchlist from "./watchlistReducer";
 import wallet from "./walletReducer";
 import price from "./priceReducer";
 import pricesHistorical from "./pricesHistoricalReducer";
+import watchbar from "./watchbarReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   watchlist,
   apiCallsInProgress,
   price,
-  pricesHistorical
+  pricesHistorical,
+  watchbar
 });
 
 export default rootReducer;

@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets submit button label 'Saving...' when saving is true 1`] = `
+<div
+  className="d-flex justify-content-center w-100"
+  style={Object {}}
+>
+  <div
+    className="d-flex flex-row w-100"
+  >
+    <div
+      className="flex-column w-5"
+    >
+       
+    </div>
+    <div
+      className="flex-column w-20"
+    >
+      <h3
+        className="text-center"
+      >
+        <table
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="name-large ticker"
+                colSpan="2"
+              >
+                BTC:USD
+              </td>
+            </tr>
+            <tr
+              className="price"
+            >
+              <td
+                className="pl2"
+              >
+                $
+                8,000.00
+              </td>
+              <td>
+                <div
+                  className="up_watchbar pl3"
+                >
+                   
+                  <i
+                    className="material-icons vertical-align-middle up_watchbar"
+                  >
+                    arrow_drop_up
+                  </i>
+                  0.11
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </h3>
+    </div>
+    <div
+      className="flex-column w-20"
+    >
+      <h3
+        className="text-center"
+      >
+        <table
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="name-large ticker"
+                colSpan="2"
+              >
+                LTC:USD
+              </td>
+            </tr>
+            <tr
+              className="price"
+            >
+              <td
+                className="pl2"
+              >
+                $
+                80.00
+              </td>
+              <td>
+                <div
+                  className="down_watchbar pl3"
+                >
+                   
+                  <i
+                    className="material-icons vertical-align-middle down_watchbar"
+                  >
+                    arrow_drop_down
+                  </i>
+                  0.19
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </h3>
+    </div>
+    <div
+      className="flex-column w-20"
+    >
+      <h3
+        className="text-center"
+      >
+        <table
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="name-large ticker"
+                colSpan="2"
+              >
+                VIX
+              </td>
+            </tr>
+            <tr
+              className="price"
+            >
+              <td
+                className="pl2"
+              >
+                $
+                80.00
+              </td>
+              <td>
+                <div
+                  className="up_watchbar pl3"
+                >
+                   
+                  <i
+                    className="material-icons vertical-align-middle up_watchbar"
+                  >
+                    arrow_drop_up
+                  </i>
+                  0.19
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </h3>
+    </div>
+    <div
+      className="flex-column w-20"
+    >
+      <h3
+        className="text-center"
+      >
+        <table
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="name-large ticker"
+                colSpan="2"
+              >
+                AAPL
+              </td>
+            </tr>
+            <tr
+              className="price"
+            >
+              <td
+                className="pl2"
+              >
+                $
+                80.00
+              </td>
+              <td>
+                <div
+                  className="up_watchbar pl3"
+                >
+                   
+                  <i
+                    className="material-icons vertical-align-middle up_watchbar"
+                  >
+                    arrow_drop_up
+                  </i>
+                  0.19
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </h3>
+    </div>
+    <div
+      className="flex-column w-20"
+    >
+      <h3
+        className="text-center"
+      >
+        <table
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="name-large ticker"
+                colSpan="2"
+              >
+                FTSE:100
+              </td>
+            </tr>
+            <tr
+              className="price"
+            >
+              <td
+                className="pl2"
+              >
+                £
+                80.00
+              </td>
+              <td>
+                <div
+                  className="up_watchbar pl3"
+                >
+                   
+                  <i
+                    className="material-icons vertical-align-middle up_watchbar"
+                  >
+                    arrow_drop_up
+                  </i>
+                  0.19
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </h3>
+    </div>
+    <div
+      className="flex-column w-5"
+    >
+       
+    </div>
+  </div>
+</div>
+`;

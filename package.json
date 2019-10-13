@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^4.1.2",
     "@types/redux-immutable-state-invariant": "^2.1.1",
     "auth0-js": "^9.11.3",
-    "auth0-lock": "^11.17.3",
+    "auth0-lock": "^11.18.0",
     "bootstrap": "^4.3.1",
     "brunch": "^2.10.17",
     "dotenv": "^8.1.0",
@@ -45,7 +45,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --watchAll",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": ""
@@ -54,7 +54,6 @@
     "extends": "react-app"
   },
   "jest": {
-    "verbose": true,
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tools/fileMock.js",
       "\\.(css|less)$": "<rootDir>/tools/styleMock.js"
@@ -69,6 +68,7 @@
   "devDependencies": {
     "@material-ui/core": "^4.5.0",
     "@testing-library/react": "^9.3.0",
+    "babel-core": "^7.0.0-bridge.0",
     "eslint-plugin-react-hooks": "^2.1.2",
     "faker": "^4.1.0",
     "increase-memory-limit": "^1.0.7",

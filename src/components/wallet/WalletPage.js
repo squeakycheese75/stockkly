@@ -2,16 +2,25 @@ import React from "react";
 import { connect } from "react-redux";
 import * as profileActions from "../../redux/actions/profileActions";
 import * as walletActions from "../../redux/actions/walletActions";
+import * as watchbarActions from "../../redux/actions/watchBarActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
 import HowToWallet from "../common/HowToWallet";
+import WatchBar from "../common/WatchBar";
 
 class WalletPage extends React.Component {
   componentDidMount() {
     const { profile, actions } = this.props;
+    const watchBarList = [
+      "BTC:USD",
+      "FTSE:100",
+      "INDEXNASDAQ:.IXIC",
+      "GBP:USD",
+      "GBP:EUR"
+    ];
 
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {
@@ -20,8 +29,15 @@ class WalletPage extends React.Component {
     }
 
     //Force wallet load because we default to cache
-    actions.loadWallet().catch(error => {
-      console.log("Loading Wallet failed ..." + error);
+    actions
+      .loadWallet()
+      .then(localStorage.setItem("wallet", JSON.stringify(this.props.wallet)))
+      .catch(error => {
+        console.log("Loading Wallet failed ..." + error);
+      });
+
+    actions.loadWatchbar(watchBarList).catch(error => {
+      console.log("Loading WatchBarList failed ..." + error);
     });
 
     var refreshRate = profile.refreshRate * 1000;
@@ -36,8 +52,13 @@ class WalletPage extends React.Component {
           .catch(error => {
             console.log("Loading Portfolio failed ..." + error);
           });
+
+        // actions.loadWatchbar(watchBarList).catch(error => {
+        //   console.log("Loading WatchBarList failed ..." + error);
+        // });
       }
     }, refreshRate);
+
     this._isMounted = true;
   }
 
@@ -49,6 +70,7 @@ class WalletPage extends React.Component {
   render() {
     return (
       <>
+        <WatchBar prices={this.props.watchbar} />
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.wallet.length > 0 ? (
@@ -75,6 +97,7 @@ class WalletPage extends React.Component {
 WalletPage.propTypes = {
   actions: PropTypes.object.isRequired,
   wallet: PropTypes.array.isRequired,
+  watchbar: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -83,6 +106,7 @@ function mapStateToProps(state) {
   return {
     profile: state.profile,
     wallet: state.wallet,
+    watchbar: state.watchbar,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -91,7 +115,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
-      loadWallet: bindActionCreators(walletActions.loadWallet, dispatch)
+      loadWallet: bindActionCreators(walletActions.loadWallet, dispatch),
+      loadWatchbar: bindActionCreators(watchbarActions.loadWatchbar, dispatch)
     }
   };
 }

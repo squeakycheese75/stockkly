@@ -70,20 +70,20 @@ class WalletSummary extends React.Component {
     }
 
     return (
-      <div>
-        <Jumbotron>
-          <h1 className="text-center">
-            <table align="center" className="summary">
-              <tbody>
-                <tr>
-                  <td>{totalFormatter(sum(data, "total"))}</td>
-                  <td>{priceChangeFormatter(sum(data, "total_change"))}</td>
-                </tr>
-              </tbody>
-            </table>
-          </h1>
-        </Jumbotron>
-      </div>
+      <Jumbotron className="summary">
+        {/* <div className="summary"> */}
+        <h1 className="text-center">
+          <table align="center" className="summary">
+            <tbody>
+              <tr>
+                <td>{totalFormatter(sum(data, "total"))}</td>
+                <td>{priceChangeFormatter(sum(data, "total_change"))}</td>
+              </tr>
+            </tbody>
+          </table>
+        </h1>
+        {/* </div> */}
+      </Jumbotron>
     );
   }
 }
