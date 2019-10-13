@@ -14,13 +14,7 @@ import WatchBar from "../common/WatchBar";
 class WalletPage extends React.Component {
   componentDidMount() {
     const { profile, actions } = this.props;
-    const watchBarList = [
-      "BTC:USD",
-      "FTSE:100",
-      "INDEXNASDAQ:.IXIC",
-      "GBP:USD",
-      "GBP:EUR"
-    ];
+    const watchBarList = ["BTC:USD", "FTSE:100", "GBP:USD", "GBP:EUR"];
 
     if (profile.length === 0) {
       actions.loadProfile().catch(error => {
