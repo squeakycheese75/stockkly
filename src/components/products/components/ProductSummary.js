@@ -58,7 +58,7 @@ const ProductSummary = ({ product, price, error }) => {
             <tbody>
               <tr>
                 <td colSpan="2" className="name-large">
-                  {product.ticker}
+                  {product.displayTicker}
                 </td>
               </tr>
               <tr>
