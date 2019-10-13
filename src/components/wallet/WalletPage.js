@@ -64,7 +64,7 @@ class WalletPage extends React.Component {
   render() {
     return (
       <>
-        <WatchBar prices={this.props.watchbar} />
+        {/* <WatchBar prices={this.props.watchbar} /> */}
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.wallet.length > 0 ? (
