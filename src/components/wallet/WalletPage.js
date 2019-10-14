@@ -70,7 +70,6 @@ class WalletPage extends React.Component {
         ) : (
           <></>
         )}
-
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.wallet.length > 0 ? (
