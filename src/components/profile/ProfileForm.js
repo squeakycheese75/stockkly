@@ -1,25 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SelectInput from "../common/SelectInput";
-import CheckBox from "../common/CheckBox";
+import Checkbox from "../common/CheckBox";
 import styles from "./ProfileForm.css";
 import { Container } from "react-bootstrap";
-import { PORTFOLIOCURRENCIES, DEVMODEOPTIONS } from "./ProfileStatics";
-
-// const portfolioCurrencies = [
-//   {
-//     value: "GBP",
-//     text: "GBP"
-//   },
-//   {
-//     value: "USD",
-//     text: "USD"
-//   },
-//   {
-//     value: "EUR",
-//     text: "EUR"
-//   }
-// ];
+import { PORTFOLIOCURRENCIES } from "./ProfileStatics";
 
 const UserProfileForm = ({
   profile,
@@ -50,14 +35,22 @@ const UserProfileForm = ({
               onChange={onChange}
               error={errors.currency}
             />
-            {/* <CheckBox
+            {/* <SelectInput
               name="devmode"
               label="Developer Mode:"
-              checked={profile.devmode || false}
-              value={profile.devmode}
+              value={profile.devmode || ""}
+              defaultOption={false}
+              options={DEVMODEOPTIONS}
               onChange={onChange}
               error={errors.devmode}
             /> */}
+            <Checkbox
+              name="devmode"
+              label="Developer Mode:"
+              value={profile.devmode}
+              onChange={onChange}
+              error={errors.devmode}
+            />
             <button
               type="submit"
               disabled={saving}

@@ -23,16 +23,13 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   }, [props.profile]);
 
   function handleChange(event) {
-    console.log("handleChange before", profile);
-    // debugger;
-    const { value, name } = event.target;
+    const { value, name, checked } = event.target;
     // const { name } = event.target;
-
-    console.log(name, value);
+    // console.log(event.target);
+    // console.log(name, value, checked);
     setProfile(prevProfile => ({
       ...prevProfile,
-      [name]: value
-      // [name]: name === "devmode" ? (value === "on" ? true : false) : value
+      [name]: name === "devmode" ? checked : value
     }));
     // console.log("handleChange after", profile);
   }
