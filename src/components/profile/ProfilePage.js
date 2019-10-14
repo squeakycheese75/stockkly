@@ -23,11 +23,16 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   }, [props.profile]);
 
   function handleChange(event) {
-    // console.log("handleChange before", profile);
+    console.log("handleChange before", profile);
+    // debugger;
     const { value, name } = event.target;
+    // const { name } = event.target;
+
+    console.log(name, value);
     setProfile(prevProfile => ({
       ...prevProfile,
       [name]: value
+      // [name]: name === "devmode" ? (value === "on" ? true : false) : value
     }));
     // console.log("handleChange after", profile);
   }
@@ -48,6 +53,7 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
     if (!formIsValid()) return;
     setSaving(true);
     saveProfile(profile)
+      .then(console.log("handleSave ", profile))
       .then(() => {
         toast.info("Profile updated");
         history.push("/");
