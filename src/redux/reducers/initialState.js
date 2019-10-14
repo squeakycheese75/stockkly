@@ -9,7 +9,8 @@ export default {
     watchList: ["BTC:USD", "INDEXNASDAQ:.IXIC"],
     currency: "GBP",
     symbol: "£",
-    refreshRate: 30
+    refreshRate: 30,
+    devmode: false
   },
   // watchlist: [],
   // wallet: []
@@ -20,10 +21,10 @@ export default {
     ? JSON.parse(localStorage.getItem("wallet"))
     : [],
   watchbar: [
-    { ticker: "BTC:USD", price: 8000.0, change: 0.11, symbol: "$" },
-    { ticker: "LTC:USD", price: 80.0, change: -0.19, symbol: "$" },
-    { ticker: "VIX", price: 80.0, change: 0.19, symbol: "$" },
-    { ticker: "AAPL", price: 80.0, change: 0.19, symbol: "$" },
-    { ticker: "FTSE:100", price: 80.0, change: 0.19, symbol: "£" }
+    // { ticker: "BTC:USD", price: 8000.0, change: 0.11, symbol: "$" },
+    // { ticker: "LTC:USD", price: 80.0, change: -0.19, symbol: "$" },
+    // { ticker: "VIX", price: 80.0, change: 0.19, symbol: "$" },
+    // { ticker: "AAPL", price: 80.0, change: 0.19, symbol: "$" },
+    // { ticker: "FTSE:100", price: 80.0, change: 0.19, symbol: "£" }
   ]
 };
