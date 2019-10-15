@@ -8,7 +8,7 @@ export function loadWatchBarSuccess(watchbar) {
 
 export function loadWatchbar(tickers) {
   return function(dispatch) {
-    console.log("In loadWatchbar with " + tickers);
+    // console.log("In loadWatchbar with " + tickers);
     dispatch(beginApiCall());
     return watchlistApi
       .getWatchListWithTickers(tickers)

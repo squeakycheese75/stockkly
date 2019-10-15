@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./WatchBar.css";
 
-function changeFormatter(change) {
+function changeFormatter(change, movement) {
   return (
     <>
       {change >= 0 ? (
         <>
-          <div className="up_watchbar pl3">
+          <div className="up_watchbar move">
             {" "}
             <i className="material-icons vertical-align-middle up_watchbar">
               arrow_drop_up
@@ -15,12 +15,18 @@ function changeFormatter(change) {
             {parseFloat(change).toLocaleString("en-GB", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
+            })}{" "}
+            ( +
+            {parseFloat(movement).toLocaleString("en-GB", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
             })}
+            %)
           </div>
         </>
       ) : (
         <>
-          <div className="down_watchbar pl3">
+          <div className="down_watchbar move">
             {" "}
             <i className="material-icons vertical-align-middle down_watchbar">
               arrow_drop_down
@@ -28,7 +34,13 @@ function changeFormatter(change) {
             {parseFloat(Math.abs(change)).toLocaleString("en-GB", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
+            })}{" "}
+            (
+            {parseFloat(movement).toLocaleString("en-GB", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
             })}
+            %)
           </div>
         </>
       )}
@@ -65,7 +77,15 @@ const WatchBar = ({ prices, error }) => {
                   </tr>
                   <tr className="price">
                     <td className="pl2">{priceFormatter(p.price, p.symbol)}</td>
-                    <td>{changeFormatter(parseFloat(p.change))}</td>
+                  </tr>
+                  <tr>
+                    {" "}
+                    <td>
+                      {changeFormatter(
+                        parseFloat(p.change),
+                        parseFloat(p.movement)
+                      )}
+                    </td>
                   </tr>
                 </tbody>
               </table>
