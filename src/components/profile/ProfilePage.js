@@ -5,11 +5,13 @@ import PropTypes from "prop-types";
 import ProfileForm from "./ProfileForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
+import DevMode from "./DevMode";
 
 function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   const [profile, setProfile] = useState({ ...props.profile });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
+  // const { innerWidth: width, innerHeight: height } = window;
 
   useEffect(() => {
     if (!profile || !profile === {}) {
@@ -69,14 +71,17 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   return profile.length === 0 ? (
     <Loading />
   ) : (
-    <ProfileForm
-      profile={profile}
-      errors={errors}
-      onChange={handleChange}
-      onSave={handleSave}
-      saving={saving}
-      cancel={handleCancel}
-    />
+    <>
+      <ProfileForm
+        profile={profile}
+        errors={errors}
+        onChange={handleChange}
+        onSave={handleSave}
+        saving={saving}
+        cancel={handleCancel}
+      />
+      <DevMode profile={profile} />
+    </>
   );
 }
 
