@@ -35,15 +35,6 @@ const UserProfileForm = ({
               onChange={onChange}
               error={errors.currency}
             />
-            {/* <SelectInput
-              name="devmode"
-              label="Developer Mode:"
-              value={profile.devmode || ""}
-              defaultOption={false}
-              options={DEVMODEOPTIONS}
-              onChange={onChange}
-              error={errors.devmode}
-            /> */}
             <Checkbox
               name="devmode"
               label="Developer Mode:"
@@ -57,7 +48,7 @@ const UserProfileForm = ({
               className="btn btn-primary"
               value="save"
             >
-              {saving ? "Saving..." : "Save"}
+              {saving ? "Updating..." : "Update"}
             </button>{" "}
             <button
               type="button"
