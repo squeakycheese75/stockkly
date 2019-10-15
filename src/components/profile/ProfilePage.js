@@ -11,7 +11,6 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   const [profile, setProfile] = useState({ ...props.profile });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
-  // const { innerWidth: width, innerHeight: height } = window;
 
   useEffect(() => {
     if (!profile || !profile === {}) {
@@ -26,14 +25,11 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
 
   function handleChange(event) {
     const { value, name, checked } = event.target;
-    // const { name } = event.target;
-    // console.log(event.target);
     // console.log(name, value, checked);
     setProfile(prevProfile => ({
       ...prevProfile,
       [name]: name === "devmode" ? checked : value
     }));
-    // console.log("handleChange after", profile);
   }
 
   function formIsValid() {
