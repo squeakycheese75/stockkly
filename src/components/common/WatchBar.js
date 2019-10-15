@@ -54,7 +54,7 @@ const WatchBar = ({ prices, error }) => {
       <div className="d-flex flex-row w-100">
         {/* <div className="flex-column"> </div> */}
         {prices.map(p => (
-          <div className="flex-column w-20" key={"watchbaritem-" + p.ticker}>
+          <div className="flex-column w-25" key={"watchbaritem-" + p.ticker}>
             <h3 className="text-center">
               <table align="center">
                 <tbody>
