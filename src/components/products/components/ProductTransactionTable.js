@@ -79,7 +79,7 @@ const ProductTransactionTable = ({
           Name
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="14%"
+          width="24%"
           dataField="transdate"
           dataSort={true}
           columnClassName="bstable"
@@ -90,7 +90,7 @@ const ProductTransactionTable = ({
           Date
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="10%"
+          width="15%"
           dataField="transtype"
           dataSort={true}
           columnClassName="bstable"
@@ -100,7 +100,7 @@ const ProductTransactionTable = ({
           Type
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="10%"
+          width="20%"
           dataField="quantity"
           dataSort={true}
           columnClassName="bstable"
@@ -110,7 +110,7 @@ const ProductTransactionTable = ({
           Qty
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="60%"
+          width="25%"
           dataField="details"
           dataSort={false}
           columnClassName="bstable"
@@ -119,7 +119,7 @@ const ProductTransactionTable = ({
           Details
         </TableHeaderColumn>
         <TableHeaderColumn
-          width="3%"
+          width="8%"
           dataField="id"
           dataSort={true}
           columnClassName="bstable"
@@ -128,7 +128,7 @@ const ProductTransactionTable = ({
           editable={false}
         ></TableHeaderColumn>
         <TableHeaderColumn
-          width="3%"
+          width="8%"
           dataField="id"
           columnClassName="bstable"
           dataFormat={deleteFormatter}
