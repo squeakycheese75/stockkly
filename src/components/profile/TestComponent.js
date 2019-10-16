@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Collapse, Container } from "react-bootstrap";
-// import styles from "./TestComponent.css";
 
 const TestComponent = ({ name }) => {
   const [open, setOpen] = useState(false);
@@ -8,23 +7,15 @@ const TestComponent = ({ name }) => {
   return (
     <>
       <Container>
-        {/* <Button
-          className="float-right"
-          onClick={() => setOpen(!open)}
-          aria-controls="example-collapse-text"
-          aria-expanded={open}
-          //   style={styles}
-        >
-          <i className="material-icons">arrow_drop_down</i>
-        </Button> */}
-
         <button
           className="btn btn-link float-right"
-          // className="btn btn-outline-danger"
-          //   size="medium"
           onClick={() => setOpen(!open)}
         >
-          <i className="material-icons">arrow_drop_down</i>
+          {open ? (
+            <i className="material-icons">arrow_drop_up</i>
+          ) : (
+            <i className="material-icons">arrow_drop_down_circle</i>
+          )}
         </button>
 
         <Collapse in={open}>
