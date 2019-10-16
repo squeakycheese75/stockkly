@@ -79,7 +79,7 @@ const WatchBar = ({ prices, error }) => {
 
       <Collapse in={open}>
         <div id="example-collapse-text">
-          <div className="d-flex justify-content-center w-100" style={styles}>
+          <div className="d-flex justify-content-center" style={styles}>
             <div className="d-flex flex-row w-100">
               {/* <div className="flex-column"> </div> */}
               {prices.map(p => (
