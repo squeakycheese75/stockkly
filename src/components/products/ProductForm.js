@@ -48,7 +48,7 @@ const ProductForm = ({
             {" "}
             <button
               type="button"
-              className="btn btn-outline-danger"
+              className="btn btn-outline-danger btn-sm"
               disabled={!auth.isAuthenticated()}
               onClick={() => {
                 let newProfile = Object.assign({}, profile, {
@@ -67,7 +67,7 @@ const ProductForm = ({
             {" "}
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
               disabled={!auth.isAuthenticated()}
               // onClick={() => onRemoveWatchlist(profile)}
               onClick={() => {
@@ -85,7 +85,7 @@ const ProductForm = ({
           <button
             type="button"
             disabled={!auth.isAuthenticated()}
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             style={{ marginLeft: "auto" }}
           >
             Add Transaction
