@@ -6,6 +6,7 @@ import ProfileForm from "./ProfileForm";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
 import DevMode from "./DevMode";
+import TestComponent from "./TestComponent";
 
 function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   const [profile, setProfile] = useState({ ...props.profile });
@@ -77,6 +78,7 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
         cancel={handleCancel}
       />
       <DevMode profile={profile} />
+      <TestComponent />
     </>
   );
 }
