@@ -81,7 +81,6 @@ const WatchBar = ({ prices, error }) => {
         <div id="example-collapse-text">
           <div className="d-flex justify-content-center" style={styles}>
             <div className="d-flex flex-row w-100">
-              {/* <div className="flex-column"> </div> */}
               {prices.map(p => (
                 <div
                   className="flex-column w-25"
@@ -114,7 +113,6 @@ const WatchBar = ({ prices, error }) => {
                   </h3>
                 </div>
               ))}
-              {/* <div className="flex-column w-5"> </div> */}
             </div>
           </div>
         </div>
