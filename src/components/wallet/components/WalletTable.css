@@ -70,12 +70,20 @@ li {
   padding-bottom: 0px;
 }
 
-.name {
+.nameSmall {
   height: 10px;
-  font-size: 12px;
+  /* font-size: 14px; */
   font-weight: bold;
   margin-left: 0px;
   margin-top: 5px;
+}
+
+.nameLarge {
+  /* height: 10px; */
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 0px;
+  /* margin-top: 5px; */
 }
 
 .details {
@@ -119,6 +127,10 @@ td.bstable-icon {
 
 .up {
   color: #4c9900;
+}
+
+.upblue {
+  color: blue;
 }
 
 .down {
