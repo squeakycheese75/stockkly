@@ -6,10 +6,21 @@ import "./WalletTable.css";
 function qtyFormatter(cell, row) {
   return (
     <>
-      {cell.toLocaleString("en-GB", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-      })}
+      {cell < 0 ? (
+        <div className="down">
+          {cell.toLocaleString("en-GB", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+          })}
+        </div>
+      ) : (
+        <div className="upblue">
+          {cell.toLocaleString("en-GB", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+          })}
+        </div>
+      )}
     </>
   );
 }
@@ -31,7 +42,7 @@ class WalletTable extends React.Component {
 
     function priceFormatter(cell, row) {
       return row.spot === 1 ? (
-        <div className="name">
+        <div className="nameLarge">
           {row.symbol}
           {parseFloat(cell).toLocaleString("en-GB", {
             minimumFractionDigits: 2,
@@ -41,13 +52,11 @@ class WalletTable extends React.Component {
       ) : (
         <div>
           <ul>
-            <li className="name">
+            <li className="nameSmall">
               {row.symbol}
               {parseFloat(cell).toLocaleString("en-GB", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
-                // currency: appSettings.currency,
-                // style: "currency"
               })}
             </li>
             <li className="details">({row.spot.toFixed(2)})</li>
@@ -60,7 +69,7 @@ class WalletTable extends React.Component {
       return (
         <div>
           <ul>
-            <li className="name">
+            <li className="nameSmall">
               {`${profile.symbol}` +
                 cell.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </li>
