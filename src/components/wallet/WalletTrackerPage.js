@@ -9,13 +9,13 @@ import WalletChart from "./components/WalletChart";
 
 class WalletTrackerPage extends React.Component {
   componentDidMount() {
-    const { actions } = this.props;
+    const { actions, profile } = this.props;
 
-    // if (profile.length === 0) {
-    //   actions.loadProfile().catch(error => {
-    //     console.log("Loading Profile failed ..." + error);
-    //   });
-    // }
+    if (profile.length === 0) {
+      actions.loadProfile().catch(error => {
+        console.log("Loading Profile failed ..." + error);
+      });
+    }
 
     //Force wallet load because we default to cache
     actions

@@ -12,7 +12,7 @@ export function getWallet() {
 
 export function getWalletChart() {
   var chartPath = baseUrl + "historical/";
-  console.log(chartPath);
+  // console.log(chartPath);
   return fetch(chartPath, {
     headers: getHeader()
   })
