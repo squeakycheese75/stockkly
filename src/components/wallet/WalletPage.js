@@ -75,6 +75,7 @@ class WalletPage extends React.Component {
           <Loading />
         ) : this.props.wallet.length > 0 ? (
           <>
+            {" "}
             <WalletSummary
               data={this.props.wallet}
               profile={this.props.profile}

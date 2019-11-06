@@ -9,3 +9,13 @@ export function getWallet() {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function getWalletChart() {
+  var chartPath = baseUrl + "historical/";
+  console.log(chartPath);
+  return fetch(chartPath, {
+    headers: getHeader()
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}

@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 import * as profileActions from "./redux/actions/profileActions";
 import { bindActionCreators } from "redux";
 import styles from "./App.css";
+import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
 
 require("dotenv").config();
 
@@ -137,6 +138,10 @@ class App extends Component {
           <Route
             path="/wallet"
             render={props => <WalletPage auth={this.auth} {...props} />}
+          />
+          <Route
+            path="/wallettracker"
+            render={props => <WalletTrackerPage auth={this.auth} {...props} />}
           />
           <Route
             path="/watching"

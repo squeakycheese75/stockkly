@@ -16,13 +16,14 @@ function changeFormatter(change, movement) {
             {parseFloat(change).toLocaleString("en-GB", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
-            })}{" "}
+            })}
+            {/* {" "}
             ( +
             {parseFloat(movement).toLocaleString("en-GB", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             })}
-            %)
+            %) */}
           </div>
         </>
       ) : (
@@ -35,13 +36,14 @@ function changeFormatter(change, movement) {
             {parseFloat(Math.abs(change)).toLocaleString("en-GB", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
-            })}{" "}
+            })}
+            {/* {" "}
             (
             {parseFloat(movement).toLocaleString("en-GB", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             })}
-            %)
+            %) */}
           </div>
         </>
       )}
@@ -100,7 +102,6 @@ const WatchBar = ({ prices, error }) => {
                           </td>
                         </tr>
                         <tr>
-                          {" "}
                           <td>
                             {changeFormatter(
                               parseFloat(p.change),

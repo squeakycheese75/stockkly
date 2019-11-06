@@ -20,3 +20,18 @@ export function loadWallet() {
       });
   };
 }
+
+// export function loadWalletChart() {
+//   return function(dispatch) {
+//     dispatch(beginApiCall());
+//     return walletApi
+//       .getWalletChart()
+//       .then(walletChart => {
+//         dispatch(loadWalletChartSuccess(walletChart));
+//       })
+//       .catch(error => {
+//         dispatch(apiCallError(error));
+//         throw error;
+//       });
+//   };
+// }

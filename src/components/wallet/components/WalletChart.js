@@ -5,13 +5,11 @@ import PropTypes from "prop-types";
 import createPlotlyComponent from "react-plotly.js/factory";
 const Plot = createPlotlyComponent(Plotly);
 
-const ProductChart = ({ chartData, errors = {} }) => {
-  var CHARTDAYS = 90;
-
+const WalletChart = ({ chartData, profile, errors = {} }) => {
   var trace1 = {
-    type: "scatter",
-    mode: "lines",
-    name: chartData.pid + " Open",
+    type: "bar",
+    // mode: "lines",
+    name: "Wealth Tracker",
     x: chartData.x,
     y: chartData.y,
     line: { color: "#428bca" }
@@ -26,8 +24,8 @@ const ProductChart = ({ chartData, errors = {} }) => {
         <Plot
           data={[trace1]}
           layout={{
-            title: chartData.pid + " Chart " + CHARTDAYS + " day",
-            height: 320
+            title: "£",
+            height: 640
             // updatemenus: updatemenus
           }}
           useResizeHandler={true}
@@ -39,9 +37,9 @@ const ProductChart = ({ chartData, errors = {} }) => {
   );
 };
 
-ProductChart.propTypes = {
+WalletChart.propTypes = {
   chartData: PropTypes.object.isRequired,
   error: PropTypes.string
 };
 
-export default ProductChart;
+export default WalletChart;
