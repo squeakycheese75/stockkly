@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// / import * as profileActions from "../../redux/actions/profileActions";
+import * as profileActions from "../../redux/actions/profileActions";
 import * as walletHistoricalActions from "../../redux/actions/walletHistoricalActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
@@ -38,6 +38,7 @@ class WalletTrackerPage extends React.Component {
       <Loading />
     ) : (
       <>
+        <p>Work in progress...</p>
         <WalletChart
           chartData={{
             x: this.props.walletChart
@@ -47,6 +48,7 @@ class WalletTrackerPage extends React.Component {
               ? Object.values(this.props.walletChart)
               : []
           }}
+          profile={this.props.profile}
         />
       </>
     );
@@ -56,11 +58,13 @@ class WalletTrackerPage extends React.Component {
 WalletTrackerPage.propTypes = {
   actions: PropTypes.object.isRequired,
   walletChart: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    profile: state.profile,
     walletChart: state.walletChart,
     loading: state.apiCallsInProgress > 0
   };
@@ -69,6 +73,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
+      loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
       loadWalletChart: bindActionCreators(
         walletHistoricalActions.loadWalletChart,
         dispatch
