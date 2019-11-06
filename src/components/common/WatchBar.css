@@ -93,7 +93,7 @@
 
 @media (min-width: 360px) {
   .move {
-    font-size: 10px;
+    font-size: 9px;
   }
   .pl2 {
     font-size: 11px;
@@ -102,7 +102,7 @@
 
 @media (min-width: 576px) {
   .move {
-    font-size: 12px;
+    font-size: 11px;
   }
   .pl2 {
     font-size: 13px;
@@ -112,7 +112,7 @@
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   .move {
-    font-size: 13px;
+    font-size: 12px;
   }
   .pl2 {
     font-size: 14px;

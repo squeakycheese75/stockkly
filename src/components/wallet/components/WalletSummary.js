@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Jumbotron } from "react-bootstrap";
 import "./WalletSummary.css";
 
@@ -70,20 +71,24 @@ class WalletSummary extends React.Component {
     }
 
     return (
-      <Jumbotron className="summary">
-        {/* <div className="summary"> */}
-        <h1 className="text-center">
-          <table align="center" className="summary">
-            <tbody>
-              <tr>
-                <td>{totalFormatter(sum(data, "total"))}</td>
-                <td>{priceChangeFormatter(sum(data, "total_change"))}</td>
-              </tr>
-            </tbody>
-          </table>
-        </h1>
-        {/* </div> */}
-      </Jumbotron>
+      <Link to="/wallettracker" style={{ textDecoration: "none" }}>
+        {/* <span className="card" style={{ display: "block" }}> */}
+        <Jumbotron className="summary">
+          {/* <div className="summary"> */}
+          <h1 className="text-center">
+            <table align="center" className="summary">
+              <tbody>
+                <tr>
+                  <td>{totalFormatter(sum(data, "total"))}</td>
+                  <td>{priceChangeFormatter(sum(data, "total_change"))}</td>
+                </tr>
+              </tbody>
+            </table>
+          </h1>
+          {/* </div> */}
+        </Jumbotron>
+        {/* </span> */}
+      </Link>
     );
   }
 }

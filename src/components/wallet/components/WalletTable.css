@@ -129,9 +129,9 @@ td.bstable-icon {
   color: #4c9900;
 }
 
-.upblue {
-  color: blue;
-}
+/* .upblue {
+  color: black;
+} */
 
 .down {
   /* animation: blinker 1s linear infinite; */
@@ -141,4 +141,5 @@ td.bstable-icon {
 .flat {
   /* animation: blinker 1s linear infinite; */
   color: black;
+  /* font-weight: normal; */
 }

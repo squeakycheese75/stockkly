@@ -14,7 +14,7 @@ function qtyFormatter(cell, row) {
           })}
         </div>
       ) : (
-        <div className="upblue">
+        <div className="flat">
           {cell.toLocaleString("en-GB", {
             minimumFractionDigits: 0,
             maximumFractionDigits: 2

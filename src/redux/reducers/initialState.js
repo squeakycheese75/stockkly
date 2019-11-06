@@ -26,5 +26,6 @@ export default {
     // { ticker: "VIX", price: 80.0, change: 0.19, symbol: "$" },
     // { ticker: "AAPL", price: 80.0, change: 0.19, symbol: "$" },
     // { ticker: "FTSE:100", price: 80.0, change: 0.19, symbol: "£" }
-  ]
+  ],
+  walletChart: {}
 };
