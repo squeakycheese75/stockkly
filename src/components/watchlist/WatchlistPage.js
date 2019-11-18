@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import WatchListTable from "./components/WatchListTable";
 import HowToWatchlist from "../common/HowToWatchlist";
+import { Helmet } from "react-helmet";
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -56,7 +57,14 @@ class WatchlistPage extends React.Component {
 
   render() {
     return (
-      <>
+      <div>
+        <Helmet>
+          <title>Stockkly Wealth tracker - Watchlist</title>
+          <meta
+            name="description"
+            content="Watchlist for live tracking your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and derived prices."
+          />
+        </Helmet>
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.watchlist.length > 0 ? (
@@ -68,7 +76,7 @@ class WatchlistPage extends React.Component {
             <HowToWatchlist />
           </>
         )}
-      </>
+      </div>
     );
   }
 }
@@ -100,7 +108,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WatchlistPage);
+export default connect(mapStateToProps, mapDispatchToProps)(WatchlistPage);
