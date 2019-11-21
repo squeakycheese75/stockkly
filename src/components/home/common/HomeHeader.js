@@ -14,10 +14,10 @@ const HomeHeader = () => {
           <ul>
             <li>
               {" "}
-              Build your portfolio of Shares, Crypto, Funds, Fx and track your
-              wealth live.
+              Build your portfolio of Shares, Crypto, Funds, Fx, Gold, Silver
+              and track your wealth live.
             </li>
-            <li>Or, add them to your watchlist to track the price.</li>
+            <li>Or, add them to your watchlist to track the prices live.</li>
           </ul>
         </Container>
       </Jumbotron>
