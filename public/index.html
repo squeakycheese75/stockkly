@@ -42,11 +42,14 @@
     <link rel=”manifest” href=”%PUBLIC_URL%/manifest.json”>
 
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
+    <!-- <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://az416426.vo.msecnd.net" crossorigin /> -->
+
+    <!-- <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons|Open+Sans"
       rel="stylesheet"
       lazyload
-    />
+    /> -->
 
     <meta
       name="google-site-verification"
@@ -85,7 +88,19 @@
       type="text/jsx"
       crossorigin
     ></script>
-
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: ["Material+Icons|Open+Sans"] }
+      };
+      (function() {
+        var wf = document.createElement("script");
+        wf.src = "https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+        wf.type = "text/javascript";
+        wf.async = "true";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
     <script type="text/javascript" async defer>
       var appInsights =
         window.appInsights ||
