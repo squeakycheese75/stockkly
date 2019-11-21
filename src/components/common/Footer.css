@@ -1,9 +1,9 @@
 /*Bottom Area*/
 .bottomArea {
-  background-color: #424243;
-  height: 250px;
+  background-color: #6a98bf;
   color: #fff;
   font-size: 0.8rem;
+  height: 60px;
 }
 
 .bottomArea p {
