@@ -3,6 +3,7 @@ import { Alert, ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import "./ProductTable.css";
 
 function msg() {
   return (
