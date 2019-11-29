@@ -67,7 +67,7 @@ const WatchBar = ({ prices, error }) => {
   const [open, setOpen] = useState(false);
 
   return prices && prices.length > 0 ? (
-    <>
+    <div>
       <button
         className="btn btn-link float-right"
         onClick={() => setOpen(!open)}
@@ -78,7 +78,19 @@ const WatchBar = ({ prices, error }) => {
           <i className="material-icons">arrow_drop_down_circle</i>
         )}
       </button>
-
+      {/* <Button
+        className="float-right"
+        color="primary"
+        onClick={() => setOpen(!open)}
+        size="sm"
+        // style={{ marginBottom: "1rem" }}
+      >
+        {open ? (
+          <i className="material-icons">arrow_drop_up</i>
+        ) : (
+          <i className="material-icons">arrow_drop_down_circle</i>
+        )}
+      </Button> */}
       <Collapse in={open}>
         <div id="example-collapse-text">
           <div className="d-flex justify-content-center" style={styles}>
@@ -118,10 +130,8 @@ const WatchBar = ({ prices, error }) => {
           </div>
         </div>
       </Collapse>
-    </>
-  ) : (
-    <></>
-  );
+    </div>
+  ) : null;
 };
 
 WatchBar.propTypes = {

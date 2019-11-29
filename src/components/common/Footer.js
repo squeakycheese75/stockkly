@@ -1,10 +1,11 @@
 import React from "react";
-import styles from "./Footer.css";
+// import styles from "./Footer.css";
 import { Navbar } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <div className={styles}>
+    // <div className={styles}>
+    <div>
       <Navbar expand="sm" fixed="bottom" className="bottomArea">
         <div class="w-60">
           {/* <h5>About Us</h5>
