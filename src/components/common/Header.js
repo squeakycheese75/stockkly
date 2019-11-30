@@ -47,6 +47,9 @@ class Header extends Component {
               <LinkContainer to="/products">
                 <Nav.Link>
                   <Button>Find</Button>
+                  {/* <i className="mdc-icon-button material-icons md-24">
+                      add_circle
+                    </i> */}
                 </Nav.Link>
               </LinkContainer>
             </Nav>

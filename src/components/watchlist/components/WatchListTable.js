@@ -326,13 +326,12 @@ class WatchListTable extends Component {
           }}
         >
           <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
+            {/* <img
+              src="images/icon_48.png/20x20?text=%20"
               className="rounded mr-2"
               alt=""
-            />
+            /> */}
             <strong className="mr-auto">Stockkly</strong>
-            {/* <small>11 mins ago</small> */}
           </Toast.Header>
           <Toast.Body>Removed {this.state.pid} from watchList!</Toast.Body>
         </Toast>

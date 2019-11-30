@@ -134,6 +134,7 @@ function mapStateToProps(state, ownProps) {
             .map(transaction => {
               return {
                 ...transaction,
+                // eslint-disable-next-line
                 productName: state.products.find(function(item) {
                   if (item.ticker === transaction.ticker) return item;
                 }).name
@@ -176,7 +177,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

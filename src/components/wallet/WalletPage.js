@@ -9,8 +9,8 @@ import Loading from "../common/Loading";
 import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
 import HowToWallet from "../common/HowToWallet";
-import WatchBar from "../common/WatchBar";
 import { Helmet } from "react-helmet";
+import WatchBar from "../common/WatchBar";
 
 class WalletPage extends React.Component {
   componentDidMount() {
@@ -68,22 +68,19 @@ class WalletPage extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Stockkly Wealth Tracker - Wallet</title>
+          <title>Stockkly wealth tracker</title>
           <meta
             name="description"
-            content="Wealth tracker wallet for live tracking your Stocks, Funds, Crypto, Fx, Gold, Silver and derived prices."
+            content="Wealth tracker for live tracking your Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
           />
         </Helmet>
         {this.props.profile.devmode ? (
           <WatchBar prices={this.props.watchbar} />
-        ) : (
-          <></>
-        )}
+        ) : null}
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.wallet.length > 0 ? (
           <>
-            {" "}
             <WalletSummary
               data={this.props.wallet}
               profile={this.props.profile}

@@ -37,15 +37,23 @@
     <meta name="theme-color" content="#ffffff" />
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/images/icon_48.png" />
     <link rel=”manifest” href=”%PUBLIC_URL%/manifest.json”>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
+    <!-- Pre-loads-->
+    <!-- <link rel="preload" href="https://fonts.gstatic.com/" crossorigin /> -->
+
+    <!-- Pre-connects-->
+    <link rel="preconnect" href="https://ajax.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" />
+    <link rel="preconnect" href="https://az416426.vo.msecnd.net" />
+
+    <!-- <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons|Open+Sans"
       rel="stylesheet"
-    />
+      lazyload
+    /> -->
 
     <meta
       name="google-site-verification"
@@ -72,17 +80,53 @@
     src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
     crossorigin
   ></script> -->
+
     <script
       src="js/react.production.min.js"
+      async
       type="text/jsx"
       crossorigin
     ></script>
     <script
       src="js/react-dom.production.min.js"
+      async
       type="text/jsx"
       crossorigin
     ></script>
-
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: ["Material+Icons|Open+Sans"] }
+      };
+      (function() {
+        var wf = document.createElement("script");
+        wf.src = "https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+        wf.type = "text/javascript";
+        wf.async = "true";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+    <!-- Sitemap Generator -->
+    <!-- <script type="text/javascript" async defer>
+      var _0xaea9 = [
+        "sitemapgenerator:: ",
+        "innerHTML",
+        "body",
+        "document",
+        "stringify",
+        "*",
+        "postMessage",
+        "setTimeout"
+      ];
+      window[_0xaea9[7]](function() {
+        parent[_0xaea9[6]](
+          _0xaea9[0] +
+            JSON[_0xaea9[4]](window[_0xaea9[3]][_0xaea9[2]][_0xaea9[1]]),
+          _0xaea9[5]
+        );
+      }, 3000);
+    </script> -->
+    <!-- Azure insights -->
     <script type="text/javascript" async defer>
       var appInsights =
         window.appInsights ||

@@ -8,6 +8,7 @@ import Loading from "../common/Loading";
 import WatchListTable from "./components/WatchListTable";
 import HowToWatchlist from "../common/HowToWatchlist";
 import { Helmet } from "react-helmet";
+// import WatchBar from "../common/WatchBar";
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -59,12 +60,15 @@ class WatchlistPage extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Stockkly Wealth tracker - Watchlist</title>
+          <title>Stockkly wealth tracker</title>
           <meta
             name="description"
-            content="Watchlist for live tracking your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and derived prices."
+            content="Watchlist for live tracking your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
           />
         </Helmet>
+        {/* {this.props.profile.devmode ? (
+          <WatchBar prices={this.props.watchbar} />
+        ) : null} */}
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.watchlist.length > 0 ? (
