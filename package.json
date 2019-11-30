@@ -76,6 +76,7 @@
     "json-server": "^0.15.1",
     "react-data-grid": "^6.1.0",
     "react-snap": "^1.23.0",
+    "reactstrap": "^8.1.1",
     "uglify-js-brunch": "^2.10.0",
     "why-did-you-update": "^1.0.6"
   }
