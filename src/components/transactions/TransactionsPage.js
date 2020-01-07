@@ -48,7 +48,7 @@ class TransactionsPage extends React.Component {
           <title>Stockkly Wealth tracker - Transactions</title>
           <meta
             name="description"
-            content="Your wallet transactions for live tracking your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and derived prices."
+            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
           />
         </Helmet>
         {this.props.loading ? (

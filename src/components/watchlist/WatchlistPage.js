@@ -63,7 +63,7 @@ class WatchlistPage extends React.Component {
           <title>Stockkly wealth tracker</title>
           <meta
             name="description"
-            content="Watchlist for live tracking your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
+            content="Watch your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices with Stockkly"
           />
         </Helmet>
         {/* {this.props.profile.devmode ? (

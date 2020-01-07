@@ -22,6 +22,7 @@ import * as profileActions from "./redux/actions/profileActions";
 import { bindActionCreators } from "redux";
 import styles from "./App.css";
 import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
+import { Helmet } from "react-helmet";
 
 require("dotenv").config();
 
@@ -81,6 +82,13 @@ class App extends Component {
 
     return (
       <div className={styles}>
+        <Helmet>
+          <title>Stockkly wealth tracker</title>
+          <meta
+            name="description"
+            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
+          />
+        </Helmet>
         <Header auth={this.auth} />
         <Switch>
           <Route

@@ -71,7 +71,7 @@ class WalletPage extends React.Component {
           <title>Stockkly wealth tracker</title>
           <meta
             name="description"
-            content="Wealth tracker for live tracking your Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
+            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
           />
         </Helmet>
         {this.props.profile.devmode ? (

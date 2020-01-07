@@ -5,6 +5,7 @@ import { ScaleLoader } from "react-spinners";
 // Another way to import
 // import ClipLoader from "react-spinners/ClipLoader";
 // import styles from "./Loading.css";
+import { Helmet } from "react-helmet";
 
 const override = css`
   display: block;
@@ -32,6 +33,13 @@ class Loading extends React.Component {
   render() {
     return (
       <div className="sweet-loading">
+        <Helmet>
+          <title>Stockkly Wealth tracker - Transactions</title>
+          <meta
+            name="description"
+            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
+          />
+        </Helmet>
         <ScaleLoader
           css={override}
           sizeUnit={"px"}

@@ -71,14 +71,24 @@ class WalletTable extends React.Component {
           <ul>
             <li className="nameSmall">
               {`${profile.symbol}` +
-                cell.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                // cell.toLocaleString(undefined, { minimumFractionDigits: 2 })
+                parseFloat(cell).toLocaleString("en-GB", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
             </li>
             {row.total_change > 0 ? (
               <li className="details up">
                 <i className="material-icons vertical-align-middle">
                   arrow_drop_up
                 </i>
-                {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+                {`(` +
+                  // row.total_change.toFixed(2).toLocaleString()
+                  parseFloat(row.total_change).toLocaleString("en-GB", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  }) +
+                  `)`}
               </li>
             ) : (
               <>
@@ -88,13 +98,25 @@ class WalletTable extends React.Component {
                       <i className="material-icons vertical-align-middle">
                         arrow_drop_down
                       </i>
-                      {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+                      {`(` +
+                        // row.total_change.toFixed(2).toLocaleString()
+                        parseFloat(row.total_change).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                        }) +
+                        `)`}
                     </li>
                   </>
                 ) : (
                   <>
                     <li className="details flat">
-                      {`(` + row.total_change.toFixed(2).toLocaleString() + `)`}
+                      {`(` +
+                        // row.total_change.toFixed(2).toLocaleString()
+                        parseFloat(row.total_change).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                        }) +
+                        `)`}
                     </li>
                   </>
                 )}
