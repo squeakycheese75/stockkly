@@ -1,2 +1,0 @@
-define(["idcta-v2/experiment-snippet"],function(){return window.optimizely=window.optimizely||[],{bucketUser:function(e){window.optimizely.push({type:"page",pageName:e})},getVariantName:function(e){try{var t=window.optimizely.get("state").getExperimentStates({isActive:!0})[e];return t?t.variation.name:null}catch(e){return null}},sendAttributes:function(e){window.optimizely.push({type:"user",attributes:e})},sendEvent:function(e){window.optimizely.push({type:"event",eventName:e})}}});
-//# sourceMappingURL=mvt.js.map
