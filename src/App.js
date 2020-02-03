@@ -30,7 +30,6 @@ const seo = {
   title: "Stockkly wealth tracker",
   description:
     "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
-  ",
   url: "https://stockkly.com/",
   image: "https://stockkly.com/images/stockkly.png"
 };
