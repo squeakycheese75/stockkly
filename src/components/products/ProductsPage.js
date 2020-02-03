@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import ProductTable from "./components/ProductTable";
-// import { Helmet } from "react-helmet";
 
 class ProductsPage extends React.Component {
   componentDidMount() {
@@ -30,13 +29,6 @@ class ProductsPage extends React.Component {
   render() {
     return (
       <div>
-        {/* <Helmet>
-          <title>Stockkly Wealth tracker - Products</title>
-          <meta
-            name="description"
-            content="Search for you favourite Stocks, Funds, Crypto, Fx, Gold, Silver and derived prices to track live."
-          />
-        </Helmet> */}
         {this.props.loading ? (
           <Loading />
         ) : (
