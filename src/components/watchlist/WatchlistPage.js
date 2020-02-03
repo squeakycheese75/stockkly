@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import Loading from "../common/Loading";
 import WatchListTable from "./components/WatchListTable";
 import HowToWatchlist from "../common/HowToWatchlist";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 // import WatchBar from "../common/WatchBar";
 
 class WatchlistPage extends React.Component {
@@ -59,13 +59,13 @@ class WatchlistPage extends React.Component {
   render() {
     return (
       <div>
-        <Helmet>
+        {/* <Helmet>
           <title>Stockkly wealth tracker</title>
           <meta
             name="description"
             content="Watch your favourite Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices with Stockkly"
           />
-        </Helmet>
+        </Helmet> */}
         {/* {this.props.profile.devmode ? (
           <WatchBar prices={this.props.watchbar} />
         ) : null} */}

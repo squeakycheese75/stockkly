@@ -26,6 +26,14 @@ import { Helmet } from "react-helmet";
 
 require("dotenv").config();
 
+const seo = {
+  title: "Stockkly wealth tracker",
+  description:
+    "A free, real-time, wealth tracker that let's you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver, composites, etc.",
+  url: "https://stockkly.com/",
+  image: "https://stockkly.com/images/stockkly.png"
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -82,13 +90,23 @@ class App extends Component {
 
     return (
       <div className={styles}>
-        <Helmet>
-          <title>Stockkly wealth tracker</title>
-          <meta
-            name="description"
-            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
-          />
-        </Helmet>
+        <Helmet
+          title={seo.title}
+          meta={[
+            {
+              name: "description",
+              property: "og:description",
+              content: seo.description
+            },
+            { property: "og:title", content: seo.title },
+            { property: "og:url", content: seo.url },
+            { property: "og:image", content: seo.image },
+            { property: "og:image:type", content: "image/png" },
+            { property: "twitter:image:src", content: seo.image },
+            { property: "twitter:title", content: seo.title },
+            { property: "twitter:description", content: seo.description }
+          ]}
+        />
         <Header auth={this.auth} />
         <Switch>
           <Route

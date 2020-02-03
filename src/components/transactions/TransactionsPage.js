@@ -10,7 +10,7 @@ import Loading from "../common/Loading";
 import { toast } from "react-toastify";
 import TransactionTable from "./components/TransactionTable";
 import HowToWallet from "../common/HowToWallet";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 
 class TransactionsPage extends React.Component {
   _isMounted = false;
@@ -44,13 +44,13 @@ class TransactionsPage extends React.Component {
   render() {
     return (
       <div>
-        <Helmet>
+        {/* <Helmet>
           <title>Stockkly Wealth tracker - Transactions</title>
           <meta
             name="description"
             content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
           />
-        </Helmet>
+        </Helmet> */}
         {this.props.loading ? (
           <Loading />
         ) : (
