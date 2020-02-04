@@ -33,6 +33,7 @@ class ProductTable extends Component {
   handleShow() {
     this.setState({ show: true });
   }
+
   addItem(index) {
     console.log(index);
     this.props.onSubmit(index);

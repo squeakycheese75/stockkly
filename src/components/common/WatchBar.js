@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./WatchBar.css";
-// import { Collapse } from "react-bootstrap";
 import { Collapse, Card } from "reactstrap";
 
 function changeFormatter(change, movement) {

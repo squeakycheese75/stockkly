@@ -5,6 +5,7 @@ import Header from "./components/common/Header";
 // import Footer from "./components/common/Footer";
 import AboutPage from "./components/about/AboutPage";
 import Auth from "./components/auth/Auth";
+// import { useAuth0 } from "./components/auth/react-auth0-spa";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
@@ -22,8 +23,17 @@ import * as profileActions from "./redux/actions/profileActions";
 import { bindActionCreators } from "redux";
 import styles from "./App.css";
 import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
+import { Helmet } from "react-helmet";
 
 require("dotenv").config();
+
+const seo = {
+  title: "Stockkly wealth tracker",
+  description:
+    "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
+  url: "https://stockkly.com/",
+  image: "https://stockkly.com/images/stockkly.png"
+};
 
 class App extends Component {
   constructor(props) {
@@ -73,6 +83,7 @@ class App extends Component {
 
   render() {
     const isLoggedIn = this.auth.isAuthenticated();
+    // const { loading, isAuthenticated } = useAuth0();
 
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
@@ -81,6 +92,23 @@ class App extends Component {
 
     return (
       <div className={styles}>
+        <Helmet
+          title={seo.title}
+          meta={[
+            {
+              name: "description",
+              property: "og:description",
+              content: seo.description
+            },
+            { property: "og:title", content: seo.title },
+            { property: "og:url", content: seo.url },
+            { property: "og:image", content: seo.image },
+            { property: "og:image:type", content: "image/png" },
+            { property: "twitter:image:src", content: seo.image },
+            { property: "twitter:title", content: seo.title },
+            { property: "twitter:description", content: seo.description }
+          ]}
+        />
         <Header auth={this.auth} />
         <Switch>
           <Route
@@ -88,6 +116,7 @@ class App extends Component {
             path="/"
             render={props =>
               isLoggedIn ? (
+                // !loading ? (
                 <WalletPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
