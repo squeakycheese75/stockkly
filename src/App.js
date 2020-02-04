@@ -5,7 +5,6 @@ import Header from "./components/common/Header";
 // import Footer from "./components/common/Footer";
 import AboutPage from "./components/about/AboutPage";
 import Auth from "./components/auth/Auth";
-// import { useAuth0 } from "./components/auth/react-auth0-spa";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
@@ -24,16 +23,18 @@ import { bindActionCreators } from "redux";
 import styles from "./App.css";
 import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
 import { Helmet } from "react-helmet";
+import { seo } from "./components/common/seo";
 
 require("dotenv").config();
 
-const seo = {
-  title: "Stockkly wealth tracker",
-  description:
-    "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
-  url: "https://stockkly.com/",
-  image: "https://stockkly.com/images/stockkly.png"
-};
+// const seo = {
+//   title:
+//     "Stockkly wealth tracker - Free real-time wealth tracker (Crypto, Stocks, etc).",
+//   description:
+//     "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
+//   url: "https://stockkly.com/",
+//   image: "https://stockkly.com/images/stockkly.png"
+// };
 
 class App extends Component {
   constructor(props) {
