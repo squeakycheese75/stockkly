@@ -21,6 +21,14 @@ const override = css`
   right: 0;
 `;
 
+const seo = {
+  title: "Stockkly wealth tracker",
+  description:
+    "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
+  url: "https://stockkly.com/",
+  image: "https://stockkly.com/images/stockkly.png"
+};
+
 class Loading extends React.Component {
   constructor(props) {
     super(props);
@@ -33,13 +41,23 @@ class Loading extends React.Component {
   render() {
     return (
       <div className="sweet-loading">
-        <Helmet>
-          <title>Stockkly Wealth tracker - Transactions</title>
-          <meta
-            name="description"
-            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
-          />
-        </Helmet>
+        <Helmet
+          title={seo.title}
+          meta={[
+            {
+              name: "description",
+              property: "og:description",
+              content: seo.description
+            },
+            { property: "og:title", content: seo.title },
+            { property: "og:url", content: seo.url },
+            { property: "og:image", content: seo.image },
+            { property: "og:image:type", content: "image/png" },
+            { property: "twitter:image:src", content: seo.image },
+            { property: "twitter:title", content: seo.title },
+            { property: "twitter:description", content: seo.description }
+          ]}
+        />
         <ScaleLoader
           css={override}
           sizeUnit={"px"}
