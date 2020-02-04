@@ -6,7 +6,7 @@ import { ScaleLoader } from "react-spinners";
 // import ClipLoader from "react-spinners/ClipLoader";
 // import styles from "./Loading.css";
 import { Helmet } from "react-helmet";
-import { seo } from "./components/common/seo";
+import { seo } from "./seo";
 
 const override = css`
   display: block;
@@ -21,15 +21,6 @@ const override = css`
   left: 0;
   right: 0;
 `;
-
-// const seo = {
-//   title:
-//     "Stockkly wealth tracker - Free real-time wealth tracker (Crypto, Stocks, etc).",
-//   description:
-//     "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
-//   url: "https://stockkly.com/",
-//   image: "https://stockkly.com/images/stockkly.png"
-// };
 
 class Loading extends React.Component {
   constructor(props) {

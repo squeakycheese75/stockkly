@@ -1,4 +1,4 @@
-const seo = {
+export const seo = {
   title:
     "Stockkly wealth tracker - Free Real-time Wealth Tracker (Crypto, Stocks, etc).",
   description:

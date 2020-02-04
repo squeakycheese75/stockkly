@@ -27,15 +27,6 @@ import { seo } from "./components/common/seo";
 
 require("dotenv").config();
 
-// const seo = {
-//   title:
-//     "Stockkly wealth tracker - Free real-time wealth tracker (Crypto, Stocks, etc).",
-//   description:
-//     "A free, real-time, wealth tracker that lets you track a portfolio of Stocks, Funds, Crypto, Fx, Gold, Silver and composites (FAANG) live!",
-//   url: "https://stockkly.com/",
-//   image: "https://stockkly.com/images/stockkly.png"
-// };
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,29 +35,30 @@ class App extends Component {
   state = {
     isLoaded: false,
     hasError: false,
-    tokenRenewalComplete: false
+    tokenRenewalComplete: false,
+    isLoggedIn: false
   };
 
-  UNSAFE_componentWillMount() {
-    // Check we've refreshed token
-    this.auth.renewToken(() => {
-      // update state
-      this.setState({ tokenRenewalComplete: true });
-      // load profile
-      if (this.auth.isAuthenticated()) {
-        this.loadProfile();
-        // console.log("Authenticated profile load");
-      }
-    });
-  }
+  // UNSAFE_componentWillMount() {
+  //   // Check we've refreshed token
+  //   this.auth.renewToken(() => {
+  //     // load profile
+  //     if (this.auth.isAuthenticated()) {
+  //       this.loadProfile();
+  //     }
+  //     // update state
+  //     this.setState({
+  //       tokenRenewalComplete: true
+  //     });
+  //   });
+  // }
 
+  // Not sure whey we're loading the profile twice here
   componentDidMount() {
     this.auth.renewToken(() => {
       this.setState({ tokenRenewalComplete: true });
       if (this.auth.isAuthenticated()) {
-        this.props.actions.loadProfile().catch(error => {
-          console.log("Loading profile failed" + error);
-        });
+        this.loadProfile();
       }
     });
   }
@@ -76,15 +68,28 @@ class App extends Component {
     localStorage.setItem("userProfile", JSON.stringify(this.state.appSettings));
   }
 
-  loadProfile() {
-    this.props.actions.loadProfile().catch(error => {
-      console.log("Loading Profile failed ..." + error);
+  authenticateUser() {
+    var isAuthenticated = this.auth.isAuthenticated();
+    console.log("isAuthenticated is ", isAuthenticated);
+    this.setState({
+      isLoggedIn: isAuthenticated
     });
+    console.log("state set ", isAuthenticated);
+  }
+
+  loadProfile() {
+    this.props.actions
+      .loadProfile()
+      .then(() => {
+        this.authenticateUser();
+      })
+      .catch(error => {
+        console.log("Loading Profile failed ..." + error);
+      });
   }
 
   render() {
-    const isLoggedIn = this.auth.isAuthenticated();
-    // const { loading, isAuthenticated } = useAuth0();
+    // const isLoggedIn = this.auth.isAuthenticated();
 
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
@@ -116,8 +121,7 @@ class App extends Component {
             exact
             path="/"
             render={props =>
-              isLoggedIn ? (
-                // !loading ? (
+              this.state.isLoggedIn ? (
                 <WalletPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
