@@ -4,13 +4,8 @@ Sitemap: https://stockkly.com/sitemap.xml
 
 Disallow: /signup
 Disallow: /login
-Disallow: /docs/addons/*
+Disallow: /authorize*
 Disallow: /legal*
 Disallow: /terms*
-Disallow: /docs/email-wall/*
-Disallow: /docs/video-series/*
-Disallow: /*wp-includes*
 Disallow: /login/*
-Disallow: /connect/*
-Disallow: /docs*?*utm_source=*
-Disallow: /learn/lp-auth0-vs-stormpath*
+Disallow: */authorize*

@@ -5,6 +5,7 @@ import Header from "./components/common/Header";
 // import Footer from "./components/common/Footer";
 import AboutPage from "./components/about/AboutPage";
 import Auth from "./components/auth/Auth";
+// import { useAuth0 } from "./components/auth/react-auth0-spa";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
 import HomePage from "./components/home/HomePage";
@@ -82,6 +83,7 @@ class App extends Component {
 
   render() {
     const isLoggedIn = this.auth.isAuthenticated();
+    // const { loading, isAuthenticated } = useAuth0();
 
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
@@ -114,6 +116,7 @@ class App extends Component {
             path="/"
             render={props =>
               isLoggedIn ? (
+                // !loading ? (
                 <WalletPage
                   auth={this.auth}
                   appSettings={this.state.appSettings}
