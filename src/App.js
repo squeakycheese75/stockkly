@@ -36,7 +36,7 @@ class App extends Component {
     isLoaded: false,
     hasError: false,
     tokenRenewalComplete: false,
-    isLoggedIn: false
+    isAuthenticated: false
   };
 
   // UNSAFE_componentWillMount() {
@@ -55,6 +55,7 @@ class App extends Component {
 
   // Not sure whey we're loading the profile twice here
   componentDidMount() {
+    // this.authenticateUser();
     this.auth.renewToken(() => {
       this.setState({ tokenRenewalComplete: true });
       if (this.auth.isAuthenticated()) {
@@ -69,10 +70,11 @@ class App extends Component {
   }
 
   authenticateUser() {
+    // console.log("authenticating user");
     var isAuthenticated = this.auth.isAuthenticated();
     console.log("isAuthenticated is ", isAuthenticated);
     this.setState({
-      isLoggedIn: isAuthenticated
+      isAuthenticated: isAuthenticated
     });
     console.log("state set ", isAuthenticated);
   }
@@ -91,6 +93,7 @@ class App extends Component {
   render() {
     // const isLoggedIn = this.auth.isAuthenticated();
     // const { isAuthenticated } = this.auth.isAuthenticated();
+    // this.authenticateUser();
 
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
@@ -121,19 +124,19 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props => (
-              // isAuthenticated ? (
-              //   <WalletPage
-              //     auth={this.auth}
-              //     appSettings={this.state.appSettings}
-              //     {...props}
-              //   />
-              // ) : (
-              //   <HomePage auth={this.auth} {...props} />
-              // )
-              <HomePage auth={this.auth} {...props} />
-              // )
-            )}
+            render={
+              props =>
+                this.state.isAuthenticated ? (
+                  <WalletPage
+                    auth={this.auth}
+                    appSettings={this.state.appSettings}
+                    {...props}
+                  />
+                ) : (
+                  <HomePage auth={this.auth} {...props} />
+                )
+              // <HomePage auth={this.auth} {...props} />
+            }
           />
           <Route path="/about" component={AboutPage} />
           <Route
