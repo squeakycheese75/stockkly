@@ -2,7 +2,7 @@ import React from "react";
 import { Jumbotron, Container, Carousel, Row, Col } from "react-bootstrap";
 import styles from "./Splash.css";
 import stockkly_wallet_img from "./stockkly_wallet.jpg";
-// import stockkly_price_img from "./stockkly_price.png";
+import stockkly_price_img from "./stockkly_price.jpg";
 import stockkly_watchlist_img from "./stockkly_watchlist.jpg";
 
 const Splash = () => {
@@ -35,7 +35,7 @@ const Splash = () => {
                       <b>GBP</b>.
                     </ul>
                     <ul>
-                      Includes up-to-date Forex prices, so you can get a single
+                      Includes up-to-date forex prices, so you can get a single
                       valuation in the currency of you choice.
                     </ul>
                     {/* </p> */}
@@ -55,10 +55,9 @@ const Splash = () => {
                 <Col xs={12} md={8}>
                   <div className="card-body">
                     <h4 className="card-title font-weight-bold">
-                      Build a watchlist of your favourites and keep an eye on
-                      their prices.
+                      Build a watchlist of your favourites to keep an eye on
+                      them.
                     </h4>
-                    {/* <p className="card-text"> */}
                     <ul>
                       Keep an eye on your favorites before you decide to add
                       them to your portfolio.
@@ -67,43 +66,38 @@ const Splash = () => {
                       Ever increasing list of Shares, Crypto, Gold, Silver,
                       composites to watch.
                     </ul>
-                    {/* </p> */}
                   </div>
                 </Col>
               </Row>
-            </Carousel.Item>{" "}
-            {/* <Carousel.Item>
+            </Carousel.Item>
+            <Carousel.Item>
               <div className="container-fluid">
                 <Row>
-                  <Col xs={5} md={4}>
+                  <Col xs={10} md={4}>
                     <img
                       className="card-img-top"
                       src={stockkly_price_img}
                       alt="Dig into your prices."
                     />
                   </Col>
-                  <Col xs={7} md={8}>
+                  <Col xs={12} md={8}>
                     <div>
                       <h4 class="card-title font-weight-bold">
-                        Dig into your prices
+                        Dig into prices!
                       </h4>
-                      <p class="card-text">
-                        <ListGroup>
-                          <ListGroupItem>
-                            Keep an eye on your favorites before you decide to
-                            add them to your portfolio.
-                          </ListGroupItem>
-                          <ListGroupItem>
-                            Ever increasing list of Shares, Crypto, Gold,
-                            Silver, composites to watch.
-                          </ListGroupItem>
-                        </ListGroup>
-                      </p>
+                      <ul>
+                        Keep an eye on your favorite shares, crypto, etc. before
+                        you decide to add them to your portfolio.
+                      </ul>
+                      <ul>
+                        Comprehensive list of Shares, Crypto, Gold, Silver,
+                        composites to watch.
+                      </ul>
                     </div>
                   </Col>
                 </Row>
               </div>
-            </Carousel.Item> */}
+            </Carousel.Item>
           </Carousel>
         </Container>
       </Jumbotron>

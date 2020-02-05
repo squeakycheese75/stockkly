@@ -1,10 +1,6 @@
 import React from "react";
 import { css } from "@emotion/core";
-// First way to import
 import { ScaleLoader } from "react-spinners";
-// Another way to import
-// import ClipLoader from "react-spinners/ClipLoader";
-// import styles from "./Loading.css";
 import { Helmet } from "react-helmet";
 import { seo } from "./seo";
 
@@ -56,7 +52,6 @@ class Loading extends React.Component {
           color={"#428BCA"}
           loading={this.state.loading}
         />
-        {/* <Spinner animation="border" variant="primary" /> */}
       </div>
     );
   }
