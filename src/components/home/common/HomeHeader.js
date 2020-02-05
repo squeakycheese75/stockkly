@@ -7,10 +7,12 @@ const HomeHeader = () => {
     <div className="jumboheader">
       <Jumbotron>
         <Container>
-          <h1>Welcome to Stockkly</h1>
+          <h1>Welcome to Stockkly.com</h1>
+          <br />
           <h3>
             A simple, mobile-friendly, wealth tracker for the modern portfolio.
           </h3>
+          {/* <br />
           <ul>
             <li>
               {" "}
@@ -18,7 +20,7 @@ const HomeHeader = () => {
               and track your wealth live.
             </li>
             <li>Or, add them to your watchlist to track the prices live.</li>
-          </ul>
+          </ul> */}
         </Container>
       </Jumbotron>
     </div>

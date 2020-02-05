@@ -90,6 +90,7 @@ class App extends Component {
 
   render() {
     // const isLoggedIn = this.auth.isAuthenticated();
+    // const { isAuthenticated } = this.auth.isAuthenticated();
 
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
@@ -120,17 +121,19 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props =>
-              this.state.isLoggedIn ? (
-                <WalletPage
-                  auth={this.auth}
-                  appSettings={this.state.appSettings}
-                  {...props}
-                />
-              ) : (
-                <HomePage auth={this.auth} {...props} />
-              )
-            }
+            render={props => (
+              // isAuthenticated ? (
+              //   <WalletPage
+              //     auth={this.auth}
+              //     appSettings={this.state.appSettings}
+              //     {...props}
+              //   />
+              // ) : (
+              //   <HomePage auth={this.auth} {...props} />
+              // )
+              <HomePage auth={this.auth} {...props} />
+              // )
+            )}
           />
           <Route path="/about" component={AboutPage} />
           <Route

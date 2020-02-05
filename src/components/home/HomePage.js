@@ -1,14 +1,14 @@
 import React from "react";
-import HowToWallet from "../common/HowToWallet";
+// import HowToWallet from "../common/HowToWallet";
 import HomeHeader from "./common/HomeHeader";
-// import Splash from "./Splash";
+import Splash from "./Splash";
 
 const HomePage = () => {
   return (
     <div>
       <HomeHeader />
-      <HowToWallet />
-      {/* <Splash /> */}
+      {/* <HowToWallet /> */}
+      <Splash />
     </div>
   );
 };
