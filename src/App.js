@@ -60,6 +60,8 @@ class App extends Component {
       this.setState({ tokenRenewalComplete: true });
       if (this.auth.isAuthenticated()) {
         this.loadProfile();
+      } else {
+        this.setState({ isLoaded: true });
       }
     });
   }
@@ -74,7 +76,8 @@ class App extends Component {
     var isAuthenticated = this.auth.isAuthenticated();
     console.log("isAuthenticated is ", isAuthenticated);
     this.setState({
-      isAuthenticated: isAuthenticated
+      isAuthenticated: isAuthenticated,
+      isLoaded: true
     });
     console.log("state set ", isAuthenticated);
   }
@@ -132,8 +135,10 @@ class App extends Component {
                     appSettings={this.state.appSettings}
                     {...props}
                   />
-                ) : (
+                ) : this.state.isLoaded ? (
                   <HomePage auth={this.auth} {...props} />
+                ) : (
+                  <Loading />
                 )
               // <HomePage auth={this.auth} {...props} />
             }

@@ -27,8 +27,6 @@ class Loading extends React.Component {
     super(props);
     this.state = {
       loading: true
-      //   color: "#000000"
-      // css: {}
     };
   }
   render() {
