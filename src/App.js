@@ -55,7 +55,6 @@ class App extends Component {
 
   // Not sure whey we're loading the profile twice here
   componentDidMount() {
-    // this.authenticateUser();
     this.auth.renewToken(() => {
       this.setState({ tokenRenewalComplete: true });
       if (this.auth.isAuthenticated()) {
