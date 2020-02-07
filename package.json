@@ -48,7 +48,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": ""
+    "deploy": "",
+    "snap": "react-snap"
   },
   "eslintConfig": {
     "extends": "react-app"

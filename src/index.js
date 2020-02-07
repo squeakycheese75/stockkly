@@ -9,14 +9,6 @@ import { Provider as ReduxProvider } from "react-redux";
 
 const store = configureStore();
 
-// ReactDOM.render(
-//   <ReduxProvider store={store}>
-//     <Router>
-//       <Route component={App} />
-//     </Router>
-//   </ReduxProvider>,
-//   document.getElementById("root")
-// );
 const rootElement = document.getElementById("root");
 if (rootElement.hasChildNodes()) {
   hydrate(

@@ -93,10 +93,6 @@ class App extends Component {
   }
 
   render() {
-    // const isLoggedIn = this.auth.isAuthenticated();
-    // const { isAuthenticated } = this.auth.isAuthenticated();
-    // this.authenticateUser();
-
     if (this.state.hasError) {
       return <h1>Oops, there is an error!</h1>;
     }
