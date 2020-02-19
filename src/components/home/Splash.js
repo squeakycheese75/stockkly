@@ -1,9 +1,9 @@
 import React from "react";
 import { Jumbotron, Container, Carousel, Row, Col } from "react-bootstrap";
 import styles from "./Splash.css";
-import stockkly_wallet_img from "./stockkly_wallet.jpg";
-import stockkly_price_img from "./stockkly_price.jpg";
-import stockkly_watchlist_img from "./stockkly_watchlist.jpg";
+import stockkly_wallet_img from "./stockkly_wallet.jpeg";
+import stockkly_price_img from "./stockkly_price.jpeg";
+import stockkly_watchlist_img from "./stockkly_watchlist.jpeg";
 
 const Splash = () => {
   return (
@@ -82,7 +82,7 @@ const Splash = () => {
                   </Col>
                   <Col xs={12} md={8}>
                     <div>
-                      <h4 class="card-title font-weight-bold">
+                      <h4 className="card-title font-weight-bold">
                         Dig into prices!
                       </h4>
                       <ul>
