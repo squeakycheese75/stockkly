@@ -1,11 +1,8 @@
 import React from "react";
 import { css } from "@emotion/core";
-// First way to import
 import { ScaleLoader } from "react-spinners";
-// Another way to import
-// import ClipLoader from "react-spinners/ClipLoader";
-// import styles from "./Loading.css";
 import { Helmet } from "react-helmet";
+import { seo } from "./seo";
 
 const override = css`
   display: block;
@@ -26,20 +23,28 @@ class Loading extends React.Component {
     super(props);
     this.state = {
       loading: true
-      //   color: "#000000"
-      // css: {}
     };
   }
   render() {
     return (
       <div className="sweet-loading">
-        <Helmet>
-          <title>Stockkly Wealth tracker - Transactions</title>
-          <meta
-            name="description"
-            content="Tracking your wealth live with stockkly, build you portfolio from Stocks, Funds, Crypto, Fx, Gold, Silver and composite prices."
-          />
-        </Helmet>
+        <Helmet
+          title={seo.title}
+          meta={[
+            {
+              name: "description",
+              property: "og:description",
+              content: seo.description
+            },
+            { property: "og:title", content: seo.title },
+            { property: "og:url", content: seo.url },
+            { property: "og:image", content: seo.image },
+            { property: "og:image:type", content: "image/png" },
+            { property: "twitter:image:src", content: seo.image },
+            { property: "twitter:title", content: seo.title },
+            { property: "twitter:description", content: seo.description }
+          ]}
+        />
         <ScaleLoader
           css={override}
           sizeUnit={"px"}
@@ -47,7 +52,6 @@ class Loading extends React.Component {
           color={"#428BCA"}
           loading={this.state.loading}
         />
-        {/* <Spinner animation="border" variant="primary" /> */}
       </div>
     );
   }

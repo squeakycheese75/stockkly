@@ -10,16 +10,15 @@ import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
 import HowToWallet from "../common/HowToWallet";
 import WatchBar from "../common/WatchBar";
+import { storage } from "../../localStorageWrapper";
 
 class WalletPage extends React.Component {
   componentDidMount() {
     const { profile, actions } = this.props;
-    // const watchBarList = ["BTC:USD", "FTSE:100"];
-    // const watchBarList = ["BTC:USD", "FTSE:100", "GBP:USD", "GBP:EUR"];
     const watchBarList = ["BTC:USD", "LTC:USD", "GBP:USD", "GBP:EUR"];
 
     if (profile.length === 0) {
-      actions.loadProfile().catch(error => {
+      actions.loadProfile().catch((error) => {
         console.log("Loading Profile failed ..." + error);
       });
     }
@@ -27,12 +26,12 @@ class WalletPage extends React.Component {
     //Force wallet load because we default to cache
     actions
       .loadWallet()
-      .then(localStorage.setItem("wallet", JSON.stringify(this.props.wallet)))
-      .catch(error => {
+      .then(storage().setItem("wallet", JSON.stringify(this.props.wallet)))
+      .catch((error) => {
         console.log("Loading Wallet failed ..." + error);
       });
 
-    actions.loadWatchbar(watchBarList).catch(error => {
+    actions.loadWatchbar(watchBarList).catch((error) => {
       console.log("Loading WatchBarList failed ..." + error);
     });
 
@@ -42,14 +41,12 @@ class WalletPage extends React.Component {
       if (this._isMounted) {
         actions
           .loadWallet()
-          .then(
-            localStorage.setItem("wallet", JSON.stringify(this.props.wallet))
-          )
-          .catch(error => {
+          .then(storage().setItem("wallet", JSON.stringify(this.props.wallet)))
+          .catch((error) => {
             console.log("Loading Portfolio failed ..." + error);
           });
 
-        actions.loadWatchbar(watchBarList).catch(error => {
+        actions.loadWatchbar(watchBarList).catch((error) => {
           console.log("Loading WatchBarList failed ..." + error);
         });
       }
@@ -60,7 +57,7 @@ class WalletPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    localStorage.setItem("wallet", JSON.stringify(this.props.wallet));
+    storage().setItem("wallet", JSON.stringify(this.props.wallet));
   }
 
   render() {
@@ -97,7 +94,7 @@ WalletPage.propTypes = {
   wallet: PropTypes.array.isRequired,
   watchbar: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -105,7 +102,7 @@ function mapStateToProps(state) {
     profile: state.profile,
     wallet: state.wallet,
     watchbar: state.watchbar,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
@@ -114,8 +111,8 @@ function mapDispatchToProps(dispatch) {
     actions: {
       loadProfle: bindActionCreators(profileActions.loadProfile, dispatch),
       loadWallet: bindActionCreators(walletActions.loadWallet, dispatch),
-      loadWatchbar: bindActionCreators(watchbarActions.loadWatchbar, dispatch)
-    }
+      loadWatchbar: bindActionCreators(watchbarActions.loadWatchbar, dispatch),
+    },
   };
 }
 

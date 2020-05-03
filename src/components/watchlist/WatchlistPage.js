@@ -8,6 +8,7 @@ import Loading from "../common/Loading";
 import WatchListTable from "./components/WatchListTable";
 import HowToWatchlist from "../common/HowToWatchlist";
 // import WatchBar from "../common/WatchBar";
+import { storage } from "../../localStorageWrapper";
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -16,7 +17,7 @@ class WatchlistPage extends React.Component {
     const { profile, actions } = this.props;
 
     if (profile.length === 0) {
-      actions.loadProfile().catch(error => {
+      actions.loadProfile().catch((error) => {
         console.log("Loading Profile failed ..." + error);
       });
     }
@@ -24,9 +25,9 @@ class WatchlistPage extends React.Component {
     actions
       .loadWatchlist(profile.watchList)
       .then(
-        localStorage.setItem("watchlist", JSON.stringify(this.props.watchlist))
+        storage().setItem("watchlist", JSON.stringify(this.props.watchlist))
       )
-      .catch(error => {
+      .catch((error) => {
         console.log("Loading Watchlist failed ..." + error);
       });
 
@@ -37,12 +38,9 @@ class WatchlistPage extends React.Component {
         actions
           .loadWatchlist(profile.watchList)
           .then(
-            localStorage.setItem(
-              "watchlist",
-              JSON.stringify(this.props.watchlist)
-            )
+            storage().setItem("watchlist", JSON.stringify(this.props.watchlist))
           )
-          .catch(error => {
+          .catch((error) => {
             console.log("Loading Watchlist failed ..." + error);
           });
       }
@@ -52,7 +50,7 @@ class WatchlistPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    localStorage.setItem("watchlist", JSON.stringify(this.props.watchlist));
+    storage().setItem("watchlist", JSON.stringify(this.props.watchlist));
   }
 
   render() {
@@ -78,14 +76,14 @@ WatchlistPage.propTypes = {
   actions: PropTypes.object.isRequired,
   watchlist: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     profile: state.profile,
     watchlist: state.watchlist,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
@@ -96,8 +94,8 @@ function mapDispatchToProps(dispatch) {
       loadWatchlist: bindActionCreators(
         watchlistActions.loadWatchlistWithTickers,
         dispatch
-      )
-    }
+      ),
+    },
   };
 }
 

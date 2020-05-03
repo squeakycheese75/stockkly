@@ -1,3 +1,4 @@
+import { storage } from "../localStorageWrapper";
 export async function handleResponse(response) {
   // console.log(response);
   // if (response.ok && response.status === 204) return response;
@@ -22,17 +23,17 @@ export function handleError(error) {
 }
 
 export function getHeader() {
-  let token = localStorage.getItem("access_token") || null;
+  let token = storage().getItem("access_token") || null;
   let config = {
-    headers: { "content-type": "application/json" }
+    headers: { "content-type": "application/json" },
   };
 
   if (token) {
     config = {
       headers: {
         "content-type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     };
   }
   return config.headers;

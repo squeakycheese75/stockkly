@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Sitemap: https://stockkly.com/sitemap.xml
 
-Disallow: /signup
+Disallow: /about
 Disallow: /login
 Disallow: /authorize*
 Disallow: /legal*
