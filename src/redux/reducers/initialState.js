@@ -1,3 +1,5 @@
+import { storage } from "../../localStorageWrapper";
+
 export default {
   transactions: [],
   products: [],
@@ -10,22 +12,14 @@ export default {
     currency: "GBP",
     symbol: "£",
     refreshRate: 30,
-    devmode: false
+    devmode: false,
   },
-  // watchlist: [],
-  // wallet: []
-  watchlist: localStorage.getItem("watchlist")
-    ? JSON.parse(localStorage.getItem("watchlist"))
+  watchlist: storage().getItem("watchlist")
+    ? JSON.parse(storage().getItem("watchlist"))
     : [],
-  wallet: localStorage.getItem("wallet")
-    ? JSON.parse(localStorage.getItem("wallet"))
+  wallet: storage().getItem("wallet")
+    ? JSON.parse(storage().getItem("wallet"))
     : [],
-  watchbar: [
-    // { ticker: "BTC:USD", price: 8000.0, change: 0.11, symbol: "$" },
-    // { ticker: "LTC:USD", price: 80.0, change: -0.19, symbol: "$" },
-    // { ticker: "VIX", price: 80.0, change: 0.19, symbol: "$" },
-    // { ticker: "AAPL", price: 80.0, change: 0.19, symbol: "$" },
-    // { ticker: "FTSE:100", price: 80.0, change: 0.19, symbol: "£" }
-  ],
-  walletChart: {}
+  watchbar: [],
+  walletChart: {},
 };

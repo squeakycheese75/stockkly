@@ -24,6 +24,7 @@ import styles from "./App.css";
 import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
 import { Helmet } from "react-helmet";
 import { seo } from "./components/common/seo";
+import { storage } from "./localStorageWrapper";
 
 require("dotenv").config();
 
@@ -36,24 +37,9 @@ class App extends Component {
     isLoaded: false,
     hasError: false,
     tokenRenewalComplete: false,
-    isAuthenticated: false
+    isAuthenticated: false,
   };
 
-  // UNSAFE_componentWillMount() {
-  //   // Check we've refreshed token
-  //   this.auth.renewToken(() => {
-  //     // load profile
-  //     if (this.auth.isAuthenticated()) {
-  //       this.loadProfile();
-  //     }
-  //     // update state
-  //     this.setState({
-  //       tokenRenewalComplete: true
-  //     });
-  //   });
-  // }
-
-  // Not sure whey we're loading the profile twice here
   componentDidMount() {
     this.auth.renewToken(() => {
       this.setState({ tokenRenewalComplete: true });
@@ -67,16 +53,18 @@ class App extends Component {
 
   componentWillUnmount() {
     //Cache data back to localStorage if unmounted
-    localStorage.setItem("userProfile", JSON.stringify(this.state.appSettings));
+    // storage();
+    // if (typeof window !== "undefined") {
+    storage().setItem("userProfile", JSON.stringify(this.state.appSettings));
+    // }
   }
 
   authenticateUser() {
-    // console.log("authenticating user");
     var isAuthenticated = this.auth.isAuthenticated();
     console.log("isAuthenticated is ", isAuthenticated);
     this.setState({
       isAuthenticated: isAuthenticated,
-      isLoaded: true
+      isLoaded: true,
     });
     console.log("state set ", isAuthenticated);
   }
@@ -87,7 +75,7 @@ class App extends Component {
       .then(() => {
         this.authenticateUser();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Loading Profile failed ..." + error);
       });
   }
@@ -106,7 +94,7 @@ class App extends Component {
             {
               name: "description",
               property: "og:description",
-              content: seo.description
+              content: seo.description,
             },
             { property: "og:title", content: seo.title },
             { property: "og:url", content: seo.url },
@@ -114,7 +102,7 @@ class App extends Component {
             { property: "og:image:type", content: "image/png" },
             { property: "twitter:image:src", content: seo.image },
             { property: "twitter:title", content: seo.title },
-            { property: "twitter:description", content: seo.description }
+            { property: "twitter:description", content: seo.description },
           ]}
         />
         <Header auth={this.auth} />
@@ -123,7 +111,7 @@ class App extends Component {
             exact
             path="/"
             render={
-              props =>
+              (props) =>
                 this.state.isAuthenticated ? (
                   <WalletPage
                     auth={this.auth}
@@ -141,51 +129,53 @@ class App extends Component {
           <Route path="/about" component={AboutPage} />
           <Route
             path="/callback"
-            render={props => <Callback auth={this.auth} {...props} />}
+            render={(props) => <Callback auth={this.auth} {...props} />}
           />
 
           <Route
             exact
             path="/transactions"
-            render={props => <TransactionsPage auth={this.auth} {...props} />}
+            render={(props) => <TransactionsPage auth={this.auth} {...props} />}
           />
           <Route
             path="/transaction/:id"
-            render={props => (
+            render={(props) => (
               <ManageTransactionPage auth={this.auth} {...props} />
             )}
           />
           <Route
             exact
             path="/transaction"
-            render={props => (
+            render={(props) => (
               <ManageTransactionPage auth={this.auth} {...props} />
             )}
           />
           <Route
             path="/products"
-            render={props => <ProductsPage auth={this.auth} {...props} />}
+            render={(props) => <ProductsPage auth={this.auth} {...props} />}
           />
           <Route
             path="/product/:ticker"
-            render={props => <ProductPage auth={this.auth} {...props} />}
+            render={(props) => <ProductPage auth={this.auth} {...props} />}
           />
 
           <Route
             path="/profile"
-            render={props => <ProfilePage auth={this.auth} {...props} />}
+            render={(props) => <ProfilePage auth={this.auth} {...props} />}
           />
           <Route
             path="/wallet"
-            render={props => <WalletPage auth={this.auth} {...props} />}
+            render={(props) => <WalletPage auth={this.auth} {...props} />}
           />
           <Route
             path="/wallettracker"
-            render={props => <WalletTrackerPage auth={this.auth} {...props} />}
+            render={(props) => (
+              <WalletTrackerPage auth={this.auth} {...props} />
+            )}
           />
           <Route
             path="/watching"
-            render={props => <WatchListPage auth={this.auth} {...props} />}
+            render={(props) => <WatchListPage auth={this.auth} {...props} />}
           />
         </Switch>
         <ToastContainer
@@ -201,21 +191,21 @@ class App extends Component {
 
 App.propTypes = {
   actions: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     profile: state.profile,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadProfile: bindActionCreators(profileActions.loadProfile, dispatch)
-    }
+      loadProfile: bindActionCreators(profileActions.loadProfile, dispatch),
+    },
   };
 }
 
