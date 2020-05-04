@@ -8,7 +8,7 @@ import Loading from "../common/Loading";
 import WatchListTable from "./components/WatchListTable";
 import HowToWatchlist from "../common/HowToWatchlist";
 // import WatchBar from "../common/WatchBar";
-import { storage } from "../../localStorageWrapper";
+import { setItem } from "../../localStorageWrapper";
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -24,9 +24,7 @@ class WatchlistPage extends React.Component {
 
     actions
       .loadWatchlist(profile.watchList)
-      .then(
-        storage().setItem("watchlist", JSON.stringify(this.props.watchlist))
-      )
+      .then(setItem("watchlist", JSON.stringify(this.props.watchlist)))
       .catch((error) => {
         console.log("Loading Watchlist failed ..." + error);
       });
@@ -37,9 +35,7 @@ class WatchlistPage extends React.Component {
       if (this._isMounted) {
         actions
           .loadWatchlist(profile.watchList)
-          .then(
-            storage().setItem("watchlist", JSON.stringify(this.props.watchlist))
-          )
+          .then(setItem("watchlist", JSON.stringify(this.props.watchlist)))
           .catch((error) => {
             console.log("Loading Watchlist failed ..." + error);
           });
@@ -50,7 +46,7 @@ class WatchlistPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    storage().setItem("watchlist", JSON.stringify(this.props.watchlist));
+    setItem("watchlist", JSON.stringify(this.props.watchlist));
   }
 
   render() {

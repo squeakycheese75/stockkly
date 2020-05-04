@@ -1,4 +1,4 @@
-import { storage } from "../../localStorageWrapper";
+import { getItem } from "../../localStorageWrapper";
 
 export default {
   transactions: [],
@@ -14,12 +14,8 @@ export default {
     refreshRate: 30,
     devmode: false,
   },
-  watchlist: storage().getItem("watchlist")
-    ? JSON.parse(storage().getItem("watchlist"))
-    : [],
-  wallet: storage().getItem("wallet")
-    ? JSON.parse(storage().getItem("wallet"))
-    : [],
+  watchlist: getItem("watchlist") ? JSON.parse(getItem("watchlist")) : [],
+  wallet: getItem("wallet") ? JSON.parse(getItem("wallet")) : [],
   watchbar: [],
   walletChart: {},
 };

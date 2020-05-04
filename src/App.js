@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/common/Header";
 // import Footer from "./components/common/Footer";
-import AboutPage from "./components/about/AboutPage";
+// import AboutPage from "./components/about/AboutPage";
 import Auth from "./components/auth/Auth";
 import Loading from "./components/common/Loading";
 import Callback from "./Callback";
@@ -24,7 +24,8 @@ import styles from "./App.css";
 import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
 import { Helmet } from "react-helmet";
 import { seo } from "./components/common/seo";
-import { storage } from "./localStorageWrapper";
+import { setItem } from "./localStorageWrapper";
+import NotFound from "./components/common/NotFound";
 
 require("dotenv").config();
 
@@ -53,10 +54,7 @@ class App extends Component {
 
   componentWillUnmount() {
     //Cache data back to localStorage if unmounted
-    // storage();
-    // if (typeof window !== "undefined") {
-    storage().setItem("userProfile", JSON.stringify(this.state.appSettings));
-    // }
+    setItem("userProfile", JSON.stringify(this.state.appSettings));
   }
 
   authenticateUser() {
@@ -66,7 +64,7 @@ class App extends Component {
       isAuthenticated: isAuthenticated,
       isLoaded: true,
     });
-    console.log("state set ", isAuthenticated);
+    // console.log("state set ", isAuthenticated);
   }
 
   loadProfile() {
@@ -76,7 +74,7 @@ class App extends Component {
         this.authenticateUser();
       })
       .catch((error) => {
-        console.log("Loading Profile failed ..." + error);
+        console.error("Loading Profile failed ..." + error);
       });
   }
 
@@ -110,23 +108,21 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={
-              (props) =>
-                this.state.isAuthenticated ? (
-                  <WalletPage
-                    auth={this.auth}
-                    appSettings={this.state.appSettings}
-                    {...props}
-                  />
-                ) : this.state.isLoaded ? (
-                  <HomePage auth={this.auth} {...props} />
-                ) : (
-                  <Loading />
-                )
-              // <HomePage auth={this.auth} {...props} />
+            render={(props) =>
+              this.state.isAuthenticated ? (
+                <WalletPage
+                  auth={this.auth}
+                  appSettings={this.state.appSettings}
+                  {...props}
+                />
+              ) : this.state.isLoaded ? (
+                <HomePage auth={this.auth} {...props} />
+              ) : (
+                <Loading />
+              )
             }
           />
-          <Route path="/about" component={AboutPage} />
+          {/* <Route path="/about" component={AboutPage} /> */}
           <Route
             path="/callback"
             render={(props) => <Callback auth={this.auth} {...props} />}
@@ -177,13 +173,13 @@ class App extends Component {
             path="/watching"
             render={(props) => <WatchListPage auth={this.auth} {...props} />}
           />
+          <Route path="" component={NotFound} />
         </Switch>
         <ToastContainer
           autoClose={3000}
           hideProgressBar
           position="bottom-right"
         />
-        {/* <Footer /> */}
       </div>
     );
   }

@@ -1,11 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://stockkly.com/sitemap.xml
-
-Disallow: /about
 Disallow: /login
-Disallow: /authorize*
-Disallow: /legal*
-Disallow: /terms*
-Disallow: /login/*
-Disallow: */authorize*
+
+Sitemap: https://stockkly.com/sitemap.xml
