@@ -1,5 +1,5 @@
 import auth0 from "auth0-js";
-import { storage } from "../../localStorageWrapper";
+import { setItem, getItem, removeItem } from "../../localStorageWrapper";
 
 const REDIRECT_ON_LOGIN = "redirect_on_login";
 
@@ -34,7 +34,7 @@ export default class Auth {
   }
 
   login() {
-    storage().setItem(REDIRECT_ON_LOGIN, JSON.stringify(this.history.location));
+    setItem(REDIRECT_ON_LOGIN, JSON.stringify(this.history.location));
     this.auth0.authorize();
   }
 
@@ -44,9 +44,9 @@ export default class Auth {
         this.setSession(authResult);
 
         const redirectLocation =
-          storage().getItem(REDIRECT_ON_LOGIN) === "undefined"
+          getItem(REDIRECT_ON_LOGIN) === "undefined"
             ? "/"
-            : JSON.parse(storage().getItem(REDIRECT_ON_LOGIN));
+            : JSON.parse(getItem(REDIRECT_ON_LOGIN));
         // window.location = "/";
         this.history.push(redirectLocation);
       } else if (err) {
@@ -67,11 +67,11 @@ export default class Auth {
 
   setSession(authResult) {
     // Set isLoggedIn flag in localStorage
-    storage().setItem("isLoggedIn", "true");
+    setItem("isLoggedIn", "true");
     // Set the time that the access token will expire at
     let expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
     this.accessToken = authResult.accessToken;
-    storage().setItem("access_token", authResult.accessToken);
+    setItem("access_token", authResult.accessToken);
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
 
@@ -118,8 +118,8 @@ export default class Auth {
     clearTimeout(this.tokenRenewalTimeout);
 
     // Remove isLoggedIn flag from localStorage
-    storage().removeItem("isLoggedIn");
-    storage().removeItem("access_token");
+    removeItem("isLoggedIn");
+    removeItem("access_token");
 
     this.auth0.logout({
       return_to: window.location.origin,

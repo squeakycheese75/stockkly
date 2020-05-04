@@ -10,7 +10,7 @@ import WalletTable from "./components/WalletTable";
 import WalletSummary from "./components/WalletSummary";
 import HowToWallet from "../common/HowToWallet";
 import WatchBar from "../common/WatchBar";
-import { storage } from "../../localStorageWrapper";
+import { setItem } from "../../localStorageWrapper";
 
 class WalletPage extends React.Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ class WalletPage extends React.Component {
     //Force wallet load because we default to cache
     actions
       .loadWallet()
-      .then(storage().setItem("wallet", JSON.stringify(this.props.wallet)))
+      .then(setItem("wallet", JSON.stringify(this.props.wallet)))
       .catch((error) => {
         console.log("Loading Wallet failed ..." + error);
       });
@@ -41,7 +41,7 @@ class WalletPage extends React.Component {
       if (this._isMounted) {
         actions
           .loadWallet()
-          .then(storage().setItem("wallet", JSON.stringify(this.props.wallet)))
+          .then(setItem("wallet", JSON.stringify(this.props.wallet)))
           .catch((error) => {
             console.log("Loading Portfolio failed ..." + error);
           });
@@ -57,7 +57,7 @@ class WalletPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    storage().setItem("wallet", JSON.stringify(this.props.wallet));
+    setItem("wallet", JSON.stringify(this.props.wallet));
   }
 
   render() {
