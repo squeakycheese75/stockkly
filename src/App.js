@@ -59,7 +59,7 @@ class App extends Component {
 
   authenticateUser() {
     var isAuthenticated = this.auth.isAuthenticated();
-    console.log('isAuthenticated is ', isAuthenticated);
+    // console.log('isAuthenticated is ', isAuthenticated);
     this.setState({
       isAuthenticated: isAuthenticated,
       isLoaded: true,
