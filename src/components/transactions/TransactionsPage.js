@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as transactionActions from "../../redux/actions/transactionActions";
-import * as productActions from "../../redux/actions/productActions";
-import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav, Button } from "react-bootstrap";
-import Loading from "../common/Loading";
-import { toast } from "react-toastify";
-import TransactionTable from "./components/TransactionTable";
-import HowToWallet from "../common/HowToWallet";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as transactionActions from '../../redux/actions/transactionActions';
+import * as productActions from '../../redux/actions/productActions';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, Button } from 'react-bootstrap';
+import Loading from '../common/Loading';
+import { toast } from 'react-toastify';
+import TransactionTable from './components/TransactionTable';
+import HowToWallet from '../common/HowToWallet';
 
 class TransactionsPage extends React.Component {
   _isMounted = false;
@@ -18,24 +18,24 @@ class TransactionsPage extends React.Component {
     const { products, actions } = this.props;
 
     // if (transactions.length === 0) {
-    console.log("Loading transactions");
-    actions.loadTransactions().catch(error => {
-      console.log("Loading Transactions failed ..." + error);
+    // console.log("Loading transactions");
+    actions.loadTransactions().catch((error) => {
+      console.error('Loading Transactions failed ...' + error);
     });
     // }
 
     if (products.length === 0) {
-      actions.loadProducts().catch(error => {
-        console.log("Loading Products failed ..." + error);
+      actions.loadProducts().catch((error) => {
+        console.error('Loading Products failed ...' + error);
       });
     }
   }
 
-  handleDelete = transaction => {
-    toast.info("Transaction Deleted!");
-    this.props.actions.deleteTransaction(transaction).catch(error => {
-      toast.error("Transaction delete has Failed! " + error.message, {
-        autoClose: false
+  handleDelete = (transaction) => {
+    toast.info('Transaction Deleted!');
+    this.props.actions.deleteTransaction(transaction).catch((error) => {
+      toast.error('Transaction delete has Failed! ' + error.message, {
+        autoClose: false,
       });
     });
   };
@@ -75,7 +75,7 @@ TransactionsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -85,16 +85,16 @@ function mapStateToProps(state) {
       state.products.length === 0
         ? []
         : state.transactions
-            .filter(value => JSON.stringify(value) !== "{}")
-            .map(t => {
+            .filter((value) => JSON.stringify(value) !== '{}')
+            .map((t) => {
               return {
                 ...t,
-                productName: state.products.find(a => a.ticker === t.ticker)
-                  .name
+                productName: state.products.find((a) => a.ticker === t.ticker)
+                  .name,
               };
             }),
     products: state.products,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
@@ -109,8 +109,8 @@ function mapDispatchToProps(dispatch) {
       deleteTransaction: bindActionCreators(
         transactionActions.deleteTransaction,
         dispatch
-      )
-    }
+      ),
+    },
   };
 }
 

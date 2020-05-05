@@ -1,7 +1,7 @@
-import auth0 from "auth0-js";
-import { setItem, getItem, removeItem } from "../../localStorageWrapper";
+import auth0 from 'auth0-js';
+import { setItem, getItem, removeItem } from '../../localStorageWrapper';
 
-const REDIRECT_ON_LOGIN = "redirect_on_login";
+const REDIRECT_ON_LOGIN = 'redirect_on_login';
 
 export default class Auth {
   accessToken;
@@ -15,8 +15,8 @@ export default class Auth {
     clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
     redirectUri: process.env.REACT_APP_AUTH0_CALLBACK_URL,
     audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-    responseType: "token id_token",
-    scope: "openid profile email",
+    responseType: 'token id_token',
+    scope: 'openid profile email',
   });
 
   constructor(history) {
@@ -44,14 +44,14 @@ export default class Auth {
         this.setSession(authResult);
 
         const redirectLocation =
-          getItem(REDIRECT_ON_LOGIN) === "undefined"
-            ? "/"
+          getItem(REDIRECT_ON_LOGIN) === 'undefined'
+            ? '/'
             : JSON.parse(getItem(REDIRECT_ON_LOGIN));
         // window.location = "/";
         this.history.push(redirectLocation);
       } else if (err) {
-        this.history.replace("/");
-        console.log(err);
+        this.history.replace('/');
+        console.error(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });
@@ -67,11 +67,11 @@ export default class Auth {
 
   setSession(authResult) {
     // Set isLoggedIn flag in localStorage
-    setItem("isLoggedIn", "true");
+    setItem('isLoggedIn', 'true');
     // Set the time that the access token will expire at
     let expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
     this.accessToken = authResult.accessToken;
-    setItem("access_token", authResult.accessToken);
+    setItem('access_token', authResult.accessToken);
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
 
@@ -79,7 +79,7 @@ export default class Auth {
     this.scheduleRenewal();
 
     // navigate to the home route
-    this.history.replace("/");
+    this.history.replace('/');
   }
 
   renewSession() {
@@ -88,7 +88,7 @@ export default class Auth {
         this.setSession(authResult);
       } else if (err) {
         this.logout();
-        console.log(err);
+        console.error(err);
         alert(
           `Could not get a new token (${err.error}: ${err.error_description}).`
         );
@@ -118,15 +118,15 @@ export default class Auth {
     clearTimeout(this.tokenRenewalTimeout);
 
     // Remove isLoggedIn flag from localStorage
-    removeItem("isLoggedIn");
-    removeItem("access_token");
+    removeItem('isLoggedIn');
+    removeItem('access_token');
 
     this.auth0.logout({
       return_to: window.location.origin,
     });
 
     // navigate to the home route
-    this.history.replace("/");
+    this.history.replace('/');
   }
 
   isAuthenticated() {
@@ -154,7 +154,7 @@ export default class Auth {
     // console.log("In renewToken");
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
-        console.log(`Error: ${err.error} - ${err.error_description}.`);
+        console.error(`Error: ${err.error} - ${err.error_description}.`);
       } else {
         this.setSession(result);
       }

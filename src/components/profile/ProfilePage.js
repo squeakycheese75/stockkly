@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import * as profileActions from "../../redux/actions/profileActions";
-import PropTypes from "prop-types";
-import ProfileForm from "./ProfileForm";
-import Loading from "../common/Loading";
-import { toast } from "react-toastify";
-import DevMode from "./DevMode";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import * as profileActions from '../../redux/actions/profileActions';
+import PropTypes from 'prop-types';
+import ProfileForm from './ProfileForm';
+import Loading from '../common/Loading';
+import { toast } from 'react-toastify';
+import DevMode from './DevMode';
 
 function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   const [profile, setProfile] = useState({ ...props.profile });
@@ -14,8 +14,8 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
 
   useEffect(() => {
     if (!profile || !profile === {}) {
-      loadProfile().catch(error => {
-        console.log("Loading profile failed" + error);
+      loadProfile().catch((error) => {
+        console.error('Loading profile failed' + error);
       });
     } else {
       setProfile({ ...props.profile });
@@ -26,9 +26,9 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
   function handleChange(event) {
     const { value, name, checked } = event.target;
     // console.log(name, value, checked);
-    setProfile(prevProfile => ({
+    setProfile((prevProfile) => ({
       ...prevProfile,
-      [name]: name === "devmode" ? checked : value
+      [name]: name === 'devmode' ? checked : value,
     }));
   }
 
@@ -36,7 +36,7 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
     const { currency } = profile;
     const errors = {};
 
-    if (!currency) errors.currency = "Currency is required";
+    if (!currency) errors.currency = 'Currency is required';
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties
@@ -48,12 +48,12 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
     if (!formIsValid()) return;
     setSaving(true);
     saveProfile(profile)
-      .then(console.log("handleSave ", profile))
+      .then(console.log('handleSave ', profile))
       .then(() => {
-        toast.info("Profile updated");
-        history.push("/");
+        toast.info('Profile updated');
+        history.push('/');
       })
-      .catch(error => {
+      .catch((error) => {
         setSaving(false);
         setErrors({ onSave: error.message });
       });
@@ -84,21 +84,18 @@ function UserProfilePage({ loadProfile, saveProfile, history, ...props }) {
 UserProfilePage.propTypes = {
   profile: PropTypes.object.isRequired,
   loadProfile: PropTypes.func.isRequired,
-  saveProfile: PropTypes.func.isRequired
+  saveProfile: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    profile: state.profile
+    profile: state.profile,
   };
 }
 
 const mapDispatchToProps = {
   loadProfile: profileActions.loadProfile,
-  saveProfile: profileActions.saveProfile
+  saveProfile: profileActions.saveProfile,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);

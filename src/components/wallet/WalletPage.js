@@ -1,38 +1,38 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as profileActions from "../../redux/actions/profileActions";
-import * as walletActions from "../../redux/actions/walletActions";
-import * as watchbarActions from "../../redux/actions/watchBarActions";
-import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import Loading from "../common/Loading";
-import WalletTable from "./components/WalletTable";
-import WalletSummary from "./components/WalletSummary";
-import HowToWallet from "../common/HowToWallet";
-import WatchBar from "../common/WatchBar";
-import { setItem } from "../../localStorageWrapper";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as profileActions from '../../redux/actions/profileActions';
+import * as walletActions from '../../redux/actions/walletActions';
+import * as watchbarActions from '../../redux/actions/watchBarActions';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import Loading from '../common/Loading';
+import WalletTable from './components/WalletTable';
+import WalletSummary from './components/WalletSummary';
+import HowToWallet from '../common/HowToWallet';
+import WatchBar from '../common/WatchBar';
+import { setItem } from '../../localStorageWrapper';
 
 class WalletPage extends React.Component {
   componentDidMount() {
     const { profile, actions } = this.props;
-    const watchBarList = ["BTC:USD", "LTC:USD", "GBP:USD", "GBP:EUR"];
+    const watchBarList = ['BTC:USD', 'LTC:USD', 'GBP:USD', 'GBP:EUR'];
 
     if (profile.length === 0) {
       actions.loadProfile().catch((error) => {
-        console.log("Loading Profile failed ..." + error);
+        console.error('Loading Profile failed ...' + error);
       });
     }
 
     //Force wallet load because we default to cache
     actions
       .loadWallet()
-      .then(setItem("wallet", JSON.stringify(this.props.wallet)))
+      .then(setItem('wallet', JSON.stringify(this.props.wallet)))
       .catch((error) => {
-        console.log("Loading Wallet failed ..." + error);
+        console.error('Loading Wallet failed ...' + error);
       });
 
     actions.loadWatchbar(watchBarList).catch((error) => {
-      console.log("Loading WatchBarList failed ..." + error);
+      console.error('Loading WatchBarList failed ...' + error);
     });
 
     var refreshRate = profile.refreshRate * 1000;
@@ -41,13 +41,13 @@ class WalletPage extends React.Component {
       if (this._isMounted) {
         actions
           .loadWallet()
-          .then(setItem("wallet", JSON.stringify(this.props.wallet)))
+          .then(setItem('wallet', JSON.stringify(this.props.wallet)))
           .catch((error) => {
-            console.log("Loading Portfolio failed ..." + error);
+            console.error('Loading Portfolio failed ...' + error);
           });
 
         actions.loadWatchbar(watchBarList).catch((error) => {
-          console.log("Loading WatchBarList failed ..." + error);
+          console.error('Loading WatchBarList failed ...' + error);
         });
       }
     }, refreshRate);
@@ -57,7 +57,7 @@ class WalletPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    setItem("wallet", JSON.stringify(this.props.wallet));
+    setItem('wallet', JSON.stringify(this.props.wallet));
   }
 
   render() {

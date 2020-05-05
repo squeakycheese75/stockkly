@@ -1,19 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as profileActions from "../../redux/actions/profileActions";
-import * as walletHistoricalActions from "../../redux/actions/walletHistoricalActions";
-import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import Loading from "../common/Loading";
-import WalletChart from "./components/WalletChart";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as profileActions from '../../redux/actions/profileActions';
+import * as walletHistoricalActions from '../../redux/actions/walletHistoricalActions';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import Loading from '../common/Loading';
+import WalletChart from './components/WalletChart';
 
 class WalletTrackerPage extends React.Component {
   componentDidMount() {
     const { actions, profile } = this.props;
 
     if (profile.length === 0) {
-      actions.loadProfile().catch(error => {
-        console.log("Loading Profile failed ..." + error);
+      actions.loadProfile().catch((error) => {
+        console.error('Loading Profile failed ...' + error);
       });
     }
 
@@ -21,8 +21,8 @@ class WalletTrackerPage extends React.Component {
     actions
       .loadWalletChart()
       //   .then(localStorage.setItem("wallet", JSON.stringify(this.props.wallet)))
-      .catch(error => {
-        console.log("Loading WalletChart failed ..." + error);
+      .catch((error) => {
+        console.error('Loading WalletChart failed ...' + error);
       });
 
     this._isMounted = true;
@@ -46,7 +46,7 @@ class WalletTrackerPage extends React.Component {
               : [],
             y: this.props.walletChart
               ? Object.values(this.props.walletChart)
-              : []
+              : [],
           }}
           profile={this.props.profile}
         />
@@ -59,14 +59,14 @@ WalletTrackerPage.propTypes = {
   actions: PropTypes.object.isRequired,
   walletChart: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     profile: state.profile,
     walletChart: state.walletChart,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
@@ -77,12 +77,9 @@ function mapDispatchToProps(dispatch) {
       loadWalletChart: bindActionCreators(
         walletHistoricalActions.loadWalletChart,
         dispatch
-      )
-    }
+      ),
+    },
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WalletTrackerPage);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletTrackerPage);
