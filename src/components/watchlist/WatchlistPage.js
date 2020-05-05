@@ -1,14 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as watchlistActions from "../../redux/actions/watchlistActions";
-import * as profileActions from "../../redux/actions/profileActions";
-import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import Loading from "../common/Loading";
-import WatchListTable from "./components/WatchListTable";
-import HowToWatchlist from "../common/HowToWatchlist";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as watchlistActions from '../../redux/actions/watchlistActions';
+import * as profileActions from '../../redux/actions/profileActions';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import Loading from '../common/Loading';
+import WatchListTable from './components/WatchListTable';
+import HowToWatchlist from '../common/HowToWatchlist';
 // import WatchBar from "../common/WatchBar";
-import { setItem } from "../../localStorageWrapper";
+import { setItem } from '../../localStorageWrapper';
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -18,15 +18,15 @@ class WatchlistPage extends React.Component {
 
     if (profile.length === 0) {
       actions.loadProfile().catch((error) => {
-        console.log("Loading Profile failed ..." + error);
+        console.log('Loading Profile failed ...' + error);
       });
     }
 
     actions
       .loadWatchlist(profile.watchList)
-      .then(setItem("watchlist", JSON.stringify(this.props.watchlist)))
+      .then(setItem('watchlist', JSON.stringify(this.props.watchlist)))
       .catch((error) => {
-        console.log("Loading Watchlist failed ..." + error);
+        console.log('Loading Watchlist failed ...' + error);
       });
 
     const refreshRate = profile.refreshRate * 1000;
@@ -35,9 +35,9 @@ class WatchlistPage extends React.Component {
       if (this._isMounted) {
         actions
           .loadWatchlist(profile.watchList)
-          .then(setItem("watchlist", JSON.stringify(this.props.watchlist)))
+          .then(setItem('watchlist', JSON.stringify(this.props.watchlist)))
           .catch((error) => {
-            console.log("Loading Watchlist failed ..." + error);
+            console.log('Loading Watchlist failed ...' + error);
           });
       }
     }, refreshRate);
@@ -46,7 +46,7 @@ class WatchlistPage extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    setItem("watchlist", JSON.stringify(this.props.watchlist));
+    setItem('watchlist', JSON.stringify(this.props.watchlist));
   }
 
   render() {

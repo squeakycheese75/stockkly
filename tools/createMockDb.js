@@ -24,6 +24,6 @@ const data = JSON.stringify({
 });
 const filepath = path.join(__dirname, "db.json");
 
-fs.writeFile(filepath, data, function(err) {
+fs.writeFile(filepath, data, (err) => {
   err ? console.log(err) : console.log("Mock DB created.");
 });

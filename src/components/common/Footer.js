@@ -7,14 +7,14 @@ const Footer = () => {
     // <div className={styles}>
     <div>
       <Navbar expand="sm" fixed="bottom" className="bottomArea">
-        <div class="w-60">
+        <div className="w-60">
           {/* <h5>About Us</h5>
           <p>
             Keelhaul aye Arr Corsair yardarm black jack careen rope's end
             overhaul maroon. Aye schooner line flogging mutiny black spot
           </p> */}
         </div>
-        <div class="d-flex flex-column">
+        <div className="d-flex flex-column">
           <h5>Contact Us:</h5>
           <div>
             <b>

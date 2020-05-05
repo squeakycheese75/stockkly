@@ -1,23 +1,23 @@
-import React from "react";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import { withRouter } from "react-router-dom";
-import "./WalletTable.css";
+import React from 'react';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { withRouter } from 'react-router-dom';
+import './WalletTable.css';
 
-function qtyFormatter(cell, row) {
+function qtyFormatter(cell) {
   return (
     <>
       {cell < 0 ? (
         <div className="down">
-          {cell.toLocaleString("en-GB", {
+          {cell.toLocaleString('en-GB', {
             minimumFractionDigits: 0,
-            maximumFractionDigits: 2
+            maximumFractionDigits: 2,
           })}
         </div>
       ) : (
         <div className="flat">
-          {cell.toLocaleString("en-GB", {
+          {cell.toLocaleString('en-GB', {
             minimumFractionDigits: 0,
-            maximumFractionDigits: 2
+            maximumFractionDigits: 2,
           })}
         </div>
       )}
@@ -44,9 +44,9 @@ class WalletTable extends React.Component {
       return row.spot === 1 ? (
         <div className="nameLarge">
           {row.symbol}
-          {parseFloat(cell).toLocaleString("en-GB", {
+          {parseFloat(cell).toLocaleString('en-GB', {
             minimumFractionDigits: 2,
-            maximumFractionDigits: 2
+            maximumFractionDigits: 2,
           })}
         </div>
       ) : (
@@ -54,9 +54,9 @@ class WalletTable extends React.Component {
           <ul>
             <li className="nameSmall">
               {row.symbol}
-              {parseFloat(cell).toLocaleString("en-GB", {
+              {parseFloat(cell).toLocaleString('en-GB', {
                 minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                maximumFractionDigits: 2,
               })}
             </li>
             <li className="details">({row.spot.toFixed(2)})</li>
@@ -72,9 +72,9 @@ class WalletTable extends React.Component {
             <li className="nameSmall">
               {`${profile.symbol}` +
                 // cell.toLocaleString(undefined, { minimumFractionDigits: 2 })
-                parseFloat(cell).toLocaleString("en-GB", {
+                parseFloat(cell).toLocaleString('en-GB', {
                   minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
+                  maximumFractionDigits: 2,
                 })}
             </li>
             {row.total_change > 0 ? (
@@ -84,9 +84,9 @@ class WalletTable extends React.Component {
                 </i>
                 {`(` +
                   // row.total_change.toFixed(2).toLocaleString()
-                  parseFloat(row.total_change).toLocaleString("en-GB", {
+                  parseFloat(row.total_change).toLocaleString('en-GB', {
                     minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
+                    maximumFractionDigits: 2,
                   }) +
                   `)`}
               </li>
@@ -100,9 +100,9 @@ class WalletTable extends React.Component {
                       </i>
                       {`(` +
                         // row.total_change.toFixed(2).toLocaleString()
-                        parseFloat(row.total_change).toLocaleString("en-GB", {
+                        parseFloat(row.total_change).toLocaleString('en-GB', {
                           minimumFractionDigits: 2,
-                          maximumFractionDigits: 2
+                          maximumFractionDigits: 2,
                         }) +
                         `)`}
                     </li>
@@ -112,9 +112,9 @@ class WalletTable extends React.Component {
                     <li className="details flat">
                       {`(` +
                         // row.total_change.toFixed(2).toLocaleString()
-                        parseFloat(row.total_change).toLocaleString("en-GB", {
+                        parseFloat(row.total_change).toLocaleString('en-GB', {
                           minimumFractionDigits: 2,
-                          maximumFractionDigits: 2
+                          maximumFractionDigits: 2,
                         }) +
                         `)`}
                     </li>
@@ -128,16 +128,16 @@ class WalletTable extends React.Component {
     };
 
     const options = {
-      onRowClick: function(row) {
+      onRowClick: function (row) {
         history.push(`/product/${row.ticker}`);
       },
-      noDataText: "Loading..."
+      noDataText: 'Loading...',
     };
     const selectRowProp = {
       hideSelectColumn: true,
-      mode: "checkbox",
+      mode: 'checkbox',
       clickToSelect: true,
-      bgColor: "rgb(178,214,225)"
+      bgColor: 'rgb(178,214,225)',
     };
 
     return (

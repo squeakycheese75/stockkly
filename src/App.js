@@ -1,33 +1,33 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import Header from "./components/common/Header";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import Header from './components/common/Header';
 // import Footer from "./components/common/Footer";
 // import AboutPage from "./components/about/AboutPage";
-import Auth from "./components/auth/Auth";
-import Loading from "./components/common/Loading";
-import Callback from "./Callback";
-import HomePage from "./components/home/HomePage";
-import ProductsPage from "./components/products/ProductsPage";
-import ProductPage from "./components/products/ProductPage";
-import TransactionsPage from "./components/transactions/TransactionsPage";
-import ManageTransactionPage from "./components/transactions/ManageTransactionPage";
-import WalletPage from "./components/wallet/WalletPage";
-import WatchListPage from "./components/watchlist/WatchlistPage";
-import ProfilePage from "./components/profile/ProfilePage";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import PropTypes from "prop-types";
-import * as profileActions from "./redux/actions/profileActions";
-import { bindActionCreators } from "redux";
-import styles from "./App.css";
-import WalletTrackerPage from "./components/wallet/WalletTrackerPage";
-import { Helmet } from "react-helmet";
-import { seo } from "./components/common/seo";
-import { setItem } from "./localStorageWrapper";
-import NotFound from "./components/common/NotFound";
+import Auth from './components/auth/Auth';
+import Loading from './components/common/Loading';
+import Callback from './Callback';
+import HomePage from './components/home/HomePage';
+import ProductsPage from './components/products/ProductsPage';
+import ProductPage from './components/products/ProductPage';
+import TransactionsPage from './components/transactions/TransactionsPage';
+import ManageTransactionPage from './components/transactions/ManageTransactionPage';
+import WalletPage from './components/wallet/WalletPage';
+import WatchListPage from './components/watchlist/WatchlistPage';
+import ProfilePage from './components/profile/ProfilePage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
+import * as profileActions from './redux/actions/profileActions';
+import { bindActionCreators } from 'redux';
+import styles from './App.css';
+import WalletTrackerPage from './components/wallet/WalletTrackerPage';
+import { Helmet } from 'react-helmet';
+import { seo } from './components/common/seo';
+import { setItem } from './localStorageWrapper';
+// import NotFound from './components/common/NotFound';
 
-require("dotenv").config();
+require('dotenv').config();
 
 class App extends Component {
   constructor(props) {
@@ -54,12 +54,12 @@ class App extends Component {
 
   componentWillUnmount() {
     //Cache data back to localStorage if unmounted
-    setItem("userProfile", JSON.stringify(this.state.appSettings));
+    setItem('userProfile', JSON.stringify(this.state.appSettings));
   }
 
   authenticateUser() {
     var isAuthenticated = this.auth.isAuthenticated();
-    console.log("isAuthenticated is ", isAuthenticated);
+    console.log('isAuthenticated is ', isAuthenticated);
     this.setState({
       isAuthenticated: isAuthenticated,
       isLoaded: true,
@@ -74,7 +74,7 @@ class App extends Component {
         this.authenticateUser();
       })
       .catch((error) => {
-        console.error("Loading Profile failed ..." + error);
+        console.error('Loading Profile failed ...' + error);
       });
   }
 
@@ -90,17 +90,17 @@ class App extends Component {
           title={seo.title}
           meta={[
             {
-              name: "description",
-              property: "og:description",
+              name: 'description',
+              property: 'og:description',
               content: seo.description,
             },
-            { property: "og:title", content: seo.title },
-            { property: "og:url", content: seo.url },
-            { property: "og:image", content: seo.image },
-            { property: "og:image:type", content: "image/png" },
-            { property: "twitter:image:src", content: seo.image },
-            { property: "twitter:title", content: seo.title },
-            { property: "twitter:description", content: seo.description },
+            { property: 'og:title', content: seo.title },
+            { property: 'og:url', content: seo.url },
+            { property: 'og:image', content: seo.image },
+            { property: 'og:image:type', content: 'image/png' },
+            { property: 'twitter:image:src', content: seo.image },
+            { property: 'twitter:title', content: seo.title },
+            { property: 'twitter:description', content: seo.description },
           ]}
         />
         <Header auth={this.auth} />
@@ -173,7 +173,7 @@ class App extends Component {
             path="/watching"
             render={(props) => <WatchListPage auth={this.auth} {...props} />}
           />
-          <Route path="" component={NotFound} />
+          {/* <Route path="" component={NotFound} /> */}
         </Switch>
         <ToastContainer
           autoClose={3000}

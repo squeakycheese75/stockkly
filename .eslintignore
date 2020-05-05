@@ -1,0 +1,6 @@
+tools/*
+config/*
+scripts/*
+build/*
+node_modules/*
+public/static/*

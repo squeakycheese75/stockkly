@@ -1,35 +1,33 @@
-import React from "react";
-import Plotly from "plotly.js-basic-dist";
-import PropTypes from "prop-types";
+import React from 'react';
+import Plotly from 'plotly.js-basic-dist';
+import PropTypes from 'prop-types';
 
-import createPlotlyComponent from "react-plotly.js/factory";
+import createPlotlyComponent from 'react-plotly.js/factory';
 const Plot = createPlotlyComponent(Plotly);
 
-const WalletChart = ({ chartData, profile, errors = {} }) => {
+const WalletChart = ({ chartData }) => {
   var trace1 = {
-    type: "bar",
-    // mode: "lines",
-    name: "Wealth Tracker",
+    type: 'bar',
+    name: 'Wealth Tracker',
     x: chartData.x,
     y: chartData.y,
-    line: { color: "#428bca" }
+    line: { color: '#428bca' },
   };
 
   return (
     <div>
-      {/* <div className="container-fluid"></div> */}
       {!Array.isArray(chartData.x) || !chartData.x.length ? (
-        "No Data"
+        'No Data'
       ) : (
         <Plot
           data={[trace1]}
           layout={{
-            title: "£",
-            height: 640
+            title: '£',
+            height: 640,
             // updatemenus: updatemenus
           }}
           useResizeHandler={true}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: '100%', height: '100%' }}
           config={{ displaylogo: false, showlegend: false }}
         />
       )}
@@ -39,7 +37,7 @@ const WalletChart = ({ chartData, profile, errors = {} }) => {
 
 WalletChart.propTypes = {
   chartData: PropTypes.object.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 export default WalletChart;

@@ -64,9 +64,9 @@ class TestTable extends Component {
 
     const Panel = ({ title, children }) => {
       return (
-        <div class="panel panel-default">
-          <div class="panel-heading">{title}</div>
-          <div class="panel-body">{children}</div>
+        <div className="panel panel-default">
+          <div className="panel-heading">{title}</div>
+          <div className="panel-body">{children}</div>
         </div>
       );
     };
