@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js';
-import { setItem, getItem, removeItem } from '../../localStorageWrapper';
+import { setItem, removeItem } from '../../localStorageWrapper';
 
 const REDIRECT_ON_LOGIN = 'redirect_on_login';
 
@@ -43,12 +43,12 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
 
-        const redirectLocation =
-          getItem(REDIRECT_ON_LOGIN) === 'undefined'
-            ? '/'
-            : JSON.parse(getItem(REDIRECT_ON_LOGIN));
-        // window.location = "/";
-        this.history.push(redirectLocation);
+        // const redirectLocation =
+        //   getItem(REDIRECT_ON_LOGIN) === 'undefined'
+        //     ? '/'
+        //     : JSON.parse(getItem(REDIRECT_ON_LOGIN));
+        window.location = '/';
+        // this.history.push(redirectLocation);
       } else if (err) {
         this.history.replace('/');
         console.error(err);

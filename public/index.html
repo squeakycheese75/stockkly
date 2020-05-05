@@ -49,17 +49,17 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/statis/images/icon_48.png" />
     <link rel=”manifest” href=”%PUBLIC_URL%/manifest.json”>
 
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="/static/css/bootstrap.min.css"
-    />
-    <!-- <link
+    /> -->
+    <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
-    /> -->
+    />
 
     <link rel="canonical" href="https://stockkly.com" />
     <!-- Pre-loads-->
@@ -67,20 +67,12 @@
 
     <!-- Pre-connects-->
     <link rel="preconnect" href="https://ajax.googleapis.com" />
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
     <link rel="preconnect" href="https://az416426.vo.msecnd.net" />
 
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons|Open+Sans"
       rel="stylesheet"
     />
-
-    <!-- <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    /> -->
-
-    <!-- lazyload -->
 
     <meta
       name="google-site-verification"
@@ -91,7 +83,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- <script
+    <script
       src="https://unpkg.com/react@16/umd/react.production.min.js"
       crossorigin
       async
@@ -100,9 +92,9 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
       crossorigin
       async
-    ></script> -->
+    ></script>
 
-    <script
+    <!-- <script
       async
       src="/static/js/react.production.min.js"
       type="application/javascript"
@@ -113,18 +105,18 @@
       src="/static/js/react-dom.production.min.js"
       type="application/javascript"
       crossorigin
-    ></script>
+    ></script> -->
 
     <script type="text/javascript" async>
       WebFontConfig = {
-        google: { families: ["Material+Icons|Open+Sans"] }
+        google: { families: ['Material+Icons|Open+Sans'] },
       };
-      (function() {
-        var wf = document.createElement("script");
-        wf.src = "https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
-        wf.type = "text/javascript";
-        wf.async = "true";
-        var s = document.getElementsByTagName("script")[0];
+      (function () {
+        var wf = document.createElement('script');
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(wf, s);
       })();
     </script>
@@ -132,11 +124,11 @@
     <script type="text/javascript" async defer>
       var appInsights =
         window.appInsights ||
-        (function(a) {
+        (function (a) {
           function b(a) {
-            c[a] = function() {
+            c[a] = function () {
               var b = arguments;
-              c.queue.push(function() {
+              c.queue.push(function () {
                 c[a].apply(c, b);
               });
             };
@@ -144,11 +136,11 @@
           var c = { config: a },
             d = document,
             e = window;
-          setTimeout(function() {
-            var b = d.createElement("script");
+          setTimeout(function () {
+            var b = d.createElement('script');
             (b.src =
-              a.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"),
-              d.getElementsByTagName("script")[0].parentNode.appendChild(b);
+              a.url || 'https://az416426.vo.msecnd.net/scripts/a/ai.0.js'),
+              d.getElementsByTagName('script')[0].parentNode.appendChild(b);
           });
           try {
             c.cookie = d.cookie;
@@ -156,37 +148,37 @@
           c.queue = [];
           for (
             var f = [
-              "Event",
-              "Exception",
-              "Metric",
-              "PageView",
-              "Trace",
-              "Dependency"
+              'Event',
+              'Exception',
+              'Metric',
+              'PageView',
+              'Trace',
+              'Dependency',
             ];
             f.length;
 
           )
-            b("track" + f.pop());
+            b('track' + f.pop());
           if (
-            (b("setAuthenticatedUserContext"),
-            b("clearAuthenticatedUserContext"),
-            b("startTrackEvent"),
-            b("stopTrackEvent"),
-            b("startTrackPage"),
-            b("stopTrackPage"),
-            b("flush"),
+            (b('setAuthenticatedUserContext'),
+            b('clearAuthenticatedUserContext'),
+            b('startTrackEvent'),
+            b('stopTrackEvent'),
+            b('startTrackPage'),
+            b('stopTrackPage'),
+            b('flush'),
             !a.disableExceptionTracking)
           ) {
-            (f = "onerror"), b("_" + f);
+            (f = 'onerror'), b('_' + f);
             var g = e[f];
-            e[f] = function(a, b, d, e, h) {
+            e[f] = function (a, b, d, e, h) {
               var i = g && g(a, b, d, e, h);
-              return !0 !== i && c["_" + f](a, b, d, e, h), i;
+              return !0 !== i && c['_' + f](a, b, d, e, h), i;
             };
           }
           return c;
         })({
-          instrumentationKey: "83697374-7da7-47ed-95b4-ad9e75c4fe3e"
+          instrumentationKey: '83697374-7da7-47ed-95b4-ad9e75c4fe3e',
         });
 
       (window.appInsights = appInsights),

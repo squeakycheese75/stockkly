@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from 'react-snapshot';
-// import {  render } from "react-dom";
+// import { hydrate, render } from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import configureStore from './redux/configureStore';
 import { Provider as ReduxProvider } from 'react-redux';
-
 const store = configureStore();
 
 render(
@@ -17,6 +16,27 @@ render(
   </ReduxProvider>,
   document.getElementById('root')
 );
+
+// const rootElement = document.getElementById('root');
+// if (rootElement.hasChildNodes()) {
+//   hydrate(
+//     <ReduxProvider store={store}>
+//       <Router>
+//         <Route component={App} />
+//       </Router>
+//     </ReduxProvider>,
+//     rootElement
+//   );
+// } else {
+//   render(
+//     <ReduxProvider store={store}>
+//       <Router>
+//         <Route component={App} />
+//       </Router>
+//     </ReduxProvider>,
+//     rootElement
+//   );
+// }
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
