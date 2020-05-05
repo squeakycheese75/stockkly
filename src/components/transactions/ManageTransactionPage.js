@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import * as transactionActions from "../../redux/actions/transactionActions";
-import * as productActions from "../../redux/actions/productActions";
-import PropTypes from "prop-types";
-import TransactionForm from "./TransactionForm";
-import Loading from "../common/Loading";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import * as transactionActions from '../../redux/actions/transactionActions';
+import * as productActions from '../../redux/actions/productActions';
+import PropTypes from 'prop-types';
+import TransactionForm from './TransactionForm';
+import Loading from '../common/Loading';
+import { toast } from 'react-toastify';
 
 const newTransaction = {
-  ticker: "",
-  transtype: "BUY",
+  ticker: '',
+  transtype: 'BUY',
   quantity: 1,
-  transdate: "",
-  price: 1
+  transdate: '',
+  price: 1,
 };
 
 function ManageTransactionPage({
@@ -30,16 +30,16 @@ function ManageTransactionPage({
 
   useEffect(() => {
     if (transactions.length === 0) {
-      loadTransactions().catch(error => {
-        console.log("Loading transactions failed" + error);
+      loadTransactions().catch((error) => {
+        console.error('Loading transactions failed' + error);
       });
     } else {
       setTransaction({ ...props.transaction });
     }
 
     if (products.length === 0) {
-      loadProducts().catch(error => {
-        console.log("Loading products failed" + error);
+      loadProducts().catch((error) => {
+        console.error('Loading products failed' + error);
       });
     }
     // eslint-disable-next-line
@@ -47,9 +47,9 @@ function ManageTransactionPage({
 
   function handleChange(event) {
     const { value, name } = event.target;
-    setTransaction(prevTransaction => ({
+    setTransaction((prevTransaction) => ({
       ...prevTransaction,
-      [name]: name === "productId" ? parseInt(value, 10) : value
+      [name]: name === 'productId' ? parseInt(value, 10) : value,
     }));
     // setTransaction(prevTransaction => ({
     //   ...prevTransaction,
@@ -61,10 +61,10 @@ function ManageTransactionPage({
     const { ticker, transtype, quantity, transdate } = transaction;
     const errors = {};
 
-    if (!ticker) errors.product = "Product is required";
-    if (!transtype) errors.transtype = "Type is required";
-    if (!quantity) errors.quantity = "Quantity is required";
-    if (!transdate) errors.transdate = "Transaction date is required";
+    if (!ticker) errors.product = 'Product is required';
+    if (!transtype) errors.transtype = 'Type is required';
+    if (!quantity) errors.quantity = 'Quantity is required';
+    if (!transdate) errors.transdate = 'Transaction date is required';
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties
@@ -78,11 +78,11 @@ function ManageTransactionPage({
     saveTransaction(transaction)
       .then(() => {
         toast.info(
-          transaction.id ? "Transaction updated" : "Transaction saved!"
+          transaction.id ? 'Transaction updated' : 'Transaction saved!'
         );
-        history.push("/transactions");
+        history.push('/transactions');
       })
-      .catch(error => {
+      .catch((error) => {
         setSaving(false);
         setErrors({ onSave: error.message });
       });
@@ -116,11 +116,11 @@ ManageTransactionPage.propTypes = {
   products: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired,
   saveTransaction: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };
 
 export function getTransactionById(transactions, id) {
-  return transactions.find(transaction => transaction.id === id) || null;
+  return transactions.find((transaction) => transaction.id === id) || null;
 }
 
 function mapStateToProps(state, ownProps) {
@@ -132,14 +132,14 @@ function mapStateToProps(state, ownProps) {
   return {
     transaction,
     transactions: state.transactions,
-    products: state.products
+    products: state.products,
   };
 }
 
 const mapDispatchToProps = {
   loadTransactions: transactionActions.loadTransactions,
   loadProducts: productActions.loadProducts,
-  saveTransaction: transactionActions.saveTransaction
+  saveTransaction: transactionActions.saveTransaction,
 };
 
 export default connect(

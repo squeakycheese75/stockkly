@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Alert, ButtonToolbar, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import "./ProductTable.css";
+import React, { Component } from 'react';
+import { Alert, ButtonToolbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import './ProductTable.css';
 
 function msg() {
   return (
@@ -22,7 +22,7 @@ class ProductTable extends Component {
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 
@@ -35,7 +35,7 @@ class ProductTable extends Component {
   }
 
   addItem(index) {
-    console.log(index);
+    // console.log(index);
     this.props.onSubmit(index);
   }
 
@@ -62,16 +62,16 @@ class ProductTable extends Component {
 
     // row.total_change
     const options = {
-      onRowClick: function(row) {
+      onRowClick: function (row) {
         history.push(`/product/${row.ticker.toString().toUpperCase()}`);
       },
-      noDataText: msg()
+      noDataText: msg(),
     };
     const selectRowProps = {
       hideSelectColumn: true,
-      mode: "checkbox",
+      mode: 'checkbox',
       clickToSelect: true,
-      bgColor: "rgb(178,214,225)"
+      bgColor: 'rgb(178,214,225)',
     };
 
     return (
