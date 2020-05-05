@@ -13,6 +13,10 @@ render(
   <ReduxProvider store={store}>
     <Router>
       <Route component={App} />
+<<<<<<< HEAD
+=======
+      {/* <App /> */}
+>>>>>>> 81df4629a7fd292d4612654a223fdb843ed1b8d1
     </Router>
   </ReduxProvider>,
   document.getElementById('root')

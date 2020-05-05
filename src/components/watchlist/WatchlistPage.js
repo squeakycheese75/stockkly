@@ -18,7 +18,11 @@ class WatchlistPage extends React.Component {
 
     if (profile.length === 0) {
       actions.loadProfile().catch((error) => {
+<<<<<<< HEAD
         console.error('Loading Profile failed ...' + error);
+=======
+        console.log('Loading Profile failed ...' + error);
+>>>>>>> 81df4629a7fd292d4612654a223fdb843ed1b8d1
       });
     }
 
@@ -26,7 +30,11 @@ class WatchlistPage extends React.Component {
       .loadWatchlist(profile.watchList)
       .then(setItem('watchlist', JSON.stringify(this.props.watchlist)))
       .catch((error) => {
+<<<<<<< HEAD
         console.error('Loading Watchlist failed ...' + error);
+=======
+        console.log('Loading Watchlist failed ...' + error);
+>>>>>>> 81df4629a7fd292d4612654a223fdb843ed1b8d1
       });
 
     const refreshRate = profile.refreshRate * 1000;
@@ -37,7 +45,11 @@ class WatchlistPage extends React.Component {
           .loadWatchlist(profile.watchList)
           .then(setItem('watchlist', JSON.stringify(this.props.watchlist)))
           .catch((error) => {
+<<<<<<< HEAD
             console.error('Loading Watchlist failed ...' + error);
+=======
+            console.log('Loading Watchlist failed ...' + error);
+>>>>>>> 81df4629a7fd292d4612654a223fdb843ed1b8d1
           });
       }
     }, refreshRate);
