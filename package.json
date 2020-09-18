@@ -41,7 +41,8 @@
     "redux": "^4.0.5",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.3.0",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "0.0.75",
+    "snyk": "^1.398.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,7 +50,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": ""
+    "deploy": "",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -93,5 +96,6 @@
     "reactstrap": "^8.4.1",
     "uglify-js-brunch": "^2.10.0",
     "why-did-you-update": "^1.0.7"
-  }
+  },
+  "snyk": true
 }
