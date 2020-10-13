@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import Header from './components/common/Header';
-// import Footer from "./components/common/Footer";
-// import AboutPage from "./components/about/AboutPage";
 import Auth from './components/auth/Auth';
 import Loading from './components/common/Loading';
 import Callback from './Callback';
@@ -25,7 +23,6 @@ import WalletTrackerPage from './components/wallet/WalletTrackerPage';
 import { Helmet } from 'react-helmet';
 import { seo } from './components/common/seo';
 import { setItem } from './localStorageWrapper';
-// import NotFound from './components/common/NotFound';
 
 require('dotenv').config();
 
@@ -59,12 +56,10 @@ class App extends Component {
 
   authenticateUser() {
     var isAuthenticated = this.auth.isAuthenticated();
-    // console.log('isAuthenticated is ', isAuthenticated);
     this.setState({
       isAuthenticated: isAuthenticated,
       isLoaded: true,
     });
-    // console.log("state set ", isAuthenticated);
   }
 
   loadProfile() {
@@ -122,7 +117,6 @@ class App extends Component {
               )
             }
           />
-          {/* <Route path="/about" component={AboutPage} /> */}
           <Route
             path="/callback"
             render={(props) => <Callback auth={this.auth} {...props} />}
@@ -173,7 +167,6 @@ class App extends Component {
             path="/watching"
             render={(props) => <WatchListPage auth={this.auth} {...props} />}
           />
-          {/* <Route path="" component={NotFound} /> */}
         </Switch>
         <ToastContainer
           autoClose={3000}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Link} from 'react-router';
+import {Route, IndexRoute} from 'react-router';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
 import App from './App';
@@ -12,6 +12,5 @@ export default ({ childProps }) =>(
         <Route path="about" exact component={AboutPage} props={childProps}/>
         <Route path="login" exact component={LoginPage} props={childProps}/>
         <Route path="manage" exact component={ManagePage} props={childProps}/>
-        <Route component={NotFound} />
     </Route>
 );
