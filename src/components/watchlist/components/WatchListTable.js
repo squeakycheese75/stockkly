@@ -11,23 +11,6 @@ function columnClassNameFormat(fieldValue, row, rowIdx, colIdx) {
     : "td-column-price-up td-column-size";
 }
 
-// function priceFormatter(cell, row) {
-//   if (!cell) {
-//     return (
-//       `${row.symbol}` +
-//       parseFloat(row.price)
-//         .toFixed(2)
-//         .toLocaleString()
-//     );
-//   }
-//   return (
-//     `${row.symbol}` +
-//     parseFloat(cell)
-//       .toFixed(2)
-//       .toLocaleString()
-//   );
-//   // cell.toLocaleString();
-// }
 function priceFormatter(cell, row) {
   return row.spot === 1 ? (
     <div className="name">
@@ -122,29 +105,6 @@ function trendFormatter(cell, row) {
   );
 }
 
-// function iconFormatter() {
-//   function handleClick(e) {
-//     e.preventDefault();
-//     console.log("The link was clicked.");
-//   }
-
-//   return (
-//     <i
-//       className="mdc-icon-button material-icons md-12 orange600"
-//       // onClick={() => this.removeItem(cell)}
-//       onClick={handleClick}
-//     >
-//       {/* highlight_off */}
-//       delete
-//     </i>
-//   );
-// }
-
-// function handleClick(e) {
-//   e.preventDefault();
-//   console.log("The link was clicked.");
-// }
-
 class WatchListTable extends Component {
   constructor(props) {
     super(props);
@@ -155,7 +115,6 @@ class WatchListTable extends Component {
   }
 
   removeItem = event => {
-    // event.preventDefault();
     this.props.onSubmit(event);
     this.setState({ pid: event, showToast: true });
   };
@@ -168,15 +127,12 @@ class WatchListTable extends Component {
           placement="top"
           overlay={<Tooltip id={`tooltip-top`}>Remove from watchlist.</Tooltip>}
         >
-          {/* <Link to={`/product/${cell}`}> */}
           <i
             className="mdc-icon-button material-icons md-12 orange600"
             onClick={() => this.removeItem(cell)}
           >
-            {/* highlight_off */}
             delete
           </i>
-          {/* </Link> */}
         </OverlayTrigger>
       </ButtonToolbar>
     );
