@@ -1,6 +1,5 @@
 import React from "react";
 import { Jumbotron, Container, ListGroup } from "react-bootstrap";
-// import PropTypes from "prop-types";
 import "./HowToWallet.css";
 
 const HowToWallet = () => {
@@ -36,15 +35,10 @@ const HowToWallet = () => {
           <h6>
             Voila! Your trade will be added to your wallet and tracked live.
           </h6>
-          {/* {auth.isAuthenticated() ? <>Auth</> : <>Not auth</>} */}
         </Container>
       </Jumbotron>
     </div>
   );
 };
-
-// HowToWallet.propTypes = {
-//   auth: PropTypes.object.isRequired
-// };
 
 export default HowToWallet;

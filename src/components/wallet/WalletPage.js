@@ -11,6 +11,7 @@ import WalletSummary from './components/WalletSummary';
 import HowToWallet from '../common/HowToWallet';
 import WatchBar from '../common/WatchBar';
 import { setItem } from '../../localStorageWrapper';
+import {Helmet} from 'react-helmet'
 
 class WalletPage extends React.Component {
   componentDidMount() {
@@ -63,6 +64,13 @@ class WalletPage extends React.Component {
   render() {
     return (
       <div>
+        <Helmet>
+        <title>Wallet - Free, Real-Time, Wealth Tracker for the modern portfolio. (Crypto, Stocks, etc).</title>
+        <meta name="description" content="Track your portfolio value in near real-time!
+                    Add shares (FTSE, NASDAQ), Crypto, Gold, Silver, composites (FAANG)
+                    Supports valuations in EUR, USD or GBP.
+                    Includes up-to-date forex prices, so you can get a single valuation in the currency of you choice." />
+      </Helmet>
         {this.props.profile.devmode ? (
           <WatchBar prices={this.props.watchbar} />
         ) : null}

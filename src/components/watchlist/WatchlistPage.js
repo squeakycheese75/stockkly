@@ -7,8 +7,8 @@ import { bindActionCreators } from 'redux';
 import Loading from '../common/Loading';
 import WatchListTable from './components/WatchListTable';
 import HowToWatchlist from '../common/HowToWatchlist';
-// import WatchBar from "../common/WatchBar";
 import { setItem } from '../../localStorageWrapper';
+import { Helmet } from 'react-helmet';
 
 class WatchlistPage extends React.Component {
   _isMounted = false;
@@ -52,6 +52,13 @@ class WatchlistPage extends React.Component {
   render() {
     return (
       <div>
+      <Helmet>
+        <title>Watchlist - Free, Real-Time, Wealth Tracker for the modern portfolio. (Crypto, Stocks, etc).</title>
+        <meta name="description" content="Track your portfolio value in near real-time!
+                    Add shares (FTSE, NASDAQ), Crypto, Gold, Silver, composites (FAANG)
+                    Supports valuations in EUR, USD or GBP.
+                    Includes up-to-date forex prices, so you can get a single valuation in the currency of you choice." />
+      </Helmet>
         {this.props.loading && !this._isMounted ? (
           <Loading />
         ) : this.props.watchlist.length > 0 ? (

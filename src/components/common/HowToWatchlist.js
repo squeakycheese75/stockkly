@@ -1,6 +1,5 @@
 import React from "react";
 import { Jumbotron, Container, ListGroup } from "react-bootstrap";
-// import PropTypes from "prop-types";
 import "./HowToWatchlist.css";
 
 const HowToWatchlist = () => {
@@ -42,9 +41,5 @@ const HowToWatchlist = () => {
     </div>
   );
 };
-
-// HowToWallet.propTypes = {
-//   auth: PropTypes.object.isRequired
-// };
 
 export default HowToWatchlist;

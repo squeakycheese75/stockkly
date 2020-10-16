@@ -6,7 +6,7 @@ import createPlotlyComponent from "react-plotly.js/factory";
 const Plot = createPlotlyComponent(Plotly);
 
 const ProductChart = ({ chartData, errors = {} }) => {
-  var CHARTDAYS = 90;
+  var CHARTDAYS = 120;
 
   var trace1 = {
     type: "scatter",
@@ -19,7 +19,6 @@ const ProductChart = ({ chartData, errors = {} }) => {
 
   return (
     <div>
-      {/* <div className="container-fluid"></div> */}
       {!Array.isArray(chartData.x) || !chartData.x.length ? (
         "No Data"
       ) : (
@@ -28,7 +27,6 @@ const ProductChart = ({ chartData, errors = {} }) => {
           layout={{
             title: chartData.pid + " Chart " + CHARTDAYS + " day",
             height: 320
-            // updatemenus: updatemenus
           }}
           useResizeHandler={true}
           style={{ width: "100%", height: "100%" }}

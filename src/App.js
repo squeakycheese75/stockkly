@@ -23,6 +23,7 @@ import WalletTrackerPage from './components/wallet/WalletTrackerPage';
 import { Helmet } from 'react-helmet';
 import { seo } from './components/common/seo';
 import { setItem } from './localStorageWrapper';
+import UserGuide from './pages/UserGuide';
 
 require('dotenv').config();
 
@@ -166,6 +167,10 @@ class App extends Component {
           <Route
             path="/watching"
             render={(props) => <WatchListPage auth={this.auth} {...props} />}
+          />
+           <Route
+            path="/help"
+            render={(props) => <UserGuide auth={this.auth} {...props} />}
           />
         </Switch>
         <ToastContainer
