@@ -42,7 +42,7 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.75",
-    "snyk": "^1.398.1"
+    "snyk": "^1.465.0"
   },
   "scripts": {
     "start": "react-scripts start",
